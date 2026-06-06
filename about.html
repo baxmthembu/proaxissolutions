@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About Proaxis Solutions — Our story, methodology, credentials and approach to technology.">
+  <title>About — Proaxis Solutions</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0F172A;
+      --blue: #2563EB;
+      --blue-hover: #1d4ed8;
+      --teal: #14B8A6;
+      --slate: #475569;
+      --light-bg: #F8FAFC;
+      --border: #E2E8F0;
+    }
+
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; box-sizing: border-box; }
+    body { background: #fff; color: var(--slate); line-height: 1.65; margin: 0; padding-top: 64px; }
+
+    /* PAGE LOADER */
+    #page-loader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 1rem;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    #page-loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-logo { font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+    .loader-logo span { color: var(--teal); }
+    .loader-bar {
+      width: 180px; height: 2px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .loader-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--teal), var(--blue));
+      border-radius: 99px;
+      animation: load 0.9s ease forwards;
+    }
+    @keyframes load { to { width: 100%; } }
+
+    /* NAV */
+    .navbar { background: var(--navy); height: 64px; padding: 0 1rem; }
+    .navbar-brand { font-weight: 700; font-size: 1.15rem; color: #fff !important; letter-spacing: -0.02em; }
+    .navbar-brand span { color: var(--teal); }
+    .nav-link { color: #CBD5E1 !important; font-size: 0.9rem; font-weight: 500; padding: 0.4rem 0.85rem !important; border-radius: 6px; transition: color 0.15s, background 0.15s; }
+    .nav-link:hover, .nav-link.active { color: #fff !important; background: rgba(255,255,255,0.08); }
+    .nav-cta { background: var(--blue) !important; color: #fff !important; margin-left: 0.5rem; }
+    .nav-cta:hover { background: var(--blue-hover) !important; }
+
+    /* PAGE HEADER */
+    .page-header {
+      background: var(--navy);
+      padding: 80px 1.5rem 72px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(37,99,235,0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-badge {
+      display: inline-block;
+      background: rgba(20,184,166,0.15);
+      color: var(--teal);
+      border: 1px solid rgba(20,184,166,0.3);
+      border-radius: 999px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .page-header h1 { color: #fff; font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 1rem; }
+    .page-header p { color: #94A3B8; font-size: 1rem; max-width: 520px; margin: 0 auto; }
+
+    /* SHARED */
+    section { padding: 80px 1.5rem; }
+    .section-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.6rem; }
+    .section-heading { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 700; color: var(--navy); letter-spacing: -0.025em; line-height: 1.25; margin-bottom: 0.75rem; }
+    .section-sub { color: var(--slate); font-size: 0.95rem; max-width: 540px; }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* MISSION SECTION */
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .mission-text h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 700; color: var(--navy); letter-spacing: -0.025em; margin-bottom: 1rem; }
+    .mission-text p { font-size: 0.95rem; color: var(--slate); line-height: 1.75; margin-bottom: 1rem; }
+    .mission-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .stat-card {
+      background: var(--light-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .stat-number { font-size: 1.75rem; font-weight: 700; color: var(--blue); letter-spacing: -0.03em; }
+    .stat-label { font-size: 0.78rem; font-weight: 600; color: var(--slate); margin-top: 0.25rem; }
+
+    /* METHODOLOGY */
+    .methodology-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    .method-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .method-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+    }
+    .method-number { font-size: 2.5rem; font-weight: 800; color: var(--border); letter-spacing: -0.04em; margin-bottom: 0.5rem; }
+    .method-card h4 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+    .method-card p { font-size: 0.85rem; color: var(--slate); margin: 0; line-height: 1.6; }
+
+    /* CREDENTIALS */
+    .creds-section { background: var(--navy); border-radius: 16px; padding: 3.5rem; }
+    .creds-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .cred-item { text-align: center; padding: 1.5rem 1rem; }
+    .cred-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .cred-item h5 { font-size: 0.9rem; font-weight: 700; color: var(--teal); margin-bottom: 0.4rem; }
+    .cred-item p { font-size: 0.82rem; color: #94A3B8; margin: 0; line-height: 1.5; }
+
+    /* SPOTLIGHTS */
+    .spotlight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .spotlight-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      transition: box-shadow 0.2s;
+    }
+    .spotlight-card:hover { box-shadow: 0 8px 24px rgba(15,23,42,0.07); }
+    .spotlight-tag {
+      display: inline-block;
+      background: rgba(37,99,235,0.08);
+      color: var(--blue);
+      border-radius: 6px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.73rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .spotlight-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+    .spotlight-card p { font-size: 0.85rem; color: var(--slate); margin: 0; line-height: 1.6; }
+    .spotlight-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: #94A3B8;
+      margin-top: 1rem;
+    }
+    .spotlight-status::before { content: '●'; font-size: 0.6rem; color: #F59E0B; }
+
+    /* DEMO CAROUSEL */
+    .demo-section { background: var(--navy); padding: 100px 1.5rem; }
+    .demo-inner { max-width: 1200px; margin: 0 auto; }
+    .demo-header { text-align: center; margin-bottom: 3rem; }
+    .demo-header .section-label { color: var(--teal); }
+    .demo-header h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; letter-spacing: -0.025em; margin-bottom: 0.75rem; }
+    .demo-header p { color: #94A3B8; font-size: 0.95rem; max-width: 580px; margin: 0 auto; line-height: 1.7; }
+
+    /* Carousel */
+    .demo-carousel-wrap { position: relative; }
+    .demo-tabs { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .demo-tab {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #94A3B8;
+      border-radius: 99px;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.83rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .demo-tab:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .demo-tab.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+    /* Business context callout */
+    .demo-context {
+      background: rgba(20,184,166,0.06);
+      border: 1px solid rgba(20,184,166,0.18);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .demo-context-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .demo-context-text h5 { font-size: 0.88rem; font-weight: 700; color: var(--teal); margin-bottom: 0.3rem; }
+    .demo-context-text p { font-size: 0.82rem; color: #94A3B8; margin: 0; line-height: 1.6; }
+    .demo-context-text .cta-link { color: var(--teal); font-weight: 700; text-decoration: none; font-size: 0.82rem; display: inline-block; margin-top: 0.35rem; }
+    .demo-context-text .cta-link:hover { text-decoration: underline; }
+
+    /* Browser frame container */
+    .demo-browser-outer {
+      max-width: 1100px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+    }
+    .demo-browser-bar {
+      background: #1E293B;
+      padding: 0.75rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .dbb-dots { display: flex; gap: 0.4rem; }
+    .dbb-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .dbb-url {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border-radius: 6px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      padding: 0 0.75rem;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      color: #94A3B8;
+      font-weight: 600;
+    }
+    .dbb-url .lock { color: #22C55E; font-size: 0.68rem; }
+    .demo-iframe-wrap {
+      position: relative;
+      width: 100%;
+      height: 620px;
+      overflow: hidden;
+      background: #0F172A;
+    }
+    .demo-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      transition: opacity 0.3s ease;
+    }
+    .demo-iframe.loading { opacity: 0; }
+
+    /* Nav arrows */
+    .demo-nav { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-top: 2rem; }
+    .demo-arrow {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #94A3B8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+    }
+    .demo-arrow:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .demo-dots { display: flex; gap: 0.5rem; }
+    .demo-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .demo-dot.active { background: var(--teal); transform: scale(1.3); }
+
+    /* benefit pills */
+    .demo-benefits { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 2.5rem; }
+    .demo-benefit { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 99px; padding: 0.4rem 1rem; font-size: 0.78rem; font-weight: 600; color: #64748B; }
+
+    /* CTA */
+    .cta-banner { background: var(--light-bg); border: 1px solid var(--border); border-radius: 16px; padding: 3rem 2rem; text-align: center; }
+    .cta-banner h2 { color: var(--navy); font-size: 1.6rem; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 0.75rem; }
+    .cta-banner p { color: var(--slate); font-size: 0.95rem; margin-bottom: 2rem; max-width: 440px; margin-left: auto; margin-right: auto; }
+    .btn-primary-custom { background: var(--blue); color: #fff; border: none; border-radius: 8px; padding: 0.75rem 1.75rem; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background 0.15s; display: inline-block; }
+    .btn-primary-custom:hover { background: var(--blue-hover); color: #fff; }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: #94A3B8; padding: 3rem 1.5rem; }
+    .footer-inner { max-width: 1140px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: flex-start; }
+    .footer-brand { font-weight: 700; font-size: 1.05rem; color: #fff; margin-bottom: 0.4rem; }
+    .footer-brand span { color: var(--teal); }
+    .footer-sub { font-size: 0.82rem; color: #64748B; }
+    .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
+    .footer-links a { color: #64748B; font-size: 0.85rem; text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-copy { font-size: 0.8rem; color: #475569; margin-top: 2rem; text-align: center; }
+
+    @media (max-width: 900px) {
+      .methodology-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .mission-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .methodology-grid { grid-template-columns: 1fr; }
+      .creds-section { padding: 2rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Page Loader -->
+<div id="page-loader">
+  <div class="loader-logo">Proaxis <span>Solutions</span></div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container-xl">
+    <a class="navbar-brand" href="index.html">Proaxis <span>Solutions</span></a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link nav-cta" href="contact.html">Get in Touch</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-badge">Our Story</div>
+  <h1>Built to Help Organisations<br>Operate at Their Best</h1>
+  <p>Proaxis Solutions is a South African technology company on a mission to make intelligent software and automation accessible to every organisation that's ready to grow.</p>
+</div>
+
+<!-- Mission -->
+<section style="background: #fff;">
+  <div class="container-xl">
+    <div class="mission-grid">
+      <div class="mission-text reveal">
+        <div class="section-label">Our Mission</div>
+        <h2>We believe great technology should drive real business outcomes — not just look impressive.</h2>
+        <p>Proaxis Solutions was founded to bridge the gap between technology capability and business reality. Too often, organisations invest in tools that don't fit how they work, or rely on manual processes long past the point where automation would serve them better.</p>
+        <p>We fix that. We work closely with our clients to understand their operations, design solutions around their specific needs, and build systems that genuinely improve how they work.</p>
+        <p>Our approach is grounded in software engineering discipline, automation-first thinking, and a commitment to long-term partnership. We don't just deliver a project and disappear — we invest in your outcomes.</p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="mission-stats">
+          <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Core service lines</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">L1</div>
+            <div class="stat-label">B-BBEE Level 1</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">SA</div>
+            <div class="stat-label">South Africa based</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">2025</div>
+            <div class="stat-label">Year incorporated</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Methodology -->
+<section style="background: var(--light-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="container-xl">
+    <div class="reveal">
+      <div class="section-label">How We Work</div>
+      <h2 class="section-heading">Discover. Design. Automate. Scale.</h2>
+      <p class="section-sub">Our four-phase methodology ensures every engagement starts with understanding and ends with measurable results.</p>
+    </div>
+    <div class="methodology-grid">
+      <div class="method-card reveal reveal-delay-1">
+        <div class="method-number">01</div>
+        <h4>Discover</h4>
+        <p>We go deep into your operations, workflows, and goals before recommending anything. Understanding your business is step one.</p>
+      </div>
+      <div class="method-card reveal reveal-delay-2">
+        <div class="method-number">02</div>
+        <h4>Design</h4>
+        <p>We design solutions that fit your business logic — not generic products force-fitted to your processes. Architecture and approach are tailored from the start.</p>
+      </div>
+      <div class="method-card reveal reveal-delay-3">
+        <div class="method-number">03</div>
+        <h4>Automate</h4>
+        <p>We implement with precision — reducing manual work, eliminating bottlenecks, and building systems that run reliably at scale.</p>
+      </div>
+      <div class="method-card reveal reveal-delay-4">
+        <div class="method-number">04</div>
+        <h4>Scale</h4>
+        <p>We support your growth. As your business evolves, our systems and partnerships evolve with it — maintained, optimised, and ready for what's next.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Credentials -->
+<section style="background: #fff;">
+  <div class="container-xl">
+    <div class="creds-section reveal">
+      <div class="text-center">
+        <div class="section-label" style="color: var(--teal);">Trust & Compliance</div>
+        <h2 style="color: #fff; font-size: 1.75rem; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 0.5rem;">Built on a foundation of professionalism and compliance</h2>
+        <p style="color: #94A3B8; max-width: 560px; margin: 0 auto; font-size: 0.9rem;">Governance and data protection are central to our delivery — not an afterthought. Especially critical for public sector and regulated environments.</p>
+      </div>
+      <div class="creds-grid">
+        <div class="cred-item">
+          <div class="cred-icon">🏢</div>
+          <h5>SA Registered Company</h5>
+          <p>Registered 2025/542019/07. Operating professionally in South Africa.</p>
+        </div>
+        <div class="cred-item">
+          <div class="cred-icon">⭐</div>
+          <h5>B-BBEE Level 1</h5>
+          <p>Verified Level 1 B-BBEE Contributor — maximum procurement recognition for our clients.</p>
+        </div>
+        <div class="cred-item">
+          <div class="cred-icon">🔒</div>
+          <h5>POPIA Compliant</h5>
+          <p>Information Officer registered. Data protection and privacy built into every engagement.</p>
+        </div>
+        <div class="cred-item">
+          <div class="cred-icon">📋</div>
+          <h5>CSD & Tender Ready</h5>
+          <p>Registered on the Central Supplier Database and ready for public sector procurement.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Solution Spotlights -->
+<section style="background: var(--light-bg); border-top: 1px solid var(--border);">
+  <div class="container-xl">
+    <div class="reveal">
+      <div class="section-label">Solution Spotlights</div>
+      <h2 class="section-heading">Early project experience</h2>
+      <p class="section-sub">A snapshot of the types of problems we've worked on. Full case studies will be published as client approvals are confirmed.</p>
+    </div>
+    <div class="spotlight-grid">
+      <div class="spotlight-card reveal reveal-delay-1">
+        <div class="spotlight-tag">Digital Presence</div>
+        <h4>Beauty Industry Platform</h4>
+        <p>Designed and built a modern digital platform for a small beauty business — improving professional credibility, customer accessibility, and creating a foundation for future digital growth.</p>
+        <div class="spotlight-status">Verification in progress</div>
+      </div>
+      <div class="spotlight-card reveal reveal-delay-2">
+        <div class="spotlight-tag">Operations</div>
+        <h4>Food & Hospitality Systems</h4>
+        <p>Developed operational systems to streamline ordering, inventory oversight, and customer communications across service teams in a food and hospitality environment.</p>
+        <div class="spotlight-status">Verification in progress</div>
+      </div>
+      <div class="spotlight-card reveal reveal-delay-3">
+        <div class="spotlight-tag">Creative Services</div>
+        <h4>Design Studio Platform</h4>
+        <p>Built a dedicated client and portfolio platform for a creative services business — enabling professional presentation, structured project management, and improved client collaboration.</p>
+        <div class="spotlight-status">Verification in progress</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO SHOWCASE CAROUSEL -->
+<div class="demo-section reveal">
+  <div class="demo-inner">
+    <div class="demo-header">
+      <div class="section-label">Our Work in Action</div>
+      <h2>Real Websites We Build for Real Businesses</h2>
+      <p>These are live, fully interactive demos of the kind of websites and web apps Proaxis Solutions builds. Every one of them could be your business — online, professional, and working for you 24/7.</p>
+    </div>
+
+    <!-- Business selector tabs -->
+    <div class="demo-tabs" id="demoTabs">
+      <button class="demo-tab active" data-index="0" onclick="switchDemo(0,this)">🍽 Kasi Kitchen <span style="font-size:0.7rem;opacity:0.6;">Restaurant</span></button>
+      <button class="demo-tab" data-index="1" onclick="switchDemo(1,this)">🎂 Sugar & Crumb <span style="font-size:0.7rem;opacity:0.6;">Bakery</span></button>
+      <button class="demo-tab" data-index="2" onclick="switchDemo(2,this)">🌿 NOIR <span style="font-size:0.7rem;opacity:0.6;">Cologne / E-commerce</span></button>
+      <button class="demo-tab" data-index="3" onclick="switchDemo(3,this)">✨ Lumière <span style="font-size:0.7rem;opacity:0.6;">Beauty Salon</span></button>
+    </div>
+
+    <!-- Business benefit callout (changes per demo) -->
+    <div class="demo-context" id="demoContext">
+      <div class="demo-context-icon" id="demoCtxIcon">🍽</div>
+      <div class="demo-context-text">
+        <h5 id="demoCtxTitle">Restaurant — Online Presence & Reservations</h5>
+        <p id="demoCtxDesc">A restaurant with a website like this takes bookings while the owner sleeps, showcases their menu beautifully, and never loses a customer to a competitor who's online. This is what Proaxis builds — tailored to your brand, your food, your community.</p>
+        <a href="contact.html" class="cta-link">→ Want something like this? Let's build yours.</a>
+      </div>
+    </div>
+
+    <!-- Browser Frame -->
+    <div class="demo-browser-outer">
+      <div class="demo-browser-bar">
+        <div class="dbb-dots">
+          <div class="dbb-dot" style="background:#EF4444;"></div>
+          <div class="dbb-dot" style="background:#F59E0B;"></div>
+          <div class="dbb-dot" style="background:#22C55E;"></div>
+        </div>
+        <div class="dbb-url">
+          <span class="lock">🔒</span>
+          <span id="demoBrowserUrl">kasikitchen.co.za</span>
+        </div>
+      </div>
+      <div class="demo-iframe-wrap">
+        <iframe class="demo-iframe" id="mainDemoIframe" src="demo-restaurant.html" title="Demo preview"></iframe>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="demo-nav">
+      <div class="demo-arrow" onclick="prevDemo()">←</div>
+      <div class="demo-dots" id="demoDots">
+        <div class="demo-dot active" onclick="switchDemo(0,null)"></div>
+        <div class="demo-dot" onclick="switchDemo(1,null)"></div>
+        <div class="demo-dot" onclick="switchDemo(2,null)"></div>
+        <div class="demo-dot" onclick="switchDemo(3,null)"></div>
+      </div>
+      <div class="demo-arrow" onclick="nextDemo()">→</div>
+    </div>
+
+    <!-- Benefit pills -->
+    <div class="demo-benefits">
+      <div class="demo-benefit">📱 Mobile-responsive</div>
+      <div class="demo-benefit">⚡ Fast & modern</div>
+      <div class="demo-benefit">🛒 Bookings & orders</div>
+      <div class="demo-benefit">🎨 Fully branded</div>
+      <div class="demo-benefit">🔒 Secure & reliable</div>
+      <div class="demo-benefit">🚀 Built by Proaxis Solutions</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section style="background: #fff;">
+  <div class="container-xl">
+    <div class="cta-banner reveal">
+      <h2>Want to work with a team that's invested in your outcomes?</h2>
+      <p>Let's start with a discovery conversation — no pressure, just a genuine look at where we can help.</p>
+      <a href="contact.html" class="btn-primary-custom">Start a Conversation</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Proaxis <span>Solutions</span></div>
+      <div class="footer-sub">Reg. 2025/542019/07 · B-BBEE Level 1</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <hr style="border-color: #1E293B; max-width: 1140px; margin: 1.5rem auto 0;">
+  <p class="footer-copy">© 2025 Proaxis Solutions (Pty) Ltd · All Rights Reserved · South Africa</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Page Loader
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('page-loader').classList.add('hidden');
+    }, 950);
+  });
+
+  // Scroll Reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Demo Carousel
+  const demos = [
+    {
+      file: 'demo-restaurant.html',
+      url: 'kasikitchen.co.za',
+      icon: '🍽',
+      title: 'Restaurant — Online Presence & Reservations',
+      desc: 'A restaurant with a website like this takes bookings while the owner sleeps, showcases their menu beautifully, and never loses a customer to a competitor who\'s online. This is what Proaxis builds — tailored to your brand, your food, your community.'
+    },
+    {
+      file: 'demo-bakery.html',
+      url: 'sugarandcrumb.co.za',
+      icon: '🎂',
+      title: 'Bakery / SME — Custom Orders & E-commerce',
+      desc: 'A small bakery can receive custom cake orders online, showcase their products professionally, and scale without extra admin. Proaxis builds websites that turn side hustles and home businesses into credible, growing brands.'
+    },
+    {
+      file: 'demo-cologne.html',
+      url: 'noirfragrance.co.za',
+      icon: '🌿',
+      title: 'Luxury Product / E-commerce — Full Online Store',
+      desc: 'A product business needs more than a WhatsApp catalogue. This demo shows a full luxury e-commerce experience — product filtering, size selection, order consultation, and checkout. Proaxis builds these for any product brand ready to sell professionally online.'
+    },
+    {
+      file: 'demo-salon.html',
+      url: 'lumierebeauty.co.za',
+      icon: '✨',
+      title: 'Beauty Salon — Bookings, Services & Showcase',
+      desc: 'Hair salons, nail bars, and beauty studios lose clients every day because they have no online booking system. A Proaxis-built site like this one lets clients book, browse services, read reviews, and trust the business before they even walk in the door.'
+    }
+  ];
+  let currentDemo = 0;
+
+  function switchDemo(index, btn) {
+    currentDemo = index;
+    const d = demos[index];
+    const iframe = document.getElementById('mainDemoIframe');
+    iframe.classList.add('loading');
+    setTimeout(() => {
+      iframe.src = d.file;
+      iframe.onload = () => iframe.classList.remove('loading');
+    }, 200);
+    document.getElementById('demoBrowserUrl').textContent = d.url;
+    document.getElementById('demoCtxIcon').textContent = d.icon;
+    document.getElementById('demoCtxTitle').textContent = d.title;
+    document.getElementById('demoCtxDesc').textContent = d.desc;
+    document.querySelectorAll('.demo-tab').forEach((t,i) => t.classList.toggle('active', i === index));
+    document.querySelectorAll('.demo-dot').forEach((dot,i) => dot.classList.toggle('active', i === index));
+  }
+
+  function nextDemo() { switchDemo((currentDemo + 1) % demos.length, null); }
+  function prevDemo() { switchDemo((currentDemo - 1 + demos.length) % demos.length, null); }
+</script>
+</body>
+</html>

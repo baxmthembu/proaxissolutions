@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Proaxis Solutions Services — Software Engineering, AI Automation & Digital Transformation for South African businesses of all sizes.">
+  <title>Services — Proaxis Solutions</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0F172A;
+      --blue: #2563EB;
+      --blue-hover: #1d4ed8;
+      --teal: #14B8A6;
+      --teal-dark: #0d9488;
+      --slate: #334155;
+      --light-bg: #F8FAFC;
+      --border: #E2E8F0;
+    }
+
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; box-sizing: border-box; }
+    body { background: #fff; color: var(--slate); line-height: 1.7; margin: 0; padding-top: 64px; font-size: 17px; }
+
+    /* PAGE LOADER */
+    #page-loader { position: fixed; inset: 0; z-index: 9999; background: var(--navy); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem; transition: opacity 0.5s ease, visibility 0.5s ease; }
+    #page-loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-logo { font-size: 1.4rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+    .loader-logo span { color: var(--teal); }
+    .loader-bar { width: 200px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden; }
+    .loader-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--teal), var(--blue)); border-radius: 99px; animation: load 0.9s ease forwards; }
+    @keyframes load { to { width: 100%; } }
+
+    /* NAV */
+    .navbar { background: var(--navy); height: 64px; padding: 0 1rem; }
+    .navbar-brand { font-weight: 800; font-size: 1.2rem; color: #fff !important; letter-spacing: -0.02em; }
+    .navbar-brand span { color: var(--teal); }
+    .nav-link { color: #CBD5E1 !important; font-size: 0.95rem; font-weight: 600; padding: 0.4rem 0.85rem !important; border-radius: 6px; transition: color 0.15s, background 0.15s; }
+    .nav-link:hover, .nav-link.active { color: #fff !important; background: rgba(255,255,255,0.1); }
+    .nav-cta { background: var(--blue) !important; color: #fff !important; margin-left: 0.5rem; }
+    .nav-cta:hover { background: var(--blue-hover) !important; }
+
+    /* PAGE HEADER */
+    .page-header { background: var(--navy); padding: 80px 1.5rem 72px; text-align: center; position: relative; overflow: hidden; }
+    .page-header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(37,99,235,0.22) 0%, transparent 70%); pointer-events: none; }
+    .page-badge { display: inline-block; background: rgba(20,184,166,0.15); color: var(--teal); border: 1px solid rgba(20,184,166,0.3); border-radius: 999px; padding: 0.35rem 1rem; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.25rem; }
+    .page-header h1 { color: #fff; font-size: clamp(1.9rem, 4.5vw, 2.9rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1rem; }
+    .page-header p { color: #CBD5E1; font-size: 1.05rem; font-weight: 500; max-width: 540px; margin: 0 auto; }
+
+    /* SHARED */
+    section { padding: 88px 1.5rem; }
+    .section-label { font-size: 0.8rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 0.6rem; }
+    .section-heading { font-size: clamp(1.6rem, 2.5vw, 2.1rem); font-weight: 800; color: var(--navy); letter-spacing: -0.025em; line-height: 1.2; margin-bottom: 0.75rem; }
+    .section-sub { color: var(--slate); font-size: 1rem; font-weight: 500; max-width: 540px; line-height: 1.7; }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── SERVICE BLOCKS ── */
+    .service-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .service-block:last-of-type { border-bottom: none; }
+    .service-block.reverse .service-visual-col { order: -1; }
+
+    .service-info h2 { font-size: clamp(1.5rem, 2.5vw, 1.85rem); font-weight: 800; color: var(--navy); letter-spacing: -0.025em; margin-bottom: 0.85rem; line-height: 1.2; }
+    .service-info p { color: var(--slate); font-size: 1rem; font-weight: 500; line-height: 1.75; margin-bottom: 1.25rem; }
+
+    .outcomes-list { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+    .outcomes-list li { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.95rem; font-weight: 600; color: var(--slate); padding: 0.45rem 0; }
+    .outcomes-list li::before { content: '✓'; color: var(--teal); font-weight: 800; flex-shrink: 0; margin-top: 0.05rem; font-size: 1rem; }
+
+    .tag { display: inline-block; background: rgba(37,99,235,0.08); color: var(--blue); border-radius: 6px; padding: 0.28rem 0.7rem; font-size: 0.78rem; font-weight: 700; margin: 0.2rem 0.15rem; letter-spacing: 0.01em; }
+
+    /* SVG ILLUSTRATION PANELS */
+    .service-visual-col {
+      position: relative;
+    }
+    .illustration-wrapper {
+      background: var(--light-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(15,23,42,0.08);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .illustration-wrapper:hover {
+      box-shadow: 0 20px 48px rgba(15,23,42,0.14);
+      transform: translateY(-6px);
+    }
+    .illus-topbar {
+      background: #1E293B;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .illus-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .illus-urlbar {
+      flex: 1; height: 22px; background: rgba(255,255,255,0.08);
+      border-radius: 6px; margin: 0 0.5rem;
+      display: flex; align-items: center; padding: 0 0.75rem;
+    }
+    .illus-urlbar span { font-size: 0.7rem; color: #64748B; font-weight: 600; }
+    .illus-body { padding: 1.5rem; }
+
+    /* ── ILLUSTRATION 1: Software / App Dashboard ── */
+    .dash-header {
+      background: linear-gradient(135deg, var(--navy), #1E3A5F);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .dash-header-title { font-size: 0.82rem; font-weight: 800; color: #fff; }
+    .dash-badge-live { background: var(--teal); color: var(--navy); font-size: 0.68rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 99px; }
+    .dash-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+    .dash-stat { background: #fff; border: 1.5px solid var(--border); border-radius: 10px; padding: 0.85rem 0.75rem; text-align: center; }
+    .dash-stat-num { font-size: 1.3rem; font-weight: 800; color: var(--blue); letter-spacing: -0.02em; }
+    .dash-stat-lbl { font-size: 0.68rem; font-weight: 700; color: #94A3B8; margin-top: 0.15rem; }
+    .dash-chart-row { display: flex; gap: 0.75rem; }
+    .dash-chart-area { flex: 2; background: #fff; border: 1.5px solid var(--border); border-radius: 10px; padding: 0.85rem; }
+    .dash-chart-area .chart-title { font-size: 0.72rem; font-weight: 800; color: var(--navy); margin-bottom: 0.75rem; }
+    .bar-row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.45rem; }
+    .bar-label { font-size: 0.65rem; font-weight: 700; color: #94A3B8; width: 28px; flex-shrink: 0; }
+    .bar-track { flex: 1; height: 8px; background: var(--light-bg); border-radius: 99px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--blue), var(--teal)); }
+    .dash-sidebar { flex: 1; background: #fff; border: 1.5px solid var(--border); border-radius: 10px; padding: 0.85rem; }
+    .dash-sidebar .chart-title { font-size: 0.72rem; font-weight: 800; color: var(--navy); margin-bottom: 0.75rem; }
+    .task-item { display: flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0; border-bottom: 1px solid var(--border); }
+    .task-item:last-child { border-bottom: none; }
+    .task-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .task-text { font-size: 0.65rem; font-weight: 600; color: var(--slate); }
+
+    /* ── ILLUSTRATION 2: Automation Flow ── */
+    .flow-container { padding: 0.5rem 0; }
+    .flow-node {
+      display: flex; align-items: center; gap: 0.85rem;
+      background: #fff; border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 0.85rem 1rem;
+      margin-bottom: 0.5rem;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .flow-node:hover { border-color: var(--blue); box-shadow: 0 4px 12px rgba(37,99,235,0.12); }
+    .flow-icon-box { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .flow-text h6 { font-size: 0.78rem; font-weight: 800; color: var(--navy); margin: 0 0 0.1rem; }
+    .flow-text p { font-size: 0.68rem; font-weight: 500; color: #94A3B8; margin: 0; }
+    .flow-status { margin-left: auto; font-size: 0.65rem; font-weight: 800; padding: 0.2rem 0.55rem; border-radius: 99px; flex-shrink: 0; }
+    .flow-arrow { text-align: center; color: var(--teal); font-size: 1rem; margin-bottom: 0.25rem; line-height: 1; font-weight: 800; }
+    .flow-result { background: linear-gradient(135deg, rgba(20,184,166,0.12), rgba(37,99,235,0.08)); border: 1.5px solid rgba(20,184,166,0.3); border-radius: 12px; padding: 0.85rem 1rem; display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem; }
+    .flow-result-icon { font-size: 1.25rem; }
+    .flow-result-text h6 { font-size: 0.78rem; font-weight: 800; color: var(--navy); margin: 0 0 0.1rem; }
+    .flow-result-text p { font-size: 0.68rem; font-weight: 600; color: var(--teal-dark); margin: 0; }
+
+    /* ── ILLUSTRATION 3: Digital Transformation Before/After ── */
+    .transform-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .transform-col h6 { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.75rem; text-align: center; }
+    .transform-col.before h6 { color: #EF4444; }
+    .transform-col.after h6 { color: var(--teal); }
+    .process-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.55rem 0.75rem; border-radius: 8px;
+      margin-bottom: 0.4rem; font-size: 0.72rem; font-weight: 600;
+    }
+    .process-item.bad { background: rgba(239,68,68,0.07); color: #EF4444; border: 1px solid rgba(239,68,68,0.15); }
+    .process-item.good { background: rgba(20,184,166,0.08); color: var(--teal-dark); border: 1px solid rgba(20,184,166,0.2); }
+    .process-icon { font-size: 0.9rem; flex-shrink: 0; }
+    .transform-arrow { display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--blue); font-weight: 800; }
+    .transform-result-bar { grid-column: 1/-1; background: linear-gradient(135deg, rgba(37,99,235,0.07), rgba(20,184,166,0.07)); border: 1.5px solid rgba(37,99,235,0.15); border-radius: 10px; padding: 0.85rem; text-align: center; margin-top: 0.5rem; }
+    .transform-result-bar p { font-size: 0.78rem; font-weight: 700; color: var(--navy); margin: 0; }
+    .transform-result-bar span { color: var(--teal); font-weight: 800; }
+
+    /* ASSESSMENT */
+    .assessment-section { background: var(--navy); border-radius: 18px; padding: 3rem; color: white; }
+    .assessment-section h2 { color: #fff; font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .assessment-section p { color: #94A3B8; font-size: 0.95rem; font-weight: 500; margin-bottom: 1.5rem; }
+    .form-label { font-size: 0.88rem; font-weight: 800; color: #CBD5E1; margin-bottom: 0.4rem; }
+    .form-control, .form-select { background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.13); color: #fff; border-radius: 9px; font-size: 0.95rem; padding: 0.7rem 0.9rem; transition: border-color 0.2s, box-shadow 0.2s; }
+    .form-control::placeholder { color: #475569; }
+    .form-control:focus, .form-select:focus { background: rgba(255,255,255,0.1); border-color: var(--teal); color: #fff; box-shadow: 0 0 0 3px rgba(20,184,166,0.2); }
+    .form-select option { background: #1E293B; color: #fff; }
+    .btn-assess { background: linear-gradient(135deg, var(--teal), #0891B2); color: #fff; font-weight: 800; border: none; border-radius: 9px; padding: 0.8rem 1.5rem; font-size: 0.95rem; width: 100%; cursor: pointer; transition: all 0.2s; }
+    .btn-assess:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(20,184,166,0.3); }
+    .result-box { background: rgba(20,184,166,0.1); border: 1.5px solid rgba(20,184,166,0.25); border-radius: 12px; padding: 1.35rem; margin-top: 1.35rem; display: none; }
+    .result-box h5 { color: var(--teal); font-size: 0.9rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .result-box p { color: #CBD5E1; font-size: 0.9rem; font-weight: 500; margin: 0; line-height: 1.65; }
+    .result-priority { font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem; }
+
+    /* LOCAL BUSINESS STRIP */
+    .local-strip {
+      background: linear-gradient(135deg, #0F2027, #0d3347, #0F172A);
+      border-radius: 18px;
+      padding: 3rem 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .local-strip h2 { color: #fff; font-size: 1.7rem; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 0.85rem; line-height: 1.2; }
+    .local-strip h2 em { font-style: normal; color: var(--teal); }
+    .local-strip p { color: #94A3B8; font-size: 0.97rem; font-weight: 500; line-height: 1.75; }
+    .local-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    .local-tile {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 1rem;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .local-tile:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); border-color: rgba(20,184,166,0.3); }
+    .local-tile .t-icon { font-size: 1.6rem; margin-bottom: 0.45rem; }
+    .local-tile .t-label { font-size: 0.78rem; font-weight: 700; color: #CBD5E1; }
+
+    /* CTA */
+    .cta-banner { background: var(--light-bg); border: 1.5px solid var(--border); border-radius: 18px; padding: 3.5rem 2.5rem; text-align: center; }
+    .cta-banner h2 { color: var(--navy); font-size: 1.75rem; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 0.75rem; }
+    .cta-banner p { color: var(--slate); font-size: 1rem; font-weight: 500; margin-bottom: 2rem; max-width: 460px; margin-left: auto; margin-right: auto; }
+    .btn-primary-custom { background: linear-gradient(135deg, var(--blue), #4F46E5); color: #fff; border: none; border-radius: 10px; padding: 0.85rem 2rem; font-weight: 800; font-size: 1rem; text-decoration: none; transition: all 0.2s; display: inline-block; }
+    .btn-primary-custom:hover { color: #fff; transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,99,235,0.35); }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: #94A3B8; padding: 3rem 1.5rem; }
+    .footer-inner { max-width: 1140px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: flex-start; }
+    .footer-brand { font-weight: 800; font-size: 1.1rem; color: #fff; margin-bottom: 0.4rem; }
+    .footer-brand span { color: var(--teal); }
+    .footer-sub { font-size: 0.85rem; font-weight: 500; color: #64748B; }
+    .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
+    .footer-links a { color: #64748B; font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-copy { font-size: 0.85rem; font-weight: 500; color: #475569; margin-top: 2rem; text-align: center; }
+
+    @media (max-width: 900px) {
+      .service-block { grid-template-columns: 1fr; gap: 2.5rem; }
+      .service-block.reverse .service-visual-col { order: 0; }
+      .local-strip { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.5rem; }
+      .assessment-section { padding: 2rem 1.25rem; }
+    }
+    @media (max-width: 600px) {
+      .transform-wrapper { grid-template-columns: 1fr; }
+      .transform-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Page Loader -->
+<div id="page-loader">
+  <div class="loader-logo">Proaxis <span>Solutions</span></div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container-xl">
+    <a class="navbar-brand" href="index.html">Proaxis <span>Solutions</span></a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link nav-cta" href="contact.html">Get in Touch</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-badge">Our Capabilities</div>
+  <h1>Solutions That Fit Your Business —<br>Whatever Size You Are</h1>
+  <p>From solo traders and local shops to large enterprises and government bodies — we design technology that actually works for how your business operates.</p>
+</div>
+
+<!-- Services -->
+<section style="background:#fff;">
+  <div class="container-xl">
+
+    <!-- ── SOFTWARE ENGINEERING ── -->
+    <div class="service-block" id="software">
+      <div class="service-info reveal">
+        <div class="section-label">Service 01</div>
+        <h2>Custom Software Engineering</h2>
+        <p>Off-the-shelf tools force your business to work their way. We build software around your exact workflows — scalable, maintainable, and designed to make your team's life easier from day one.</p>
+        <p>Whether you need a booking system for your salon, a stock tracker for your shop, a client portal for your firm, or a full enterprise platform — we build it right.</p>
+        <ul class="outcomes-list">
+          <li>Reduces manual work and costly workarounds</li>
+          <li>Integrates with your existing tools and data</li>
+          <li>Designed for the long term — easy to maintain and grow</li>
+          <li>Faster time-to-market with purpose-built solutions</li>
+          <li>Works for businesses of any size</li>
+        </ul>
+        <div style="margin-top:0.25rem;">
+          <span class="tag">Web Applications</span>
+          <span class="tag">API Development</span>
+          <span class="tag">System Integration</span>
+          <span class="tag">Database Design</span>
+          <span class="tag">Legacy Modernisation</span>
+          <span class="tag">Mobile-Friendly</span>
+        </div>
+      </div>
+      <div class="service-visual-col reveal reveal-delay-2">
+        <div class="illustration-wrapper">
+          <div class="illus-topbar">
+            <div class="illus-dot" style="background:#EF4444;"></div>
+            <div class="illus-dot" style="background:#F59E0B;"></div>
+            <div class="illus-dot" style="background:#22C55E;"></div>
+            <div class="illus-urlbar"><span>✦ proaxis-business-platform.app</span></div>
+          </div>
+          <div class="illus-body">
+            <div class="dash-header">
+              <div class="dash-header-title">Business Dashboard</div>
+              <div class="dash-badge-live">LIVE</div>
+            </div>
+            <div class="dash-stats">
+              <div class="dash-stat"><div class="dash-stat-num">247</div><div class="dash-stat-lbl">Orders Today</div></div>
+              <div class="dash-stat"><div class="dash-stat-num" style="color:var(--teal);">R 18.4k</div><div class="dash-stat-lbl">Revenue</div></div>
+              <div class="dash-stat"><div class="dash-stat-num" style="color:#22C55E;">98%</div><div class="dash-stat-lbl">Uptime</div></div>
+            </div>
+            <div class="dash-chart-row">
+              <div class="dash-chart-area">
+                <div class="chart-title">Weekly Performance</div>
+                <div class="bar-row"><div class="bar-label">Mon</div><div class="bar-track"><div class="bar-fill" style="width:65%"></div></div></div>
+                <div class="bar-row"><div class="bar-label">Tue</div><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div></div>
+                <div class="bar-row"><div class="bar-label">Wed</div><div class="bar-track"><div class="bar-fill" style="width:55%"></div></div></div>
+                <div class="bar-row"><div class="bar-label">Thu</div><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div></div>
+                <div class="bar-row"><div class="bar-label">Fri</div><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div></div>
+              </div>
+              <div class="dash-sidebar">
+                <div class="chart-title">Active Tasks</div>
+                <div class="task-item"><div class="task-dot" style="background:#22C55E;"></div><div class="task-text">Invoices sent</div></div>
+                <div class="task-item"><div class="task-dot" style="background:var(--blue);"></div><div class="task-text">Orders processed</div></div>
+                <div class="task-item"><div class="task-dot" style="background:var(--teal);"></div><div class="task-text">Reports ready</div></div>
+                <div class="task-item"><div class="task-dot" style="background:#F59E0B;"></div><div class="task-text">2 pending</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── AI & AUTOMATION ── -->
+    <div class="service-block reverse" id="ai">
+      <div class="service-info reveal">
+        <div class="section-label">Service 02</div>
+        <h2>AI & Business Automation</h2>
+        <p>Every hour your team spends on repetitive manual tasks is an hour not spent growing your business. We identify where automation can make the biggest difference — and build intelligent workflows that run reliably in the background.</p>
+        <p>From automatic invoicing and appointment reminders to AI-assisted document processing — we bring practical AI to your operations, not just buzzwords.</p>
+        <ul class="outcomes-list">
+          <li>Dramatically reduces manual processing time</li>
+          <li>Fewer errors, faster throughput</li>
+          <li>AI-assisted insights for better decisions</li>
+          <li>Your team focuses on customers, not admin</li>
+          <li>Scales without needing to hire more staff</li>
+        </ul>
+        <div style="margin-top:0.25rem;">
+          <span class="tag">Process Automation</span>
+          <span class="tag">AI Workflows</span>
+          <span class="tag">Document Processing</span>
+          <span class="tag">Smart Notifications</span>
+          <span class="tag">Reporting Automation</span>
+        </div>
+      </div>
+      <div class="service-visual-col reveal reveal-delay-1">
+        <div class="illustration-wrapper">
+          <div class="illus-topbar">
+            <div class="illus-dot" style="background:#EF4444;"></div>
+            <div class="illus-dot" style="background:#F59E0B;"></div>
+            <div class="illus-dot" style="background:#22C55E;"></div>
+            <div class="illus-urlbar"><span>✦ automation-flow · running</span></div>
+          </div>
+          <div class="illus-body">
+            <div class="flow-container">
+              <div class="flow-node">
+                <div class="flow-icon-box" style="background:rgba(37,99,235,0.1);">📥</div>
+                <div class="flow-text"><h6>New Order Received</h6><p>Trigger: Customer submits order form</p></div>
+                <div class="flow-status" style="background:rgba(34,197,94,0.12); color:#16A34A;">● Active</div>
+              </div>
+              <div class="flow-arrow">↓</div>
+              <div class="flow-node">
+                <div class="flow-icon-box" style="background:rgba(20,184,166,0.1);">🤖</div>
+                <div class="flow-text"><h6>AI Processes & Validates</h6><p>Checks stock, verifies details, flags issues</p></div>
+                <div class="flow-status" style="background:rgba(37,99,235,0.1); color:var(--blue);">⚡ Auto</div>
+              </div>
+              <div class="flow-arrow">↓</div>
+              <div class="flow-node">
+                <div class="flow-icon-box" style="background:rgba(245,158,11,0.1);">📧</div>
+                <div class="flow-text"><h6>Confirmation Sent</h6><p>Customer & team notified instantly</p></div>
+                <div class="flow-status" style="background:rgba(34,197,94,0.12); color:#16A34A;">✓ Done</div>
+              </div>
+              <div class="flow-arrow">↓</div>
+              <div class="flow-result">
+                <div class="flow-result-icon">📊</div>
+                <div class="flow-result-text"><h6>Dashboard Updated</h6><p>Full audit trail logged automatically — zero manual entry</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DIGITAL TRANSFORMATION ── -->
+    <div class="service-block" id="digital">
+      <div class="service-info reveal">
+        <div class="section-label">Service 03</div>
+        <h2>Digital Transformation</h2>
+        <p>Still using paper files, spreadsheets, or outdated systems? You're not alone — and you're not stuck. We help businesses of every size move to smarter, faster, fully digital operations.</p>
+        <p>We handle the whole journey: from auditing your current processes to building the new systems and supporting your team through the change.</p>
+        <ul class="outcomes-list">
+          <li>Replaces paper processes with digital workflows</li>
+          <li>Modernises outdated systems — fast</li>
+          <li>Employees are more productive and less frustrated</li>
+          <li>Better customer experience across every touchpoint</li>
+          <li>Positions you for long-term competitive advantage</li>
+        </ul>
+        <div style="margin-top:0.25rem;">
+          <span class="tag">Digital Strategy</span>
+          <span class="tag">Process Redesign</span>
+          <span class="tag">Cloud Setup</span>
+          <span class="tag">Team Onboarding</span>
+          <span class="tag">Digital Consulting</span>
+        </div>
+      </div>
+      <div class="service-visual-col reveal reveal-delay-2">
+        <div class="illustration-wrapper">
+          <div class="illus-topbar">
+            <div class="illus-dot" style="background:#EF4444;"></div>
+            <div class="illus-dot" style="background:#F59E0B;"></div>
+            <div class="illus-dot" style="background:#22C55E;"></div>
+            <div class="illus-urlbar"><span>✦ transformation-roadmap</span></div>
+          </div>
+          <div class="illus-body">
+            <div class="transform-wrapper">
+              <div class="transform-col before">
+                <h6>❌ Before</h6>
+                <div class="process-item bad"><div class="process-icon">📄</div>Paper-based records</div>
+                <div class="process-item bad"><div class="process-icon">📊</div>Manual spreadsheets</div>
+                <div class="process-item bad"><div class="process-icon">📞</div>Phone order taking</div>
+                <div class="process-item bad"><div class="process-icon">⏳</div>Slow approvals</div>
+                <div class="process-item bad"><div class="process-icon">🗂️</div>Lost documents</div>
+              </div>
+              <div class="transform-col after">
+                <h6>✅ After</h6>
+                <div class="process-item good"><div class="process-icon">☁️</div>Cloud-based system</div>
+                <div class="process-item good"><div class="process-icon">📱</div>Live digital dashboard</div>
+                <div class="process-item good"><div class="process-icon">🛒</div>Online order portal</div>
+                <div class="process-item good"><div class="process-icon">⚡</div>Instant approvals</div>
+                <div class="process-item good"><div class="process-icon">🔍</div>Searchable records</div>
+              </div>
+              <div class="transform-result-bar">
+                <p>Result: <span>Up to 70% reduction in manual admin time</span> — your team back to what matters most.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Local Business Strip -->
+<section style="background:var(--light-bg); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container-xl">
+    <div class="local-strip reveal">
+      <div>
+        <div style="font-size:0.8rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:0.75rem;">🏪 Built for Every South African Business</div>
+        <h2>You don't need to be<br>a big company to <em>benefit from technology</em></h2>
+        <p>We work with hair salons, spaza shops, food stalls, family businesses, community organisations, and growing SMEs across South Africa. Our solutions are designed to fit your reality — your budget, your team size, your goals.</p>
+        <a href="contact.html" style="display:inline-block; margin-top:1.5rem; background:var(--teal); color:var(--navy); padding:0.75rem 1.75rem; border-radius:9px; font-weight:800; font-size:0.95rem; text-decoration:none; transition:all 0.2s;">
+          Tell Us About Your Business →
+        </a>
+      </div>
+      <div class="local-grid">
+        <div class="local-tile"><div class="t-icon">💇</div><div class="t-label">Hair & Beauty</div></div>
+        <div class="local-tile"><div class="t-icon">🛒</div><div class="t-label">Retail & Spaza</div></div>
+        <div class="local-tile"><div class="t-icon">🍽️</div><div class="t-label">Food & Catering</div></div>
+        <div class="local-tile"><div class="t-icon">🔧</div><div class="t-label">Trades & Services</div></div>
+        <div class="local-tile"><div class="t-icon">🏥</div><div class="t-label">Healthcare</div></div>
+        <div class="local-tile"><div class="t-icon">🏛️</div><div class="t-label">Government</div></div>
+        <div class="local-tile"><div class="t-icon">📚</div><div class="t-label">Education</div></div>
+        <div class="local-tile"><div class="t-icon">🏢</div><div class="t-label">Professional Firms</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Automation Assessment -->
+<section style="background:#fff;">
+  <div class="container-xl">
+    <div class="row align-items-start g-5">
+      <div class="col-lg-5 reveal">
+        <div class="section-label">Free Tool</div>
+        <h2 class="section-heading">Automation Opportunity Assessment</h2>
+        <p class="section-sub">Not sure where to start? Run a quick check to see how much time and money your business could save through automation. No technical knowledge needed.</p>
+        <ul class="outcomes-list" style="margin-top:1.5rem;">
+          <li>Estimates your monthly manual effort</li>
+          <li>Scores your process as a candidate for automation</li>
+          <li>Gives you a clear starting point for a conversation</li>
+        </ul>
+      </div>
+      <div class="col-lg-7 reveal reveal-delay-1">
+        <div class="assessment-section">
+          <h2>Run Your Assessment</h2>
+          <p>Answer three quick questions about any process in your business. Takes 30 seconds.</p>
+          <form id="assessmentForm">
+            <div class="mb-3">
+              <label class="form-label" for="manualHours">How many hours per week does this process take?</label>
+              <input class="form-control" id="manualHours" type="number" min="0" max="500" placeholder="e.g. 10" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="staffCount">How many people are involved?</label>
+              <input class="form-control" id="staffCount" type="number" min="1" max="500" placeholder="e.g. 2" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="frequency">How often does it run?</label>
+              <select class="form-select" id="frequency" required>
+                <option value="">Select frequency</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+              </select>
+            </div>
+            <button class="btn-assess" type="submit">Calculate My Automation Opportunity</button>
+          </form>
+          <div class="result-box" id="assessmentResult">
+            <div class="result-priority" id="priorityText"></div>
+            <h5>Assessment Summary</h5>
+            <p id="resultText"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:var(--light-bg); border-top:1px solid var(--border);">
+  <div class="container-xl">
+    <div class="cta-banner reveal">
+      <h2>Which service fits your challenge?</h2>
+      <p>Let's have a real conversation about your situation — no jargon, no pressure. We work with businesses of all sizes.</p>
+      <a href="contact.html" class="btn-primary-custom">Talk to Our Team</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Proaxis <span>Solutions</span></div>
+      <div class="footer-sub">Reg. 2025/542019/07 · B-BBEE Level 1 Contributor · South Africa</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <hr style="border-color:#1E293B; max-width:1140px; margin:1.5rem auto 0;">
+  <p class="footer-copy">© 2025 Proaxis Solutions (Pty) Ltd · All Rights Reserved · South Africa</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  window.addEventListener('load', () => setTimeout(() => document.getElementById('page-loader').classList.add('hidden'), 950));
+
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const hours = parseFloat(document.getElementById('manualHours').value) || 0;
+    const staff = parseInt(document.getElementById('staffCount').value, 10) || 1;
+    const freq = document.getElementById('frequency').value;
+    const multiplier = freq === 'daily' ? 20 : freq === 'weekly' ? 4 : 1;
+    const monthlyHours = hours * multiplier * staff;
+    let priority, msg;
+    if (hours >= 20 || staff >= 5 || freq === 'daily') {
+      priority = '🔴 High Automation Opportunity';
+      msg = `Your team spends approximately ${monthlyHours.toLocaleString()} person-hours per month on this process. This is a prime candidate for automation — significant time savings are achievable.`;
+    } else if (hours >= 10 || staff >= 3) {
+      priority = '🟡 Strong Automation Candidate';
+      msg = `Estimated ${monthlyHours.toLocaleString()} person-hours per month. Solid automation potential — targeted workflows could meaningfully free up your team and reduce errors.`;
+    } else {
+      priority = '🟢 Moderate Opportunity';
+      msg = `Estimated ${monthlyHours.toLocaleString()} person-hours per month. Even moderate processes benefit from automation. Small improvements compound into real efficiency gains over time.`;
+    }
+    document.getElementById('priorityText').textContent = priority;
+    document.getElementById('resultText').textContent = msg + ' Share this with our team to explore a tailored solution.';
+    const box = document.getElementById('assessmentResult');
+    box.style.display = 'block';
+    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+</script>
+</body>
+</html>

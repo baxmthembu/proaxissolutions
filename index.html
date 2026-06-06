@@ -3,310 +3,501 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Intelligent Software, Automation & Digital Transformation Solutions">
-  <title>Proaxis Solutions - Software Engineering, AI Automation & Digital Transformation</title>
+  <meta name="description" content="Proaxis Solutions — Intelligent Software, AI Automation & Digital Transformation for South African businesses.">
+  <title>Proaxis Solutions — Software Engineering, AI Automation & Digital Transformation</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
   <style>
-    * {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    :root {
+      --navy: #0F172A;
+      --blue: #2563EB;
+      --blue-hover: #1d4ed8;
+      --teal: #14B8A6;
+      --slate: #475569;
+      --light-bg: #F8FAFC;
+      --border: #E2E8F0;
     }
+
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; box-sizing: border-box; }
+
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      padding-top: 60px;
-      background-color: #ffffff;
-      line-height: 1.6;
-      color: #475569;
+      background: #fff;
+      color: var(--slate);
+      line-height: 1.65;
+      margin: 0;
+      padding-top: 64px;
     }
-    h1, h2, h3, h4, h5, h6 {
-      color: #0F172A;
+
+    /* ── NAV ── */
+    .navbar {
+      background: var(--navy);
+      height: 64px;
+      padding: 0 1rem;
+    }
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #fff !important;
+      letter-spacing: -0.02em;
+    }
+    .navbar-brand span { color: var(--teal); }
+    .nav-link {
+      color: #CBD5E1 !important;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.4rem 0.85rem !important;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: #fff !important;
+      background: rgba(255,255,255,0.08);
+    }
+    .nav-cta {
+      background: var(--blue) !important;
+      color: #fff !important;
+      margin-left: 0.5rem;
+    }
+    .nav-cta:hover { background: var(--blue-hover) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      padding: 100px 1.5rem 96px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(37,99,235,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(20,184,166,0.15);
+      color: var(--teal);
+      border: 1px solid rgba(20,184,166,0.3);
+      border-radius: 999px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.8rem;
       font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
     }
-    header {
-      background: linear-gradient(135deg, #0F172A 0%, #2563EB 100%);
-      color: white;
-      text-align: center;
-      padding: 100px 20px 80px 20px;
-    }
-    header h1 {
-      color: white;
-      font-size: 3rem;
+    .hero h1 {
+      color: #fff;
+      font-size: clamp(2rem, 5vw, 3.25rem);
       font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 20px;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    header p {
-      font-size: 1.2rem;
-      color: #E2E8F0;
-      margin-bottom: 30px;
+    .hero h1 em {
+      font-style: normal;
+      color: var(--teal);
     }
-    footer {
-      background: #0F172A;
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
+    .hero p {
+      color: #94A3B8;
+      font-size: 1.1rem;
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
     }
-    .counter {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #2563EB;
-    }
-    .btn-primary {
-      background-color: #2563EB;
-      border-color: #2563EB;
-      font-weight: 500;
-    }
-    .btn-primary:hover {
-      background-color: #1d4ed8;
-      border-color: #1d4ed8;
-    }
-    .btn-light {
-      background-color: #E2E8F0;
-      border-color: #E2E8F0;
-      color: #0F172A;
-      font-weight: 500;
-    }
-    .btn-light:hover {
-      background-color: #cbd5e1;
-      border-color: #cbd5e1;
-    }
-    .card {
-      border: 1px solid #E2E8F0;
+    .hero-actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary-custom {
+      background: var(--blue);
+      color: #fff;
+      border: none;
       border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      padding: 0.75rem 1.75rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.1s;
+      display: inline-block;
     }
-    .card-body {
+    .btn-primary-custom:hover { background: var(--blue-hover); color: #fff; transform: translateY(-1px); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.08);
+      color: #E2E8F0;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 0.75rem 1.75rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.15s;
+      display: inline-block;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.14); color: #fff; }
+
+    /* ── TRUST STRIP ── */
+    .trust-strip {
+      background: var(--light-bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+    }
+    .trust-strip-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 2.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--slate);
+      white-space: nowrap;
+    }
+    .trust-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+
+    /* ── SECTIONS ── */
+    section { padding: 88px 1.5rem; }
+
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.75rem;
+    }
+    .section-heading {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      color: var(--slate);
+      font-size: 1rem;
+      max-width: 520px;
+    }
+
+    /* ── WHY US ── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .why-card {
+      background: var(--light-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      transition: box-shadow 0.25s, border-color 0.25s, transform 0.25s;
+    }
+    .why-card:hover {
+      box-shadow: 0 10px 28px rgba(15,23,42,0.1);
+      border-color: #93C5FD;
+      transform: translateY(-4px);
+    }
+    .why-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: rgba(37,99,235,0.1);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    .why-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 0.4rem; }
+    .why-card p { font-size: 0.88rem; color: var(--slate); margin: 0; line-height: 1.55; }
+
+    /* ── SERVICES TEASER ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
       padding: 2rem;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      text-decoration: none;
+      display: block;
+      color: inherit;
     }
-    section {
-      padding: 80px 20px;
+    .service-card:hover {
+      box-shadow: 0 12px 32px rgba(15,23,42,0.12);
+      border-color: var(--blue);
+      color: inherit;
+      transform: translateY(-5px);
     }
-    .bg-light {
-      background-color: #F8FAFC !important;
+    .service-icon {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+    .service-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+    .service-card p { font-size: 0.88rem; color: var(--slate); margin: 0; line-height: 1.6; }
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--blue);
+      margin-top: 1rem;
+    }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 3.5rem 2.5rem;
+      text-align: center;
+    }
+    .cta-banner h2 { color: #fff; font-size: 1.9rem; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 0.75rem; }
+    .cta-banner p { color: #94A3B8; font-size: 1rem; margin-bottom: 2rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: #94A3B8;
+      padding: 3rem 1.5rem;
+    }
+    .footer-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .footer-brand { font-weight: 700; font-size: 1.05rem; color: #fff; margin-bottom: 0.4rem; }
+    .footer-brand span { color: var(--teal); }
+    .footer-sub { font-size: 0.82rem; color: #64748B; }
+    .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
+    .footer-links a { color: #64748B; font-size: 0.85rem; text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-copy { font-size: 0.8rem; color: #475569; margin-top: 2rem; text-align: center; }
+    hr.footer-divider { border-color: #1E293B; margin: 1.5rem 0; }
+
+    /* PAGE LOADER */
+    #page-loader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 1rem;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    #page-loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-logo { font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+    .loader-logo span { color: var(--teal); }
+    .loader-bar { width: 180px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden; }
+    .loader-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--teal), var(--blue)); border-radius: 99px; animation: load 0.9s ease forwards; }
+    @keyframes load { to { width: 100%; } }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    @media (max-width: 768px) {
+      .hero { padding: 72px 1.25rem 64px; }
+      .footer-inner { flex-direction: column; gap: 1rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0F172A;">
-  <div class="container">
-    <a class="navbar-brand" href="#" style="font-weight: 700; font-size: 1.3rem;">Proaxis Solutions</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+<!-- Page Loader -->
+<div id="page-loader">
+  <div class="loader-logo">Proaxis <span>Solutions</span></div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container-xl">
+    <a class="navbar-brand" href="index.html">Proaxis <span>Solutions</span></a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#solutions">Solutions</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#work">How We Work</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#contact">Contact</a>
-        </li>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link nav-cta" href="contact.html">Get in Touch</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- Hero Section -->
-<header>
-  <h1>Build Intelligent Systems.<br>Automate Operations.<br>Transform Business.</h1>
-  <p>Proaxis Solutions helps organisations modernise operations and accelerate growth through intelligent software and automation solutions.</p>
-  <a href="#solutions" class="btn btn-light btn-lg mt-3">Explore Our Solutions</a>
-  <a href="#work" class="btn btn-light btn-lg mt-3 ms-3">How We Work</a>
-</header>
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge">South African Technology Partner</div>
+  <h1>Build Smarter Systems.<br>Automate What Slows You Down.<br><em>Grow Without Limits.</em></h1>
+  <p>Proaxis Solutions delivers custom software, AI automation, and digital transformation for organisations ready to scale.</p>
+  <div class="hero-actions">
+    <a href="services.html" class="btn-primary-custom">Explore Our Services</a>
+    <a href="contact.html" class="btn-ghost">Start a Conversation</a>
+  </div>
+</section>
 
-<!-- Why Proaxis Solutions Section -->
-<section style="background-color: #F8FAFC;">
-  <div class="container">
-    <h2 class="text-center mb-5" style="font-size: 2.2rem;">Why Proaxis Solutions</h2>
-    <div class="row g-5">
-      <div class="col-md-6">
-        <div style="margin-bottom: 2.5rem;">
-          <h4 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">✓ Business-First Thinking</h4>
-          <p>We start with your operations, not technology. Our solutions solve real business problems.</p>
-        </div>
-        <div style="margin-bottom: 2.5rem;">
-          <h4 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">✓ Software Engineering Discipline</h4>
-          <p>Built for scale, built to last. Our code and systems are designed for the long term.</p>
-        </div>
-        <div style="margin-bottom: 2.5rem;">
-          <h4 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">✓ Long-Term Partnerships</h4>
-          <p>We invest in your success. Our support doesn't end at delivery.</p>
-        </div>
+<!-- Trust Strip -->
+<div class="trust-strip">
+  <div class="trust-strip-inner">
+    <div class="trust-item"><div class="trust-dot"></div> SA Registered Company</div>
+    <div class="trust-item"><div class="trust-dot"></div> B-BBEE Level 1 Contributor</div>
+    <div class="trust-item"><div class="trust-dot"></div> CSD & Tender Ready</div>
+    <div class="trust-item"><div class="trust-dot"></div> POPIA Compliant</div>
+    <div class="trust-item"><div class="trust-dot"></div> Information Officer Registered</div>
+  </div>
+</div>
+
+<!-- Why Proaxis -->
+<section style="background: #fff;">
+  <div class="container-xl">
+    <div class="section-label">Why Choose Us</div>
+    <h2 class="section-heading">Technology that works for your business,<br>not the other way around.</h2>
+    <p class="section-sub">We start with your operations, not a product catalogue. Every solution we build is designed to solve real problems and deliver measurable outcomes.</p>
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <div class="why-icon">🎯</div>
+        <h4>Business-First Thinking</h4>
+        <p>We understand your operations deeply before recommending any technology. Solutions fit your business logic, not the other way around.</p>
       </div>
-      <div class="col-md-6">
-        <div style="margin-bottom: 2.5rem;">
-          <h4 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">✓ Automation Mindset</h4>
-          <p>Reduce manual work, improve efficiency. We help you work smarter, not harder.</p>
-        </div>
-        <div style="margin-bottom: 2.5rem;">
-          <h4 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">✓ Practical Innovation</h4>
-          <p>Real solutions for real business problems, without unnecessary complexity.</p>
-        </div>
-        <div style="margin-bottom: 2.5rem;">
-          <h4 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">✓ Verified Outcomes</h4>
-          <p>We focus on measurable business value, not vanity metrics.</p>
-        </div>
+      <div class="why-card">
+        <div class="why-icon">⚙️</div>
+        <h4>Automation Mindset</h4>
+        <p>We identify every opportunity to reduce manual effort, eliminate bottlenecks, and free your team to focus on high-value work.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🏗️</div>
+        <h4>Built for Scale</h4>
+        <p>Our software engineering discipline means systems are designed to grow with your business — robust, maintainable, and future-ready.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🤝</div>
+        <h4>Long-Term Partnership</h4>
+        <p>We invest in your success beyond delivery. Our support evolves as your business grows and your needs change.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">✅</div>
+        <h4>Verified Outcomes</h4>
+        <p>We measure success by your business results — efficiency gains, time saved, and value delivered — not lines of code.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔒</div>
+        <h4>Compliance Ready</h4>
+        <p>Governance, POPIA, and data protection are built into our approach — not bolted on. Especially important for regulated and public sector clients.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Our Methodology Section -->
-<section id="work">
-  <div class="container">
-    <h2 class="text-center mb-5" style="font-size: 2.2rem;">Our Approach: Discover. Design. Automate. Scale.</h2>
-    <div class="row g-4 text-center">
-      <div class="col-md-3">
-        <div style="background-color: #F8FAFC; padding: 2rem; border-radius: 8px;">
-          <h4 style="color: #2563EB; font-weight: 700; font-size: 1.3rem; margin-bottom: 1rem;">1. Discover</h4>
-          <p>We deeply understand your operations, challenges, and goals before recommending solutions.</p>
-        </div>
+<!-- Services Teaser -->
+<section style="background: var(--light-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="container-xl">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-heading">Three core capabilities.<br>Infinite business applications.</h2>
+    <p class="section-sub">From custom platforms to intelligent automation, we have the depth to tackle your most complex technology challenges.</p>
+    <div class="services-grid">
+      <a class="service-card" href="services.html#software">
+        <div class="service-icon">💻</div>
+        <h3>Software Engineering</h3>
+        <p>Custom software built to your exact business logic — scalable, maintainable, and designed to reduce operational friction.</p>
+        <span class="service-link">Learn more →</span>
+      </a>
+      <a class="service-card" href="services.html#ai">
+        <div class="service-icon">🤖</div>
+        <h3>AI & Automation</h3>
+        <p>Intelligent workflows that eliminate repetitive manual work, improve decision-making, and let your team focus on what matters.</p>
+        <span class="service-link">Learn more →</span>
+      </a>
+      <a class="service-card" href="services.html#digital">
+        <div class="service-icon">🚀</div>
+        <h3>Digital Transformation</h3>
+        <p>Modernise legacy systems and outdated processes — improving employee productivity, customer experience, and competitive position.</p>
+        <span class="service-link">Learn more →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Local Business Section -->
+<section style="background: var(--navy); padding: 80px 1.5rem;">
+  <div class="container-xl">
+    <div style="display:grid; grid-template-columns:1.1fr 1fr; gap:4rem; align-items:center;" class="reveal local-section-grid">
+      <div>
+        <div style="font-size:0.78rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:0.75rem;">🏪 For Every South African Business</div>
+        <h2 style="color:#fff; font-size:clamp(1.6rem,3vw,2.2rem); font-weight:700; letter-spacing:-0.025em; line-height:1.2; margin-bottom:1rem;">Technology isn't just for big companies.<br><span style="color:var(--teal);">It's for yours too.</span></h2>
+        <p style="color:#94A3B8; font-size:1rem; line-height:1.75; margin-bottom:1.5rem;">Whether you run a hair salon in Soweto, a food stall in the Cape Flats, a family business in Durban, or a growing SME anywhere in South Africa — we design solutions that fit your budget, your context, and your goals.</p>
+        <a href="contact.html" style="display:inline-block; background:var(--teal); color:var(--navy); padding:0.75rem 1.75rem; border-radius:8px; font-weight:700; font-size:0.95rem; text-decoration:none; transition:all 0.2s;">Let's Talk About Your Business →</a>
       </div>
-      <div class="col-md-3">
-        <div style="background-color: #F8FAFC; padding: 2rem; border-radius: 8px;">
-          <h4 style="color: #2563EB; font-weight: 700; font-size: 1.3rem; margin-bottom: 1rem;">2. Design</h4>
-          <p>We design solutions that fit your business logic, not force-fit generic tools.</p>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div style="background-color: #F8FAFC; padding: 2rem; border-radius: 8px;">
-          <h4 style="color: #2563EB; font-weight: 700; font-size: 1.3rem; margin-bottom: 1rem;">3. Automate</h4>
-          <p>We implement solutions that reduce manual work and improve efficiency.</p>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div style="background-color: #F8FAFC; padding: 2rem; border-radius: 8px;">
-          <h4 style="color: #2563EB; font-weight: 700; font-size: 1.3rem; margin-bottom: 1rem;">4. Scale</h4>
-          <p>We support your growth with systems that scale, maintain, and evolve with your business.</p>
-        </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.85rem;">
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1.1rem; text-align:center; transition:all 0.2s; cursor:default;" onmouseover="this.style.background='rgba(20,184,166,0.1)'; this.style.borderColor='rgba(20,184,166,0.3)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='none'"><div style="font-size:1.6rem; margin-bottom:0.4rem;">💇</div><div style="font-size:0.78rem; font-weight:700; color:#CBD5E1;">Hair & Beauty</div></div>
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1.1rem; text-align:center; transition:all 0.2s; cursor:default;" onmouseover="this.style.background='rgba(20,184,166,0.1)'; this.style.borderColor='rgba(20,184,166,0.3)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='none'"><div style="font-size:1.6rem; margin-bottom:0.4rem;">🛒</div><div style="font-size:0.78rem; font-weight:700; color:#CBD5E1;">Retail & Spaza</div></div>
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1.1rem; text-align:center; transition:all 0.2s; cursor:default;" onmouseover="this.style.background='rgba(20,184,166,0.1)'; this.style.borderColor='rgba(20,184,166,0.3)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='none'"><div style="font-size:1.6rem; margin-bottom:0.4rem;">🍽️</div><div style="font-size:0.78rem; font-weight:700; color:#CBD5E1;">Food & Catering</div></div>
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1.1rem; text-align:center; transition:all 0.2s; cursor:default;" onmouseover="this.style.background='rgba(20,184,166,0.1)'; this.style.borderColor='rgba(20,184,166,0.3)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='none'"><div style="font-size:1.6rem; margin-bottom:0.4rem;">🔧</div><div style="font-size:0.78rem; font-weight:700; color:#CBD5E1;">Trades & Services</div></div>
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1.1rem; text-align:center; transition:all 0.2s; cursor:default;" onmouseover="this.style.background='rgba(20,184,166,0.1)'; this.style.borderColor='rgba(20,184,166,0.3)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='none'"><div style="font-size:1.6rem; margin-bottom:0.4rem;">🏥</div><div style="font-size:0.78rem; font-weight:700; color:#CBD5E1;">Healthcare</div></div>
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1.1rem; text-align:center; transition:all 0.2s; cursor:default;" onmouseover="this.style.background='rgba(20,184,166,0.1)'; this.style.borderColor='rgba(20,184,166,0.3)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.08)'; this.style.transform='none'"><div style="font-size:1.6rem; margin-bottom:0.4rem;">🏢</div><div style="font-size:0.78rem; font-weight:700; color:#CBD5E1;">Professional Firms</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Solutions Section -->
-<section id="solutions" style="background-color: #F8FAFC;">
-  <div class="container">
-    <h2 class="text-center mb-5" style="font-size: 2.2rem;">Our Solutions</h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card h-100">
-          <div class="card-body">
-            <h3 class="h4" style="color: #2563EB; margin-bottom: 1rem;">Software Engineering</h3>
-            <p>Custom software solutions built to your business logic, not off-the-shelf limitations. We design and develop scalable systems that reduce operational friction and integrate seamlessly with your existing stack.</p>
-            <h5 style="color: #0F172A; margin-top: 1.5rem; margin-bottom: 0.5rem; font-weight: 600;">Outcomes:</h5>
-            <ul>
-              <li>Reduced operational complexity</li>
-              <li>Faster time-to-market</li>
-              <li>Future-ready technology foundation</li>
-              <li>Improved team productivity</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100">
-          <div class="card-body">
-            <h3 class="h4" style="color: #2563EB; margin-bottom: 1rem;">AI & Automation</h3>
-            <p>Intelligent automation that reduces manual work and improves decision-making. We identify repetitive processes, implement intelligent workflows, and free up your team to focus on strategy.</p>
-            <h5 style="color: #0F172A; margin-top: 1.5rem; margin-bottom: 0.5rem; font-weight: 600;">Outcomes:</h5>
-            <ul>
-              <li>Efficiency gains and cost reduction</li>
-              <li>Faster processing and throughput</li>
-              <li>Improved decision-making with data</li>
-              <li>Team focus on high-value work</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100">
-          <div class="card-body">
-            <h3 class="h4" style="color: #2563EB; margin-bottom: 1rem;">Digital Transformation</h3>
-            <p>Modernising legacy systems and outdated processes for the digital age. We help you upgrade your technology stack, improve employee productivity, and deliver better customer experiences.</p>
-            <h5 style="color: #0F172A; margin-top: 1.5rem; margin-bottom: 0.5rem; font-weight: 600;">Outcomes:</h5>
-            <ul>
-              <li>Future-ready technology foundation</li>
-              <li>Improved employee productivity</li>
-              <li>Better customer experience</li>
-              <li>Sustainable competitive advantage</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Trust & Credentials Section -->
-<section id="trust" style="background-color: #0F172A;">
-  <div class="container">
-    <h2 class="text-center mb-5" style="color: white; font-size: 2.2rem;">Trust & Professionalism</h2>
-    <div class="row text-center text-white">
-      <div class="col-md-3 mb-4">
-        <h5 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">South African Registered</h5>
-        <p>Professional company registered and operating in South Africa</p>
-      </div>
-      <div class="col-md-3 mb-4">
-        <h5 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">B-BBEE Level 1</h5>
-        <p>Verified Level 1 B-BBEE Contributor</p>
-      </div>
-      <div class="col-md-3 mb-4">
-        <h5 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">Information Officer Registered</h5>
-        <p>Registered in compliance with information management requirements</p>
-      </div>
-      <div class="col-md-3 mb-4">
-        <h5 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">Supplier Compliance</h5>
-        <p>CSD registered and tender-ready for public sector opportunities</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- Contact Section -->
-<section id="contact" class="container py-5">
-  <div class="row">
-    <div class="col-md-6 mb-4">
-      <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Ready to Transform Your Operations?</h2>
-      <p style="font-size: 1.1rem; color: #475569; margin-bottom: 2rem;">Let's discuss how Proaxis Solutions can help your organisation modernise, automate, and scale through intelligent technology.</p>
-    </div>
-    <div class="col-md-6">
-      <form class="mx-auto">
-        <div class="mb-3">
-          <label for="name" class="form-label">Full Name</label>
-          <input type="text" class="form-control" id="name" placeholder="Your Name">
-        </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="email" placeholder="name@example.com">
-        </div>
-        <div class="mb-3">
-          <label for="company" class="form-label">Organisation</label>
-          <input type="text" class="form-control" id="company" placeholder="Your Company">
-        </div>
-        <div class="mb-3">
-          <label for="message" class="form-label">Message</label>
-          <textarea class="form-control" id="message" rows="4" placeholder="Tell us about your needs"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Start a Conversation</button>
-      </form>
+<!-- CTA Banner -->
+<section style="background: #fff;">
+  <div class="container-xl">
+    <div class="cta-banner">
+      <h2>Ready to transform how your business operates?</h2>
+      <p>Let's talk about where technology can make the biggest difference for your organisation.</p>
+      <a href="contact.html" class="btn-primary-custom">Book a Discovery Call</a>
     </div>
   </div>
 </section>
 
 <!-- Footer -->
 <footer>
-  <p style="margin-bottom: 1rem;">© 2025 Proaxis Solutions | All Rights Reserved</p>
-  <p style="font-size: 0.9rem; color: #cbd5e1;">South African Registered Company | B-BBEE Level 1 Contributor</p>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Proaxis <span>Solutions</span></div>
+      <div class="footer-sub">Reg. 2025/542019/07 · B-BBEE Level 1</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <hr class="footer-divider" style="max-width: 1140px; margin: 1.5rem auto;">
+  <p class="footer-copy">© 2025 Proaxis Solutions (Pty) Ltd · All Rights Reserved · South Africa</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('page-loader').classList.add('hidden'), 950);
+  });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>

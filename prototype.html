@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proaxis Solutions — Interactive Site Prototype</title>
+  <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0F172A;
+      --blue: #2563EB;
+      --teal: #14B8A6;
+      --slate: #475569;
+      --border: #E2E8F0;
+      --light: #F8FAFC;
+    }
+    * { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; margin: 0; padding: 0; }
+
+    body { background: #0A0F1E; color: #fff; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* TOP BAR */
+    .proto-topbar {
+      background: #111827;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 0.75rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .proto-brand { font-weight: 800; font-size: 1rem; color: #fff; letter-spacing: -0.02em; }
+    .proto-brand span { color: var(--teal); }
+    .proto-label { font-size: 0.75rem; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.08em; }
+    .proto-badge {
+      background: rgba(20,184,166,0.15);
+      color: var(--teal);
+      border: 1px solid rgba(20,184,166,0.3);
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* DEVICE SELECTOR */
+    .device-bar {
+      background: #0F172A;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 0.6rem 2rem;
+      display: flex; align-items: center; gap: 2rem;
+    }
+    .device-btns { display: flex; gap: 0.5rem; }
+    .device-btn {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #94A3B8;
+      border-radius: 7px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .device-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    .device-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+    /* PAGE NAV */
+    .page-nav { display: flex; gap: 0.5rem; margin-left: auto; }
+    .page-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #94A3B8;
+      border-radius: 7px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+    .page-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .page-btn.active { background: rgba(37,99,235,0.2); color: #93C5FD; border-color: rgba(37,99,235,0.3); }
+
+    /* STAGE */
+    .proto-stage {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem;
+      overflow: auto;
+    }
+
+    /* BROWSER CHROME */
+    .browser-frame {
+      background: #1E293B;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+      transition: width 0.35s ease;
+      max-width: 100%;
+    }
+    .browser-frame.desktop { width: 1100px; }
+    .browser-frame.tablet  { width: 768px; }
+    .browser-frame.mobile  { width: 390px; }
+
+    .browser-topbar {
+      background: #0F172A;
+      padding: 0.75rem 1.1rem;
+      display: flex; align-items: center; gap: 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .b-dots { display: flex; gap: 0.45rem; }
+    .b-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .b-urlbar {
+      flex: 1;
+      background: rgba(255,255,255,0.07);
+      border-radius: 8px;
+      height: 28px;
+      display: flex; align-items: center;
+      padding: 0 0.85rem;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: #94A3B8;
+      font-weight: 500;
+    }
+    .b-lock { color: #22C55E; font-size: 0.7rem; }
+    .b-url-text { color: #CBD5E1; font-weight: 600; }
+
+    /* IFRAME */
+    .browser-viewport {
+      width: 100%;
+      height: 700px;
+      border: none;
+      display: block;
+      background: #fff;
+    }
+    .browser-frame.mobile .browser-viewport { height: 800px; }
+
+    /* DEVICE MOCKUP LABELS */
+    .device-label {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #334155;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* DUAL VIEW */
+    .dual-view {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    .dual-view .browser-frame { flex-shrink: 0; }
+
+    /* BOTTOM STATUS */
+    .proto-footer {
+      background: #111827;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 0.5rem 2rem;
+      display: flex; align-items: center; gap: 1.5rem;
+      font-size: 0.72rem; font-weight: 600; color: #475569;
+    }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #22C55E; animation: pulse 2.5s ease infinite; display: inline-block; margin-right: 0.35rem; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="proto-topbar">
+  <div class="proto-brand">Proaxis <span>Solutions</span></div>
+  <div class="proto-label">Interactive Site Prototype</div>
+  <div class="proto-badge">✦ Live Preview</div>
+</div>
+
+<!-- Device + Page Bar -->
+<div class="device-bar">
+  <div class="device-btns">
+    <button class="device-btn active" onclick="setDevice('desktop', this)">🖥 Desktop</button>
+    <button class="device-btn" onclick="setDevice('tablet', this)">📱 Tablet</button>
+    <button class="device-btn" onclick="setDevice('mobile', this)">📲 Mobile</button>
+    <button class="device-btn" onclick="setDevice('dual', this)">⊞ Dual View</button>
+  </div>
+  <div class="page-nav">
+    <a class="page-btn active" onclick="setPage('index.html', this)" href="#">Home</a>
+    <a class="page-btn" onclick="setPage('services.html', this)" href="#">Services</a>
+    <a class="page-btn" onclick="setPage('about.html', this)" href="#">About</a>
+    <a class="page-btn" onclick="setPage('contact.html', this)" href="#">Contact</a>
+  </div>
+</div>
+
+<!-- Stage -->
+<div class="proto-stage" id="stage">
+  <!-- populated by JS -->
+</div>
+
+<!-- Footer -->
+<div class="proto-footer">
+  <span><span class="status-dot"></span>All pages live and interactive</span>
+  <span>· Click inside the browser frame to navigate normally</span>
+  <span>· Use the buttons above to switch pages or screen sizes</span>
+</div>
+
+<script>
+  let currentPage = 'index.html';
+  let currentDevice = 'desktop';
+
+  const urlMap = {
+    'index.html':    'proaxissolutions.co.za',
+    'services.html': 'proaxissolutions.co.za/services',
+    'about.html':    'proaxissolutions.co.za/about',
+    'contact.html':  'proaxissolutions.co.za/contact',
+  };
+
+  function buildBrowser(page, deviceClass, showLabel) {
+    const url = urlMap[page] || page;
+    return `
+      <div>
+        <div class="browser-frame ${deviceClass}" id="bf-${deviceClass}">
+          <div class="browser-topbar">
+            <div class="b-dots">
+              <div class="b-dot" style="background:#EF4444;"></div>
+              <div class="b-dot" style="background:#F59E0B;"></div>
+              <div class="b-dot" style="background:#22C55E;"></div>
+            </div>
+            <div class="b-urlbar">
+              <span class="b-lock">🔒</span>
+              <span class="b-url-text">${url}</span>
+            </div>
+          </div>
+          <iframe class="browser-viewport" src="${page}" id="iframe-${deviceClass}"></iframe>
+        </div>
+        ${showLabel ? `<div class="device-label">${deviceClass}</div>` : ''}
+      </div>
+    `;
+  }
+
+  function render() {
+    const stage = document.getElementById('stage');
+    if (currentDevice === 'dual') {
+      stage.innerHTML = `<div class="dual-view">
+        ${buildBrowser(currentPage, 'desktop', true)}
+        ${buildBrowser(currentPage, 'mobile', true)}
+      </div>`;
+    } else {
+      stage.innerHTML = buildBrowser(currentPage, currentDevice, false);
+    }
+  }
+
+  function setDevice(device, btn) {
+    currentDevice = device;
+    document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  }
+
+  function setPage(page, btn) {
+    currentPage = page;
+    document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // Update iframes that already exist
+    document.querySelectorAll('.browser-viewport').forEach(iframe => {
+      iframe.src = page;
+    });
+    // Update URL bar
+    document.querySelectorAll('.b-url-text').forEach(el => {
+      el.textContent = urlMap[page] || page;
+    });
+    return false;
+  }
+
+  // Initial render
+  render();
+</script>
+</body>
+</html>
