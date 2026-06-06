@@ -3,302 +3,310 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Proaxis Solutions - Premium Web & App Development">
-  <title>Proaxis Solutions</title>
+  <meta name="description" content="Intelligent Software, Automation & Digital Transformation Solutions">
+  <title>Proaxis Solutions - Software Engineering, AI Automation & Digital Transformation</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
   <style>
+    * {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       padding-top: 60px;
+      background-color: #ffffff;
+      line-height: 1.6;
+      color: #475569;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      color: #0F172A;
+      font-weight: 600;
     }
     header {
-      background: linear-gradient(135deg, #007bff, #6610f2);
+      background: linear-gradient(135deg, #0F172A 0%, #2563EB 100%);
       color: white;
       text-align: center;
-      padding: 80px 20px;
+      padding: 100px 20px 80px 20px;
+    }
+    header h1 {
+      color: white;
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #E2E8F0;
+      margin-bottom: 30px;
     }
     footer {
-      background: #222;
+      background: #0F172A;
       color: white;
       text-align: center;
-      padding: 20px 0;
+      padding: 40px 20px;
     }
     .counter {
       font-size: 2.5rem;
-      font-weight: bold;
-      color: #007bff;
+      font-weight: 700;
+      color: #2563EB;
     }
-
-    .testimonial-card {
-      max-width: 800px;
-      margin: 0 auto;
+    .btn-primary {
+      background-color: #2563EB;
+      border-color: #2563EB;
+      font-weight: 500;
+    }
+    .btn-primary:hover {
+      background-color: #1d4ed8;
+      border-color: #1d4ed8;
+    }
+    .btn-light {
+      background-color: #E2E8F0;
+      border-color: #E2E8F0;
+      color: #0F172A;
+      font-weight: 500;
+    }
+    .btn-light:hover {
+      background-color: #cbd5e1;
+      border-color: #cbd5e1;
+    }
+    .card {
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    .card-body {
       padding: 2rem;
     }
-
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-      background-color: #007bff;
-      border-radius: 50%;
-      padding: 1.5rem;
+    section {
+      padding: 80px 20px;
     }
-
-    .accordion-button:not(.collapsed) {
-      background-color: #e7f1ff;
-      color: #0056b3;
+    .bg-light {
+      background-color: #F8FAFC !important;
     }
   </style>
 </head>
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0F172A;">
   <div class="container">
-    <a class="navbar-brand" href="#">Proaxis Solutions</a>
+    <a class="navbar-brand" href="#" style="font-weight: 700; font-size: 1.3rem;">Proaxis Solutions</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#solutions">Solutions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#work">How We Work</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">Contact</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
 
 <!-- Hero Section -->
 <header>
-  <h1>Welcome to Proaxis Solutions</h1>
-  <p>High-quality, efficient websites & applications for your business</p>
-  <a href="#services" class="btn btn-light btn-lg mt-3">View Our Services</a>
+  <h1>Build Intelligent Systems.<br>Automate Operations.<br>Transform Business.</h1>
+  <p>Proaxis Solutions helps organisations modernise operations and accelerate growth through intelligent software and automation solutions.</p>
+  <a href="#solutions" class="btn btn-light btn-lg mt-3">Explore Our Solutions</a>
+  <a href="#work" class="btn btn-light btn-lg mt-3 ms-3">How We Work</a>
 </header>
 
-<!-- Services Section -->
-<section id="services" class="container py-5">
-  <h2 class="text-center mb-4">Our Services</h2>
-  <div class="row g-4">
-    <div class="col-md-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <h3 class="h4">Website Development</h3>
-          <p>Create stunning, responsive websites that convert visitors into customers. Our solutions include:</p>
-          <ul>
-            <li>Custom Website Design</li>
-            <li>E-commerce Integration</li>
-            <li>SEO Optimization</li>
-            <li>Performance Optimization</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <h3 class="h4">App Development</h3>
-          <p>Build powerful, user-friendly applications for all platforms. Our services feature:</p>
-          <ul>
-            <li>Native & Cross-Platform Apps</li>
-            <li>App Store Optimization</li>
-            <li>API Integration</li>
-            <li>Maintenance & Support</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <h3 class="h4">Digital Solutions</h3>
-          <p>Enhance your online presence with our expert digital solutions, including:</p>
-          <ul>
-            <li>SEO & SEM Services</li>
-            <li>Social Media Management</li>
-            <li>Content Creation</li>
-            <li>Email Marketing Campaigns</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Stats Section -->
-<section class="stats bg-light py-5">
+<!-- Why Proaxis Solutions Section -->
+<section style="background-color: #F8FAFC;">
   <div class="container">
-    <div class="row text-center">
-      <div class="col-md-3 mb-3">
-        <div class="counter" data-target="150">0</div>
-        <h5>Projects Delivered</h5>
-      </div>
-      <div class="col-md-3 mb-3">
-        <div class="counter" data-target="75">0</div>
-        <h5>Happy Clients</h5>
-      </div>
-      <div class="col-md-3 mb-3">
-        <div class="counter" data-target="200">0</div>
-        <h5>Websites Developed</h5>
-      </div>
-      <div class="col-md-3 mb-3">
-        <div class="counter" data-target="50">0</div>
-        <h5>Apps Launched</h5>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Portfolio Section (placeholder for future dynamic content) -->
-<section id="portfolio" class="container py-5">
-  <h2 class="text-center mb-4">Our Portfolio</h2>
-  <div class="row text-center">
-    <div class="col-md-4 mb-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Sample Project 1</h5>
-          <p class="card-text">Description of a high-quality website or app project.</p>
+    <h2 class="text-center mb-5" style="font-size: 2.2rem;">Why Proaxis Solutions</h2>
+    <div class="row g-5">
+      <div class="col-md-6">
+        <div style="margin-bottom: 2.5rem;">
+          <h4 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">✓ Business-First Thinking</h4>
+          <p>We start with your operations, not technology. Our solutions solve real business problems.</p>
+        </div>
+        <div style="margin-bottom: 2.5rem;">
+          <h4 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">✓ Software Engineering Discipline</h4>
+          <p>Built for scale, built to last. Our code and systems are designed for the long term.</p>
+        </div>
+        <div style="margin-bottom: 2.5rem;">
+          <h4 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">✓ Long-Term Partnerships</h4>
+          <p>We invest in your success. Our support doesn't end at delivery.</p>
         </div>
       </div>
-    </div>
-    <div class="col-md-4 mb-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Sample Project 2</h5>
-          <p class="card-text">Another dynamic project for demonstration purposes.</p>
+      <div class="col-md-6">
+        <div style="margin-bottom: 2.5rem;">
+          <h4 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">✓ Automation Mindset</h4>
+          <p>Reduce manual work, improve efficiency. We help you work smarter, not harder.</p>
         </div>
-      </div>
-    </div>
-    <div class="col-md-4 mb-3">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Sample Project 3</h5>
-          <p class="card-text">Future client-ready project placeholder.</p>
+        <div style="margin-bottom: 2.5rem;">
+          <h4 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">✓ Practical Innovation</h4>
+          <p>Real solutions for real business problems, without unnecessary complexity.</p>
+        </div>
+        <div style="margin-bottom: 2.5rem;">
+          <h4 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">✓ Verified Outcomes</h4>
+          <p>We focus on measurable business value, not vanity metrics.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Testimonials Section -->
-<section class="testimonials py-5">
+<!-- Our Methodology Section -->
+<section id="work">
   <div class="container">
-    <h2 class="text-center mb-5">Client Success Stories</h2>
-    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Proaxis Solutions transformed our online presence. Our website traffic has doubled!"</p>
-            <p class="client-name">- John Doe, CEO of ExampleCorp</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="testimonial-card">
-            <p class="testimonial-text">"The app developed by Proaxis is a game-changer for our business operations."</p>
-            <p class="client-name">- Jane Smith, Operations Head of BusinessCo</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="testimonial-card">
-            <p class="testimonial-text">"Excellent digital marketing services. Our sales have seen a significant boost!"</p>
-            <p class="client-name">- Emily Johnson, Marketing Director of ShopNow</p>
-          </div>
+    <h2 class="text-center mb-5" style="font-size: 2.2rem;">Our Approach: Discover. Design. Automate. Scale.</h2>
+    <div class="row g-4 text-center">
+      <div class="col-md-3">
+        <div style="background-color: #F8FAFC; padding: 2rem; border-radius: 8px;">
+          <h4 style="color: #2563EB; font-weight: 700; font-size: 1.3rem; margin-bottom: 1rem;">1. Discover</h4>
+          <p>We deeply understand your operations, challenges, and goals before recommending solutions.</p>
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+      <div class="col-md-3">
+        <div style="background-color: #F8FAFC; padding: 2rem; border-radius: 8px;">
+          <h4 style="color: #2563EB; font-weight: 700; font-size: 1.3rem; margin-bottom: 1rem;">2. Design</h4>
+          <p>We design solutions that fit your business logic, not force-fit generic tools.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div style="background-color: #F8FAFC; padding: 2rem; border-radius: 8px;">
+          <h4 style="color: #2563EB; font-weight: 700; font-size: 1.3rem; margin-bottom: 1rem;">3. Automate</h4>
+          <p>We implement solutions that reduce manual work and improve efficiency.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div style="background-color: #F8FAFC; padding: 2rem; border-radius: 8px;">
+          <h4 style="color: #2563EB; font-weight: 700; font-size: 1.3rem; margin-bottom: 1rem;">4. Scale</h4>
+          <p>We support your growth with systems that scale, maintain, and evolve with your business.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FAQ Section -->
-<section class="faq py-5 bg-light">
+<!-- Solutions Section -->
+<section id="solutions" style="background-color: #F8FAFC;">
   <div class="container">
-    <h2 class="text-center mb-5">Frequently Asked Questions</h2>
-    <div class="accordion" id="faqAccordion">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            What services do you offer?
-          </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            We offer a wide range of services including website development, app development, and digital marketing solutions.
+    <h2 class="text-center mb-5" style="font-size: 2.2rem;">Our Solutions</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="h4" style="color: #2563EB; margin-bottom: 1rem;">Software Engineering</h3>
+            <p>Custom software solutions built to your business logic, not off-the-shelf limitations. We design and develop scalable systems that reduce operational friction and integrate seamlessly with your existing stack.</p>
+            <h5 style="color: #0F172A; margin-top: 1.5rem; margin-bottom: 0.5rem; font-weight: 600;">Outcomes:</h5>
+            <ul>
+              <li>Reduced operational complexity</li>
+              <li>Faster time-to-market</li>
+              <li>Future-ready technology foundation</li>
+              <li>Improved team productivity</li>
+            </ul>
           </div>
         </div>
       </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            How can I contact you?
-          </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            You can contact us through the form in the "Contact Us" section, or directly via email at contact@proaxissolutions.com.
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="h4" style="color: #2563EB; margin-bottom: 1rem;">AI & Automation</h3>
+            <p>Intelligent automation that reduces manual work and improves decision-making. We identify repetitive processes, implement intelligent workflows, and free up your team to focus on strategy.</p>
+            <h5 style="color: #0F172A; margin-top: 1.5rem; margin-bottom: 0.5rem; font-weight: 600;">Outcomes:</h5>
+            <ul>
+              <li>Efficiency gains and cost reduction</li>
+              <li>Faster processing and throughput</li>
+              <li>Improved decision-making with data</li>
+              <li>Team focus on high-value work</li>
+            </ul>
           </div>
         </div>
       </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingThree">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            Do you provide support and maintenance?
-          </button>
-        </h2>
-        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-          <div class="accordion-body">
-            Yes, we offer comprehensive support and maintenance packages for all our products and services.
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="h4" style="color: #2563EB; margin-bottom: 1rem;">Digital Transformation</h3>
+            <p>Modernising legacy systems and outdated processes for the digital age. We help you upgrade your technology stack, improve employee productivity, and deliver better customer experiences.</p>
+            <h5 style="color: #0F172A; margin-top: 1.5rem; margin-bottom: 0.5rem; font-weight: 600;">Outcomes:</h5>
+            <ul>
+              <li>Future-ready technology foundation</li>
+              <li>Improved employee productivity</li>
+              <li>Better customer experience</li>
+              <li>Sustainable competitive advantage</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Trust & Credentials Section -->
+<section id="trust" style="background-color: #0F172A;">
+  <div class="container">
+    <h2 class="text-center mb-5" style="color: white; font-size: 2.2rem;">Trust & Professionalism</h2>
+    <div class="row text-center text-white">
+      <div class="col-md-3 mb-4">
+        <h5 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">South African Registered</h5>
+        <p>Professional company registered and operating in South Africa</p>
+      </div>
+      <div class="col-md-3 mb-4">
+        <h5 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">B-BBEE Level 1</h5>
+        <p>Verified Level 1 B-BBEE Contributor</p>
+      </div>
+      <div class="col-md-3 mb-4">
+        <h5 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">Information Officer Registered</h5>
+        <p>Registered in compliance with information management requirements</p>
+      </div>
+      <div class="col-md-3 mb-4">
+        <h5 style="color: #14B8A6; font-weight: 700; margin-bottom: 0.5rem;">Supplier Compliance</h5>
+        <p>CSD registered and tender-ready for public sector opportunities</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
 <!-- Contact Section -->
 <section id="contact" class="container py-5">
-  <h2 class="text-center mb-4">Contact Us</h2>
-  <form class="mx-auto" style="max-width:600px;">
-    <div class="mb-3">
-      <label for="name" class="form-label">Full Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Your Name">
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Ready to Transform Your Operations?</h2>
+      <p style="font-size: 1.1rem; color: #475569; margin-bottom: 2rem;">Let's discuss how Proaxis Solutions can help your organisation modernise, automate, and scale through intelligent technology.</p>
     </div>
-    <div class="mb-3">
-      <label for="email" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="email" placeholder="name@example.com">
+    <div class="col-md-6">
+      <form class="mx-auto">
+        <div class="mb-3">
+          <label for="name" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Your Name">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="name@example.com">
+        </div>
+        <div class="mb-3">
+          <label for="company" class="form-label">Organisation</label>
+          <input type="text" class="form-control" id="company" placeholder="Your Company">
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message</label>
+          <textarea class="form-control" id="message" rows="4" placeholder="Tell us about your needs"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Start a Conversation</button>
+      </form>
     </div>
-    <div class="mb-3">
-      <label for="message" class="form-label">Message</label>
-      <textarea class="form-control" id="message" rows="3" placeholder="Your message"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary w-100">Send Message</button>
-  </form>
+  </div>
 </section>
 
 <!-- Footer -->
 <footer>
-  <p>© 2025 Proaxis Solutions | All Rights Reserved</p>
+  <p style="margin-bottom: 1rem;">© 2025 Proaxis Solutions | All Rights Reserved</p>
+  <p style="font-size: 0.9rem; color: #cbd5e1;">South African Registered Company | B-BBEE Level 1 Contributor</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-// Counter animation script
-const counters = document.querySelectorAll('.counter');
-const speed = 200;
-
-counters.forEach(counter => {
-  const updateCount = () => {
-    const target = +counter.getAttribute('data-target');
-    const count = +counter.innerText;
-    const inc = target / speed;
-
-    if (count < target) {
-      counter.innerText = Math.ceil(count + inc);
-      setTimeout(updateCount, 1);
-    } else {
-      counter.innerText = target;
-    }
-  };
-  updateCount();
-});
-</script>
 </body>
 </html>
