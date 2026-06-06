@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Onboarding — Proaxis Solutions</title>
+  <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
+
+  <!--
+  ═══════════════════════════════════════════════════════════════
+  EMAIL SETUP (EmailJS — free tier: 200 emails/month)
+  ═══════════════════════════════════════════════════════════════
+  1. Go to https://emailjs.com → Create free account
+  2. Add Email Service → Gmail → connect willsonjohnny430@gmail.com
+     (later switch to info@proaxissolutions.co.za)
+  3. Create Email Template with these variables:
+       {{to_email}}  {{from_name}}  {{lead_score}}  {{responses_html}}
+     Subject: "🔔 New Client Onboarding — {{from_name}} | Proaxis"
+  4. Replace these three values below:
+       EMAILJS_PUBLIC_KEY   → Account → API Keys
+       EMAILJS_SERVICE_ID   → Email Services → your service ID
+       EMAILJS_TEMPLATE_ID  → Email Templates → your template ID
+  ═══════════════════════════════════════════════════════════════
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    const EMAILJS_PUBLIC_KEY   = 'YOUR_PUBLIC_KEY';     // ← replace
+    const EMAILJS_SERVICE_ID   = 'YOUR_SERVICE_ID';     // ← replace
+    const EMAILJS_TEMPLATE_ID  = 'YOUR_TEMPLATE_ID';    // ← replace
+    const COMPANY_EMAIL        = 'willsonjohnny430@gmail.com'; // ← replace with info@proaxissolutions.co.za when ready
+  </script>
+
+  <style>
+    /* ─── TOKENS ─── */
+    :root {
+      --navy:   #0F172A;
+      --navy2:  #1E293B;
+      --blue:   #2563EB;
+      --teal:   #14B8A6;
+      --teal2:  #0D9488;
+      --slate:  #64748B;
+      --border: rgba(255,255,255,0.08);
+      --white:  #F8FAFC;
+      --muted:  #94A3B8;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: 'Inter', system-ui, sans-serif; }
+    body { background: var(--navy); color: var(--white); overflow: hidden; }
+
+    /* ─── PROGRESS BAR ─── */
+    #progress-track {
+      position: fixed; top: 0; left: 0; right: 0; height: 3px;
+      background: rgba(255,255,255,0.07); z-index: 50;
+    }
+    #progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal), var(--blue));
+      border-radius: 0 99px 99px 0;
+      transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+      width: 0%;
+    }
+
+    /* ─── TOP BAR ─── */
+    .top-bar {
+      position: fixed; top: 3px; left: 0; right: 0; z-index: 40;
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .top-brand { font-size: 0.88rem; font-weight: 700; color: var(--muted); letter-spacing: -0.01em; }
+    .top-brand span { color: var(--teal); }
+    .top-step { font-size: 0.78rem; font-weight: 600; color: var(--slate); }
+
+    /* ─── STAGE ─── */
+    #stage {
+      height: 100vh; width: 100vw;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+
+    /* ─── SLIDE ─── */
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      padding: 80px 2rem 100px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .slide.active {
+      opacity: 1; pointer-events: all; transform: none !important;
+    }
+    .slide.exit-up    { transform: translateY(-60px); opacity: 0; }
+    .slide.enter-down { transform: translateY(60px);  opacity: 0; }
+    .slide.exit-down  { transform: translateY(60px);  opacity: 0; }
+    .slide.enter-up   { transform: translateY(-60px); opacity: 0; }
+
+    /* ─── SLIDE INNER ─── */
+    .slide-inner {
+      max-width: 680px; width: 100%;
+      display: flex; flex-direction: column; gap: 0;
+    }
+
+    /* ─── STEP NUMBER ─── */
+    .step-num {
+      font-size: 0.72rem; font-weight: 800; color: var(--teal);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .step-num::after { content: ''; display: block; width: 24px; height: 1.5px; background: var(--teal); opacity: 0.5; }
+
+    /* ─── QUESTION ─── */
+    .question {
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-weight: 700; letter-spacing: -0.03em; line-height: 1.2;
+      color: var(--white); margin-bottom: 0.65rem;
+    }
+    .question em { color: var(--teal); font-style: normal; }
+    .sub-hint {
+      font-size: 0.92rem; color: var(--muted); margin-bottom: 2.25rem; line-height: 1.65;
+    }
+
+    /* ─── SINGLE-SELECT CARDS ─── */
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.65rem;
+    }
+    .opt-card {
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 0.95rem 1.1rem;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.9rem; font-weight: 600; color: var(--muted);
+      user-select: none;
+    }
+    .opt-card:hover { border-color: rgba(20,184,166,0.45); color: var(--white); background: rgba(20,184,166,0.06); }
+    .opt-card.selected { border-color: var(--teal); background: rgba(20,184,166,0.1); color: var(--white); }
+    .opt-card.selected .opt-check { background: var(--teal); border-color: var(--teal); }
+    .opt-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .opt-label { flex: 1; }
+    .opt-check {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 1.5px solid var(--slate); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.18s;
+    }
+    .opt-check::after { content: '✓'; font-size: 0.65rem; color: var(--navy); font-weight: 800; opacity: 0; }
+    .opt-card.selected .opt-check::after { opacity: 1; }
+
+    /* multi-select variant */
+    .opt-card.multi .opt-check { border-radius: 4px; }
+
+    /* ─── TEXT INPUT ─── */
+    .text-field {
+      background: transparent;
+      border: none; border-bottom: 2px solid rgba(255,255,255,0.15);
+      color: var(--white); font-size: 1.35rem; font-weight: 500;
+      outline: none; width: 100%; padding: 0.75rem 0;
+      font-family: inherit; transition: border-color 0.2s;
+    }
+    .text-field:focus { border-bottom-color: var(--teal); }
+    .text-field::placeholder { color: rgba(255,255,255,0.2); font-size: 1.25rem; font-weight: 400; }
+    textarea.text-field { resize: none; min-height: 120px; font-size: 1.1rem; line-height: 1.7; }
+
+    /* ─── MULTI-FIELD CONTACT ─── */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .contact-field label {
+      font-size: 0.72rem; font-weight: 800; color: var(--slate);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      display: block; margin-bottom: 0.35rem;
+    }
+
+    /* ─── SCALE SLIDER ─── */
+    .scale-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .scale-btn {
+      width: 52px; height: 52px; border-radius: 10px;
+      background: rgba(255,255,255,0.04); border: 1.5px solid var(--border);
+      color: var(--muted); font-size: 0.95rem; font-weight: 700;
+      cursor: pointer; transition: all 0.15s; display: flex;
+      align-items: center; justify-content: center;
+    }
+    .scale-btn:hover { border-color: var(--teal); color: var(--white); }
+    .scale-btn.selected { background: var(--teal); border-color: var(--teal); color: var(--navy); }
+    .scale-labels { display: flex; justify-content: space-between; margin-top: 0.6rem; }
+    .scale-lbl { font-size: 0.72rem; color: var(--slate); font-weight: 600; }
+
+    /* ─── ACTION ROW ─── */
+    .action-row {
+      display: flex; align-items: center; gap: 1rem;
+      margin-top: 2.25rem; flex-wrap: wrap;
+    }
+    .btn-next {
+      background: var(--teal); color: var(--navy);
+      border: none; border-radius: 10px;
+      padding: 0.85rem 2.25rem;
+      font-size: 0.95rem; font-weight: 800; cursor: pointer;
+      transition: all 0.2s; letter-spacing: 0.01em;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-next:hover { background: #0D9488; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(20,184,166,0.3); }
+    .btn-next:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-back {
+      background: transparent; border: none;
+      color: var(--slate); font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; transition: color 0.15s; padding: 0.5rem 0;
+    }
+    .btn-back:hover { color: var(--white); }
+    .btn-skip {
+      background: transparent; border: none;
+      color: var(--slate); font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; transition: color 0.15s; padding: 0.5rem 0;
+      margin-left: auto;
+    }
+    .btn-skip:hover { color: var(--muted); }
+    .enter-hint { font-size: 0.75rem; color: var(--slate); margin-left: 0.25rem; }
+
+    /* ─── WELCOME SCREEN ─── */
+    .welcome-screen { text-align: center; }
+    .welcome-screen .w-badge {
+      display: inline-block; background: rgba(20,184,166,0.1);
+      border: 1px solid rgba(20,184,166,0.25); border-radius: 99px;
+      color: var(--teal); font-size: 0.75rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.4rem 1.1rem; margin-bottom: 2rem;
+    }
+    .welcome-screen h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800; letter-spacing: -0.035em; line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    .welcome-screen h1 span { color: var(--teal); }
+    .welcome-screen p {
+      color: var(--muted); font-size: 1.05rem; line-height: 1.75;
+      max-width: 500px; margin: 0 auto 1rem;
+    }
+    .welcome-meta {
+      display: flex; justify-content: center; gap: 2rem;
+      flex-wrap: wrap; margin: 2rem 0 2.5rem;
+    }
+    .w-meta-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--slate); font-weight: 600; }
+    .btn-start {
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      color: var(--white); border: none; border-radius: 12px;
+      padding: 1rem 2.75rem; font-size: 1.05rem; font-weight: 800;
+      cursor: pointer; transition: all 0.25s; letter-spacing: 0.01em;
+    }
+    .btn-start:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(20,184,166,0.35); filter: brightness(1.05); }
+
+    /* ─── SUCCESS SCREEN ─── */
+    .success-screen { text-align: center; }
+    .success-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: rgba(20,184,166,0.12); border: 1.5px solid rgba(20,184,166,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; margin: 0 auto 2rem;
+      animation: pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards;
+    }
+    @keyframes pop { 0%{transform:scale(0.4); opacity:0} 100%{transform:scale(1); opacity:1} }
+    .success-screen h2 { font-size: 2.25rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
+    .success-screen p { color: var(--muted); font-size: 1rem; line-height: 1.75; max-width: 480px; margin: 0 auto 2rem; }
+    .next-steps {
+      display: flex; flex-direction: column; gap: 0.75rem;
+      max-width: 400px; margin: 0 auto 2.5rem;
+      text-align: left;
+    }
+    .next-step {
+      display: flex; align-items: center; gap: 1rem;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.85rem 1.1rem;
+      font-size: 0.88rem; color: var(--muted); font-weight: 600;
+    }
+    .ns-num { width: 24px; height: 24px; border-radius: 50%; background: var(--teal); color: var(--navy); font-size: 0.72rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .return-link { color: var(--teal); font-weight: 700; text-decoration: none; font-size: 0.88rem; }
+    .return-link:hover { text-decoration: underline; }
+
+    /* ─── SUMMARY SCREEN ─── */
+    .summary-grid { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 0.5rem; max-height: 45vh; overflow-y: auto; padding-right: 0.5rem; }
+    .summary-grid::-webkit-scrollbar { width: 3px; }
+    .summary-grid::-webkit-scrollbar-thumb { background: var(--slate); border-radius: 99px; }
+    .summary-item { display: flex; gap: 1rem; font-size: 0.85rem; align-items: flex-start; padding: 0.55rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .summary-q { color: var(--slate); font-weight: 600; flex-shrink: 0; width: 200px; line-height: 1.4; }
+    .summary-a { color: var(--white); font-weight: 600; line-height: 1.4; }
+    .summary-badge { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.68rem; font-weight: 800; padding: 0.2rem 0.55rem; border-radius: 99px; }
+    .badge-hot  { background: rgba(239,68,68,0.15); color: #F87171; border: 1px solid rgba(239,68,68,0.2); }
+    .badge-warm { background: rgba(245,158,11,0.15); color: #FCD34D; border: 1px solid rgba(245,158,11,0.2); }
+    .badge-cool { background: rgba(100,116,139,0.15); color: #94A3B8; border: 1px solid rgba(100,116,139,0.2); }
+
+    /* ─── BOTTOM BAR ─── */
+    .bottom-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(to top, rgba(15,23,42,0.95), transparent);
+    }
+    .bottom-note { font-size: 0.72rem; color: #1E293B; }
+    .kbd {
+      display: inline-block; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;
+      padding: 0.1rem 0.35rem; font-size: 0.65rem; font-weight: 700;
+      color: var(--slate); font-family: monospace;
+    }
+    .powered-by { font-size: 0.7rem; color: #1E2D44; font-weight: 600; }
+    .powered-by a { color: #2D4A6A; text-decoration: none; }
+    .powered-by a:hover { color: var(--teal); }
+
+    /* ─── LOADER OVERLAY ─── */
+    #submit-loader {
+      position: fixed; inset: 0; background: var(--navy); z-index: 999;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1.5rem; opacity: 0; visibility: hidden; transition: all 0.3s;
+    }
+    #submit-loader.active { opacity: 1; visibility: visible; }
+    .loader-spinner {
+      width: 42px; height: 42px; border: 3px solid rgba(20,184,166,0.15);
+      border-top-color: var(--teal); border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loader-text { font-size: 0.9rem; color: var(--muted); font-weight: 600; }
+
+    /* ─── RESPONSIVE ─── */
+    @media(max-width: 640px) {
+      .slide { padding: 70px 1.25rem 90px; }
+      .option-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .scale-btn { width: 44px; height: 44px; }
+      .bottom-bar { padding: 0.75rem 1.25rem; }
+      .top-bar { padding: 0.75rem 1.25rem; }
+      .summary-q { width: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-track"><div id="progress-fill"></div></div>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="top-brand">Proaxis <span>Solutions</span></div>
+  <div class="top-step" id="stepIndicator"></div>
+</div>
+
+<!-- Slides Stage -->
+<div id="stage">
+
+  <!-- ── SLIDE 0: WELCOME ── -->
+  <div class="slide active" id="slide-0">
+    <div class="slide-inner welcome-screen">
+      <div class="w-badge">Client Onboarding</div>
+      <h1>Let's build something<br><span>great together</span></h1>
+      <p>Before we talk, help us understand your business and what you're looking to achieve. This takes about <strong style="color:var(--white);">4–6 minutes</strong>.</p>
+      <div class="welcome-meta">
+        <div class="w-meta-item">📋 13 questions</div>
+        <div class="w-meta-item">🔒 Private & confidential</div>
+        <div class="w-meta-item">⚡ No obligation</div>
+      </div>
+      <button class="btn-start" onclick="startForm()">Let's Get Started →</button>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 1: Name ── -->
+  <div class="slide enter-down" id="slide-1">
+    <div class="slide-inner">
+      <div class="step-num">Question 1</div>
+      <div class="question">What's your <em>name?</em></div>
+      <div class="sub-hint">Let's start with the basics. First and last name, please.</div>
+      <input class="text-field" id="q1" type="text" placeholder="e.g. Thabo Nkosi" autocomplete="name" oninput="checkNext(1)">
+      <div class="action-row">
+        <button class="btn-next" id="next-1" onclick="goNext(1)" disabled>Continue <span>→</span></button>
+        <span class="enter-hint">or press <kbd class="kbd">Enter ↵</kbd></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 2: Contact Details ── -->
+  <div class="slide enter-down" id="slide-2">
+    <div class="slide-inner">
+      <div class="step-num">Question 2</div>
+      <div class="question">How can we <em>reach you?</em></div>
+      <div class="sub-hint">We'll use these details to follow up — nothing is shared or spammed, ever.</div>
+      <div class="contact-grid">
+        <div class="contact-field">
+          <label>Email Address *</label>
+          <input class="text-field" id="q2_email" type="email" placeholder="you@company.com" oninput="checkNext(2)">
+        </div>
+        <div class="contact-field">
+          <label>Phone / WhatsApp *</label>
+          <input class="text-field" id="q2_phone" type="tel" placeholder="+27 ..." oninput="checkNext(2)">
+        </div>
+        <div class="contact-field">
+          <label>Company / Business Name *</label>
+          <input class="text-field" id="q2_company" type="text" placeholder="e.g. Nkosi Enterprises" oninput="checkNext(2)">
+        </div>
+        <div class="contact-field">
+          <label>Your Role / Title</label>
+          <input class="text-field" id="q2_role" type="text" placeholder="e.g. Owner, Director, Manager">
+        </div>
+      </div>
+      <div class="action-row">
+        <button class="btn-next" id="next-2" onclick="goNext(2)" disabled>Continue <span>→</span></button>
+        <button class="btn-back" onclick="goBack(2)">← Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 3: Industry ── -->
+  <div class="slide enter-down" id="slide-3">
+    <div class="slide-inner">
+      <div class="step-num">Question 3</div>
+      <div class="question">What <em>industry</em> are you in?</div>
+      <div class="sub-hint">Select the one that best describes your business.</div>
+      <div class="option-grid" id="opts-3">
+        <div class="opt-card" onclick="selectSingle(3,this,'Retail / Spaza / Hawker')"><span class="opt-icon">🛒</span><span class="opt-label">Retail / Spaza / Hawker</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(3,this,'Food & Hospitality')"><span class="opt-icon">🍽</span><span class="opt-label">Food & Hospitality</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(3,this,'Hair, Beauty & Wellness')"><span class="opt-icon">💅</span><span class="opt-label">Hair, Beauty & Wellness</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(3,this,'Healthcare & Medical')"><span class="opt-icon">🏥</span><span class="opt-label">Healthcare & Medical</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(3,this,'Education & Training')"><span class="opt-icon">📚</span><span class="opt-label">Education & Training</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(3,this,'Finance & Professional Services')"><span class="opt-icon">💼</span><span class="opt-label">Finance & Professional Services</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(3,this,'Construction & Property')"><span class="opt-icon">🏗</span><span class="opt-label">Construction & Property</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(3,this,'Government / Public Sector')"><span class="opt-icon">🏛</span><span class="opt-label">Government / Public Sector</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(3,this,'Logistics & Transport')"><span class="opt-icon">🚚</span><span class="opt-label">Logistics & Transport</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(3,this,'Technology / Software')"><span class="opt-icon">💻</span><span class="opt-label">Technology / Software</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(3,this,'NGO / Non-profit')"><span class="opt-icon">🤝</span><span class="opt-label">NGO / Non-profit</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(3,this,'Other')"><span class="opt-icon">📌</span><span class="opt-label">Other</span><span class="opt-check"></span></div>
+      </div>
+      <div class="action-row">
+        <button class="btn-next" id="next-3" onclick="goNext(3)" disabled>Continue <span>→</span></button>
+        <button class="btn-back" onclick="goBack(3)">← Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 4: Company Size ── -->
+  <div class="slide enter-down" id="slide-4">
+    <div class="slide-inner">
+      <div class="step-num">Question 4</div>
+      <div class="question">How large is your <em>organisation?</em></div>
+      <div class="sub-hint">Including yourself — approximate is fine.</div>
+      <div class="option-grid" id="opts-4" style="grid-template-columns: repeat(auto-fill, minmax(180px,1fr));">
+        <div class="opt-card" onclick="selectSingle(4,this,'Just me (Sole trader)')"><span class="opt-icon">🧑</span><span class="opt-label">Just me</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(4,this,'2–10 employees')"><span class="opt-icon">👥</span><span class="opt-label">2–10 employees</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(4,this,'11–50 employees')"><span class="opt-icon">🏢</span><span class="opt-label">11–50 employees</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(4,this,'51–200 employees')"><span class="opt-icon">🏬</span><span class="opt-label">51–200 employees</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(4,this,'200+ employees')"><span class="opt-icon">🏙</span><span class="opt-label">200+ employees</span><span class="opt-check"></span></div>
+      </div>
+      <div class="action-row">
+        <button class="btn-next" id="next-4" onclick="goNext(4)" disabled>Continue <span>→</span></button>
+        <button class="btn-back" onclick="goBack(4)">← Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 5: Primary Driver ── -->
+  <div class="slide enter-down" id="slide-5">
+    <div class="slide-inner">
+      <div class="step-num">Question 5</div>
+      <div class="question">What's driving you to <em>reach out now?</em></div>
+      <div class="sub-hint">Pick the option that best reflects where you are right now.</div>
+      <div class="option-grid" id="opts-5">
+        <div class="opt-card" onclick="selectSingle(5,this,'I have a new project I want to build')"><span class="opt-icon">🚀</span><span class="opt-label">I have a new project to build</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(5,this,'I need to replace or upgrade an existing system')"><span class="opt-icon">🔄</span><span class="opt-label">Replace / upgrade existing system</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(5,this,'I need to automate manual processes')"><span class="opt-icon">⚙️</span><span class="opt-label">Automate manual processes</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(5,this,'I need a website or digital presence')"><span class="opt-icon">🌐</span><span class="opt-label">Build a digital presence</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(5,this,'I am losing business to more digital competitors')"><span class="opt-icon">📉</span><span class="opt-label">Losing ground to digital competitors</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(5,this,'I am exploring options / not sure yet')"><span class="opt-icon">💡</span><span class="opt-label">Exploring options / not sure yet</span><span class="opt-check"></span></div>
+      </div>
+      <div class="action-row">
+        <button class="btn-next" id="next-5" onclick="goNext(5)" disabled>Continue <span>→</span></button>
+        <button class="btn-back" onclick="goBack(5)">← Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 6: Pain Points (multi-select) ── -->
+  <div class="slide enter-down" id="slide-6">
+    <div class="slide-inner">
+      <div class="step-num">Question 6</div>
+      <div class="question">What are your <em>biggest challenges</em> right now?</div>
+      <div class="sub-hint">Select all that apply — be as honest as you like.</div>
+      <div class="option-grid" id="opts-6">
+        <div class="opt-card multi" onclick="selectMulti(6,this,'Too much manual work and paperwork')"><span class="opt-icon">📄</span><span class="opt-label">Too much manual work / paperwork</span><span class="opt-check"></span></div>
+        <div class="opt-card multi" onclick="selectMulti(6,this,'No professional online presence')"><span class="opt-icon">🌐</span><span class="opt-label">No professional online presence</span><span class="opt-check"></span></div>
+        <div class="opt-card multi" onclick="selectMulti(6,this,'Losing customers to more digital competitors')"><span class="opt-icon">🏃</span><span class="opt-label">Losing customers to digital competitors</span><span class="opt-check"></span></div>
+        <div class="opt-card multi" onclick="selectMulti(6,this,'Data scattered across spreadsheets and email')"><span class="opt-icon">📊</span><span class="opt-label">Data scattered across spreadsheets</span><span class="opt-check"></span></div>
+        <div class="opt-card multi" onclick="selectMulti(6,this,'Cannot scale without hiring more people')"><span class="opt-icon">📈</span><span class="opt-label">Can't scale without more headcount</span><span class="opt-check"></span></div>
+        <div class="opt-card multi" onclick="selectMulti(6,this,'Poor customer communication and follow-up')"><span class="opt-icon">📨</span><span class="opt-label">Poor customer communication</span><span class="opt-check"></span></div>
+        <div class="opt-card multi" onclick="selectMulti(6,this,'Compliance and reporting is time-consuming')"><span class="opt-icon">📋</span><span class="opt-label">Compliance / reporting takes too long</span><span class="opt-check"></span></div>
+        <div class="opt-card multi" onclick="selectMulti(6,this,'No visibility into business performance / data')"><span class="opt-icon">🔭</span><span class="opt-label">No visibility into performance data</span><span class="opt-check"></span></div>
+      </div>
+      <div class="action-row">
+        <button class="btn-next" id="next-6" onclick="goNext(6)">Continue <span>→</span></button>
+        <button class="btn-back" onclick="goBack(6)">← Back</button>
+        <button class="btn-skip" onclick="skipStep(6)">Skip</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 7: Services Needed (multi-select) ── -->
+  <div class="slide enter-down" id="slide-7">
+    <div class="slide-inner">
+      <div class="step-num">Question 7</div>
+      <div class="question">What type of <em>solution</em> are you looking for?</div>
+      <div class="sub-hint">Select all that are relevant — it's okay if you're not 100% sure yet.</div>
+      <div class="option-grid" id="opts-7">
+        <div class="opt-card multi" onclick="selectMulti(7,this,'Custom software / web application')"><span class="opt-icon">💻</span><span class="opt-label">Custom software / web app</span><span class="opt-check"></span></div>
+        <div class="opt-card multi" onclick="selectMulti(7,this,'Website or e-commerce store')"><span class="opt-icon">🌐</span><span class="opt-label">Website or e-commerce store</span><span class="opt-check"></span></div>
+        <div class="opt-card multi" onclick="selectMulti(7,this,'AI & intelligent automation')"><span class="opt-icon">🤖</span><span class="opt-label">AI & intelligent automation</span><span class="opt-check"></span></div>
+        <div class="opt-card multi" onclick="selectMulti(7,this,'Business process automation')"><span class="opt-icon">⚙️</span><span class="opt-label">Business process automation</span><span class="opt-check"></span></div>
+        <div class="opt-card multi" onclick="selectMulti(7,this,'IT support & infrastructure')"><span class="opt-icon">🛠</span><span class="opt-label">IT support & infrastructure</span><span class="opt-check"></span></div>
+        <div class="opt-card multi" onclick="selectMulti(7,this,'Digital strategy & consulting')"><span class="opt-icon">📐</span><span class="opt-label">Digital strategy & consulting</span><span class="opt-check"></span></div>
+        <div class="opt-card multi" onclick="selectMulti(7,this,'Data dashboard / reporting system')"><span class="opt-icon">📊</span><span class="opt-label">Data dashboard / reporting</span><span class="opt-check"></span></div>
+        <div class="opt-card multi" onclick="selectMulti(7,this,'I need guidance to figure out what I need')"><span class="opt-icon">🧭</span><span class="opt-label">I need guidance first</span><span class="opt-check"></span></div>
+      </div>
+      <div class="action-row">
+        <button class="btn-next" id="next-7" onclick="goNext(7)">Continue <span>→</span></button>
+        <button class="btn-back" onclick="goBack(7)">← Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 8: Timeline ── -->
+  <div class="slide enter-down" id="slide-8">
+    <div class="slide-inner">
+      <div class="step-num">Question 8</div>
+      <div class="question">How soon do you need this <em>delivered?</em></div>
+      <div class="sub-hint">Helps us understand urgency so we can plan resources accordingly.</div>
+      <div class="option-grid" id="opts-8">
+        <div class="opt-card" onclick="selectSingle(8,this,'Urgently — within the next month')"><span class="opt-icon">🔥</span><span class="opt-label">Urgently — within 1 month</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(8,this,'Soon — within 1 to 3 months')"><span class="opt-icon">⚡</span><span class="opt-label">Soon — 1 to 3 months</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(8,this,'Planning ahead — 3 to 6 months')"><span class="opt-icon">📅</span><span class="opt-label">Planning ahead — 3 to 6 months</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(8,this,'Exploring options — no fixed deadline')"><span class="opt-icon">🔭</span><span class="opt-label">Exploring — no fixed deadline</span><span class="opt-check"></span></div>
+      </div>
+      <div class="action-row">
+        <button class="btn-next" id="next-8" onclick="goNext(8)" disabled>Continue <span>→</span></button>
+        <button class="btn-back" onclick="goBack(8)">← Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 9: Budget ── -->
+  <div class="slide enter-down" id="slide-9">
+    <div class="slide-inner">
+      <div class="step-num">Question 9</div>
+      <div class="question">What is your approximate <em>investment range?</em></div>
+      <div class="sub-hint">This helps us propose a solution that fits your reality. All ranges are welcome — we work with startups and enterprises alike.</div>
+      <div class="option-grid" id="opts-9">
+        <div class="opt-card" onclick="selectSingle(9,this,'Under R 15,000')"><span class="opt-icon">🌱</span><span class="opt-label">Under R 15,000</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(9,this,'R 15,000 – R 50,000')"><span class="opt-icon">💼</span><span class="opt-label">R 15,000 – R 50,000</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(9,this,'R 50,000 – R 150,000')"><span class="opt-icon">🏗</span><span class="opt-label">R 50,000 – R 150,000</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(9,this,'R 150,000 – R 500,000')"><span class="opt-icon">🏢</span><span class="opt-label">R 150,000 – R 500,000</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(9,this,'Over R 500,000')"><span class="opt-icon">🏙</span><span class="opt-label">Over R 500,000</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(9,this,'Government / Tender funded')"><span class="opt-icon">🏛</span><span class="opt-label">Government / Tender funded</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(9,this,'Not sure yet — need guidance')"><span class="opt-icon">🤔</span><span class="opt-label">Not sure yet — need guidance</span><span class="opt-check"></span></div>
+      </div>
+      <div class="action-row">
+        <button class="btn-next" id="next-9" onclick="goNext(9)" disabled>Continue <span>→</span></button>
+        <button class="btn-back" onclick="goBack(9)">← Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 10: Decision Authority ── -->
+  <div class="slide enter-down" id="slide-10">
+    <div class="slide-inner">
+      <div class="step-num">Question 10</div>
+      <div class="question">Are you the <em>decision maker</em> for this project?</div>
+      <div class="sub-hint">Helps us involve the right people from the start — no surprises for anyone.</div>
+      <div class="option-grid" id="opts-10">
+        <div class="opt-card" onclick="selectSingle(10,this,'Yes — I make this decision alone')"><span class="opt-icon">✅</span><span class="opt-label">Yes — I decide alone</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(10,this,'Yes — along with a co-founder or partner')"><span class="opt-icon">🤝</span><span class="opt-label">Yes — with a co-founder / partner</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(10,this,'No — I am recommending to leadership / management')"><span class="opt-icon">📤</span><span class="opt-label">No — recommending to management</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(10,this,'No — requires board or committee approval')"><span class="opt-icon">🏛</span><span class="opt-label">No — needs board / committee approval</span><span class="opt-check"></span></div>
+      </div>
+      <div class="action-row">
+        <button class="btn-next" id="next-10" onclick="goNext(10)" disabled>Continue <span>→</span></button>
+        <button class="btn-back" onclick="goBack(10)">← Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 11: Success Criteria ── -->
+  <div class="slide enter-down" id="slide-11">
+    <div class="slide-inner">
+      <div class="step-num">Question 11</div>
+      <div class="question">What does <em>success</em> look like for you?</div>
+      <div class="sub-hint">In 6 months, if everything went perfectly — what would have changed in your business? Even a rough answer is valuable.</div>
+      <textarea class="text-field" id="q11" rows="4" placeholder="e.g. Our team spends half the time on admin, we're taking online orders, and we have real-time data on our operations..." oninput="checkNext(11)"></textarea>
+      <div class="action-row">
+        <button class="btn-next" id="next-11" onclick="goNext(11)" disabled>Continue <span>→</span></button>
+        <button class="btn-back" onclick="goBack(11)">← Back</button>
+        <button class="btn-skip" onclick="skipStep(11)">Skip</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 12: Lead Source ── -->
+  <div class="slide enter-down" id="slide-12">
+    <div class="slide-inner">
+      <div class="step-num">Question 12</div>
+      <div class="question">How did you <em>hear about us?</em></div>
+      <div class="sub-hint">Takes one second — genuinely helps us.</div>
+      <div class="option-grid" id="opts-12" style="grid-template-columns: repeat(auto-fill, minmax(200px,1fr));">
+        <div class="opt-card" onclick="selectSingle(12,this,'Google / online search')"><span class="opt-icon">🔍</span><span class="opt-label">Google / Online search</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(12,this,'Social media (LinkedIn, Instagram, Facebook)')"><span class="opt-icon">📱</span><span class="opt-label">Social media</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(12,this,'Referred by someone')"><span class="opt-icon">👋</span><span class="opt-label">Referred by someone</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(12,this,'Saw our demo / portfolio online')"><span class="opt-icon">💡</span><span class="opt-label">Saw our demo / portfolio</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(12,this,'Tender / procurement platform')"><span class="opt-icon">📋</span><span class="opt-label">Tender / procurement platform</span><span class="opt-check"></span></div>
+        <div class="opt-card" onclick="selectSingle(12,this,'Other')"><span class="opt-icon">📌</span><span class="opt-label">Other</span><span class="opt-check"></span></div>
+      </div>
+      <div class="action-row">
+        <button class="btn-next" id="next-12" onclick="goNext(12)" disabled>Continue <span>→</span></button>
+        <button class="btn-back" onclick="goBack(12)">← Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 13: Anything Else ── -->
+  <div class="slide enter-down" id="slide-13">
+    <div class="slide-inner">
+      <div class="step-num">Question 13</div>
+      <div class="question">Anything else we should <em>know?</em></div>
+      <div class="sub-hint">Tell us about your project, constraints, ideas, or questions. This is your space — entirely optional.</div>
+      <textarea class="text-field" id="q13" rows="4" placeholder="e.g. We have an existing system built 5 years ago on outdated tech. We want to migrate it but keep the core data..."></textarea>
+      <div class="action-row">
+        <button class="btn-next" id="next-13" onclick="goNext(13)">Review My Answers <span>→</span></button>
+        <button class="btn-back" onclick="goBack(13)">← Back</button>
+        <button class="btn-skip" onclick="skipStep(13)">Skip</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 14: SUMMARY / REVIEW ── -->
+  <div class="slide enter-down" id="slide-14">
+    <div class="slide-inner" style="max-width:760px;">
+      <div class="step-num">Almost done</div>
+      <div class="question">Review your <em>answers</em></div>
+      <div class="sub-hint">Everything look right? Edit anything on the left before submitting.</div>
+      <div class="summary-grid" id="summary-grid"></div>
+      <div class="action-row" style="margin-top:1.5rem;">
+        <button class="btn-next" id="btn-submit" onclick="submitForm()" style="background:linear-gradient(135deg,var(--teal),var(--blue));">Submit to Proaxis <span>→</span></button>
+        <button class="btn-back" onclick="goBack(14)">← Edit answers</button>
+      </div>
+      <p style="font-size:0.75rem; color:var(--slate); margin-top:1rem;">
+        🔒 By submitting you agree that Proaxis Solutions may contact you regarding this enquiry. Your information is handled in accordance with POPIA.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 15: SUCCESS ── -->
+  <div class="slide enter-down" id="slide-15">
+    <div class="slide-inner success-screen">
+      <div class="success-icon">✓</div>
+      <h2>You're all set, <span id="success-name" style="color:var(--teal);">there</span>!</h2>
+      <p>Your onboarding is complete. A member of our team will personally review your responses and be in touch within <strong style="color:var(--white);">1 business day</strong>.</p>
+      <div class="next-steps">
+        <div class="next-step"><div class="ns-num">1</div>We review your submission today</div>
+        <div class="next-step"><div class="ns-num">2</div>You receive a call or WhatsApp within 24 hours</div>
+        <div class="next-step"><div class="ns-num">3</div>We schedule a discovery session (free, no obligation)</div>
+        <div class="next-step"><div class="ns-num">4</div>You receive a clear, tailored proposal</div>
+      </div>
+      <a href="index.html" class="return-link">← Return to Proaxis Solutions</a>
+    </div>
+  </div>
+
+</div><!-- /stage -->
+
+<!-- Bottom Bar -->
+<div class="bottom-bar">
+  <div class="bottom-note"><kbd class="kbd">Tab</kbd> navigate · <kbd class="kbd">Enter ↵</kbd> confirm</div>
+  <div class="powered-by">Powered by <a href="index.html">Proaxis Solutions</a></div>
+</div>
+
+<!-- Submit Loader Overlay -->
+<div id="submit-loader">
+  <div class="loader-spinner"></div>
+  <div class="loader-text">Sending your submission securely…</div>
+</div>
+
+<!-- ════════════════════════════════════ SCRIPT ════════════════════════════════════ -->
+<script>
+  // ── State ──
+  let current = 0;
+  const TOTAL = 13; // question slides
+  const answers = {};
+  const multiAnswers = {}; // for multi-select questions
+
+  // ── Initialize EmailJS ──
+  (function() {
+    try { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); } catch(e) {}
+  })();
+
+  // ── Progress ──
+  function updateProgress(step) {
+    const pct = step <= 0 ? 0 : Math.min(100, Math.round((step / TOTAL) * 100));
+    document.getElementById('progress-fill').style.width = pct + '%';
+    const ind = document.getElementById('stepIndicator');
+    if (step === 0 || step === 14 || step === 15) {
+      ind.textContent = '';
+    } else {
+      ind.textContent = step + ' of ' + TOTAL;
+    }
+  }
+
+  // ── Transition ──
+  function goToSlide(from, to, direction) {
+    const fromEl = document.getElementById('slide-' + from);
+    const toEl   = document.getElementById('slide-' + to);
+    const exitClass   = direction > 0 ? 'exit-up'    : 'exit-down';
+    const enterClass  = direction > 0 ? 'enter-down' : 'enter-up';
+
+    fromEl.classList.remove('active');
+    fromEl.classList.add(exitClass);
+
+    toEl.classList.remove(enterClass, 'exit-up', 'exit-down', 'enter-up', 'enter-down');
+    toEl.classList.add(enterClass);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        toEl.classList.add('active');
+        toEl.classList.remove(enterClass);
+      });
+    });
+
+    setTimeout(() => fromEl.classList.remove(exitClass, 'active'), 450);
+    current = to;
+    updateProgress(to);
+
+    // Focus first input on text slides
+    const inp = toEl.querySelector('input:not([type=hidden]), textarea');
+    if (inp) setTimeout(() => inp.focus(), 480);
+  }
+
+  function startForm() { goToSlide(0, 1, 1); }
+
+  function goNext(step) {
+    if (!validateStep(step)) return;
+    saveStep(step);
+    if (step === 13) { buildSummary(); goToSlide(step, 14, 1); }
+    else goToSlide(step, step + 1, 1);
+  }
+
+  function goBack(step) {
+    goToSlide(step, step - 1, -1);
+  }
+
+  function skipStep(step) {
+    goToSlide(step, step + 1, 1);
+  }
+
+  // ── Validation ──
+  function validateStep(step) {
+    if ([1].includes(step)) return !!document.getElementById('q' + step)?.value.trim();
+    if (step === 2) {
+      return document.getElementById('q2_email')?.value.trim() &&
+             document.getElementById('q2_phone')?.value.trim() &&
+             document.getElementById('q2_company')?.value.trim();
+    }
+    if ([3,4,5,8,9,10,12].includes(step)) return !!answers['q' + step];
+    return true; // multi-select, textarea, optional steps
+  }
+
+  function checkNext(step) {
+    const btn = document.getElementById('next-' + step);
+    if (btn) btn.disabled = !validateStep(step);
+  }
+
+  // ── Save Step ──
+  function saveStep(step) {
+    if (step === 1) answers.q1 = document.getElementById('q1').value.trim();
+    if (step === 2) {
+      answers.q2_email   = document.getElementById('q2_email').value.trim();
+      answers.q2_phone   = document.getElementById('q2_phone').value.trim();
+      answers.q2_company = document.getElementById('q2_company').value.trim();
+      answers.q2_role    = document.getElementById('q2_role').value.trim();
+    }
+    if (step === 11) answers.q11 = document.getElementById('q11').value.trim();
+    if (step === 13) answers.q13 = document.getElementById('q13').value.trim();
+  }
+
+  // ── Single Select ──
+  function selectSingle(step, card, value) {
+    document.querySelectorAll('#opts-' + step + ' .opt-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    answers['q' + step] = value;
+    const btn = document.getElementById('next-' + step);
+    if (btn) { btn.disabled = false; }
+  }
+
+  // ── Multi Select ──
+  function selectMulti(step, card, value) {
+    card.classList.toggle('selected');
+    if (!multiAnswers[step]) multiAnswers[step] = new Set();
+    if (card.classList.contains('selected')) multiAnswers[step].add(value);
+    else multiAnswers[step].delete(value);
+    answers['q' + step] = [...multiAnswers[step]].join('; ') || null;
+  }
+
+  // ── Lead Score ──
+  function computeLeadScore() {
+    let score = 0; let max = 0; const signals = [];
+
+    // Timeline
+    max += 30;
+    const t = answers.q8 || '';
+    if (t.includes('Urgently')) { score += 30; signals.push('🔥 Urgent timeline'); }
+    else if (t.includes('Soon')) { score += 20; signals.push('⚡ Near-term timeline'); }
+    else if (t.includes('Planning')) { score += 10; signals.push('📅 Planning stage'); }
+
+    // Budget
+    max += 30;
+    const b = answers.q9 || '';
+    if (b.includes('500,000') || b.includes('Tender')) { score += 30; signals.push('💰 High budget'); }
+    else if (b.includes('150,000')) { score += 25; signals.push('💰 Strong budget'); }
+    else if (b.includes('50,000')) { score += 18; signals.push('💼 Mid budget'); }
+    else if (b.includes('15,000')) { score += 10; signals.push('🌱 Starter budget'); }
+    else { score += 5; }
+
+    // Authority
+    max += 20;
+    const a = answers.q10 || '';
+    if (a.includes('alone')) { score += 20; signals.push('✅ Decision maker'); }
+    else if (a.includes('partner')) { score += 16; signals.push('🤝 Joint decision'); }
+    else if (a.includes('management')) { score += 8; }
+    else if (a.includes('board')) { score += 4; }
+
+    // Company Size
+    max += 10;
+    const s = answers.q4 || '';
+    if (s.includes('200+')) score += 10;
+    else if (s.includes('51')) score += 8;
+    else if (s.includes('11')) score += 6;
+    else score += 3;
+
+    // Clarity of need
+    max += 10;
+    if (answers.q11 && answers.q11.length > 30) { score += 10; signals.push('📝 Clear success vision'); }
+
+    const pct = Math.round((score / max) * 100);
+    let tier, color;
+    if (pct >= 70) { tier = '🔴 HOT'; color = '#F87171'; }
+    else if (pct >= 40) { tier = '🟡 WARM'; color = '#FCD34D'; }
+    else { tier = '🔵 NURTURE'; color = '#94A3B8'; }
+    return { score: pct, tier, color, signals };
+  }
+
+  // ── Build Summary ──
+  function buildSummary() {
+    const ls = computeLeadScore();
+    const rows = [
+      { q:'Full Name',        a: answers.q1 },
+      { q:'Email',            a: answers.q2_email },
+      { q:'Phone',            a: answers.q2_phone },
+      { q:'Company',          a: answers.q2_company },
+      { q:'Role',             a: answers.q2_role || '—' },
+      { q:'Industry',         a: answers.q3 || '—' },
+      { q:'Company Size',     a: answers.q4 || '—' },
+      { q:'Primary Driver',   a: answers.q5 || '—' },
+      { q:'Challenges',       a: answers.q6 ? answers.q6.replace(/;/g,' ·') : '—' },
+      { q:'Solutions Needed', a: answers.q7 ? answers.q7.replace(/;/g,' ·') : '—' },
+      { q:'Timeline',         a: answers.q8 || '—' },
+      { q:'Budget',           a: answers.q9 || '—' },
+      { q:'Decision Auth.',   a: answers.q10 || '—' },
+      { q:'Success Vision',   a: answers.q11 || '—' },
+      { q:'Lead Source',      a: answers.q12 || '—' },
+      { q:'Notes',            a: answers.q13 || '—' },
+    ];
+
+    const badgeClass = ls.tier.includes('HOT') ? 'badge-hot' : ls.tier.includes('WARM') ? 'badge-warm' : 'badge-cool';
+
+    let html = `<div class="summary-item"><div class="summary-q">Lead Score</div><div class="summary-a"><span class="summary-badge ${badgeClass}">${ls.tier} · ${ls.score}%</span></div></div>`;
+    rows.forEach(r => {
+      if (r.a) html += `<div class="summary-item"><div class="summary-q">${r.q}</div><div class="summary-a">${r.a}</div></div>`;
+    });
+    document.getElementById('summary-grid').innerHTML = html;
+  }
+
+  // ── Format Email HTML ──
+  function buildEmailHTML() {
+    const ls = computeLeadScore();
+    const scoreColor = ls.tier.includes('HOT') ? '#EF4444' : ls.tier.includes('WARM') ? '#F59E0B' : '#6B7280';
+
+    let rows = '';
+    const data = [
+      ['Full Name',        answers.q1],
+      ['Email',            answers.q2_email],
+      ['Phone / WhatsApp', answers.q2_phone],
+      ['Company',          answers.q2_company],
+      ['Role / Title',     answers.q2_role || '—'],
+      ['Industry',         answers.q3 || '—'],
+      ['Company Size',     answers.q4 || '—'],
+      ['Primary Driver',   answers.q5 || '—'],
+      ['Pain Points',      answers.q6 ? answers.q6.replace(/;/g, '\n·') : '—'],
+      ['Solutions Needed', answers.q7 ? answers.q7.replace(/;/g, '\n·') : '—'],
+      ['Timeline',         answers.q8 || '—'],
+      ['Budget Range',     answers.q9 || '—'],
+      ['Decision Auth.',   answers.q10 || '—'],
+      ['Success Vision',   answers.q11 || '—'],
+      ['Lead Source',      answers.q12 || '—'],
+      ['Additional Notes', answers.q13 || '—'],
+    ];
+    data.forEach(([q, a]) => {
+      rows += `<tr><td style="padding:10px 16px;font-size:13px;color:#64748B;font-weight:600;background:#F8FAFC;border:1px solid #E2E8F0;width:200px;vertical-align:top;">${q}</td><td style="padding:10px 16px;font-size:13px;color:#0F172A;border:1px solid #E2E8F0;vertical-align:top;white-space:pre-line;">${a}</td></tr>`;
+    });
+
+    return `
+      <div style="font-family:Inter,sans-serif;max-width:680px;margin:0 auto;">
+        <div style="background:#0F172A;padding:32px 40px;border-radius:12px 12px 0 0;">
+          <div style="font-size:11px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:#14B8A6;margin-bottom:8px;">Proaxis Solutions</div>
+          <div style="font-size:22px;font-weight:800;color:#fff;letter-spacing:-0.02em;">New Client Onboarding</div>
+          <div style="font-size:13px;color:#64748B;margin-top:6px;">${new Date().toLocaleString('en-ZA', { timeZone:'Africa/Johannesburg' })}</div>
+        </div>
+        <div style="background:#fff;border:1px solid #E2E8F0;border-top:none;padding:24px 40px;">
+          <div style="display:inline-block;background:${scoreColor}20;border:1px solid ${scoreColor}40;border-radius:99px;padding:6px 16px;font-size:12px;font-weight:800;color:${scoreColor};letter-spacing:0.06em;margin-bottom:16px;">
+            LEAD SCORE · ${ls.tier} · ${ls.score}%
+          </div>
+          <div style="font-size:13px;color:#475569;margin-bottom:8px;font-weight:600;">Qualifying signals:</div>
+          <div style="font-size:13px;color:#475569;margin-bottom:24px;">${ls.signals.join(' &nbsp;·&nbsp; ') || 'Standard enquiry'}</div>
+          <table style="width:100%;border-collapse:collapse;">${rows}</table>
+        </div>
+        <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-top:none;padding:20px 40px;border-radius:0 0 12px 12px;text-align:center;">
+          <a href="mailto:${answers.q2_email}" style="display:inline-block;background:#2563EB;color:#fff;padding:10px 28px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;margin-right:10px;">Reply to ${answers.q1}</a>
+          <div style="font-size:11px;color:#94A3B8;margin-top:12px;">Proaxis Solutions (Pty) Ltd · Reg 2025/542019/07 · KwaZulu-Natal, SA</div>
+        </div>
+      </div>`;
+  }
+
+  // ── Submit ──
+  async function submitForm() {
+    document.getElementById('submit-loader').classList.add('active');
+    const ls = computeLeadScore();
+
+    const params = {
+      to_email:       COMPANY_EMAIL,
+      from_name:      answers.q1 || 'New Lead',
+      reply_to:       answers.q2_email || '',
+      lead_score:     ls.tier + ' · ' + ls.score + '%',
+      company:        answers.q2_company || '—',
+      phone:          answers.q2_phone || '—',
+      industry:       answers.q3 || '—',
+      budget:         answers.q9 || '—',
+      timeline:       answers.q8 || '—',
+      decision_auth:  answers.q10 || '—',
+      responses_html: buildEmailHTML(),
+      submitted_at:   new Date().toLocaleString('en-ZA', { timeZone:'Africa/Johannesburg' }),
+    };
+
+    try {
+      if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+      } else {
+        // Dev fallback: log to console when EmailJS not yet configured
+        console.log('📧 [DEV MODE] Onboarding submission (EmailJS not configured yet):', params);
+        await new Promise(r => setTimeout(r, 1400)); // simulate send
+      }
+      document.getElementById('submit-loader').classList.remove('active');
+      document.getElementById('success-name').textContent = answers.q1 ? answers.q1.split(' ')[0] : 'there';
+      goToSlide(14, 15, 1);
+    } catch (err) {
+      document.getElementById('submit-loader').classList.remove('active');
+      // Fallback: show mailto link
+      const subject = encodeURIComponent(`New Client Onboarding — ${answers.q1} (${answers.q2_company})`);
+      const body = encodeURIComponent(`Name: ${answers.q1}\nEmail: ${answers.q2_email}\nPhone: ${answers.q2_phone}\nCompany: ${answers.q2_company}\nIndustry: ${answers.q3}\nBudget: ${answers.q9}\nTimeline: ${answers.q8}`);
+      window.location.href = `mailto:${COMPANY_EMAIL}?subject=${subject}&body=${body}`;
+    }
+  }
+
+  // ── Keyboard Navigation ──
+  document.addEventListener('keydown', (e) => {
+    if (current === 0 || current === 14 || current === 15) return;
+    if (e.key === 'Enter') {
+      const btn = document.getElementById('next-' + current);
+      if (btn && !btn.disabled) btn.click();
+    }
+  });
+
+  // ── Init ──
+  updateProgress(0);
+</script>
+
+</body>
+</html>
