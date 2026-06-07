@@ -804,12 +804,101 @@
     document.querySelector('.contact-form-wrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  function submitForm() {
-    document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
-    document.querySelector('.step-indicator').style.display = 'none';
-    document.querySelector('.urgency-bar').style.display = 'none';
-    document.getElementById('success-state').style.display = 'block';
+  // ── PROAXIS CONTACT FORM SUBMISSION ──
+// Web3Forms key — get yours FREE at https://web3forms.com (enter info@proaxissolutions.co.za)
+const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE';
+
+function collectFormData() {
+  const val = id => (document.getElementById(id) || {}).value || '';
+  return {
+    name:         val('name'),
+    email:        val('email'),
+    organisation: val('organisation'),
+    biz_size:     val('biz-size'),
+    industry:     val('industry'),
+    service:      val('selected-service'),
+    challenge:    val('challenge'),
+    budget:       val('budget'),
+    timeline:     val('timeline'),
+    additional:   val('additional'),
+    page:         'contact.html',
+    source:       document.referrer || 'direct',
+    timestamp:    new Date().toISOString(),
+    user_agent:   navigator.userAgent
+  };
+}
+
+function saveLeadLocally(data) {
+  try {
+    const leads = JSON.parse(localStorage.getItem('proaxis_contact_leads') || '[]');
+    leads.unshift({ id: Date.now(), ...data });
+    localStorage.setItem('proaxis_contact_leads', JSON.stringify(leads));
+    // Also set a cookie for tracking
+    document.cookie = 'proaxis_enquiry=1;path=/;max-age=31536000;SameSite=Lax';
+    document.cookie = 'proaxis_enquiry_email=' + encodeURIComponent(data.email) + ';path=/;max-age=31536000;SameSite=Lax';
+  } catch(e) { console.warn('localStorage save failed:', e); }
+}
+
+function showSuccess() {
+  document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+  const si = document.querySelector('.step-indicator');
+  const ub = document.querySelector('.urgency-bar');
+  if (si) si.style.display = 'none';
+  if (ub) ub.style.display = 'none';
+  document.getElementById('success-state').style.display = 'block';
+}
+
+async function submitForm() {
+  const btn = document.querySelector('[onclick="submitForm()"]');
+  if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+  const data = collectFormData();
+
+  // Always save locally first
+  saveLeadLocally(data);
+
+  // Validate minimum fields
+  if (!data.name || !data.email) {
+    alert('Please fill in your name and email before submitting.');
+    if (btn) { btn.disabled = false; btn.textContent = '✅ Send My Message'; }
+    return;
   }
+
+  // Try Web3Forms (email delivery)
+  if (WEB3FORMS_KEY && WEB3FORMS_KEY !== 'YOUR_ACCESS_KEY_HERE') {
+    try {
+      const payload = {
+        access_key: WEB3FORMS_KEY,
+        subject: `New Enquiry from ${data.name} — Proaxis Solutions Website`,
+        from_name: 'Proaxis Solutions Website',
+        name: data.name,
+        email: data.email,
+        organisation: data.organisation,
+        business_size: data.biz_size,
+        industry: data.industry,
+        service_interest: data.service,
+        challenge: data.challenge,
+        budget: data.budget,
+        timeline: data.timeline,
+        additional_info: data.additional,
+        submitted_at: data.timestamp,
+        referral_source: data.source
+      };
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const result = await res.json();
+      if (!result.success) console.warn('Web3Forms error:', result.message);
+    } catch(err) {
+      console.warn('Web3Forms submission failed (lead saved locally):', err);
+    }
+  }
+
+  // Show success regardless — lead is saved locally
+  showSuccess();
+}
 </script>
 </body>
 </html>

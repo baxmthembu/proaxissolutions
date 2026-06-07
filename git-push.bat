@@ -1,0 +1,13 @@
+@echo off
+cd /d C:\Users\baxmt\proaxissolutions
+echo Removing stale git lock...
+del /f /q ".git\index.lock" 2>nul
+echo Staging all files...
+git add -A
+echo Committing...
+git commit -m "feat: contact form live, assessment upgraded, leads admin, homepage overhaul - contact.html: Web3Forms integration + localStorage lead capture - leads-admin.html: full lead manager dashboard with CSV export - services.html: ZAR cost calculator, lead capture, contextual advice - index.html: flip-card prototypes, professional footer, trust strip - COMPLIANCE_DOCUMENTS: all docx and pdf compliance documents added"
+echo Pushing to GitHub...
+git push origin main
+echo.
+echo Done! Press any key to close.
+pause

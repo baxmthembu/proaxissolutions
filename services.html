@@ -249,6 +249,28 @@
       .transform-wrapper { grid-template-columns: 1fr; }
       .transform-arrow { display: none; }
     }
+
+    /* ── ASSESSMENT UPGRADE ── */
+    .assess-hint {
+      font-size: 0.78rem;
+      color: #14B8A6;
+      margin-top: 0.4rem;
+      min-height: 1rem;
+      transition: all 0.3s;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: #14B8A6 !important;
+      box-shadow: 0 0 0 3px rgba(20,184,166,0.15) !important;
+    }
+    .result-metric-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 0.9rem;
+      text-align: center;
+    }
+    .result-metric-value { font-size: 1.4rem; font-weight: 700; color: #fff; }
+    .result-metric-label { font-size: 0.72rem; color: #64748B; margin-top: 0.2rem; }
   </style>
 </head>
 <body>
@@ -502,43 +524,119 @@
   <div class="container-xl">
     <div class="row align-items-start g-5">
       <div class="col-lg-5 reveal">
-        <div class="section-label">Free Tool</div>
-        <h2 class="section-heading">Automation Opportunity Assessment</h2>
-        <p class="section-sub">Not sure where to start? Run a quick check to see how much time and money your business could save through automation. No technical knowledge needed.</p>
-        <ul class="outcomes-list" style="margin-top:1.5rem;">
-          <li>Estimates your monthly manual effort</li>
-          <li>Scores your process as a candidate for automation</li>
-          <li>Gives you a clear starting point for a conversation</li>
-        </ul>
+        <div class="section-label">Free Tool — Takes 60 Seconds</div>
+        <h2 class="section-heading">How Much Is Manual Work <em style="font-style:normal;color:var(--blue);">Costing You?</em></h2>
+        <p class="section-sub" style="font-size:1rem;line-height:1.7;">Most business owners have <strong style="color:var(--navy);">no idea</strong> how much money walks out the door every month in wasted manual effort. This tool shows you exactly what you're losing — in Rands and in hours.</p>
+        <div style="margin-top:1.75rem;display:flex;flex-direction:column;gap:1rem;">
+          <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+            <div style="width:36px;height:36px;border-radius:50%;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.9rem;">💸</div>
+            <div><div style="font-size:0.88rem;font-weight:700;color:var(--navy);">See your monthly Rand cost</div><div style="font-size:0.82rem;color:var(--slate);margin-top:0.1rem;">Calculated against South African average labour costs.</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+            <div style="width:36px;height:36px;border-radius:50%;background:rgba(37,99,235,0.08);border:1px solid rgba(37,99,235,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.9rem;">⏱️</div>
+            <div><div style="font-size:0.88rem;font-weight:700;color:var(--navy);">Quantify the hours your team loses</div><div style="font-size:0.82rem;color:var(--slate);margin-top:0.1rem;">Hours you could redirect to revenue-generating work.</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+            <div style="width:36px;height:36px;border-radius:50%;background:rgba(20,184,166,0.1);border:1px solid rgba(20,184,166,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.9rem;">🎯</div>
+            <div><div style="font-size:0.88rem;font-weight:700;color:var(--navy);">Get a personalised automation score</div><div style="font-size:0.82rem;color:var(--slate);margin-top:0.1rem;">We score your process and tell you exactly where to start.</div></div>
+          </div>
+        </div>
+        <div style="margin-top:1.75rem;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.15);border-radius:10px;padding:1rem 1.25rem;">
+          <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#EF4444;margin-bottom:0.3rem;">💡 Did you know?</div>
+          <p style="font-size:0.85rem;color:#475569;margin:0;line-height:1.6;">South African SMEs spend an average of <strong style="color:var(--navy);">18–35% of payroll</strong> on tasks that can be fully or partially automated. That's money that could pay for a new hire — or go straight to profit.</p>
+        </div>
       </div>
       <div class="col-lg-7 reveal reveal-delay-1">
         <div class="assessment-section">
-          <h2>Run Your Assessment</h2>
-          <p>Answer three quick questions about any process in your business. Takes 30 seconds.</p>
-          <form id="assessmentForm">
-            <div class="mb-3">
-              <label class="form-label" for="manualHours">How many hours per week does this process take?</label>
-              <input class="form-control" id="manualHours" type="number" min="0" max="500" placeholder="e.g. 10" required>
+          <!-- Step 1: Questions -->
+          <div id="assess-step1">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.25rem;">
+              <h2 style="margin:0;">Calculate Your Hidden Cost</h2>
             </div>
-            <div class="mb-3">
-              <label class="form-label" for="staffCount">How many people are involved?</label>
-              <input class="form-control" id="staffCount" type="number" min="1" max="500" placeholder="e.g. 2" required>
+            <p style="color:#94A3B8;font-size:0.88rem;margin-bottom:1.5rem;">Answer 4 quick questions. We'll calculate exactly what this process is costing your business every month.</p>
+            <form id="assessmentForm">
+              <!-- Q1 -->
+              <div class="assess-field" style="margin-bottom:1.25rem;">
+                <label class="form-label" for="processType" style="font-weight:700;color:#E2E8F0;display:flex;align-items:center;gap:0.5rem;">
+                  <span style="background:rgba(20,184,166,0.15);color:#14B8A6;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:800;">1</span>
+                  What type of process is this?
+                </label>
+                <select class="form-select" id="processType" required style="background:#1E293B;border:1px solid #334155;color:#E2E8F0;border-radius:8px;padding:0.7rem 1rem;">
+                  <option value="">Select the closest match</option>
+                  <option value="admin">Admin / paperwork / data entry</option>
+                  <option value="reporting">Reporting & spreadsheets</option>
+                  <option value="communication">Client communication & follow-ups</option>
+                  <option value="invoicing">Invoicing & payments</option>
+                  <option value="scheduling">Scheduling & bookings</option>
+                  <option value="inventory">Stock & inventory management</option>
+                  <option value="compliance">Compliance & document filing</option>
+                  <option value="other">Other manual process</option>
+                </select>
+                <div id="hint-processType" class="assess-hint"></div>
+              </div>
+              <!-- Q2 -->
+              <div class="assess-field" style="margin-bottom:1.25rem;">
+                <label class="form-label" for="manualHours" style="font-weight:700;color:#E2E8F0;display:flex;align-items:center;gap:0.5rem;">
+                  <span style="background:rgba(20,184,166,0.15);color:#14B8A6;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:800;">2</span>
+                  How many hours per week does this process take?
+                </label>
+                <input class="form-control" id="manualHours" type="number" min="1" max="500" placeholder="e.g. 10" required style="background:#1E293B;border:1px solid #334155;color:#E2E8F0;border-radius:8px;padding:0.7rem 1rem;" oninput="showHourHint(this.value)">
+                <div id="hint-hours" class="assess-hint"></div>
+              </div>
+              <!-- Q3 -->
+              <div class="assess-field" style="margin-bottom:1.25rem;">
+                <label class="form-label" for="staffCount" style="font-weight:700;color:#E2E8F0;display:flex;align-items:center;gap:0.5rem;">
+                  <span style="background:rgba(20,184,166,0.15);color:#14B8A6;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:800;">3</span>
+                  How many people are involved?
+                </label>
+                <input class="form-control" id="staffCount" type="number" min="1" max="500" placeholder="e.g. 2" required style="background:#1E293B;border:1px solid #334155;color:#E2E8F0;border-radius:8px;padding:0.7rem 1rem;">
+              </div>
+              <!-- Q4 -->
+              <div class="assess-field" style="margin-bottom:1.5rem;">
+                <label class="form-label" for="frequency" style="font-weight:700;color:#E2E8F0;display:flex;align-items:center;gap:0.5rem;">
+                  <span style="background:rgba(20,184,166,0.15);color:#14B8A6;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:800;">4</span>
+                  How often does it run?
+                </label>
+                <select class="form-select" id="frequency" required style="background:#1E293B;border:1px solid #334155;color:#E2E8F0;border-radius:8px;padding:0.7rem 1rem;">
+                  <option value="">Select frequency</option>
+                  <option value="daily">Daily — every single working day</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="monthly">Monthly</option>
+                </select>
+              </div>
+              <button class="btn-assess" type="submit" style="width:100%;padding:1rem;font-size:1rem;letter-spacing:0.01em;">Show Me What This Is Costing Me →</button>
+            </form>
+          </div>
+
+          <!-- Step 2: Lead Capture (shown after form submit) -->
+          <div id="assess-step2" style="display:none;">
+            <div style="text-align:center;margin-bottom:1.5rem;">
+              <div style="font-size:2rem;margin-bottom:0.5rem;">📊</div>
+              <h2 style="color:#fff;margin-bottom:0.25rem;">Your results are ready.</h2>
+              <p style="color:#94A3B8;font-size:0.88rem;">Enter your details below to unlock your full cost analysis and personalised automation recommendation.</p>
             </div>
-            <div class="mb-3">
-              <label class="form-label" for="frequency">How often does it run?</label>
-              <select class="form-select" id="frequency" required>
-                <option value="">Select frequency</option>
-                <option value="daily">Daily</option>
-                <option value="weekly">Weekly</option>
-                <option value="monthly">Monthly</option>
-              </select>
+            <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1rem;">
+              <input id="lead-name" type="text" placeholder="Your name" style="background:#1E293B;border:1px solid #334155;color:#E2E8F0;border-radius:8px;padding:0.7rem 1rem;font-size:0.9rem;outline:none;width:100%;">
+              <input id="lead-email" type="email" placeholder="Work email address" style="background:#1E293B;border:1px solid #334155;color:#E2E8F0;border-radius:8px;padding:0.7rem 1rem;font-size:0.9rem;outline:none;width:100%;">
+              <input id="lead-phone" type="tel" placeholder="Phone number (optional)" style="background:#1E293B;border:1px solid #334155;color:#E2E8F0;border-radius:8px;padding:0.7rem 1rem;font-size:0.9rem;outline:none;width:100%;">
             </div>
-            <button class="btn-assess" type="submit">Calculate My Automation Opportunity</button>
-          </form>
-          <div class="result-box" id="assessmentResult">
-            <div class="result-priority" id="priorityText"></div>
-            <h5>Assessment Summary</h5>
-            <p id="resultText"></p>
+            <p style="font-size:0.72rem;color:#475569;margin-bottom:1rem;">🔒 We respect your privacy. No spam. No selling your data. POPIA compliant.</p>
+            <button onclick="unlockResults()" style="width:100%;background:#14B8A6;color:#0F172A;border:none;border-radius:8px;padding:0.9rem;font-weight:700;font-size:0.95rem;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='#0d9488'" onmouseout="this.style.background='#14B8A6'">Unlock My Free Results →</button>
+            <p style="text-align:center;font-size:0.75rem;color:#334155;margin-top:0.75rem;cursor:pointer;text-decoration:underline;" onclick="unlockResults(true)">Skip — just show me the numbers</p>
+          </div>
+
+          <!-- Step 3: Results -->
+          <div id="assess-step3" style="display:none;">
+            <div id="assessmentResult" class="result-box" style="display:block;">
+              <div class="result-priority" id="priorityText"></div>
+              <h5 id="resultHeadline" style="color:#fff;font-size:1.1rem;margin-bottom:0.75rem;"></h5>
+              <div id="resultMetrics" style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1rem;"></div>
+              <p id="resultText" style="color:#94A3B8;font-size:0.88rem;line-height:1.65;margin-bottom:1rem;"></p>
+              <div id="resultAdvice" style="background:rgba(20,184,166,0.08);border:1px solid rgba(20,184,166,0.2);border-radius:8px;padding:0.85rem;margin-bottom:1.25rem;font-size:0.84rem;color:#CBD5E1;line-height:1.6;"></div>
+              <a href="contact.html" style="display:block;background:#2563EB;color:#fff;font-weight:700;text-align:center;padding:0.85rem;border-radius:8px;text-decoration:none;font-size:0.9rem;transition:all 0.2s;" onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563EB'">Book a Free Discovery Call — We'll Show You How to Fix This →</a>
+              <p style="text-align:center;font-size:0.75rem;color:#475569;margin-top:0.5rem;">No commitment · No cost · 30-minute call</p>
+              <button onclick="resetAssessment()" style="display:block;width:100%;background:transparent;border:1px solid #1E293B;color:#475569;border-radius:8px;padding:0.6rem;font-size:0.8rem;cursor:pointer;margin-top:0.5rem;">← Run Another Assessment</button>
+            </div>
           </div>
         </div>
       </div>
@@ -577,35 +675,112 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  window.addEventListener('load', () => setTimeout(() => document.getElementById('page-loader').classList.add('hidden'), 950));
+// ── PROCESS HINTS ──
+const processHints = {
+  admin: "Admin tasks are among the most automatable — typically 70–90% reduction in manual time is achievable.",
+  reporting: "Reporting automation saves businesses an average of 8–15 hours per month per person.",
+  communication: "Automated follow-ups recover 25–40% of leads that would otherwise go cold.",
+  invoicing: "Automated invoicing reduces payment delays by 35% and eliminates capture errors.",
+  scheduling: "Booking automation cuts no-shows by 40–60% and removes back-and-forth entirely.",
+  inventory: "Smart inventory systems prevent stockouts and reduce over-ordering by up to 30%.",
+  compliance: "Compliance automation eliminates deadline misses and reduces document prep time by 60%.",
+  other: "Most manual processes have at least 50% automation potential — even partial automation delivers significant ROI."
+};
+document.getElementById('processType').addEventListener('change', function() {
+  const hint = document.getElementById('hint-processType');
+  hint.textContent = processHints[this.value] || '';
+});
 
-  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+function showHourHint(val) {
+  const hint = document.getElementById('hint-hours');
+  const h = parseFloat(val);
+  if (!h || h < 1) { hint.textContent = ''; return; }
+  const monthly = h * 4.33;
+  hint.textContent = `That's roughly ${Math.round(monthly)} hours per month — before we factor in the number of people.`;
+}
 
-  document.getElementById('assessmentForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const hours = parseFloat(document.getElementById('manualHours').value) || 0;
-    const staff = parseInt(document.getElementById('staffCount').value, 10) || 1;
-    const freq = document.getElementById('frequency').value;
-    const multiplier = freq === 'daily' ? 20 : freq === 'weekly' ? 4 : 1;
-    const monthlyHours = hours * multiplier * staff;
-    let priority, msg;
-    if (hours >= 20 || staff >= 5 || freq === 'daily') {
-      priority = '🔴 High Automation Opportunity';
-      msg = `Your team spends approximately ${monthlyHours.toLocaleString()} person-hours per month on this process. This is a prime candidate for automation — significant time savings are achievable.`;
-    } else if (hours >= 10 || staff >= 3) {
-      priority = '🟡 Strong Automation Candidate';
-      msg = `Estimated ${monthlyHours.toLocaleString()} person-hours per month. Solid automation potential — targeted workflows could meaningfully free up your team and reduce errors.`;
-    } else {
-      priority = '🟢 Moderate Opportunity';
-      msg = `Estimated ${monthlyHours.toLocaleString()} person-hours per month. Even moderate processes benefit from automation. Small improvements compound into real efficiency gains over time.`;
-    }
-    document.getElementById('priorityText').textContent = priority;
-    document.getElementById('resultText').textContent = msg + ' Share this with our team to explore a tailored solution.';
-    const box = document.getElementById('assessmentResult');
-    box.style.display = 'block';
-    box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  });
+let calcData = {};
+
+document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const hours = parseFloat(document.getElementById('manualHours').value) || 0;
+  const staff = parseFloat(document.getElementById('staffCount').value) || 1;
+  const freq = document.getElementById('frequency').value;
+  const ptype = document.getElementById('processType').value;
+  const freqMultiplier = {daily: 22, weekly: 4.33, monthly: 1}[freq] || 4.33;
+  const monthlyHours = Math.round(hours * freqMultiplier * staff);
+  // SA average cost: ~R120/hour blended labour
+  const hourlyRate = 120;
+  const monthlyCost = monthlyHours * hourlyRate;
+  const annualCost = monthlyCost * 12;
+  const automationSavingPct = {admin:0.8, reporting:0.75, communication:0.65, invoicing:0.75, scheduling:0.7, inventory:0.6, compliance:0.7, other:0.6}[ptype] || 0.65;
+  const monthlySaving = Math.round(monthlyCost * automationSavingPct);
+  const annualSaving = monthlySaving * 12;
+  calcData = {monthlyHours, monthlyCost, annualCost, monthlySaving, annualSaving, ptype, freq, hours, staff};
+  document.getElementById('assess-step1').style.display = 'none';
+  document.getElementById('assess-step2').style.display = 'block';
+});
+
+function unlockResults(skip) {
+  const name = document.getElementById('lead-name').value.trim();
+  const email = document.getElementById('lead-email').value.trim();
+  if (!skip && email && !/\S+@\S+\.\S+/.test(email)) {
+    alert('Please enter a valid email address.'); return;
+  }
+  // Store lead data
+  if (email) {
+    const lead = {name, email, phone: document.getElementById('lead-phone').value, ...calcData, ts: new Date().toISOString()};
+    const leads = JSON.parse(localStorage.getItem('proaxis_leads') || '[]');
+    leads.push(lead);
+    localStorage.setItem('proaxis_leads', JSON.stringify(leads));
+    document.cookie = `proaxis_lead=${encodeURIComponent(email)};path=/;max-age=31536000;SameSite=Lax`;
+  }
+  document.getElementById('assess-step2').style.display = 'none';
+  document.getElementById('assess-step3').style.display = 'block';
+  showResults(calcData, name);
+}
+
+function showResults(d, name) {
+  const greeting = name ? `${name.split(' ')[0]}, ` : '';
+  const score = d.monthlyHours > 200 ? 'high' : d.monthlyHours > 60 ? 'medium' : 'low';
+  const scoreConfig = {
+    high: {dot:'🔴', label:'Critical Automation Priority', color:'#EF4444'},
+    medium: {dot:'🟠', label:'Strong Automation Candidate', color:'#F59E0B'},
+    low: {dot:'🟢', label:'Automation Opportunity', color:'#10B981'}
+  }[score];
+  document.getElementById('priorityText').innerHTML = `${scoreConfig.dot} <span style="color:${scoreConfig.color}">${scoreConfig.label}</span>`;
+  document.getElementById('resultHeadline').textContent = `${greeting}here's what this process is really costing you.`;
+  document.getElementById('resultMetrics').innerHTML = `
+    <div class="result-metric-box"><div class="result-metric-value">${d.monthlyHours.toLocaleString()}</div><div class="result-metric-label">Hours lost per month</div></div>
+    <div class="result-metric-box"><div class="result-metric-value" style="color:#EF4444;">R${d.monthlyCost.toLocaleString()}</div><div class="result-metric-label">Monthly cost to your business</div></div>
+    <div class="result-metric-box"><div class="result-metric-value" style="color:#EF4444;">R${d.annualCost.toLocaleString()}</div><div class="result-metric-label">Wasted per year (if unchanged)</div></div>
+    <div class="result-metric-box"><div class="result-metric-value" style="color:#10B981;">R${d.monthlySaving.toLocaleString()}/mo</div><div class="result-metric-label">Estimated automation saving</div></div>`;
+  const msgs = {
+    high: `This is a significant drain. You're losing the equivalent of a full-time salary every year to a process that a well-built automation could handle in the background — without errors, without fatigue, without sick days. Every month you delay costs R${d.monthlyCost.toLocaleString()}.`,
+    medium: `This process is quietly costing R${d.monthlyCost.toLocaleString()} every month. That's R${d.annualCost.toLocaleString()} per year — money that could fund new hires, marketing, or equipment. Targeted automation could reclaim R${d.monthlySaving.toLocaleString()} of that every month.`,
+    low: `Even at this scale, you're spending R${d.monthlyCost.toLocaleString()} monthly on manual work. Small improvements compound — and the right automation now sets the foundation for scaling without adding headcount.`
+  }[score];
+  document.getElementById('resultText').textContent = msgs;
+  const advice = {
+    admin: '💡 Recommendation: Document capture + RPA (Robotic Process Automation) can handle this with near-zero human input. Timeline: 4–6 weeks to deploy.',
+    reporting: '💡 Recommendation: Automated dashboards pull live data and generate reports on schedule. No more manual spreadsheet updates.',
+    communication: '💡 Recommendation: AI-powered follow-up sequences ensure no lead or client message goes unanswered — even after hours.',
+    invoicing: '💡 Recommendation: Integrate invoicing with your existing systems. Auto-generate, send and chase invoices without lifting a finger.',
+    scheduling: '💡 Recommendation: Online booking with automated confirmations and reminders. Clients self-serve. Your diary fills itself.',
+    inventory: '💡 Recommendation: Smart inventory system with low-stock alerts and automated supplier ordering. Never run out of key stock again.',
+    compliance: '💡 Recommendation: Compliance automation tracks deadlines, generates documents and maintains audit trails automatically.',
+    other: '💡 Recommendation: A process audit will identify the quickest automation wins. Most businesses see ROI within the first 60 days.'
+  }[d.ptype] || '💡 Recommendation: A 30-minute discovery call will map exactly which parts of this process to automate first for maximum impact.';
+  document.getElementById('resultAdvice').textContent = advice;
+}
+
+function resetAssessment() {
+  document.getElementById('assess-step3').style.display = 'none';
+  document.getElementById('assess-step1').style.display = 'block';
+  document.getElementById('assessmentForm').reset();
+  document.getElementById('hint-processType').textContent = '';
+  document.getElementById('hint-hours').textContent = '';
+}
 </script>
 </body>
 </html>
