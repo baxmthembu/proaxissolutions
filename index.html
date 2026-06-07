@@ -353,8 +353,11 @@
       background: #0F172A;
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 20px;
-      width: 100%; max-width: 680px;
-      max-height: 88vh; overflow-y: auto;
+      width: 100%; max-width: 780px;
+      height: 92vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
       padding: 0;
       animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
     }
@@ -539,12 +542,54 @@
         <a href="contact.html" style="display:inline-block; background:var(--teal); color:var(--navy); padding:0.75rem 1.75rem; border-radius:8px; font-weight:700; font-size:0.95rem; text-decoration:none; transition:all 0.2s;">Let's Talk About Your Business →</a>
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.85rem;">
-        <div class="biz-flip-card" onclick="openProto('hair')"><div class="biz-card-inner"><div style="font-size:1.6rem;margin-bottom:0.4rem;">💇</div><div style="font-size:0.78rem;font-weight:700;color:#CBD5E1;">Hair &amp; Beauty</div><div style="font-size:0.6rem;color:#14B8A6;margin-top:0.3rem;">Tap to see demo ✦</div></div></div>
-        <div class="biz-flip-card" onclick="openProto('retail')"><div class="biz-card-inner"><div style="font-size:1.6rem;margin-bottom:0.4rem;">🛒</div><div style="font-size:0.78rem;font-weight:700;color:#CBD5E1;">Retail &amp; Spaza</div><div style="font-size:0.6rem;color:#14B8A6;margin-top:0.3rem;">Tap to see demo ✦</div></div></div>
-        <div class="biz-flip-card" onclick="openProto('food')"><div class="biz-card-inner"><div style="font-size:1.6rem;margin-bottom:0.4rem;">🍽️</div><div style="font-size:0.78rem;font-weight:700;color:#CBD5E1;">Food &amp; Catering</div><div style="font-size:0.6rem;color:#14B8A6;margin-top:0.3rem;">Tap to see demo ✦</div></div></div>
-        <div class="biz-flip-card" onclick="openProto('trades')"><div class="biz-card-inner"><div style="font-size:1.6rem;margin-bottom:0.4rem;">🔧</div><div style="font-size:0.78rem;font-weight:700;color:#CBD5E1;">Trades &amp; Services</div><div style="font-size:0.6rem;color:#14B8A6;margin-top:0.3rem;">Tap to see demo ✦</div></div></div>
-        <div class="biz-flip-card" onclick="openProto('health')"><div class="biz-card-inner"><div style="font-size:1.6rem;margin-bottom:0.4rem;">🏥</div><div style="font-size:0.78rem;font-weight:700;color:#CBD5E1;">Healthcare</div><div style="font-size:0.6rem;color:#14B8A6;margin-top:0.3rem;">Tap to see demo ✦</div></div></div>
-        <div class="biz-flip-card" onclick="openProto('legal')"><div class="biz-card-inner"><div style="font-size:1.6rem;margin-bottom:0.4rem;">🏢</div><div style="font-size:0.78rem;font-weight:700;color:#CBD5E1;">Professional Firms</div><div style="font-size:0.6rem;color:#14B8A6;margin-top:0.3rem;">Tap to see demo ✦</div></div></div>
+        <div class="biz-flip-card" onclick="openProto('hair')">
+          <div class="biz-card-inner">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem;">💇</div>
+            <div style="font-size:0.92rem;font-weight:800;color:#fff;letter-spacing:-0.01em;line-height:1.2;">Hause of Lace</div>
+            <div style="font-size:0.68rem;font-weight:500;color:#64748B;margin-top:0.25rem;text-transform:uppercase;letter-spacing:0.06em;">Hair &amp; Beauty</div>
+            <div style="font-size:0.62rem;color:#14B8A6;margin-top:0.5rem;font-weight:600;">Tap to see demo ✦</div>
+          </div>
+        </div>
+        <div class="biz-flip-card" onclick="openProto('retail')">
+          <div class="biz-card-inner">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem;">🛒</div>
+            <div style="font-size:0.92rem;font-weight:800;color:#fff;letter-spacing:-0.01em;line-height:1.2;">Kasi Fresh Market</div>
+            <div style="font-size:0.68rem;font-weight:500;color:#64748B;margin-top:0.25rem;text-transform:uppercase;letter-spacing:0.06em;">Retail &amp; Spaza</div>
+            <div style="font-size:0.62rem;color:#14B8A6;margin-top:0.5rem;font-weight:600;">Tap to see demo ✦</div>
+          </div>
+        </div>
+        <div class="biz-flip-card" onclick="openProto('food')">
+          <div class="biz-card-inner">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem;">🍽️</div>
+            <div style="font-size:0.92rem;font-weight:800;color:#fff;letter-spacing:-0.01em;line-height:1.2;">LarrieCooks</div>
+            <div style="font-size:0.68rem;font-weight:500;color:#64748B;margin-top:0.25rem;text-transform:uppercase;letter-spacing:0.06em;">Food &amp; Catering</div>
+            <div style="font-size:0.62rem;color:#14B8A6;margin-top:0.5rem;font-weight:600;">Tap to see demo ✦</div>
+          </div>
+        </div>
+        <div class="biz-flip-card" onclick="openProto('trades')">
+          <div class="biz-card-inner">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem;">🔧</div>
+            <div style="font-size:0.92rem;font-weight:800;color:#fff;letter-spacing:-0.01em;line-height:1.2;">FixPro SA</div>
+            <div style="font-size:0.68rem;font-weight:500;color:#64748B;margin-top:0.25rem;text-transform:uppercase;letter-spacing:0.06em;">Trades &amp; Services</div>
+            <div style="font-size:0.62rem;color:#14B8A6;margin-top:0.5rem;font-weight:600;">Tap to see demo ✦</div>
+          </div>
+        </div>
+        <div class="biz-flip-card" onclick="openProto('health')">
+          <div class="biz-card-inner">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem;">🏥</div>
+            <div style="font-size:0.92rem;font-weight:800;color:#fff;letter-spacing:-0.01em;line-height:1.2;">PrimeCare Clinic</div>
+            <div style="font-size:0.68rem;font-weight:500;color:#64748B;margin-top:0.25rem;text-transform:uppercase;letter-spacing:0.06em;">Healthcare</div>
+            <div style="font-size:0.62rem;color:#14B8A6;margin-top:0.5rem;font-weight:600;">Tap to see demo ✦</div>
+          </div>
+        </div>
+        <div class="biz-flip-card" onclick="openProto('legal')">
+          <div class="biz-card-inner">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem;">🏢</div>
+            <div style="font-size:0.92rem;font-weight:800;color:#fff;letter-spacing:-0.01em;line-height:1.2;">Ndlovu &amp; Associates</div>
+            <div style="font-size:0.68rem;font-weight:500;color:#64748B;margin-top:0.25rem;text-transform:uppercase;letter-spacing:0.06em;">Professional Firms</div>
+            <div style="font-size:0.62rem;color:#14B8A6;margin-top:0.5rem;font-weight:600;">Tap to see demo ✦</div>
+          </div>
+        </div>
       </div></div>
       </div>
     </div>
@@ -638,8 +683,12 @@
 
 <!-- Prototype Modal -->
 <div id="proto-overlay" onclick="if(event.target===this)closeProto()">
-  <div class="proto-modal" id="proto-modal-content">
-    <!-- filled by JS -->
+  <div class="proto-modal" style="display:flex;flex-direction:column;width:100%;max-width:780px;max-height:92vh;border-radius:20px;overflow:hidden;box-shadow:0 25px 80px rgba(0,0,0,0.7);">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1.1rem;background:#0F172A;border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0;">
+      <div id="proto-modal-title" style="font-size:0.82rem;font-weight:700;color:#fff;letter-spacing:0.02em;">Live Demo</div>
+      <button onclick="closeProto()" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:#fff;width:30px;height:30px;border-radius:50%;font-size:0.9rem;cursor:pointer;line-height:28px;text-align:center;">✕</button>
+    </div>
+    <iframe id="proto-iframe" src="" style="width:100%;flex:1;min-height:0;border:none;display:block;"></iframe>
   </div>
 </div>
 
@@ -772,44 +821,31 @@ const PROTOS = {
 };
 
 function openProto(key) {
-  const p = PROTOS[key];
-  if (!p) return;
-  const ownerRows = p.ownerBenefits.map(b => `
-    <div class="proto-benefit">
-      <div class="proto-benefit-icon">${b.icon}</div>
-      <div class="proto-benefit-title">${b.title}</div>
-      <div class="proto-benefit-desc">${b.desc}</div>
-    </div>`).join('');
-  const clientRows = p.clientBenefits.map(b => `
-    <div class="proto-benefit">
-      <div class="proto-benefit-icon">${b.icon}</div>
-      <div class="proto-benefit-title">${b.title}</div>
-      <div class="proto-benefit-desc">${b.desc}</div>
-    </div>`).join('');
-  document.getElementById('proto-modal-content').innerHTML = `
-    <div class="proto-header">
-      <button class="proto-close" onclick="closeProto()">✕</button>
-      <div class="proto-tag">${p.tag} · Prototype Demo</div>
-      <h2 class="proto-biz-name">${p.emoji} ${p.name}</h2>
-      <p class="proto-biz-desc">${p.desc}</p>
-    </div>
-    <div class="proto-body">
-      <div class="proto-what-missing">
-        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#F87171;margin-bottom:0.4rem;">⚠️ What they're missing right now</div>
-        <p>${p.missing}</p>
-      </div>
-      <div class="proto-section-title">What a Proaxis system gives the business owner</div>
-      <div class="proto-benefit-grid">${ownerRows}</div>
-      <div class="proto-section-title" style="margin-top:1.25rem;">What their customers experience</div>
-      <div class="proto-benefit-grid">${clientRows}</div>
-      <a href="contact.html" class="proto-cta">Build This For My Business →</a>
-      <p style="text-align:center;font-size:0.75rem;color:#475569;margin-top:0.75rem;">Free discovery call · No commitment · Built for South African businesses</p>
-    </div>`;
+  const demoFiles = {
+    hair:   'demo-hause-of-lace.html',
+    retail: 'demo-kasi-fresh-market.html',
+    food:   'demo-larriecooks.html',
+    trades: 'demo-fixpro-sa.html',
+    health: 'demo-primecare-clinic.html',
+    legal:  'demo-ndlovu-associates.html'
+  };
+  const demoTitles = {
+    hair:   '💇 Hause of Lace — Hair & Beauty',
+    retail: '🛒 Kasi Fresh Market — Retail POS',
+    food:   '🍖 LarrieCooks — Food & Catering',
+    trades: '🔧 FixPro SA — Trades & Services',
+    health: '🏥 PrimeCare Clinic — Healthcare',
+    legal:  '⚖️ Ndlovu & Associates — Legal'
+  };
+  if (!demoFiles[key]) return;
+  document.getElementById('proto-iframe').src = demoFiles[key];
+  document.getElementById('proto-modal-title').textContent = demoTitles[key] || 'Live Demo';
   document.getElementById('proto-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 function closeProto() {
   document.getElementById('proto-overlay').classList.remove('open');
+  document.getElementById('proto-iframe').src = '';
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeProto(); });

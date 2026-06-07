@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ndlovu & Associates</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+body{background:#05060a;color:#e8e6e0;min-height:100vh}
+:root{--gold:#c9a84c;--gold-light:#e2c87a;--dark:#05060a;--card:#0c0d12;--border:rgba(201,168,76,0.15);--text-dim:#8c8a80}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;background:rgba(5,6,10,0.98);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.logo{display:flex;flex-direction:column}
+.logo-name{font-size:0.9rem;font-weight:800;color:#fff;letter-spacing:0.06em;text-transform:uppercase}
+.logo-tag{font-size:0.58rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;font-weight:600;margin-top:0.1rem}
+.nav-right{display:flex;align-items:center;gap:0.7rem}
+.consult-btn{background:linear-gradient(135deg,var(--gold),#a8702e);color:#05060a;border:none;padding:0.45rem 0.95rem;border-radius:20px;font-size:0.72rem;font-weight:800;cursor:pointer;letter-spacing:0.03em}
+.call-btn{background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,0.3);padding:0.45rem 0.85rem;border-radius:20px;font-size:0.72rem;font-weight:700;cursor:pointer}
+
+.hero{background:linear-gradient(160deg,#08090f 0%,#0d1020 50%,#08090f 100%);padding:2.5rem 1.25rem 2rem;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(201,168,76,0.07),transparent)}
+.hero-tag{font-size:0.62rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;display:flex;align-items:center;justify-content:center;gap:0.5rem}
+.hero-tag::before,.hero-tag::after{content:'';height:1px;width:24px;background:rgba(201,168,76,0.4)}
+.hero h1{font-size:1.6rem;font-weight:900;color:#fff;line-height:1.2;letter-spacing:-0.01em;margin-bottom:0.5rem}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{font-size:0.8rem;color:#8c8a80;max-width:280px;margin:0 auto 1.25rem;line-height:1.7}
+.hero-btns{display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap}
+.btn-p{background:linear-gradient(135deg,var(--gold),#a8702e);color:#05060a;border:none;padding:0.65rem 1.3rem;border-radius:25px;font-weight:800;font-size:0.8rem;cursor:pointer;letter-spacing:0.02em}
+.btn-s{background:transparent;color:var(--gold);border:1.5px solid rgba(201,168,76,0.3);padding:0.65rem 1.3rem;border-radius:25px;font-weight:700;font-size:0.8rem;cursor:pointer}
+.credentials{display:flex;justify-content:center;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap}
+.cred{font-size:0.65rem;color:var(--text-dim);display:flex;align-items:center;gap:0.3rem}
+.cred::before{content:'✓';color:var(--gold);font-weight:700}
+
+/* Practice areas */
+.practice-strip{display:flex;gap:0.5rem;padding:0.85rem 1.25rem;overflow-x:auto;background:#08090f;border-bottom:1px solid var(--border)}
+.pa-chip{display:flex;align-items:center;gap:0.35rem;padding:0.4rem 0.85rem;border-radius:20px;background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.12);white-space:nowrap;cursor:pointer;transition:all 0.15s}
+.pa-chip.active{background:rgba(201,168,76,0.12);border-color:rgba(201,168,76,0.35)}
+.pa-chip span{font-size:0.7rem;font-weight:600;color:var(--gold)}
+
+.section{padding:1rem 1.25rem}
+.section-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem}
+.section-title{font-size:0.88rem;font-weight:700;color:#fff}
+.gold-divider{height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin-bottom:0.85rem;opacity:0.3}
+
+/* Attorneys */
+.attorney-grid{display:grid;gap:0.6rem;margin-bottom:1.25rem}
+.attorney-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0.95rem;display:flex;gap:0.85rem;align-items:flex-start;cursor:pointer;transition:all 0.15s}
+.attorney-card:hover{border-color:rgba(201,168,76,0.3)}
+.att-avatar{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;border:1px solid rgba(201,168,76,0.15)}
+.av1{background:linear-gradient(135deg,#1a1200,#2d2000)}
+.av2{background:linear-gradient(135deg,#0d1220,#1a2035)}
+.av3{background:linear-gradient(135deg,#120d1a,#251535)}
+.att-info{flex:1}
+.att-name{font-size:0.83rem;font-weight:700;color:#fff}
+.att-title{font-size:0.68rem;color:var(--gold);font-weight:600;margin-top:0.1rem}
+.att-spec{font-size:0.65rem;color:var(--text-dim);margin-top:0.3rem;line-height:1.5}
+.att-badge{display:inline-block;font-size:0.58rem;font-weight:700;padding:0.12rem 0.45rem;border-radius:10px;background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.2);margin-top:0.3rem}
+.att-right{text-align:right;flex-shrink:0}
+.att-rate{font-size:0.72rem;font-weight:700;color:#fff}
+.att-rate-label{font-size:0.58rem;color:var(--text-dim);margin-top:0.1rem}
+.att-book{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);color:var(--gold);font-size:0.65rem;font-weight:700;padding:0.3rem 0.65rem;border-radius:20px;cursor:pointer;margin-top:0.5rem;white-space:nowrap}
+
+/* Case tracker */
+.case-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0.9rem;margin-bottom:0.5rem;cursor:pointer;transition:all 0.15s}
+.case-card:hover{border-color:rgba(201,168,76,0.25)}
+.case-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.4rem}
+.case-ref{font-size:0.67rem;font-weight:700;color:var(--gold);letter-spacing:0.04em}
+.case-status{font-size:0.6rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:20px}
+.cs-active{background:rgba(201,168,76,0.1);color:var(--gold-light)}
+.cs-review{background:rgba(37,99,235,0.12);color:#93c5fd}
+.cs-complete{background:rgba(74,222,128,0.1);color:#86efac}
+.cs-pending{background:rgba(156,163,175,0.1);color:#9ca3af}
+.case-name{font-size:0.82rem;font-weight:600;color:#fff;margin-bottom:0.15rem}
+.case-matter{font-size:0.7rem;color:var(--text-dim);line-height:1.4}
+.case-footer{display:flex;justify-content:space-between;margin-top:0.5rem;align-items:center}
+.case-meta{font-size:0.62rem;color:#4a4840;display:flex;gap:0.7rem}
+.case-value{font-size:0.75rem;font-weight:700;color:var(--gold)}
+.progress-bar-bg{height:3px;background:rgba(255,255,255,0.05);border-radius:20px;margin-top:0.6rem}
+.progress-bar{height:3px;border-radius:20px;background:linear-gradient(90deg,var(--gold),#a8702e)}
+
+/* Consultation booking */
+.consult-box{background:linear-gradient(135deg,rgba(201,168,76,0.05),rgba(168,112,46,0.03));border:1px solid var(--border);border-radius:14px;padding:1.1rem;margin-bottom:1rem}
+.consult-title{font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:0.85rem;display:flex;align-items:center;gap:0.4rem}
+.consult-types{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;margin-bottom:0.75rem}
+.consult-type{border:1px solid var(--border);border-radius:8px;padding:0.6rem;text-align:center;cursor:pointer;transition:all 0.15s}
+.consult-type.sel{border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.06)}
+.ct-icon{font-size:1rem;margin-bottom:0.2rem}
+.ct-name{font-size:0.72rem;font-weight:600;color:#fff}
+.ct-duration{font-size:0.62rem;color:var(--text-dim)}
+.cal-mini{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:0.75rem}
+.cm-h{font-size:0.58rem;font-weight:700;color:var(--text-dim);text-align:center;padding:0.2rem;text-transform:uppercase}
+.cm-d{font-size:0.7rem;text-align:center;padding:0.32rem 0;border-radius:5px;cursor:pointer;color:#64605a}
+.cm-d:hover,.cm-d.sel{background:rgba(201,168,76,0.1);color:var(--gold)}
+.cm-d.today{background:linear-gradient(135deg,var(--gold),#a8702e);color:#05060a;font-weight:700}
+.cm-d.na{color:#1e1c18;cursor:default}
+.confirm-consult{width:100%;background:linear-gradient(135deg,var(--gold),#a8702e);color:#05060a;border:none;padding:0.7rem;border-radius:10px;font-weight:800;font-size:0.8rem;cursor:pointer;letter-spacing:0.02em}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">
+    <div class="logo-name">Ndlovu &amp; Associates</div>
+    <div class="logo-tag">Attorneys · Notaries · Conveyancers</div>
+  </div>
+  <div class="nav-right">
+    <button class="call-btn">📞 Call</button>
+    <button class="consult-btn">Book Consult</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Durban Legal Excellence</div>
+  <h1>Trusted Counsel.<br><em>Decisive</em> Action.</h1>
+  <p>Expert legal representation across commercial, property, labour, and family law. 20+ years serving KwaZulu-Natal.</p>
+  <div class="hero-btns">
+    <button class="btn-p">Free Consultation</button>
+    <button class="btn-s">Our Practice Areas</button>
+  </div>
+  <div class="credentials">
+    <span class="cred">Law Society of SA</span>
+    <span class="cred">Legal Aid Panel</span>
+    <span class="cred">BBB-EE Level 1</span>
+  </div>
+</div>
+
+<div class="practice-strip">
+  <div class="pa-chip active"><span>⚖️ Commercial Law</span></div>
+  <div class="pa-chip"><span>🏠 Property</span></div>
+  <div class="pa-chip"><span>👷 Labour Law</span></div>
+  <div class="pa-chip"><span>👨‍👩‍👧 Family Law</span></div>
+  <div class="pa-chip"><span>📑 Contracts</span></div>
+  <div class="pa-chip"><span>🏛️ Litigation</span></div>
+</div>
+
+<div class="section">
+  <div class="section-row"><div class="section-title">Our Attorneys</div><span style="font-size:0.7rem;color:var(--text-dim)">3 practitioners</span></div>
+  <div class="gold-divider"></div>
+  <div class="attorney-grid">
+    <div class="attorney-card">
+      <div class="att-avatar av1">👨‍⚖️</div>
+      <div class="att-info">
+        <div class="att-name">Adv. S. Ndlovu</div>
+        <div class="att-title">Senior Partner</div>
+        <div class="att-spec">Commercial Law · Mergers &amp; Acquisitions · Corporate Governance</div>
+        <div class="att-badge">20 yrs experience</div>
+      </div>
+      <div class="att-right">
+        <div class="att-rate">R1,800</div>
+        <div class="att-rate-label">per hour</div>
+        <button class="att-book">Book</button>
+      </div>
+    </div>
+    <div class="attorney-card">
+      <div class="att-avatar av2">👩‍⚖️</div>
+      <div class="att-info">
+        <div class="att-name">Adv. P. Zungu</div>
+        <div class="att-title">Associate · Conveyancer</div>
+        <div class="att-spec">Property Law · Transfers · Bonds &amp; Registration</div>
+        <div class="att-badge">Notary Public</div>
+      </div>
+      <div class="att-right">
+        <div class="att-rate">R1,200</div>
+        <div class="att-rate-label">per hour</div>
+        <button class="att-book">Book</button>
+      </div>
+    </div>
+    <div class="attorney-card">
+      <div class="att-avatar av3">👨‍⚖️</div>
+      <div class="att-info">
+        <div class="att-name">Adv. R. Cele</div>
+        <div class="att-title">Associate</div>
+        <div class="att-spec">Labour Law · CCMA · Disciplinary Hearings</div>
+        <div class="att-badge">CCMA Accredited</div>
+      </div>
+      <div class="att-right">
+        <div class="att-rate">R950</div>
+        <div class="att-rate-label">per hour</div>
+        <button class="att-book">Book</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-row"><div class="section-title">Active Cases</div><span style="font-size:0.7rem;color:var(--text-dim)">8 matters</span></div>
+  <div class="gold-divider"></div>
+
+  <div class="case-card">
+    <div class="case-header"><div><div class="case-ref">CASE-2024/1142</div><div class="case-name">Dlamini Holdings (Pty) Ltd</div></div><span class="case-status cs-active">In Litigation</span></div>
+    <div class="case-matter">Commercial dispute — breach of supply contract. High Court Durban. Next hearing 22 July 2026.</div>
+    <div class="case-footer"><div class="case-meta"><span>⚖️ Commercial</span><span>👤 S. Ndlovu</span></div><span class="case-value">R340k</span></div>
+    <div class="progress-bar-bg"><div class="progress-bar" style="width:65%"></div></div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-header"><div><div class="case-ref">CASE-2025/0081</div><div class="case-name">Naidoo v. Coastal Properties</div></div><span class="case-status cs-review">Under Review</span></div>
+    <div class="case-matter">Property transfer dispute. Title deed irregularity identified. Awaiting Deeds Office response.</div>
+    <div class="case-footer"><div class="case-meta"><span>🏠 Property</span><span>👤 P. Zungu</span></div><span class="case-value">R1.2m</span></div>
+    <div class="progress-bar-bg"><div class="progress-bar" style="width:30%"></div></div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-header"><div><div class="case-ref">CASE-2025/0203</div><div class="case-name">Mokoena v. EduTech SA</div></div><span class="case-status cs-complete">Settled</span></div>
+    <div class="case-matter">Unfair dismissal — CCMA arbitration. Settled out of hearing. R85,000 compensation awarded.</div>
+    <div class="case-footer"><div class="case-meta"><span>👷 Labour</span><span>👤 R. Cele</span></div><span class="case-value">R85k ✓</span></div>
+    <div class="progress-bar-bg"><div class="progress-bar" style="width:100%"></div></div>
+  </div>
+
+  <div class="consult-box">
+    <div class="consult-title">📅 Book a Consultation</div>
+    <div class="consult-types">
+      <div class="consult-type sel"><div class="ct-icon">🏛️</div><div class="ct-name">In-Person</div><div class="ct-duration">60 min · R800</div></div>
+      <div class="consult-type"><div class="ct-icon">💻</div><div class="ct-name">Virtual</div><div class="ct-duration">45 min · R600</div></div>
+    </div>
+    <div class="cal-mini">
+      <div class="cm-h">Mo</div><div class="cm-h">Tu</div><div class="cm-h">We</div><div class="cm-h">Th</div><div class="cm-h">Fr</div><div class="cm-h">Sa</div><div class="cm-h">Su</div>
+      <div class="cm-d na">2</div><div class="cm-d na">3</div><div class="cm-d">4</div><div class="cm-d">5</div><div class="cm-d">6</div><div class="cm-d na">7</div><div class="cm-d na">8</div>
+      <div class="cm-d">9</div><div class="cm-d sel">10</div><div class="cm-d today">11</div><div class="cm-d">12</div><div class="cm-d">13</div><div class="cm-d na">14</div><div class="cm-d na">15</div>
+    </div>
+    <button class="confirm-consult">Confirm — Adv. Ndlovu · Wed 11 Jun · 10:00 →</button>
+  </div>
+</div>
+</body>
+</html>

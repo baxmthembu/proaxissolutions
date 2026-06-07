@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LarrieCooks</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+body{background:#0e0900;color:#f5e6cc;min-height:100vh}
+:root{--amber:#f59e0b;--orange:#ea580c;--warm:#fcd34d;--card:#1a1200;--border:rgba(245,158,11,0.15)}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.25rem;background:rgba(14,9,0,0.97);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.logo{font-size:1.1rem;font-weight:900;color:#fff;letter-spacing:-0.02em}.logo span{color:var(--amber)}
+.nav-links{display:flex;gap:1.25rem;list-style:none}
+.nav-links a{color:#b89a60;text-decoration:none;font-size:0.78rem;font-weight:600}
+.order-btn{background:var(--amber);color:#0e0900;border:none;padding:0.45rem 1rem;border-radius:20px;font-size:0.75rem;font-weight:800;cursor:pointer}
+
+.hero{background:linear-gradient(135deg,#1a0f00,#2d1f00,#1a0f00);padding:2rem 1.25rem;text-align:center;position:relative}
+.hero::after{content:'🔥';position:absolute;right:1.5rem;top:1.5rem;font-size:2rem;opacity:0.4}
+.hero-tag{font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:0.4rem}
+.hero h1{font-size:1.7rem;font-weight:900;color:#fff;line-height:1.2;margin-bottom:0.4rem}
+.hero h1 em{font-style:normal;color:var(--amber)}
+.hero p{font-size:0.82rem;color:#b89a60;max-width:280px;margin:0 auto 1.25rem;line-height:1.6}
+.hero-btns{display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap}
+.btn-p{background:linear-gradient(135deg,var(--amber),var(--orange));color:#fff;border:none;padding:0.65rem 1.25rem;border-radius:25px;font-weight:700;font-size:0.8rem;cursor:pointer}
+.btn-s{background:transparent;color:var(--amber);border:1.5px solid rgba(245,158,11,0.35);padding:0.65rem 1.25rem;border-radius:25px;font-weight:700;font-size:0.8rem;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);background:rgba(245,158,11,0.06);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat{padding:0.9rem;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-val{font-size:1.1rem;font-weight:800;color:var(--amber)}
+.stat-label{font-size:0.6rem;color:#7a6040;text-transform:uppercase;font-weight:600;margin-top:0.1rem}
+
+.section{padding:1rem 1.25rem}
+.section-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem}
+.section-title{font-size:0.9rem;font-weight:700;color:#fff}
+.filter-tabs{display:flex;gap:0.4rem;margin-bottom:1rem;flex-wrap:wrap}
+.tab{padding:0.35rem 0.75rem;border-radius:20px;font-size:0.72rem;font-weight:600;cursor:pointer;border:1px solid rgba(245,158,11,0.2);color:#9a8060;background:transparent;transition:all 0.15s}
+.tab.active{background:var(--amber);color:#0e0900;border-color:var(--amber)}
+
+.menu-grid{display:grid;grid-template-columns:repeat(1,1fr);gap:0.6rem;margin-bottom:1rem}
+.menu-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0.9rem;display:flex;align-items:center;gap:0.9rem;cursor:pointer;transition:all 0.15s;position:relative}
+.menu-card:hover{border-color:rgba(245,158,11,0.35);background:rgba(245,158,11,0.04)}
+.menu-img{width:52px;height:52px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
+.bg1{background:linear-gradient(135deg,#2d1500,#3d2000)}
+.bg2{background:linear-gradient(135deg,#1a1000,#2d1a00)}
+.bg3{background:linear-gradient(135deg,#200d00,#351500)}
+.bg4{background:linear-gradient(135deg,#251800,#3a2500)}
+.menu-info{flex:1}
+.menu-name{font-size:0.85rem;font-weight:700;color:#fff}
+.menu-desc{font-size:0.7rem;color:#9a8060;margin-top:0.15rem;line-height:1.4}
+.menu-tags{display:flex;gap:0.3rem;margin-top:0.3rem;flex-wrap:wrap}
+.menu-tag{font-size:0.58rem;font-weight:700;padding:0.1rem 0.4rem;border-radius:10px}
+.tag-spicy{background:rgba(234,88,12,0.15);color:#fb923c}
+.tag-pop{background:rgba(245,158,11,0.15);color:#fcd34d}
+.tag-veg{background:rgba(74,222,128,0.12);color:#86efac}
+.menu-right{text-align:right;flex-shrink:0}
+.menu-price{font-size:0.9rem;font-weight:800;color:var(--amber)}
+.add-to-cart{background:var(--amber);color:#0e0900;border:none;width:26px;height:26px;border-radius:8px;font-weight:700;cursor:pointer;font-size:1rem;line-height:26px;text-align:center;margin-top:0.35rem;display:block;margin-left:auto}
+
+/* Quote builder */
+.quote-box{background:linear-gradient(135deg,#1a1200,#261900);border:1px solid var(--border);border-radius:14px;padding:1.1rem;margin-bottom:1rem}
+.quote-title{font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.4rem}
+.quote-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;font-size:0.78rem}
+.quote-label{color:#9a8060}
+.quote-val{color:#fff;font-weight:600}
+.slider-bar{height:6px;background:rgba(245,158,11,0.12);border-radius:20px;position:relative;margin:0.5rem 0 0.25rem}
+.slider-fill{height:6px;background:linear-gradient(90deg,var(--amber),var(--orange));border-radius:20px;width:60%}
+.quote-total{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:0.75rem;text-align:center;margin-top:0.75rem}
+.quote-total-label{font-size:0.65rem;color:#9a8060;text-transform:uppercase;font-weight:600;letter-spacing:0.06em}
+.quote-total-val{font-size:1.4rem;font-weight:900;color:var(--amber);margin-top:0.1rem}
+.quote-note{font-size:0.65rem;color:#7a6040;margin-top:0.15rem}
+.quote-btn{width:100%;background:linear-gradient(135deg,var(--amber),var(--orange));color:#fff;border:none;padding:0.65rem;border-radius:10px;font-weight:700;font-size:0.82rem;cursor:pointer;margin-top:0.75rem}
+
+/* Active Orders */
+.order-row{display:flex;align-items:center;justify-content:space-between;padding:0.7rem 0;border-bottom:1px solid rgba(245,158,11,0.06)}
+.order-info{display:flex;align-items:center;gap:0.5rem}
+.order-num{font-size:0.82rem;font-weight:700;color:#fff}
+.order-detail{font-size:0.68rem;color:#9a8060;margin-top:0.1rem}
+.order-status{font-size:0.65rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:20px}
+.status-prep{background:rgba(245,158,11,0.15);color:var(--amber)}
+.status-ready{background:rgba(74,222,128,0.12);color:#86efac}
+.status-out{background:rgba(59,130,246,0.12);color:#93c5fd}
+.order-price{font-size:0.82rem;font-weight:700;color:var(--amber)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Larrie<span>Cooks</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Menu</a></li>
+    <li><a href="#">Catering</a></li>
+    <li><a href="#">Events</a></li>
+  </ul>
+  <button class="order-btn">Order Now</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Durban's Favourite Catering</div>
+  <h1>Bold Flavours,<br><em>Zero Fuss</em></h1>
+  <p>Order online for delivery or catering. Traditional South African cuisine made with love.</p>
+  <div class="hero-btns">
+    <button class="btn-p">Order Delivery</button>
+    <button class="btn-s">Book Catering</button>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-val">340+</div><div class="stat-label">Orders / mo</div></div>
+  <div class="stat"><div class="stat-val">4.8★</div><div class="stat-label">Avg Rating</div></div>
+  <div class="stat"><div class="stat-val">35min</div><div class="stat-label">Avg Delivery</div></div>
+</div>
+
+<div class="section">
+  <div class="section-row"><div class="section-title">Our Menu</div></div>
+  <div class="filter-tabs">
+    <button class="tab active">All</button>
+    <button class="tab">Mains</button>
+    <button class="tab">Grills</button>
+    <button class="tab">Starters</button>
+    <button class="tab">Desserts</button>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="menu-img bg1">🍖</div>
+      <div class="menu-info">
+        <div class="menu-name">Pap & Wors</div>
+        <div class="menu-desc">Creamy pap, grilled boerewors, chakalaka</div>
+        <div class="menu-tags"><span class="menu-tag tag-pop">🔥 Bestseller</span><span class="menu-tag tag-spicy">Spicy</span></div>
+      </div>
+      <div class="menu-right"><div class="menu-price">R95</div><button class="add-to-cart">+</button></div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img bg2">🍗</div>
+      <div class="menu-info">
+        <div class="menu-name">Durban Bunny Chow</div>
+        <div class="menu-desc">Quarter loaf, lamb or veg curry filling</div>
+        <div class="menu-tags"><span class="menu-tag tag-pop">🔥 Fan Fave</span></div>
+      </div>
+      <div class="menu-right"><div class="menu-price">R110</div><button class="add-to-cart">+</button></div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img bg3">🥗</div>
+      <div class="menu-info">
+        <div class="menu-name">Rainbow Braai Salad</div>
+        <div class="menu-desc">Roasted veg, feta, balsamic drizzle</div>
+        <div class="menu-tags"><span class="menu-tag tag-veg">Vegetarian</span></div>
+      </div>
+      <div class="menu-right"><div class="menu-price">R75</div><button class="add-to-cart">+</button></div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-img bg4">🍮</div>
+      <div class="menu-info">
+        <div class="menu-name">Malva Pudding</div>
+        <div class="menu-desc">Warm pudding, apricot jam, custard</div>
+        <div class="menu-tags"><span class="menu-tag tag-pop">⭐ New</span></div>
+      </div>
+      <div class="menu-right"><div class="menu-price">R55</div><button class="add-to-cart">+</button></div>
+    </div>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-title">📋 Catering Quote Builder</div>
+    <div class="quote-row"><span class="quote-label">Event Type</span><span class="quote-val">Corporate Lunch</span></div>
+    <div class="quote-row"><span class="quote-label">Guest Count</span><span class="quote-val">60 guests</span></div>
+    <div class="slider-bar"><div class="slider-fill"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:0.6rem;color:#7a6040;margin-bottom:0.5rem"><span>10</span><span>100+</span></div>
+    <div class="quote-row"><span class="quote-label">Menu Package</span><span class="quote-val">Premium Braai</span></div>
+    <div class="quote-row"><span class="quote-label">Service</span><span class="quote-val">Full service + staff</span></div>
+    <div class="quote-total">
+      <div class="quote-total-label">Estimated Total</div>
+      <div class="quote-total-val">R8,400</div>
+      <div class="quote-note">R140 per person · includes delivery & setup</div>
+    </div>
+    <button class="quote-btn">Send Catering Quote →</button>
+  </div>
+
+  <div class="section-row"><div class="section-title">Live Orders</div><span style="font-size:0.7rem;color:#9a8060">Today: 18 orders</span></div>
+  <div class="order-row">
+    <div class="order-info">
+      <div><div class="order-num">#ORD-2241</div><div class="order-detail">Pap & Wors × 2, Bunny Chow × 1</div></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:0.6rem">
+      <span class="order-status status-prep">Preparing</span>
+      <span class="order-price">R300</span>
+    </div>
+  </div>
+  <div class="order-row">
+    <div class="order-info">
+      <div><div class="order-num">#ORD-2240</div><div class="order-detail">Malva Pudding × 4</div></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:0.6rem">
+      <span class="order-status status-ready">Ready</span>
+      <span class="order-price">R220</span>
+    </div>
+  </div>
+  <div class="order-row">
+    <div class="order-info">
+      <div><div class="order-num">#ORD-2239</div><div class="order-detail">Braai Salad × 3, Wors × 2</div></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:0.6rem">
+      <span class="order-status status-out">On the Way</span>
+      <span class="order-price">R415</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

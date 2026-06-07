@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PrimeCare Clinic</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+body{background:#f0f4f8;color:#1e293b;min-height:100vh}
+:root{--teal:#0d9488;--blue:#2563eb;--light-teal:#ccfbf1;--card:#fff;--border:#e2e8f0;--dark-bg:#0f172a}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.25rem;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.logo{display:flex;align-items:center;gap:0.5rem}
+.logo-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--teal),var(--blue));border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.9rem;font-weight:900}
+.logo-text{font-size:0.95rem;font-weight:800;color:#0f172a}<br>
+.logo-text span{color:var(--teal)}
+.nav-right{display:flex;align-items:center;gap:0.6rem}
+.emergency{background:#ef4444;color:#fff;border:none;padding:0.4rem 0.8rem;border-radius:20px;font-size:0.7rem;font-weight:700;cursor:pointer}
+.book-btn{background:var(--teal);color:#fff;border:none;padding:0.4rem 0.9rem;border-radius:20px;font-size:0.7rem;font-weight:700;cursor:pointer}
+
+.hero{background:linear-gradient(135deg,var(--dark-bg),#0d2540);padding:2rem 1.25rem;color:#fff;text-align:center}
+.hero-tag{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#5eead4;margin-bottom:0.4rem}
+.hero h1{font-size:1.5rem;font-weight:900;line-height:1.2;margin-bottom:0.4rem}
+.hero h1 span{color:#5eead4}
+.hero p{font-size:0.8rem;color:#94a3b8;max-width:280px;margin:0 auto 1.1rem;line-height:1.6}
+.availability{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(13,148,136,0.15);border:1px solid rgba(13,148,136,0.3);border-radius:20px;padding:0.35rem 0.9rem;font-size:0.7rem;color:#5eead4;font-weight:600;margin-bottom:1.1rem}
+.avail-dot{width:7px;height:7px;background:#22c55e;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero-btns{display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap}
+.btn-p{background:var(--teal);color:#fff;border:none;padding:0.6rem 1.2rem;border-radius:25px;font-weight:700;font-size:0.8rem;cursor:pointer}
+.btn-s{background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.15);padding:0.6rem 1.2rem;border-radius:25px;font-weight:700;font-size:0.8rem;cursor:pointer}
+
+.services-strip{display:flex;gap:0.5rem;padding:1rem 1.25rem;overflow-x:auto;background:#fff;border-bottom:1px solid var(--border)}
+.svc-chip{display:flex;align-items:center;gap:0.35rem;padding:0.4rem 0.85rem;border-radius:20px;background:rgba(13,148,136,0.06);border:1px solid rgba(13,148,136,0.15);white-space:nowrap;cursor:pointer;transition:all 0.15s}
+.svc-chip:hover{background:rgba(13,148,136,0.12)}
+.svc-chip.active{background:var(--teal);border-color:var(--teal)}
+.svc-chip.active span{color:#fff}
+.svc-chip .ic{font-size:0.9rem}
+.svc-chip span{font-size:0.72rem;font-weight:600;color:var(--teal)}
+.svc-chip.active span{color:#fff}
+
+.section{padding:1rem 1.25rem}
+.section-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem}
+.section-title{font-size:0.9rem;font-weight:800;color:#0f172a}
+
+/* Doctors */
+.doctor-grid{display:grid;grid-template-columns:repeat(1,1fr);gap:0.6rem;margin-bottom:1.25rem}
+.doctor-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0.9rem;display:flex;gap:0.9rem;align-items:flex-start;cursor:pointer;transition:all 0.15s;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.doctor-card:hover{border-color:rgba(13,148,136,0.3);box-shadow:0 4px 12px rgba(13,148,136,0.1)}
+.doc-avatar{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.av1{background:linear-gradient(135deg,#0d9488,#0369a1)}
+.av2{background:linear-gradient(135deg,#7c3aed,#2563eb)}
+.av3{background:linear-gradient(135deg,#dc2626,#9333ea)}
+.doc-info{flex:1}
+.doc-name{font-size:0.85rem;font-weight:700;color:#0f172a}
+.doc-spec{font-size:0.7rem;color:var(--teal);font-weight:600;margin-top:0.1rem}
+.doc-tags{display:flex;gap:0.3rem;margin-top:0.4rem;flex-wrap:wrap}
+.doc-tag{font-size:0.6rem;font-weight:600;padding:0.15rem 0.45rem;border-radius:10px;background:rgba(13,148,136,0.08);color:var(--teal)}
+.doc-right{text-align:right;flex-shrink:0}
+.doc-avail{font-size:0.65rem;font-weight:700;color:#22c55e}
+.doc-avail.busy{color:#f59e0b}
+.doc-rate{font-size:0.75rem;font-weight:700;color:#0f172a;margin-top:0.25rem}
+.book-doc-btn{background:var(--teal);color:#fff;border:none;padding:0.3rem 0.7rem;border-radius:20px;font-size:0.65rem;font-weight:700;cursor:pointer;margin-top:0.4rem}
+
+/* Booking */
+.booking-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem;box-shadow:0 1px 3px rgba(0,0,0,0.04);margin-bottom:1rem}
+.booking-card h3{font-size:0.85rem;font-weight:700;color:#0f172a;margin-bottom:0.85rem}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:0.85rem}
+.ch{font-size:0.6rem;font-weight:700;color:#94a3b8;text-align:center;padding:0.2rem;text-transform:uppercase}
+.cd{font-size:0.72rem;text-align:center;padding:0.35rem 0;border-radius:6px;cursor:pointer;color:#475569}
+.cd:hover{background:rgba(13,148,136,0.1);color:var(--teal)}
+.cd.today{background:var(--teal);color:#fff;font-weight:700}
+.cd.sel{background:rgba(13,148,136,0.12);color:var(--teal);font-weight:700;border:1px solid rgba(13,148,136,0.3)}
+.cd.na{color:#e2e8f0;cursor:default}
+.time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.4rem;margin-bottom:0.75rem}
+.ts{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:0.4rem;text-align:center;font-size:0.72rem;color:#64748b;cursor:pointer;transition:all 0.15s;font-weight:500}
+.ts:hover,.ts.sel{background:rgba(13,148,136,0.08);border-color:rgba(13,148,136,0.3);color:var(--teal);font-weight:600}
+.ts.booked{background:#f1f5f9;color:#cbd5e1;cursor:default}
+.confirm-btn{width:100%;background:linear-gradient(135deg,var(--teal),var(--blue));color:#fff;border:none;padding:0.7rem;border-radius:10px;font-weight:700;font-size:0.82rem;cursor:pointer}
+
+/* Patient queue */
+.queue-item{display:flex;align-items:center;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid var(--border)}
+.queue-left{display:flex;align-items:center;gap:0.6rem}
+.queue-num{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue));color:#fff;font-size:0.72rem;font-weight:800;display:flex;align-items:center;justify-content:center}
+.q-name{font-size:0.8rem;font-weight:600;color:#0f172a}
+.q-detail{font-size:0.65rem;color:#64748b;margin-top:0.1rem}
+.q-status{font-size:0.62rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:20px}
+.qs-in{background:rgba(34,197,94,0.1);color:#16a34a}
+.qs-wait{background:rgba(245,158,11,0.1);color:#d97706}
+.qs-next{background:rgba(37,99,235,0.1);color:var(--blue)}
+.q-wait-time{font-size:0.65rem;color:#94a3b8;text-align:right;margin-top:0.2rem}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo"><div class="logo-mark">+</div><div class="logo-text">Prime<span>Care</span> Clinic</div></div>
+  <div class="nav-right">
+    <button class="emergency">🚨 Emergency</button>
+    <button class="book-btn">Book Now</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Durban's Trusted Community Clinic</div>
+  <h1>Your Health,<br><span>Our Priority</span></h1>
+  <p>Book appointments online. Consult from home. Access your records anytime.</p>
+  <div class="availability"><span class="avail-dot"></span>Accepting new patients today</div>
+  <div class="hero-btns">
+    <button class="btn-p">Book Appointment</button>
+    <button class="btn-s">Virtual Consult</button>
+  </div>
+</div>
+
+<div class="services-strip">
+  <div class="svc-chip active"><span class="ic">🏥</span><span>General GP</span></div>
+  <div class="svc-chip"><span class="ic">👶</span><span>Paediatrics</span></div>
+  <div class="svc-chip"><span class="ic">❤️</span><span>Cardiology</span></div>
+  <div class="svc-chip"><span class="ic">🦷</span><span>Dental</span></div>
+  <div class="svc-chip"><span class="ic">🧠</span><span>Mental Health</span></div>
+  <div class="svc-chip"><span class="ic">💉</span><span>Vaccinations</span></div>
+</div>
+
+<div class="section">
+  <div class="section-row"><div class="section-title">Our Doctors</div><span style="font-size:0.7rem;color:#64748b">3 available today</span></div>
+  <div class="doctor-grid">
+    <div class="doctor-card">
+      <div class="doc-avatar av1">👨‍⚕️</div>
+      <div class="doc-info">
+        <div class="doc-name">Dr. Ndlela Mthethwa</div>
+        <div class="doc-spec">General Practitioner</div>
+        <div class="doc-tags"><span class="doc-tag">Diabetes</span><span class="doc-tag">Hypertension</span><span class="doc-tag">Chronic</span></div>
+      </div>
+      <div class="doc-right">
+        <div class="doc-avail">● Available</div>
+        <div class="doc-rate">R350/visit</div>
+        <button class="book-doc-btn">Book</button>
+      </div>
+    </div>
+    <div class="doctor-card">
+      <div class="doc-avatar av2">👩‍⚕️</div>
+      <div class="doc-info">
+        <div class="doc-name">Dr. Priya Pillay</div>
+        <div class="doc-spec">Paediatrics</div>
+        <div class="doc-tags"><span class="doc-tag">Child Health</span><span class="doc-tag">Vaccines</span></div>
+      </div>
+      <div class="doc-right">
+        <div class="doc-avail">● Available</div>
+        <div class="doc-rate">R380/visit</div>
+        <button class="book-doc-btn">Book</button>
+      </div>
+    </div>
+    <div class="doctor-card">
+      <div class="doc-avatar av3">👨‍⚕️</div>
+      <div class="doc-info">
+        <div class="doc-name">Dr. A. Govender</div>
+        <div class="doc-spec">Mental Health & Counselling</div>
+        <div class="doc-tags"><span class="doc-tag">Anxiety</span><span class="doc-tag">CBT</span></div>
+      </div>
+      <div class="doc-right">
+        <div class="doc-avail busy">● Next: 2pm</div>
+        <div class="doc-rate">R420/visit</div>
+        <button class="book-doc-btn">Book</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="booking-card">
+    <h3>📅 Schedule Your Appointment</h3>
+    <div class="cal-grid">
+      <div class="ch">Mo</div><div class="ch">Tu</div><div class="ch">We</div><div class="ch">Th</div><div class="ch">Fr</div><div class="ch">Sa</div><div class="ch">Su</div>
+      <div class="cd na">2</div><div class="cd na">3</div><div class="cd">4</div><div class="cd">5</div><div class="cd">6</div><div class="cd">7</div><div class="cd na">8</div>
+      <div class="cd">9</div><div class="cd sel">10</div><div class="cd today">11</div><div class="cd">12</div><div class="cd">13</div><div class="cd">14</div><div class="cd na">15</div>
+    </div>
+    <div class="time-grid">
+      <div class="ts booked">08:00</div>
+      <div class="ts booked">09:00</div>
+      <div class="ts sel">10:30</div>
+      <div class="ts">12:00</div>
+      <div class="ts booked">13:30</div>
+      <div class="ts">15:00</div>
+    </div>
+    <button class="confirm-btn">Confirm — Dr. Mthethwa · 10:30am →</button>
+  </div>
+
+  <div class="section-row"><div class="section-title">Today's Queue</div><span style="font-size:0.7rem;color:#64748b">8 patients</span></div>
+  <div class="queue-item">
+    <div class="queue-left"><div class="queue-num">1</div><div><div class="q-name">Zanele Dlamini</div><div class="q-detail">Dr. Mthethwa · General check-up</div></div></div>
+    <div style="text-align:right"><span class="q-status qs-in">In Consult</span><div class="q-wait-time">~15 min</div></div>
+  </div>
+  <div class="queue-item">
+    <div class="queue-left"><div class="queue-num">2</div><div><div class="q-name">Sandile Ngcobo</div><div class="q-detail">Dr. Pillay · Paediatrics</div></div></div>
+    <div style="text-align:right"><span class="q-status qs-next">Up Next</span><div class="q-wait-time">~5 min</div></div>
+  </div>
+  <div class="queue-item">
+    <div class="queue-left"><div class="queue-num">3</div><div><div class="q-name">Mrs Pather</div><div class="q-detail">Dr. Mthethwa · Blood pressure</div></div></div>
+    <div style="text-align:right"><span class="q-status qs-wait">Waiting</span><div class="q-wait-time">~25 min</div></div>
+  </div>
+</div>
+</body>
+</html>

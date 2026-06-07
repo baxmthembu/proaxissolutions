@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hause of Lace</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+body{background:#0d0a0e;color:#f0e6f0;min-height:100vh}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;background:rgba(13,10,14,0.95);border-bottom:1px solid rgba(255,182,193,0.15);position:sticky;top:0;z-index:10}
+.logo{font-size:1rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#fff}.logo span{color:#e8a0b8}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{color:#ccc;text-decoration:none;font-size:0.8rem;font-weight:600;letter-spacing:0.04em}
+.btn-book{background:linear-gradient(135deg,#e8a0b8,#c76d96);color:#fff;border:none;padding:0.5rem 1.1rem;border-radius:20px;font-size:0.78rem;font-weight:700;cursor:pointer;letter-spacing:0.04em}
+.hero{background:linear-gradient(135deg,#1a0d1a 0%,#2d1030 50%,#1a0d1a 100%);padding:2.5rem 1.5rem 2rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:300px;height:300px;background:radial-gradient(circle,rgba(232,160,184,0.15) 0%,transparent 70%);pointer-events:none}
+.hero-tag{font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#e8a0b8;margin-bottom:0.5rem}
+.hero h1{font-size:1.8rem;font-weight:900;color:#fff;line-height:1.15;letter-spacing:-0.02em;margin-bottom:0.4rem}
+.hero h1 em{font-style:normal;color:#e8a0b8}
+.hero p{font-size:0.85rem;color:#b09ab0;max-width:300px;margin:0 auto 1.25rem;line-height:1.6}
+.hero-btns{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:linear-gradient(135deg,#e8a0b8,#c76d96);color:#fff;border:none;padding:0.7rem 1.4rem;border-radius:25px;font-weight:700;font-size:0.82rem;cursor:pointer}
+.btn-secondary{background:transparent;color:#e8a0b8;border:1.5px solid rgba(232,160,184,0.4);padding:0.7rem 1.4rem;border-radius:25px;font-weight:700;font-size:0.82rem;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,182,193,0.08);border-top:1px solid rgba(255,182,193,0.1);border-bottom:1px solid rgba(255,182,193,0.1)}
+.stat{background:#0d0a0e;padding:1rem;text-align:center}
+.stat-val{font-size:1.3rem;font-weight:800;color:#e8a0b8}
+.stat-label{font-size:0.65rem;color:#7a6a7a;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-top:0.15rem}
+.section{padding:1.5rem}
+.section-label{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#e8a0b8;margin-bottom:0.3rem}
+.section-title{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:1rem}
+/* Services Grid */
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;margin-bottom:1.5rem}
+.service-card{background:linear-gradient(135deg,rgba(232,160,184,0.08),rgba(199,109,150,0.04));border:1px solid rgba(232,160,184,0.12);border-radius:12px;padding:1rem;cursor:pointer;transition:all 0.2s}
+.service-card:hover{border-color:rgba(232,160,184,0.35);background:linear-gradient(135deg,rgba(232,160,184,0.15),rgba(199,109,150,0.08))}
+.service-icon{font-size:1.4rem;margin-bottom:0.4rem}
+.service-name{font-size:0.82rem;font-weight:700;color:#fff}
+.service-price{font-size:0.72rem;color:#e8a0b8;margin-top:0.2rem;font-weight:600}
+.service-time{font-size:0.65rem;color:#7a6a7a;margin-top:0.1rem}
+/* Booking */
+.booking-box{background:rgba(232,160,184,0.06);border:1px solid rgba(232,160,184,0.15);border-radius:14px;padding:1.25rem}
+.booking-title{font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:1rem}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:1rem}
+.cal-header{text-align:center;font-size:0.62rem;font-weight:700;color:#7a6a7a;padding:0.3rem 0;text-transform:uppercase}
+.cal-day{text-align:center;font-size:0.75rem;padding:0.4rem 0;border-radius:6px;cursor:pointer;color:#ccc;transition:all 0.15s}
+.cal-day:hover{background:rgba(232,160,184,0.15);color:#e8a0b8}
+.cal-day.today{background:linear-gradient(135deg,#e8a0b8,#c76d96);color:#fff;font-weight:700}
+.cal-day.booked{color:#3d2d3d;cursor:default}
+.cal-day.selected{background:rgba(232,160,184,0.2);color:#e8a0b8;font-weight:700;border:1px solid rgba(232,160,184,0.4)}
+.time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:0.4rem;margin-bottom:1rem}
+.slot{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:0.4rem;text-align:center;font-size:0.72rem;color:#ccc;cursor:pointer;transition:all 0.15s}
+.slot:hover,.slot.active{background:rgba(232,160,184,0.15);border-color:rgba(232,160,184,0.35);color:#e8a0b8;font-weight:600}
+.slot.taken{color:#3d2d3d;cursor:default;text-decoration:line-through}
+.book-btn{width:100%;background:linear-gradient(135deg,#e8a0b8,#c76d96);color:#fff;border:none;padding:0.75rem;border-radius:10px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:opacity 0.2s}
+.book-btn:hover{opacity:0.9}
+/* Portfolio */
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem}
+.portfolio-item{aspect-ratio:1;border-radius:10px;overflow:hidden;position:relative;cursor:pointer}
+.portfolio-item div{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2rem;transition:transform 0.3s}
+.portfolio-item:hover div{transform:scale(1.1)}
+.p1{background:linear-gradient(135deg,#2d1030,#4a1a3a)}
+.p2{background:linear-gradient(135deg,#1a1025,#3d1535)}
+.p3{background:linear-gradient(135deg,#251025,#4a2040)}
+.p4{background:linear-gradient(135deg,#1a0d20,#351530)}
+.p5{background:linear-gradient(135deg,#2a1030,#451840)}
+.p6{background:linear-gradient(135deg,#200d25,#3a1535)}
+.portfolio-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);padding:0.5rem 0.4rem 0.3rem;font-size:0.6rem;color:#e8a0b8;font-weight:600}
+/* Loyalty */
+.loyalty-card{background:linear-gradient(135deg,#2d1030,#451840);border:1px solid rgba(232,160,184,0.2);border-radius:14px;padding:1.25rem;margin-top:1.5rem}
+.loyalty-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.loyalty-name{font-size:0.85rem;font-weight:700;color:#fff}
+.loyalty-tier{background:linear-gradient(135deg,#e8a0b8,#c76d96);color:#fff;font-size:0.65rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:20px}
+.points-bar-bg{background:rgba(255,255,255,0.08);border-radius:20px;height:8px;margin-bottom:0.5rem}
+.points-bar{background:linear-gradient(90deg,#e8a0b8,#c76d96);height:8px;border-radius:20px;width:72%}
+.points-info{display:flex;justify-content:space-between;font-size:0.68rem;color:#9a8a9a}
+.perks{display:flex;gap:0.5rem;margin-top:0.75rem;flex-wrap:wrap}
+.perk{background:rgba(232,160,184,0.1);border:1px solid rgba(232,160,184,0.2);color:#e8a0b8;font-size:0.65rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:20px}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Hause <span>of Lace</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Gallery</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <button class="btn-book">Book Now</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Durban's Premier Hair Studio</div>
+  <h1>Where Every Strand<br>Tells a <em>Story</em></h1>
+  <p>Weaves, braids, lashes & nails. Experience luxury hair artistry crafted just for you.</p>
+  <div class="hero-btns">
+    <button class="btn-primary">Book Appointment</button>
+    <button class="btn-secondary">View Gallery</button>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-val">2,400+</div><div class="stat-label">Happy Clients</div></div>
+  <div class="stat"><div class="stat-val">4.9★</div><div class="stat-label">Avg Rating</div></div>
+  <div class="stat"><div class="stat-val">8 Yrs</div><div class="stat-label">Experience</div></div>
+</div>
+
+<div class="section">
+  <div class="section-label">What We Offer</div>
+  <div class="section-title">Our Services</div>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-icon">💇</div><div class="service-name">Knotless Braids</div><div class="service-price">From R450</div><div class="service-time">3–4 hrs</div></div>
+    <div class="service-card"><div class="service-icon">✨</div><div class="service-name">Weave Install</div><div class="service-price">From R380</div><div class="service-time">2–3 hrs</div></div>
+    <div class="service-card"><div class="service-icon">👁️</div><div class="service-name">Lash Extensions</div><div class="service-price">From R250</div><div class="service-time">1.5 hrs</div></div>
+    <div class="service-card"><div class="service-icon">💅</div><div class="service-name">Gel Nails</div><div class="service-price">From R180</div><div class="service-time">1 hr</div></div>
+  </div>
+
+  <div class="booking-box">
+    <div class="booking-title">📅 Book Your Appointment</div>
+    <div class="calendar">
+      <div class="cal-header">Mo</div><div class="cal-header">Tu</div><div class="cal-header">We</div><div class="cal-header">Th</div><div class="cal-header">Fr</div><div class="cal-header">Sa</div><div class="cal-header">Su</div>
+      <div class="cal-day booked">2</div><div class="cal-day booked">3</div><div class="cal-day booked">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day booked">8</div>
+      <div class="cal-day">9</div><div class="cal-day selected">10</div><div class="cal-day today">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day booked">15</div>
+    </div>
+    <div class="time-slots">
+      <div class="slot taken">09:00</div>
+      <div class="slot active">10:30</div>
+      <div class="slot">12:00</div>
+      <div class="slot taken">13:30</div>
+      <div class="slot">15:00</div>
+      <div class="slot">16:30</div>
+    </div>
+    <button class="book-btn">Confirm Booking — 10:30am ✓</button>
+  </div>
+
+  <div style="margin-top:1.5rem">
+    <div class="section-label">Our Work</div>
+    <div class="section-title">Portfolio</div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item"><div class="p1">💇</div><div class="portfolio-label">Knotless Box Braids</div></div>
+      <div class="portfolio-item"><div class="p2">✨</div><div class="portfolio-label">Silk Press & Curl</div></div>
+      <div class="portfolio-item"><div class="p3">🌸</div><div class="portfolio-label">Goddess Locs</div></div>
+      <div class="portfolio-item"><div class="p4">💅</div><div class="portfolio-label">Chrome Nails</div></div>
+      <div class="portfolio-item"><div class="p5">👁️</div><div class="portfolio-label">Volume Lashes</div></div>
+      <div class="portfolio-item"><div class="p6">🎀</div><div class="portfolio-label">Weave & Trim</div></div>
+    </div>
+  </div>
+
+  <div class="loyalty-card">
+    <div class="loyalty-header">
+      <div><div class="loyalty-name">Thandi Dlamini</div><div style="font-size:0.7rem;color:#9a8a9a;margin-top:0.1rem">720 loyalty points</div></div>
+      <div class="loyalty-tier">GOLD MEMBER</div>
+    </div>
+    <div class="points-bar-bg"><div class="points-bar"></div></div>
+    <div class="points-info"><span>720 pts</span><span>1,000 pts = Free service</span></div>
+    <div class="perks">
+      <span class="perk">10% off nails</span>
+      <span class="perk">Free deep cond.</span>
+      <span class="perk">Priority booking</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

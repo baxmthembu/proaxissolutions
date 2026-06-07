@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FixPro SA</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+body{background:#060a14;color:#e2e8f0;min-height:100vh}
+:root{--blue:#3b82f6;--steel:#64748b;--teal:#14b8a6;--card:#0d1526;--border:rgba(59,130,246,0.12)}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.25rem;background:rgba(6,10,20,0.97);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.logo{display:flex;align-items:center;gap:0.5rem}
+.logo-badge{background:var(--blue);color:#fff;font-size:0.7rem;font-weight:800;padding:0.2rem 0.5rem;border-radius:6px;letter-spacing:0.04em}
+.logo-name{font-size:0.95rem;font-weight:800;color:#fff}
+.nav-right{display:flex;align-items:center;gap:0.75rem}
+.quote-btn{background:var(--blue);color:#fff;border:none;padding:0.45rem 0.9rem;border-radius:20px;font-size:0.75rem;font-weight:700;cursor:pointer}
+.notif{background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);color:var(--blue);font-size:0.65rem;font-weight:700;padding:0.2rem 0.55rem;border-radius:20px}
+
+.hero{background:linear-gradient(135deg,#060a14,#0d1a30,#060a14);padding:2rem 1.25rem;border-bottom:1px solid var(--border)}
+.hero-tag{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:0.4rem}
+.hero h1{font-size:1.5rem;font-weight:900;color:#fff;line-height:1.2;margin-bottom:0.35rem}
+.hero h1 span{color:var(--blue)}
+.hero p{font-size:0.8rem;color:#64748b;max-width:300px;line-height:1.6;margin-bottom:1.1rem}
+.tags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:1.1rem}
+.tag{font-size:0.65rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:20px;border:1px solid rgba(59,130,246,0.2);color:#93c5fd;background:rgba(59,130,246,0.08)}
+.hero-btns{display:flex;gap:0.6rem;flex-wrap:wrap}
+.btn-p{background:var(--blue);color:#fff;border:none;padding:0.6rem 1.2rem;border-radius:25px;font-weight:700;font-size:0.8rem;cursor:pointer}
+.btn-s{background:transparent;color:var(--blue);border:1.5px solid rgba(59,130,246,0.3);padding:0.6rem 1.2rem;border-radius:25px;font-weight:700;font-size:0.8rem;cursor:pointer}
+
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.kpi{background:#060a14;padding:0.8rem 0.6rem;text-align:center}
+.kpi-val{font-size:1rem;font-weight:800;color:#fff}
+.kpi-val.up{color:var(--teal)}
+.kpi-val.warn{color:#f59e0b}
+.kpi-label{font-size:0.58rem;color:#334155;text-transform:uppercase;font-weight:600;margin-top:0.1rem}
+
+.section{padding:1rem 1.25rem}
+.section-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem}
+.section-title{font-size:0.88rem;font-weight:700;color:#fff}
+
+/* Job board */
+.board{display:grid;grid-template-columns:repeat(1,1fr);gap:0.6rem;margin-bottom:1.25rem}
+.job-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0.9rem;cursor:pointer;transition:all 0.15s;position:relative}
+.job-card:hover{border-color:rgba(59,130,246,0.3)}
+.job-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem}
+.job-id{font-size:0.7rem;font-weight:700;color:var(--blue)}
+.job-status{font-size:0.62rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:20px}
+.s-new{background:rgba(59,130,246,0.15);color:#93c5fd}
+.s-progress{background:rgba(245,158,11,0.12);color:#fcd34d}
+.s-done{background:rgba(20,184,166,0.12);color:#5eead4}
+.s-quote{background:rgba(168,85,247,0.12);color:#d8b4fe}
+.job-client{font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:0.2rem}
+.job-desc{font-size:0.72rem;color:#64748b;margin-bottom:0.5rem;line-height:1.4}
+.job-footer{display:flex;justify-content:space-between;align-items:center}
+.job-meta{font-size:0.65rem;color:#334155;display:flex;gap:0.75rem}
+.job-amount{font-size:0.85rem;font-weight:700;color:var(--teal)}
+.priority-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px}
+.dot-high{background:#ef4444}
+.dot-med{background:#f59e0b}
+.dot-low{background:var(--teal)}
+
+/* Quote builder */
+.quote-form{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem;margin-bottom:1rem}
+.form-title{font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:0.85rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.5rem}
+.form-field{background:rgba(255,255,255,0.03);border:1px solid rgba(59,130,246,0.1);border-radius:8px;padding:0.5rem 0.7rem}
+.field-label{font-size:0.6rem;color:#334155;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.2rem}
+.field-val{font-size:0.78rem;color:#e2e8f0;font-weight:600}
+.quote-line{display:flex;justify-content:space-between;padding:0.4rem 0;font-size:0.75rem;border-bottom:1px solid rgba(59,130,246,0.06)}
+.q-label{color:#64748b}
+.q-val{color:#fff;font-weight:600}
+.quote-total-row{display:flex;justify-content:space-between;padding:0.6rem 0 0;border-top:1px solid rgba(59,130,246,0.15);margin-top:0.2rem}
+.q-total-label{font-size:0.8rem;font-weight:700;color:#94a3b8}
+.q-total{font-size:1.1rem;font-weight:800;color:var(--teal)}
+.send-quote-btn{width:100%;background:var(--blue);color:#fff;border:none;padding:0.65rem;border-radius:10px;font-weight:700;font-size:0.82rem;cursor:pointer;margin-top:0.75rem;transition:all 0.2s}
+.send-quote-btn:hover{background:#2563eb}
+
+/* Review */
+.review-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0.9rem;margin-bottom:0.5rem}
+.review-header{display:flex;justify-content:space-between;margin-bottom:0.4rem}
+.reviewer{font-size:0.8rem;font-weight:700;color:#fff}
+.review-stars{color:#f59e0b;font-size:0.8rem}
+.review-text{font-size:0.75rem;color:#64748b;line-height:1.5}
+.review-service{font-size:0.65rem;color:var(--blue);font-weight:600;margin-top:0.35rem}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo"><div class="logo-badge">FIX</div><div class="logo-name">Pro SA</div></div>
+  <div class="nav-right">
+    <span class="notif">3 New Jobs</span>
+    <button class="quote-btn">+ New Quote</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">KwaZulu-Natal's Trusted Trades</div>
+  <h1>Fast Fixes.<br><span>Professional</span> Finish.</h1>
+  <p>Plumbing, electrical, roofing & general repairs. Vetted technicians, real-time job tracking, instant quotes.</p>
+  <div class="tags">
+    <span class="tag">⚡ Electrical</span>
+    <span class="tag">🔧 Plumbing</span>
+    <span class="tag">🏠 Roofing</span>
+    <span class="tag">🔩 General</span>
+  </div>
+  <div class="hero-btns">
+    <button class="btn-p">Get a Quote</button>
+    <button class="btn-s">View Services</button>
+  </div>
+</div>
+
+<div class="kpi-strip">
+  <div class="kpi"><div class="kpi-val up">R42k</div><div class="kpi-label">This Month</div></div>
+  <div class="kpi"><div class="kpi-val">14</div><div class="kpi-label">Active Jobs</div></div>
+  <div class="kpi"><div class="kpi-val warn">3</div><div class="kpi-label">Pending</div></div>
+  <div class="kpi"><div class="kpi-val up">4.8★</div><div class="kpi-label">Rating</div></div>
+</div>
+
+<div class="section">
+  <div class="section-row"><div class="section-title">Job Board</div><span style="font-size:0.7rem;color:#334155">14 active</span></div>
+  <div class="board">
+    <div class="job-card">
+      <div class="job-header">
+        <div><div class="job-id">JOB-2241</div><div class="job-client">Mrs Naidoo — Westville</div></div>
+        <span class="job-status s-progress">In Progress</span>
+      </div>
+      <div class="job-desc"><span class="priority-dot dot-high"></span>Burst pipe under kitchen sink. Water damage to cabinet floor.</div>
+      <div class="job-footer">
+        <div class="job-meta"><span>🔧 Plumbing</span><span>📅 Today</span><span>👷 Sipho M.</span></div>
+        <span class="job-amount">R1,850</span>
+      </div>
+    </div>
+    <div class="job-card">
+      <div class="job-header">
+        <div><div class="job-id">JOB-2240</div><div class="job-client">Thabo Khumalo — Pinetown</div></div>
+        <span class="job-status s-quote">Quote Sent</span>
+      </div>
+      <div class="job-desc"><span class="priority-dot dot-med"></span>DB board upgrade, 3-phase installation requested.</div>
+      <div class="job-footer">
+        <div class="job-meta"><span>⚡ Electrical</span><span>📅 Tomorrow</span><span>👷 Lungelo D.</span></div>
+        <span class="job-amount">R6,400</span>
+      </div>
+    </div>
+    <div class="job-card">
+      <div class="job-header">
+        <div><div class="job-id">JOB-2238</div><div class="job-client">Patel Family — Phoenix</div></div>
+        <span class="job-status s-done">Completed</span>
+      </div>
+      <div class="job-desc"><span class="priority-dot dot-low"></span>Leaking geyser replacement. 150L installed.</div>
+      <div class="job-footer">
+        <div class="job-meta"><span>🔧 Plumbing</span><span>📅 Yesterday</span><span>👷 Sipho M.</span></div>
+        <span class="job-amount">R3,200 ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-form">
+    <div class="form-title">⚡ Instant Quote</div>
+    <div class="form-row">
+      <div class="form-field"><div class="field-label">Service</div><div class="field-val">Electrical</div></div>
+      <div class="form-field"><div class="field-label">Urgency</div><div class="field-val">Same day</div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><div class="field-label">Location</div><div class="field-val">Durban North</div></div>
+      <div class="form-field"><div class="field-label">Property</div><div class="field-val">Residential</div></div>
+    </div>
+    <div style="margin-top:0.75rem">
+      <div class="quote-line"><span class="q-label">Labour (4 hrs)</span><span class="q-val">R1,200</span></div>
+      <div class="quote-line"><span class="q-label">Materials</span><span class="q-val">R850</span></div>
+      <div class="quote-line"><span class="q-label">Call-out fee</span><span class="q-val">R200</span></div>
+      <div class="quote-total-row"><span class="q-total-label">Total (incl. VAT)</span><span class="q-total">R2,588</span></div>
+    </div>
+    <button class="send-quote-btn">Send This Quote to Client →</button>
+  </div>
+
+  <div class="section-row"><div class="section-title">Recent Reviews</div></div>
+  <div class="review-card">
+    <div class="review-header"><span class="reviewer">Mrs Naidoo</span><span class="review-stars">★★★★★</span></div>
+    <div class="review-text">"Sipho was professional, fast and cleaned up after himself. Highly recommend FixPro!"</div>
+    <div class="review-service">Plumbing · Burst Pipe</div>
+  </div>
+  <div class="review-card">
+    <div class="review-header"><span class="reviewer">Thabo K.</span><span class="review-stars">★★★★★</span></div>
+    <div class="review-text">"Got the quote instantly via WhatsApp, came the next morning. Quality work."</div>
+    <div class="review-service">Electrical · DB Board</div>
+  </div>
+</div>
+</body>
+</html>

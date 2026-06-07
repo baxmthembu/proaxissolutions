@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kasi Fresh Market</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+body{background:#0a1205;color:#e8f5e0;min-height:100vh}
+:root{--green:#4ade80;--orange:#fb923c;--dark:#0a1205;--card:#0f1a08;--border:rgba(74,222,128,0.12)}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.25rem;background:rgba(10,18,5,0.97);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.logo{display:flex;align-items:center;gap:0.5rem}
+.logo-icon{width:30px;height:30px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.9rem}
+.logo-text{font-size:0.92rem;font-weight:800;color:#fff;letter-spacing:-0.01em}
+.logo-text span{color:var(--green)}
+.nav-right{display:flex;align-items:center;gap:0.75rem}
+.cart-btn{background:var(--orange);color:#fff;border:none;padding:0.4rem 0.9rem;border-radius:20px;font-size:0.75rem;font-weight:700;cursor:pointer}
+.status-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.status-text{font-size:0.7rem;color:#86efac;font-weight:600}
+
+/* Dashboard Banner */
+.banner{background:linear-gradient(135deg,#0f2a08,#1a3d10);padding:1.25rem;border-bottom:1px solid var(--border)}
+.banner-title{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:0.25rem}
+.banner-date{font-size:1rem;font-weight:800;color:#fff}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin-top:1rem}
+.kpi{background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.1);border-radius:10px;padding:0.6rem;text-align:center}
+.kpi-val{font-size:1rem;font-weight:800;color:#fff}
+.kpi-val.up{color:var(--green)}
+.kpi-val.warn{color:var(--orange)}
+.kpi-label{font-size:0.6rem;color:#4a7a40;font-weight:600;margin-top:0.1rem;text-transform:uppercase}
+
+/* POS Section */
+.section{padding:1rem 1.25rem}
+.section-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem}
+.section-title{font-size:0.88rem;font-weight:700;color:#fff}
+.badge{background:var(--orange);color:#fff;font-size:0.62rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:20px}
+
+.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.5rem;margin-bottom:1rem}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:0.75rem;cursor:pointer;transition:all 0.15s;position:relative}
+.product-card:hover{border-color:rgba(74,222,128,0.3);background:rgba(74,222,128,0.04)}
+.product-card.low-stock{border-color:rgba(251,146,60,0.3)}
+.low-badge{position:absolute;top:0.4rem;right:0.4rem;background:var(--orange);color:#fff;font-size:0.55rem;font-weight:700;padding:0.1rem 0.4rem;border-radius:10px}
+.prod-icon{font-size:1.3rem;margin-bottom:0.3rem}
+.prod-name{font-size:0.78rem;font-weight:700;color:#fff}
+.prod-price{font-size:0.72rem;color:var(--green);font-weight:600;margin-top:0.15rem}
+.prod-stock{font-size:0.62rem;color:#4a7a40;margin-top:0.1rem}
+.add-btn{position:absolute;bottom:0.5rem;right:0.5rem;width:22px;height:22px;background:var(--green);border:none;border-radius:6px;color:#0a1205;font-weight:700;cursor:pointer;font-size:0.85rem;line-height:22px;text-align:center}
+
+/* Cart */
+.cart-section{background:rgba(74,222,128,0.04);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem}
+.cart-title{font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:0.75rem;display:flex;justify-content:space-between;align-items:center}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:0.4rem 0;border-bottom:1px solid rgba(74,222,128,0.06);font-size:0.78rem}
+.cart-item-name{color:#ccc}
+.cart-item-right{display:flex;align-items:center;gap:0.5rem}
+.qty-ctrl{display:flex;align-items:center;gap:0.3rem}
+.qty-btn{background:rgba(74,222,128,0.1);border:1px solid var(--border);color:var(--green);width:18px;height:18px;border-radius:4px;cursor:pointer;font-size:0.75rem;line-height:18px;text-align:center}
+.qty-num{font-size:0.72rem;color:#fff;width:16px;text-align:center}
+.cart-price{color:var(--green);font-weight:700;font-size:0.75rem;min-width:45px;text-align:right}
+.cart-total{display:flex;justify-content:space-between;padding-top:0.6rem;margin-top:0.3rem;border-top:1px solid rgba(74,222,128,0.15);font-weight:700}
+.total-label{font-size:0.78rem;color:#86efac}
+.total-val{font-size:1rem;color:var(--green)}
+.checkout-btn{width:100%;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;border:none;padding:0.7rem;border-radius:10px;font-weight:700;font-size:0.85rem;cursor:pointer;margin-top:0.75rem}
+
+/* Inventory */
+.inv-row{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid rgba(74,222,128,0.06)}
+.inv-info{display:flex;align-items:center;gap:0.6rem}
+.inv-icon{font-size:1rem}
+.inv-name{font-size:0.78rem;font-weight:600;color:#fff}
+.inv-sku{font-size:0.62rem;color:#4a7a40}
+.inv-right{text-align:right}
+.inv-count{font-size:0.85rem;font-weight:700}
+.inv-count.ok{color:var(--green)}
+.inv-count.low{color:var(--orange)}
+.inv-count.out{color:#ef4444}
+.inv-status{font-size:0.62rem;font-weight:600;margin-top:0.1rem}
+.stock-bar-bg{height:4px;background:rgba(255,255,255,0.06);border-radius:20px;width:60px;margin-top:0.3rem}
+.stock-bar{height:4px;border-radius:20px}
+.bar-green{background:var(--green)}
+.bar-orange{background:var(--orange)}
+.bar-red{background:#ef4444}
+.alert-box{background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);border-radius:10px;padding:0.75rem;margin-top:0.75rem;display:flex;align-items:center;gap:0.6rem}
+.alert-icon{font-size:1rem}
+.alert-text{font-size:0.75rem;color:#fed7aa;line-height:1.5}
+.alert-text strong{color:var(--orange)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo"><div class="logo-icon">🛒</div><div class="logo-text">Kasi <span>Fresh</span> Market</div></div>
+  <div class="nav-right">
+    <span class="status-dot"></span><span class="status-text">Store Open</span>
+    <button class="cart-btn">🧾 View Sales</button>
+  </div>
+</nav>
+
+<div class="banner">
+  <div class="banner-title">Today's Dashboard — Sunday 8 June 2025</div>
+  <div class="banner-date">Good morning, Sipho 👋</div>
+  <div class="kpis">
+    <div class="kpi"><div class="kpi-val up">R1,240</div><div class="kpi-label">Today</div></div>
+    <div class="kpi"><div class="kpi-val up">47</div><div class="kpi-label">Txns</div></div>
+    <div class="kpi"><div class="kpi-val warn">3</div><div class="kpi-label">Low Stock</div></div>
+    <div class="kpi"><div class="kpi-val">R26</div><div class="kpi-label">Avg Sale</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-row">
+    <div class="section-title">Quick Sale — Tap to Add</div>
+    <span class="badge">⚡ POS Mode</span>
+  </div>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="prod-icon">🥬</div><div class="prod-name">Spinach Bunch</div>
+      <div class="prod-price">R8.50</div><div class="prod-stock">Stock: 34</div>
+      <button class="add-btn">+</button>
+    </div>
+    <div class="product-card low-stock">
+      <div class="low-badge">LOW</div>
+      <div class="prod-icon">🧈</div><div class="prod-name">Butter 500g</div>
+      <div class="prod-price">R36.99</div><div class="prod-stock">Stock: 4</div>
+      <button class="add-btn">+</button>
+    </div>
+    <div class="product-card">
+      <div class="prod-icon">🍞</div><div class="prod-name">Brown Bread</div>
+      <div class="prod-price">R18.99</div><div class="prod-stock">Stock: 22</div>
+      <button class="add-btn">+</button>
+    </div>
+    <div class="product-card low-stock">
+      <div class="low-badge">LOW</div>
+      <div class="prod-icon">🥛</div><div class="prod-name">Milk 2L</div>
+      <div class="prod-price">R28.00</div><div class="prod-stock">Stock: 6</div>
+      <button class="add-btn">+</button>
+    </div>
+  </div>
+
+  <div class="cart-section">
+    <div class="cart-title">Current Sale <span style="color:#4a7a40;font-size:0.7rem;font-weight:500">3 items</span></div>
+    <div class="cart-item">
+      <span class="cart-item-name">Brown Bread</span>
+      <div class="cart-item-right">
+        <div class="qty-ctrl"><button class="qty-btn">−</button><span class="qty-num">2</span><button class="qty-btn">+</button></div>
+        <span class="cart-price">R37.98</span>
+      </div>
+    </div>
+    <div class="cart-item">
+      <span class="cart-item-name">Spinach Bunch</span>
+      <div class="cart-item-right">
+        <div class="qty-ctrl"><button class="qty-btn">−</button><span class="qty-num">1</span><button class="qty-btn">+</button></div>
+        <span class="cart-price">R8.50</span>
+      </div>
+    </div>
+    <div class="cart-item">
+      <span class="cart-item-name">Milk 2L</span>
+      <div class="cart-item-right">
+        <div class="qty-ctrl"><button class="qty-btn">−</button><span class="qty-num">1</span><button class="qty-btn">+</button></div>
+        <span class="cart-price">R28.00</span>
+      </div>
+    </div>
+    <div class="cart-total"><span class="total-label">Total Due</span><span class="total-val">R74.48</span></div>
+    <button class="checkout-btn">💳 Charge R74.48</button>
+  </div>
+
+  <div class="section-row"><div class="section-title">Inventory Alerts</div></div>
+  <div class="inv-row">
+    <div class="inv-info"><div class="inv-icon">🧈</div><div><div class="inv-name">Butter 500g</div><div class="inv-sku">SKU-0042</div></div></div>
+    <div class="inv-right"><div class="inv-count low">4 units</div><div class="stock-bar-bg"><div class="stock-bar bar-orange" style="width:15%"></div></div></div>
+  </div>
+  <div class="inv-row">
+    <div class="inv-info"><div class="inv-icon">🥛</div><div><div class="inv-name">Full Cream Milk 2L</div><div class="inv-sku">SKU-0018</div></div></div>
+    <div class="inv-right"><div class="inv-count low">6 units</div><div class="stock-bar-bg"><div class="stock-bar bar-orange" style="width:20%"></div></div></div>
+  </div>
+  <div class="inv-row">
+    <div class="inv-info"><div class="inv-icon">🍳</div><div><div class="inv-name">Cooking Oil 2L</div><div class="inv-sku">SKU-0031</div></div></div>
+    <div class="inv-right"><div class="inv-count out">0 units</div><div class="stock-bar-bg"><div class="stock-bar bar-red" style="width:0%"></div></div></div>
+  </div>
+
+  <div class="alert-box">
+    <div class="alert-icon">⚡</div>
+    <div class="alert-text"><strong>Auto-order triggered:</strong> Supplier notified for Butter (×24) and Cooking Oil (×12). Estimated delivery: Tuesday morning.</div>
+  </div>
+</div>
+</body>
+</html>
