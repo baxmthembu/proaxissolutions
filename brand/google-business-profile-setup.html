@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Business Profile Setup — Proaxis Solutions</title>
+<style>
+  :root { --navy:#0F172A; --teal:#14B8A6; --blue:#0284C7; --slate:#64748B; --border:#E2E8F0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, 'Helvetica Neue', sans-serif; background: #F8FAFC; color: var(--navy); line-height: 1.6; }
+  .page { max-width: 860px; margin: 0 auto; padding: 48px 32px; }
+
+  .hdr { border-bottom: 3px solid var(--teal); padding-bottom: 24px; margin-bottom: 40px; }
+  .hdr h1 { font-size: 22px; font-weight: 900; font-family: 'Arial Black', Arial, sans-serif; }
+  .hdr p { font-size: 12px; color: var(--slate); margin-top: 6px; }
+
+  .section { margin-bottom: 36px; }
+  .section-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 14px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .field-block { background: white; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+  .field-label { background: #F1F5F9; padding: 7px 14px; font-size: 10px; font-weight: 700; color: var(--slate); letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+  .field-value { padding: 12px 14px; font-size: 13px; color: var(--navy); line-height: 1.6; }
+  .field-value.mono { font-family: monospace; font-size: 12px; background: #F8FAFC; }
+  .field-note { padding: 6px 14px 10px; font-size: 11px; color: var(--slate); font-style: italic; }
+
+  .step-list { list-style: none; counter-reset: steps; }
+  .step-list li {
+    counter-increment: steps;
+    display: flex; gap: 14px; align-items: flex-start;
+    background: white; border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px; margin-bottom: 8px;
+  }
+  .step-list li::before {
+    content: counter(steps);
+    min-width: 26px; height: 26px;
+    background: var(--teal); color: white;
+    border-radius: 50%; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .step-text { font-size: 13px; }
+  .step-text strong { color: var(--navy); display: block; margin-bottom: 2px; }
+  .step-text span { color: var(--slate); font-size: 12px; }
+
+  .warn-box { background: #FEF9C3; border: 1px solid #FDE047; border-radius: 10px; padding: 14px 18px; font-size: 12px; color: #713F12; margin-bottom: 16px; }
+  .info-box { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 10px; padding: 14px 18px; font-size: 12px; color: #1E3A8A; margin-bottom: 16px; }
+
+  .cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .cat-item { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: 12px; }
+  .cat-item.primary { border-color: var(--teal); }
+  .cat-badge { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--teal); }
+
+  .service-row { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; margin-bottom: 6px; }
+  .service-name { font-size: 13px; font-weight: 700; color: var(--navy); }
+  .service-desc { font-size: 11px; color: var(--slate); margin-top: 3px; }
+
+  .footer { border-top: 1px solid var(--border); padding-top: 20px; margin-top: 40px; font-size: 10px; color: var(--slate); display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hdr">
+    <h1>Google Business Profile — Setup Pack</h1>
+    <p>Proaxis Solutions (Pty) Ltd · Reg 2025/542019/07 · Prepared June 2026 · Copy and paste everything below exactly as written.</p>
+  </div>
+
+  <div class="info-box">
+    <strong>Before you start:</strong> Go to <strong>business.google.com</strong> and sign in with the Google account you want to manage the business from. Click "Add your business" and follow the steps below. Have this document open alongside the Google form.
+  </div>
+
+  <!-- ── Core Fields ── -->
+  <div class="section">
+    <div class="section-title">Core business information — copy exactly</div>
+
+    <div class="field-block">
+      <div class="field-label">Business Name</div>
+      <div class="field-value">Proaxis Solutions</div>
+      <div class="field-note">Do not add "(Pty) Ltd" — Google prefers the trading name only.</div>
+    </div>
+
+    <div class="field-block">
+      <div class="field-label">Primary Category</div>
+      <div class="field-value">Software Company</div>
+      <div class="field-note">This is the most important field. Search for "Software Company" in Google's category picker — select it first.</div>
+    </div>
+
+    <div class="field-block">
+      <div class="field-label">Address</div>
+      <div class="field-value">1 Shantally Close, Milarina Gardens, Durban, KwaZulu-Natal, 4051</div>
+      <div class="field-note">Use this as your registered/service address. If you prefer not to display a street address publicly, select "I deliver goods and services to my customers" and hide the address — you can still show a service area.</div>
+    </div>
+
+    <div class="field-block">
+      <div class="field-label">Service Area</div>
+      <div class="field-value">KwaZulu-Natal, South Africa</div>
+      <div class="field-note">Add "KwaZulu-Natal" as the service area. Also add "South Africa" to capture national searches.</div>
+    </div>
+
+    <div class="field-block">
+      <div class="field-label">Phone Number</div>
+      <div class="field-value">066 213 6607</div>
+      <div class="field-note">Andile Khoza's number — Information Officer and primary contact.</div>
+    </div>
+
+    <div class="field-block">
+      <div class="field-label">Website</div>
+      <div class="field-value mono">https://proaxissolutions.co.za</div>
+    </div>
+
+    <div class="field-block">
+      <div class="field-label">Email</div>
+      <div class="field-value mono">info@proaxissolutions.co.za</div>
+    </div>
+
+    <div class="field-block">
+      <div class="field-label">Business Hours</div>
+      <div class="field-value">Monday – Friday: 08:00 – 17:00<br>Saturday – Sunday: Closed</div>
+      <div class="field-note">You can always update these. Set them conservatively for now.</div>
+    </div>
+  </div>
+
+  <!-- ── Categories ── -->
+  <div class="section">
+    <div class="section-title">Categories — primary + secondary</div>
+    <div class="cat-grid">
+      <div class="cat-item primary">
+        <div class="cat-badge">Primary — most important</div>
+        <div style="font-size:13px;font-weight:700;margin-top:4px;">Software Company</div>
+      </div>
+      <div class="cat-item">
+        <div class="cat-badge">Secondary</div>
+        <div style="font-size:13px;font-weight:700;margin-top:4px;">Computer Consultant</div>
+      </div>
+      <div class="cat-item">
+        <div class="cat-badge">Secondary</div>
+        <div style="font-size:13px;font-weight:700;margin-top:4px;">Business Management Consultant</div>
+      </div>
+      <div class="cat-item">
+        <div class="cat-badge">Secondary</div>
+        <div style="font-size:13px;font-weight:700;margin-top:4px;">Internet Marketing Service</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--slate);margin-top:10px;">Add secondary categories after the profile is created — look for "Edit profile → More info → Categories".</div>
+  </div>
+
+  <!-- ── Business Description ── -->
+  <div class="section">
+    <div class="section-title">Business description — 750 characters max, copy exactly</div>
+    <div class="field-block">
+      <div class="field-label">Short description (for Google Business Profile)</div>
+      <div class="field-value">Proaxis Solutions is a KwaZulu-Natal technology company delivering custom software development, AI automation and digital transformation for South African businesses. We help SMEs, healthcare organisations and private sector companies reduce manual work, improve operational efficiency and build digital capabilities that scale. Services include software development, AI-powered automation, website development, business process automation, IT support, project management and digital consulting. POPIA-conscious. B-BBEE Level 1 contributor. Registration No. 2025/542019/07.</div>
+      <div class="field-note">Character count: ~680 — within the 750-character limit. Paste this verbatim.</div>
+    </div>
+  </div>
+
+  <!-- ── Services ── -->
+  <div class="section">
+    <div class="section-title">Services to add (under "Edit profile → Services")</div>
+
+    <div class="service-row">
+      <div class="service-name">Custom Software Development</div>
+      <div class="service-desc">Design and development of custom business applications, workflow systems and web platforms built to scale with your organisation.</div>
+    </div>
+    <div class="service-row">
+      <div class="service-name">AI Automation</div>
+      <div class="service-desc">AI-powered workflow automation that reduces manual work, eliminates repetitive tasks and improves operational accuracy.</div>
+    </div>
+    <div class="service-row">
+      <div class="service-name">Business Process Automation</div>
+      <div class="service-desc">Analysis and digitisation of business workflows to reduce friction and improve day-to-day operational efficiency.</div>
+    </div>
+    <div class="service-row">
+      <div class="service-name">Website Development</div>
+      <div class="service-desc">Professional, high-performance websites and web applications designed to represent your business credibly and convert visitors into clients.</div>
+    </div>
+    <div class="service-row">
+      <div class="service-name">Digital Consulting</div>
+      <div class="service-desc">Strategic technology advisory helping organisations make informed decisions about digital transformation and technology investment.</div>
+    </div>
+    <div class="service-row">
+      <div class="service-name">IT Support</div>
+      <div class="service-desc">Structured technology support to maintain stable, secure and well-managed technology environments.</div>
+    </div>
+    <div class="service-row">
+      <div class="service-name">Project Management</div>
+      <div class="service-desc">Formal project management for technology engagements — structured planning, clear milestones and accountable delivery.</div>
+    </div>
+  </div>
+
+  <!-- ── Step-by-step ── -->
+  <div class="section">
+    <div class="section-title">Step-by-step — click-by-click setup instructions</div>
+
+    <div class="warn-box">
+      <strong>Verification note:</strong> Google will ask you to verify the business. For a service-area business without a shopfront, verification is usually done by <strong>phone call</strong> or <strong>video recording</strong>. Have your phone ready. The call comes to the number you listed above (066 213 6607).
+    </div>
+
+    <ol class="step-list">
+      <li>
+        <div class="step-text">
+          <strong>Go to business.google.com</strong>
+          <span>Sign in with your Google account. Click the blue "Manage now" or "Add your business" button.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-text">
+          <strong>Enter business name: "Proaxis Solutions"</strong>
+          <span>Type exactly as shown. If Google suggests an existing listing, make sure it is genuinely yours before claiming it.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-text">
+          <strong>Select business category: "Software Company"</strong>
+          <span>Start typing "Software" and select "Software Company" from the dropdown. This is the primary category — the most important selection you make.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-text">
+          <strong>Add your location</strong>
+          <span>Enter: 1 Shantally Close, Milarina Gardens, Durban, KwaZulu-Natal. If you don't want the street address public, tick "I also serve customers outside this location" and hide the address after saving.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-text">
+          <strong>Set service area: "KwaZulu-Natal" + "South Africa"</strong>
+          <span>Add both — this tells Google you serve clients beyond your immediate address.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-text">
+          <strong>Add contact details</strong>
+          <span>Phone: 066 213 6607 · Website: https://proaxissolutions.co.za</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-text">
+          <strong>Complete verification</strong>
+          <span>Choose phone or video verification when prompted. Answer the call to 066 213 6607 or follow the video instructions. This may take 24–72 hours for Google to confirm.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-text">
+          <strong>After verification — add the business description</strong>
+          <span>Go to "Edit profile → About → Description". Paste the 680-character description from this document exactly.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-text">
+          <strong>Add services</strong>
+          <span>Go to "Edit profile → Services". Add each of the 7 services listed above with their descriptions.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-text">
+          <strong>Add secondary categories</strong>
+          <span>Go to "Edit profile → More info → Categories". Add: Computer Consultant, Business Management Consultant, Internet Marketing Service.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-text">
+          <strong>Upload the logo as your profile photo</strong>
+          <span>Go to "Add photos → Logo". Upload brand/logo-icon-512.png from your proaxissolutions folder.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-text">
+          <strong>Upload a cover photo</strong>
+          <span>Go to "Add photos → Cover". Upload brand/logo-full-1200.png as the cover image.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-text">
+          <strong>Set opening hours</strong>
+          <span>Monday – Friday: 08:00 – 17:00. Saturday + Sunday: Closed.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-text">
+          <strong>Confirm everything looks correct and publish</strong>
+          <span>Review all fields. Hit Save. Your listing goes live once Google indexes it — usually within 1–3 days after verification.</span>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- ── After publishing ── -->
+  <div class="section">
+    <div class="section-title">After publishing — first 30 days checklist</div>
+    <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 18px;">
+      <div style="font-size:12px;color:var(--navy);line-height:2.2;">
+        ☐ &nbsp;Post a "Welcome" update introducing Proaxis Solutions (use the Posts feature)<br>
+        ☐ &nbsp;Add Q&amp;A: write and answer your own 3–5 most common questions<br>
+        ☐ &nbsp;Ask Andile + any network contacts to leave an honest Google review<br>
+        ☐ &nbsp;Link Google Search Console to proaxissolutions.co.za and submit sitemap.xml<br>
+        ☐ &nbsp;Check Google Search Console for any indexing errors after 7 days<br>
+        ☐ &nbsp;Respond to any reviews — positive or negative — within 24 hours
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Proaxis Solutions (Pty) Ltd · Registration 2025/542019/07 · KwaZulu-Natal, South Africa</span>
+    <span>GBP Setup Pack · June 2026 · Internal Use</span>
+  </div>
+
+</div>
+</body>
+</html>

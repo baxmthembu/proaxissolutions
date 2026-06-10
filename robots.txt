@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Block internal/admin pages from indexing
+Disallow: /leads-admin.html
+Disallow: /onboarding.html
+Disallow: /mockup.html
+Disallow: /prototype.html
+Disallow: /demo-*/
+
+Sitemap: https://proaxissolutions.co.za/sitemap.xml
