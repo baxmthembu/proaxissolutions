@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Contact Proaxis Solutions — Start a conversation about your technology challenge.">
   <title>Contact — Proaxis Solutions</title>
+  <link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="brand/favicon.ico">
+  <link rel="apple-touch-icon" href="brand/logo-icon-192.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
   <style>
@@ -50,8 +53,11 @@
 
     /* NAV */
     .navbar { background: var(--navy); height: 64px; padding: 0 1rem; }
-    .navbar-brand { font-weight: 800; font-size: 1.2rem; color: #fff !important; letter-spacing: -0.02em; }
-    .navbar-brand span { color: var(--teal); }
+    .navbar-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .navbar-brand .brand-icon { width: 36px; height: 36px; background: #1E293B; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid rgba(20,184,166,0.3); }
+    .navbar-brand .brand-words { display: flex; flex-direction: column; }
+    .navbar-brand .brand-name { font-family: "Arial Black", Arial, sans-serif; font-size: 1.05rem; font-weight: 900; color: #fff; letter-spacing: 0.3px; line-height: 1; }
+    .navbar-brand .brand-sub { font-size: 0.55rem; color: rgba(255,255,255,0.45); letter-spacing: 3px; text-transform: uppercase; margin-top: 2px; }
     .nav-link { color: #CBD5E1 !important; font-size: 0.95rem; font-weight: 600; padding: 0.4rem 0.85rem !important; border-radius: 6px; transition: color 0.15s, background 0.15s; }
     .nav-link:hover, .nav-link.active { color: #fff !important; background: rgba(255,255,255,0.1); }
     .nav-cta { background: var(--blue) !important; color: #fff !important; margin-left: 0.5rem; }
@@ -419,7 +425,10 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg fixed-top">
   <div class="container-xl">
-    <a class="navbar-brand" href="index.html">Proaxis <span>Solutions</span></a>
+    <a class="navbar-brand" href="index.html">
+      <div class="brand-icon"><svg viewBox="0 0 36 36" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><line x1="18" y1="26" x2="18" y2="8" stroke="#14B8A6" stroke-width="2" stroke-linecap="round"/><path d="M13 14 L18 8 L23 14" fill="none" stroke="#14B8A6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="6" y1="26" x2="30" y2="26" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.35"/><circle cx="18" cy="26" r="2" fill="#14B8A6"/></svg></div>
+      <div class="brand-words"><span class="brand-name">Proaxis</span><span class="brand-sub">Solutions</span></div>
+    </a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
       <span class="navbar-toggler-icon"></span>
     </button>

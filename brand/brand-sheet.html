@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proaxis Solutions — Brand Sheet</title>
+<style>
+  :root {
+    --navy:   #0F172A;
+    --teal:   #14B8A6;
+    --teal2:  #0D9488;
+    --blue:   #0284C7;
+    --slate:  #64748B;
+    --light:  #F0FDFA;
+    --white:  #FFFFFF;
+    --border: #E2E8F0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, 'Helvetica Neue', sans-serif;
+    background: #F8FAFC;
+    color: var(--navy);
+    line-height: 1.6;
+  }
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 32px;
+  }
+
+  /* ── Header ── */
+  .brand-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 32px;
+    border-bottom: 2px solid var(--teal);
+    margin-bottom: 48px;
+  }
+  .brand-header-left h1 {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--slate);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .brand-header-left p {
+    font-size: 11px;
+    color: var(--slate);
+  }
+  .brand-logo-preview {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo-mark {
+    width: 56px;
+    height: 56px;
+    background: var(--navy);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid rgba(20,184,166,0.3);
+  }
+  .logo-text-group { display: flex; flex-direction: column; }
+  .logo-wordmark {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--navy);
+    letter-spacing: 0.5px;
+    line-height: 1;
+  }
+  .logo-sub {
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--slate);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top: 5px;
+  }
+
+  /* ── Section ── */
+  .section { margin-bottom: 48px; }
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--teal);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Logo variations ── */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .logo-box {
+    border-radius: 12px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .logo-box.light-bg { background: var(--white); border: 1px solid var(--border); }
+  .logo-box.dark-bg  { background: var(--navy); }
+  .logo-box.teal-bg  { background: var(--teal); }
+  .logo-box.grey-bg  { background: #F1F5F9; border: 1px solid var(--border); }
+  .logo-box-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .logo-box.light-bg .logo-box-label,
+  .logo-box.grey-bg .logo-box-label  { color: var(--slate); }
+  .logo-box.dark-bg .logo-box-label,
+  .logo-box.teal-bg .logo-box-label  { color: rgba(255,255,255,0.55); }
+  .inline-logo { display: flex; align-items: center; gap: 12px; }
+  .lm { border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .lm-dark  { background: var(--navy); }
+  .lm-teal  { background: var(--teal); }
+  .lm-white { background: white; }
+  .wm-dark  { font-family: 'Arial Black', Arial, sans-serif; font-size: 20px; font-weight: 900; color: var(--navy); }
+  .wm-light { font-family: 'Arial Black', Arial, sans-serif; font-size: 20px; font-weight: 900; color: white; }
+  .ws-dark  { font-size: 8.5px; color: var(--slate); letter-spacing: 3.5px; margin-top: 3px; }
+  .ws-light { font-size: 8.5px; color: rgba(255,255,255,0.6); letter-spacing: 3.5px; margin-top: 3px; }
+
+  /* Icon row */
+  .icon-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+  }
+  .icon-sample {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .icon-sample span {
+    font-size: 10px;
+    color: var(--slate);
+  }
+  .ic { background: var(--navy); border-radius: 20%; display: flex; align-items: center; justify-content: center; }
+
+  /* ── Colours ── */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+  }
+  .color-swatch {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .swatch-block { height: 72px; }
+  .swatch-info { background: white; padding: 8px 10px; }
+  .swatch-name { font-size: 11px; font-weight: 700; color: var(--navy); }
+  .swatch-hex  { font-size: 10px; color: var(--slate); font-family: monospace; margin-top: 2px; }
+  .swatch-use  { font-size: 9px; color: var(--slate); margin-top: 3px; }
+
+  /* ── Typography ── */
+  .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .type-box { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px 20px; }
+  .type-sample-h { font-family: 'Arial Black', Arial, sans-serif; font-size: 28px; font-weight: 900; color: var(--navy); line-height: 1.2; }
+  .type-sample-b { font-family: Arial, sans-serif; font-size: 14px; color: #334155; line-height: 1.7; margin-top: 8px; }
+  .type-label { font-size: 10px; font-weight: 700; color: var(--teal); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .type-specs { font-size: 10px; color: var(--slate); margin-top: 10px; }
+
+  /* ── Spacing scale ── */
+  .spacing-row { display: flex; align-items: flex-end; gap: 16px; margin-top: 12px; }
+  .sp-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .sp-block { background: var(--teal); border-radius: 4px; width: 24px; }
+  .sp-label { font-size: 10px; color: var(--slate); }
+
+  /* ── Voice ── */
+  .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .voice-box { border-radius: 10px; padding: 16px 18px; }
+  .voice-box.do   { background: #F0FDF4; border: 1px solid #86EFAC; }
+  .voice-box.dont { background: #FEF2F2; border: 1px solid #FCA5A5; }
+  .voice-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .voice-box.do   .voice-label { color: #15803D; }
+  .voice-box.dont .voice-label { color: #DC2626; }
+  .voice-box p { font-size: 12px; line-height: 1.6; color: #1E293B; font-style: italic; }
+
+  /* ── Positioning pill ── */
+  .positioning {
+    background: var(--light);
+    border: 1px solid rgba(20,184,166,0.3);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+  .positioning blockquote {
+    font-size: 14px;
+    color: var(--navy);
+    line-height: 1.7;
+    font-style: italic;
+    border-left: 3px solid var(--teal);
+    padding-left: 16px;
+    margin-top: 8px;
+  }
+
+  /* ── Footer ── */
+  .brand-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    margin-top: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: var(--slate);
+  }
+
+  @media print {
+    body { background: white; }
+    .page { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── Header ── -->
+  <div class="brand-header">
+    <div class="brand-header-left">
+      <h1>Brand Identity Sheet</h1>
+      <p>Proaxis Solutions (Pty) Ltd · Reg 2025/542019/07 · Version 1.0 · June 2026</p>
+    </div>
+    <div class="brand-logo-preview">
+      <div class="logo-mark">
+        <svg viewBox="0 0 56 56" width="56" height="56" xmlns="http://www.w3.org/2000/svg">
+          <line x1="28" y1="40" x2="28" y2="14" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M22 21 L28 14 L34 21" fill="none" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="10" y1="40" x2="46" y2="40" stroke="white" stroke-width="2" stroke-linecap="round" stroke-opacity="0.35"/>
+          <path d="M40 34 L46 40 L40 46" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.35"/>
+          <circle cx="28" cy="40" r="3" fill="#14B8A6"/>
+        </svg>
+      </div>
+      <div class="logo-text-group">
+        <div class="logo-wordmark">Proaxis</div>
+        <div class="logo-sub">Solutions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Positioning ── -->
+  <div class="section">
+    <div class="section-title">Positioning</div>
+    <div class="positioning">
+      <div style="font-size:11px;color:var(--teal);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">What We Are</div>
+      <blockquote>Proaxis Solutions is a technology, software engineering and AI automation company that helps South African organisations modernise operations and accelerate growth through intelligent digital solutions.</blockquote>
+      <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;">
+        <span style="background:var(--navy);color:white;font-size:10px;font-weight:700;padding:4px 12px;border-radius:100px;">Software Engineering</span>
+        <span style="background:var(--teal);color:white;font-size:10px;font-weight:700;padding:4px 12px;border-radius:100px;">AI Automation</span>
+        <span style="background:#0284C7;color:white;font-size:10px;font-weight:700;padding:4px 12px;border-radius:100px;">Digital Transformation</span>
+        <span style="background:#475569;color:white;font-size:10px;font-weight:700;padding:4px 12px;border-radius:100px;">Business Process Automation</span>
+        <span style="background:#475569;color:white;font-size:10px;font-weight:700;padding:4px 12px;border-radius:100px;">Digital Consulting</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Logo Variations ── -->
+  <div class="section">
+    <div class="section-title">Logo Variations</div>
+    <div class="logo-grid">
+
+      <!-- Light background -->
+      <div class="logo-box light-bg">
+        <div class="logo-box-label">Standard — light background</div>
+        <div class="inline-logo">
+          <div class="lm lm-dark" style="width:52px;height:52px;">
+            <svg viewBox="0 0 52 52" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+              <line x1="26" y1="38" x2="26" y2="12" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M20 19 L26 12 L32 19" fill="none" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="8" y1="38" x2="44" y2="38" stroke="white" stroke-width="2" stroke-linecap="round" stroke-opacity="0.35"/>
+              <path d="M38 32 L44 38 L38 44" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.35"/>
+              <circle cx="26" cy="38" r="3" fill="#14B8A6"/>
+            </svg>
+          </div>
+          <div>
+            <div class="wm-dark">Proaxis</div>
+            <div class="ws-dark">SOLUTIONS</div>
+          </div>
+        </div>
+        <div style="font-size:10px;color:var(--slate);">Use on white, light grey, and light teal backgrounds.</div>
+      </div>
+
+      <!-- Dark background -->
+      <div class="logo-box dark-bg">
+        <div class="logo-box-label">Reversed — dark background</div>
+        <div class="inline-logo">
+          <div class="lm lm-teal" style="width:52px;height:52px;">
+            <svg viewBox="0 0 52 52" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+              <line x1="26" y1="38" x2="26" y2="12" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M20 19 L26 12 L32 19" fill="none" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="8" y1="38" x2="44" y2="38" stroke="white" stroke-width="2" stroke-linecap="round" stroke-opacity="0.5"/>
+              <path d="M38 32 L44 38 L38 44" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.5"/>
+              <circle cx="26" cy="38" r="3" fill="#0F172A"/>
+            </svg>
+          </div>
+          <div>
+            <div class="wm-light">Proaxis</div>
+            <div class="ws-light">SOLUTIONS</div>
+          </div>
+        </div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.5);">Use on dark navy, dark grey, and hero section backgrounds.</div>
+      </div>
+
+      <!-- Icon only variations -->
+      <div class="logo-box grey-bg" style="grid-column: span 2;">
+        <div class="logo-box-label">Icon mark — all sizes</div>
+        <div class="icon-row">
+          <div class="icon-sample">
+            <div class="ic" style="width:80px;height:80px;">
+              <svg viewBox="0 0 52 52" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
+                <line x1="26" y1="38" x2="26" y2="12" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M20 19 L26 12 L32 19" fill="none" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="8" y1="38" x2="44" y2="38" stroke="white" stroke-width="2" stroke-linecap="round" stroke-opacity="0.35"/>
+                <circle cx="26" cy="38" r="3" fill="#14B8A6"/>
+              </svg>
+            </div>
+            <span>80px</span>
+          </div>
+          <div class="icon-sample">
+            <div class="ic" style="width:56px;height:56px;">
+              <svg viewBox="0 0 52 52" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                <line x1="26" y1="38" x2="26" y2="12" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M20 19 L26 12 L32 19" fill="none" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="8" y1="38" x2="44" y2="38" stroke="white" stroke-width="2" stroke-linecap="round" stroke-opacity="0.35"/>
+                <circle cx="26" cy="38" r="3" fill="#14B8A6"/>
+              </svg>
+            </div>
+            <span>56px</span>
+          </div>
+          <div class="icon-sample">
+            <div class="ic" style="width:40px;height:40px;">
+              <svg viewBox="0 0 52 52" width="22" height="22" xmlns="http://www.w3.org/2000/svg">
+                <line x1="26" y1="38" x2="26" y2="12" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M20 19 L26 12 L32 19" fill="none" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="8" y1="38" x2="44" y2="38" stroke="white" stroke-width="2" stroke-linecap="round" stroke-opacity="0.35"/>
+                <circle cx="26" cy="38" r="3" fill="#14B8A6"/>
+              </svg>
+            </div>
+            <span>40px</span>
+          </div>
+          <div class="icon-sample">
+            <div class="ic" style="width:32px;height:32px;">
+              <svg viewBox="0 0 32 32" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="6" fill="#0F172A"/>
+                <line x1="16" y1="23" x2="16" y2="8" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M11 13 L16 8 L21 13" fill="none" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="6" y1="23" x2="26" y2="23" stroke="white" stroke-width="2" stroke-linecap="round" stroke-opacity="0.4"/>
+                <circle cx="16" cy="23" r="2" fill="#14B8A6"/>
+              </svg>
+            </div>
+            <span>32px (favicon)</span>
+          </div>
+          <div class="icon-sample">
+            <div class="ic" style="width:20px;height:20px;">
+              <svg viewBox="0 0 32 32" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="6" fill="#0F172A"/>
+                <line x1="16" y1="23" x2="16" y2="8" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M11 13 L16 8 L21 13" fill="none" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="6" y1="23" x2="26" y2="23" stroke="white" stroke-width="2" stroke-linecap="round" stroke-opacity="0.4"/>
+                <circle cx="16" cy="23" r="2" fill="#14B8A6"/>
+              </svg>
+            </div>
+            <span>20px</span>
+          </div>
+          <div style="margin-left:16px;border-left:1px solid var(--border);padding-left:20px;font-size:11px;color:var(--slate);line-height:1.8;align-self:center;">
+            <strong style="color:var(--navy);display:block;margin-bottom:4px;">Icon mark meaning</strong>
+            The vertical teal axis (Y) represents upward growth and digital progress.<br>
+            The horizontal baseline (X) represents operational foundation.<br>
+            The origin dot represents precision — the reference point everything is built from.<br>
+            Together: <em>Proaxis</em> — the professional axis of your transformation.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Colour Palette ── -->
+  <div class="section">
+    <div class="section-title">Colour Palette</div>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#0F172A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Navy</div>
+          <div class="swatch-hex">#0F172A</div>
+          <div class="swatch-use">Primary brand, text, icon bg</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#14B8A6;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Teal</div>
+          <div class="swatch-hex">#14B8A6</div>
+          <div class="swatch-use">Primary accent, CTAs, axis mark</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#0D9488;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Teal Dark</div>
+          <div class="swatch-hex">#0D9488</div>
+          <div class="swatch-use">Hover states, emphasis</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#0284C7;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Blue</div>
+          <div class="swatch-hex">#0284C7</div>
+          <div class="swatch-use">Links, secondary accents</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#64748B;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Slate</div>
+          <div class="swatch-hex">#64748B</div>
+          <div class="swatch-use">Body text, subtext, labels</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-block" style="background:#F0FDFA;border:1px solid #CCFBF1;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Teal Light</div>
+          <div class="swatch-hex">#F0FDFA</div>
+          <div class="swatch-use">Section backgrounds, highlights</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Colour ratios guidance -->
+    <div style="margin-top:16px;background:white;border:1px solid var(--border);border-radius:10px;padding:14px 18px;font-size:11px;color:var(--slate);">
+      <strong style="color:var(--navy);">Usage ratio:</strong>&nbsp;
+      Navy 50% · Teal 25% · White/light 20% · Blue accent 5% — keep the palette disciplined; do not introduce new colours without updating this sheet.
+    </div>
+  </div>
+
+  <!-- ── Typography ── -->
+  <div class="section">
+    <div class="section-title">Typography</div>
+    <div class="type-grid">
+      <div class="type-box">
+        <div class="type-label">Display / Headings</div>
+        <div class="type-sample-h">Building Digital Capability</div>
+        <div class="type-specs">
+          Font: <strong>Arial Black / Helvetica Neue</strong><br>
+          Weight: 900 (Black)<br>
+          Use: H1, H2, logo wordmark, hero headlines
+        </div>
+      </div>
+      <div class="type-box">
+        <div class="type-label">Body / Supporting</div>
+        <div class="type-sample-b">We design and deploy intelligent digital solutions that reduce manual effort, improve operational efficiency and enable organisations to focus on what they do best.</div>
+        <div class="type-specs">
+          Font: <strong>Arial / Helvetica Neue</strong><br>
+          Weight: 400 regular · 700 bold<br>
+          Size: 14–16px body · 12px small<br>
+          Use: All body copy, labels, captions
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:16px;background:white;border:1px solid var(--border);border-radius:10px;padding:14px 18px;">
+      <div style="font-size:10px;font-weight:700;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Type Scale</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--border);padding-bottom:6px;">
+          <span style="font-size:28px;font-family:'Arial Black',Arial,sans-serif;font-weight:900;color:var(--navy);min-width:180px;">Headline H1</span>
+          <span style="font-size:10px;color:var(--slate);">28–36px · Arial Black · 900 · Navy</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--border);padding-bottom:6px;">
+          <span style="font-size:20px;font-family:'Arial Black',Arial,sans-serif;font-weight:900;color:var(--navy);min-width:180px;">Section H2</span>
+          <span style="font-size:10px;color:var(--slate);">20–24px · Arial Black · 900 · Navy</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--border);padding-bottom:6px;">
+          <span style="font-size:16px;font-weight:700;color:var(--navy);min-width:180px;">Subheading H3</span>
+          <span style="font-size:10px;color:var(--slate);">16–18px · Arial Bold · 700 · Navy</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--border);padding-bottom:6px;">
+          <span style="font-size:14px;color:#334155;min-width:180px;">Body text paragraph</span>
+          <span style="font-size:10px;color:var(--slate);">14–16px · Arial Regular · 400 · #334155</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:16px;">
+          <span style="font-size:11px;color:var(--slate);letter-spacing:3px;text-transform:uppercase;min-width:180px;">SMALL LABEL / TAG</span>
+          <span style="font-size:10px;color:var(--slate);">10–11px · Arial · 700 · Tracked · Slate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Voice ── -->
+  <div class="section">
+    <div class="section-title">Voice &amp; Tone — Do / Don't</div>
+    <div class="voice-grid">
+      <div class="voice-box do">
+        <div class="voice-label">✓ On-brand</div>
+        <p>"Proaxis Solutions helps organisations reduce manual work, improve operational visibility and build digital capabilities that scale — through structured software development, intelligent automation and practical digital consulting."</p>
+      </div>
+      <div class="voice-box dont">
+        <div class="voice-label">✗ Off-brand</div>
+        <p>"We're a market-leading, award-winning tech startup that revolutionises your business with cutting-edge AI and disruptive digital transformation. Trusted by hundreds of clients!"</p>
+      </div>
+      <div class="voice-box do">
+        <div class="voice-label">✓ On-brand</div>
+        <p>"We are an early-stage company with strong technical foundations, compliance readiness and a clear focus on delivering measurable outcomes for our clients."</p>
+      </div>
+      <div class="voice-box dont">
+        <div class="voice-label">✗ Off-brand</div>
+        <p>"Our team of experts with decades of experience and a huge portfolio of successful enterprise projects will take your business to the next level!"</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Logo Rules ── -->
+  <div class="section">
+    <div class="section-title">Logo Usage Rules</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 18px;">
+        <div style="font-size:10px;font-weight:700;color:#15803D;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">✓ Do</div>
+        <ul style="font-size:12px;color:#334155;line-height:2;padding-left:16px;">
+          <li>Use the SVG/PNG files provided — never recreate manually</li>
+          <li>Use on white, light grey, navy, and teal backgrounds only</li>
+          <li>Maintain clear space of at least the icon height on all sides</li>
+          <li>Use the favicon.svg for browser tabs and app icons</li>
+          <li>Keep wordmark and icon mark together unless space prevents it</li>
+        </ul>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 18px;">
+        <div style="font-size:10px;font-weight:700;color:#DC2626;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">✗ Don't</div>
+        <ul style="font-size:12px;color:#334155;line-height:2;padding-left:16px;">
+          <li>Don't recolour, rotate, or distort the logo</li>
+          <li>Don't place on busy photographic backgrounds</li>
+          <li>Don't use drop shadows, outlines, or effects</li>
+          <li>Don't stretch or squeeze the proportions</li>
+          <li>Don't use below 24px height for the full wordmark</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <div class="brand-footer">
+    <span>Proaxis Solutions (Pty) Ltd · Registration 2025/542019/07 · KwaZulu-Natal, South Africa</span>
+    <span>Brand Sheet v1.0 · June 2026 · Internal Use Only</span>
+  </div>
+
+</div>
+</body>
+</html>
