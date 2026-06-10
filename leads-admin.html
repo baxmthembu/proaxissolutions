@@ -3,312 +3,215 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Proaxis Solutions — Lead Manager</title>
+<title>Leads CRM — Proaxis Solutions</title>
+<link href="https://rsms.me/inter/inter.css" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0F172A; color: #E2E8F0; min-height: 100vh; }
-  header { background: #1E293B; border-bottom: 1px solid #334155; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
-  .logo { font-size: 1rem; font-weight: 800; color: #fff; }
-  .logo span { color: #14B8A6; }
-  .badge { font-size: 0.72rem; background: rgba(20,184,166,0.15); color: #14B8A6; border: 1px solid rgba(20,184,166,0.3); padding: 0.2rem 0.6rem; border-radius: 20px; font-weight: 700; }
-  .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
-  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-  .stat-card { background: #1E293B; border: 1px solid #334155; border-radius: 12px; padding: 1.25rem; text-align: center; }
-  .stat-val { font-size: 2rem; font-weight: 800; color: #fff; }
-  .stat-label { font-size: 0.75rem; color: #64748B; margin-top: 0.25rem; }
-  .controls { display: flex; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap; align-items: center; }
-  .search-box { flex: 1; min-width: 200px; background: #1E293B; border: 1px solid #334155; color: #E2E8F0; border-radius: 8px; padding: 0.6rem 1rem; font-size: 0.88rem; }
-  .search-box:focus { outline: none; border-color: #14B8A6; }
-  .btn { padding: 0.6rem 1.1rem; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s; }
-  .btn-teal { background: #14B8A6; color: #0F172A; }
-  .btn-teal:hover { background: #0d9488; }
-  .btn-red { background: rgba(239,68,68,0.15); color: #EF4444; border: 1px solid rgba(239,68,68,0.3); }
-  .btn-red:hover { background: rgba(239,68,68,0.25); }
-  .btn-outline { background: transparent; color: #94A3B8; border: 1px solid #334155; }
-  .btn-outline:hover { border-color: #14B8A6; color: #14B8A6; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
-  thead th { background: #1E293B; color: #94A3B8; font-weight: 700; padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid #334155; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
-  tbody tr { border-bottom: 1px solid #1E293B; transition: background 0.15s; }
-  tbody tr:hover { background: rgba(255,255,255,0.03); }
-  td { padding: 0.85rem 1rem; vertical-align: top; }
-  .lead-name { font-weight: 700; color: #fff; }
-  .lead-email { color: #14B8A6; font-size: 0.8rem; }
-  .lead-org { color: #94A3B8; font-size: 0.78rem; }
-  .tag { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 20px; font-size: 0.7rem; font-weight: 700; margin: 1px; }
-  .tag-service { background: rgba(37,99,235,0.15); color: #60A5FA; }
-  .tag-budget { background: rgba(16,185,129,0.1); color: #10B981; }
-  .tag-hot { background: rgba(239,68,68,0.15); color: #EF4444; }
-  .empty { text-align: center; padding: 4rem 2rem; color: #475569; }
-  .empty h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: #64748B; }
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 999; align-items: center; justify-content: center; }
-  .modal-overlay.open { display: flex; }
-  .modal { background: #1E293B; border: 1px solid #334155; border-radius: 16px; padding: 2rem; max-width: 540px; width: 90%; max-height: 80vh; overflow-y: auto; }
-  .modal h3 { color: #fff; margin-bottom: 1rem; font-size: 1rem; }
-  .detail-row { display: flex; gap: 1rem; margin-bottom: 0.75rem; font-size: 0.85rem; }
-  .detail-label { color: #64748B; min-width: 120px; font-weight: 600; flex-shrink: 0; }
-  .detail-val { color: #E2E8F0; word-break: break-word; }
-  .setup-banner { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
-  .setup-banner h4 { color: #F59E0B; font-size: 0.9rem; margin-bottom: 0.5rem; }
-  .setup-banner p { font-size: 0.82rem; color: #CBD5E1; line-height: 1.6; }
-  .setup-banner a { color: #14B8A6; }
-  .key-input { background: #0F172A; border: 1px solid #334155; color: #E2E8F0; border-radius: 8px; padding: 0.5rem 0.9rem; font-size: 0.83rem; width: 260px; font-family: monospace; }
-  .source-type { display: flex; gap: 0.5rem; align-items: center; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; }
-  .dot-green { background: #10B981; }
-  .dot-yellow { background: #F59E0B; }
-  .dot-blue { background: #3B82F6; }
+  :root{--navy:#0F172A;--navy2:#1E293B;--teal:#14B8A6;--blue:#0284C7;--slate:#64748B;--white:#F8FAFC;--muted:#94A3B8;--border:rgba(255,255,255,0.08);--green:#10B981;--amber:#F59E0B;--red:#EF4444;--purple:#8B5CF6}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--navy);color:var(--white);min-height:100vh;overflow-x:hidden}
+  .topbar{background:var(--navy2);border-bottom:1px solid var(--border);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between}
+  .topbar-brand{font-size:1rem;font-weight:800;letter-spacing:-.02em}.topbar-brand span{color:var(--teal)}
+  .topbar-right{display:flex;gap:.75rem;align-items:center}
+  .btn{padding:.5rem 1.1rem;border-radius:8px;font-size:.82rem;font-weight:700;cursor:pointer;border:none;transition:all .15s}
+  .btn-teal{background:var(--teal);color:var(--navy)}.btn-teal:hover{background:#0D9488}
+  .btn-outline{background:transparent;color:var(--muted);border:1px solid var(--border)}.btn-outline:hover{color:var(--white);border-color:var(--muted)}
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;padding:1.5rem 2rem}
+  .stat-card{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem}
+  .stat-val{font-size:1.75rem;font-weight:800;letter-spacing:-.03em}.stat-label{font-size:.72rem;color:var(--slate);font-weight:600;margin-top:.2rem;text-transform:uppercase;letter-spacing:.06em}
+  .stat-card.teal .stat-val{color:var(--teal)}.stat-card.amber .stat-val{color:var(--amber)}.stat-card.green .stat-val{color:var(--green)}.stat-card.blue .stat-val{color:var(--blue)}
+  .tabs{padding:0 2rem;display:flex;gap:.25rem;border-bottom:1px solid var(--border)}
+  .tab{padding:.65rem 1.1rem;font-size:.85rem;font-weight:600;color:var(--slate);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}.tab:hover{color:var(--white)}.tab.active{color:var(--teal);border-bottom-color:var(--teal)}
+  .toolbar{padding:1rem 2rem;display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
+  .search-box{flex:1;min-width:200px;background:var(--navy2);border:1px solid var(--border);border-radius:8px;padding:.55rem 1rem;color:var(--white);font-size:.85rem;outline:none}.search-box:focus{border-color:var(--teal)}.search-box::placeholder{color:var(--slate)}
+  .filter-select{background:var(--navy2);border:1px solid var(--border);border-radius:8px;padding:.55rem .9rem;color:var(--white);font-size:.82rem;outline:none;cursor:pointer}
+  .table-wrap{padding:0 2rem 2rem;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th{text-align:left;padding:.65rem .85rem;font-size:.7rem;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border);white-space:nowrap}
+  td{padding:.75rem .85rem;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+  tr:hover td{background:rgba(255,255,255,.02)}
+  .name-cell{font-weight:700;color:var(--white)}.sub-cell{font-size:.75rem;color:var(--muted);margin-top:.15rem}
+  .contact-cell a{color:var(--teal);text-decoration:none;font-size:.82rem}.contact-cell a:hover{text-decoration:underline}
+  .stage-select{background:transparent;border:1px solid var(--border);border-radius:99px;padding:.3rem .7rem;font-size:.72rem;font-weight:700;cursor:pointer;outline:none;transition:all .15s}
+  .stage-new{color:var(--muted);border-color:var(--slate)}.stage-contacted{color:var(--blue);border-color:var(--blue);background:rgba(2,132,199,.1)}.stage-discovery{color:var(--purple);border-color:var(--purple);background:rgba(139,92,246,.1)}.stage-proposal{color:var(--amber);border-color:var(--amber);background:rgba(245,158,11,.1)}.stage-won{color:var(--green);border-color:var(--green);background:rgba(16,185,129,.1)}.stage-lost{color:var(--red);border-color:var(--red);background:rgba(239,68,68,.1)}
+  .source-badge{font-size:.68rem;font-weight:700;padding:.2rem .55rem;border-radius:99px}
+  .source-onboarding{background:rgba(20,184,166,.12);color:var(--teal)}.source-contact{background:rgba(2,132,199,.12);color:var(--blue)}
+  .score-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:.35rem}
+  .score-hot .score-dot{background:var(--red)}.score-warm .score-dot{background:var(--amber)}.score-cool .score-dot{background:var(--slate)}
+  .empty{text-align:center;padding:4rem 2rem;color:var(--slate)}.empty-icon{font-size:2.5rem;margin-bottom:1rem}.empty h3{font-size:1rem;font-weight:700;color:var(--muted);margin-bottom:.5rem}.empty p{font-size:.85rem;line-height:1.6}
+  .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:none;align-items:center;justify-content:center;padding:1rem}.modal-bg.open{display:flex}
+  .modal{background:var(--navy2);border:1px solid var(--border);border-radius:16px;max-width:560px;width:100%;padding:2rem;max-height:90vh;overflow-y:auto}
+  .modal h3{font-size:1.1rem;font-weight:800;margin-bottom:1.5rem}.modal-row{display:flex;gap:.5rem;margin-bottom:.65rem;font-size:.85rem}.modal-key{color:var(--slate);font-weight:600;min-width:130px}.modal-val{color:var(--white);font-weight:500}
+  .modal-close{float:right;background:none;border:none;color:var(--slate);font-size:1.25rem;cursor:pointer;margin-top:-.25rem}.modal-close:hover{color:var(--white)}
+  .notes-area{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;color:var(--white);font-size:.85rem;padding:.75rem;resize:vertical;min-height:80px;outline:none;font-family:inherit;margin-top:1rem}.notes-area:focus{border-color:var(--teal)}
+  .dual-btn{display:flex;gap:.75rem;margin-top:1rem}
+  @media(max-width:768px){.stats{grid-template-columns:1fr 1fr}.topbar,.toolbar,.table-wrap,.tabs{padding-left:1rem;padding-right:1rem}.stats{padding:1rem}}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="logo">Proaxis <span>Solutions</span> — Lead Manager</div>
-  <div style="display:flex;gap:0.75rem;align-items:center;">
-    <span class="badge" id="lead-count-badge">Loading…</span>
-    <button class="btn btn-teal" onclick="exportCSV()">⬇ Export CSV</button>
-    <button class="btn btn-red" onclick="clearAllLeads()">🗑 Clear All</button>
+<div class="topbar">
+  <div class="topbar-brand">Proaxis <span>Solutions</span> — Leads CRM</div>
+  <div class="topbar-right">
+    <button class="btn btn-outline" onclick="exportCSV()">⬇ Export CSV</button>
+    <button class="btn btn-teal" onclick="loadLeads()">↺ Refresh</button>
   </div>
-</header>
-
-<div class="container">
-
-  <!-- Setup Banner (shown if Web3Forms not configured) -->
-  <div class="setup-banner" id="setup-banner" style="display:none;">
-    <h4>⚙️ Email Delivery Not Yet Configured</h4>
-    <p>Leads are being saved locally to this browser. To also receive them by email (to <strong>info@proaxissolutions.co.za</strong>), get a free Web3Forms key:</p>
-    <ol style="margin:0.75rem 0 0.75rem 1.25rem;font-size:0.82rem;color:#CBD5E1;line-height:2;">
-      <li>Go to <a href="https://web3forms.com" target="_blank">web3forms.com</a></li>
-      <li>Enter <strong>info@proaxissolutions.co.za</strong> and click "Create Access Key"</li>
-      <li>Check your email and copy the key</li>
-      <li>Paste it below and click Save</li>
-    </ol>
-    <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;">
-      <input class="key-input" id="w3f-key-input" placeholder="Paste Web3Forms access key here…">
-      <button class="btn btn-teal" onclick="saveW3FKey()">Save Key</button>
-    </div>
-  </div>
-
-  <!-- Stats Row -->
-  <div class="stats">
-    <div class="stat-card">
-      <div class="stat-val" id="stat-total">0</div>
-      <div class="stat-label">Total Leads</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-val" id="stat-today">0</div>
-      <div class="stat-label">Today</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-val" id="stat-week">0</div>
-      <div class="stat-label">This Week</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-val" id="stat-assess">0</div>
-      <div class="stat-label">Assessment Leads</div>
-    </div>
-  </div>
-
-  <!-- Controls -->
-  <div class="controls">
-    <input class="search-box" id="search" placeholder="Search by name, email, organisation…" oninput="renderTable()">
-    <select class="search-box" id="filter-source" style="flex:0;width:160px;" onchange="renderTable()">
-      <option value="">All Sources</option>
-      <option value="contact">Contact Form</option>
-      <option value="assessment">Assessment Tool</option>
-    </select>
-    <button class="btn btn-outline" onclick="renderTable()">↻ Refresh</button>
-  </div>
-
-  <!-- Table -->
-  <div style="background:#1E293B;border:1px solid #334155;border-radius:12px;overflow:hidden;">
-    <table>
-      <thead>
-        <tr>
-          <th>Contact</th>
-          <th>Service / Interest</th>
-          <th>Budget</th>
-          <th>Source</th>
-          <th>Date</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="leads-table-body">
-        <tr><td colspan="6" class="empty"><h3>Loading leads…</h3></td></tr>
-      </tbody>
-    </table>
-  </div>
-
 </div>
-
-<!-- Detail Modal -->
-<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
-  <div class="modal" id="modal-content">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
-      <h3 id="modal-title">Lead Details</h3>
-      <button onclick="closeModal()" style="background:none;border:none;color:#64748B;font-size:1.2rem;cursor:pointer;">✕</button>
-    </div>
+<div class="stats" id="stats-row"></div>
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('all',this)">All Leads</div>
+  <div class="tab" onclick="switchTab('onboarding',this)">Onboarding</div>
+  <div class="tab" onclick="switchTab('contact',this)">Contact Form</div>
+  <div class="tab" onclick="switchTab('won',this)">Won ✓</div>
+</div>
+<div class="toolbar">
+  <input class="search-box" id="search-box" placeholder="Search name, business, email..." oninput="renderTable()">
+  <select class="filter-select" id="stage-filter" onchange="renderTable()">
+    <option value="">All Stages</option>
+    <option value="new">New</option>
+    <option value="contacted">Contacted</option>
+    <option value="discovery">Discovery</option>
+    <option value="proposal">Proposal Sent</option>
+    <option value="won">Won</option>
+    <option value="lost">Lost</option>
+  </select>
+  <select class="filter-select" id="sort-filter" onchange="renderTable()">
+    <option value="newest">Newest First</option>
+    <option value="oldest">Oldest First</option>
+    <option value="score">By Priority</option>
+  </select>
+</div>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Name / Business</th><th>Contact</th><th>Needs</th><th>Budget</th><th>Timeline</th><th>Source</th><th>Stage</th><th>Priority</th><th>Date</th><th></th></tr></thead>
+    <tbody id="leads-tbody"></tbody>
+  </table>
+  <div id="empty-state" class="empty" style="display:none">
+    <div class="empty-icon">📭</div>
+    <h3>No leads yet</h3>
+    <p>Leads from your contact form and onboarding page appear here automatically.<br>Share your website to start getting enquiries.</p>
+  </div>
+</div>
+<div class="modal-bg" id="modal-bg" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('modal-bg').classList.remove('open')">✕</button>
+    <h3 id="modal-title">Lead Detail</h3>
     <div id="modal-body"></div>
-    <div style="margin-top:1.5rem;display:flex;gap:0.75rem;">
-      <a id="modal-email-link" href="#" class="btn btn-teal" style="text-decoration:none;flex:1;text-align:center;">📧 Email This Lead</a>
-      <button onclick="closeModal()" class="btn btn-outline">Close</button>
+    <textarea class="notes-area" id="modal-notes" placeholder="Add notes about this lead..."></textarea>
+    <div class="dual-btn">
+      <button class="btn btn-teal" onclick="saveNotes()">Save Notes</button>
+      <button class="btn btn-outline" onclick="document.getElementById('modal-bg').classList.remove('open')">Close</button>
     </div>
   </div>
 </div>
-
 <script>
-let allLeads = [];
-
-function getAllLeads() {
-  const contact = JSON.parse(localStorage.getItem('proaxis_contact_leads') || '[]').map(l => ({...l, _source:'contact'}));
-  const assess  = JSON.parse(localStorage.getItem('proaxis_leads') || '[]').map(l => ({...l, _source:'assessment'}));
-  return [...contact, ...assess].sort((a,b) => (b.id||0) - (a.id||0));
+let allLeads=[],currentTab='all',currentModalId=null;
+function loadLeads(){
+  const ob=JSON.parse(localStorage.getItem('proaxis_onboarding_leads')||'[]').map(l=>({...l,_source:'onboarding',_id:l._id||'ob_'+(l.ts||Math.random())}));
+  const ct=JSON.parse(localStorage.getItem('proaxis_contact_leads')||'[]').map(l=>({...l,_source:'contact',_id:l._id||'ct_'+(l.ts||Math.random())}));
+  const meta=JSON.parse(localStorage.getItem('proaxis_crm_meta')||'{}');
+  allLeads=[...ob,...ct].map(l=>({...l,_stage:meta[l._id]?.stage||'new',_notes:meta[l._id]?.notes||''}));
+  renderStats();renderTable();
 }
-
-function updateStats(leads) {
-  document.getElementById('stat-total').textContent = leads.length;
-  const now = new Date();
-  const today = leads.filter(l => {
-    const d = new Date(l.timestamp || l.ts || 0);
-    return d.toDateString() === now.toDateString();
-  }).length;
-  const week = leads.filter(l => {
-    const d = new Date(l.timestamp || l.ts || 0);
-    return (now - d) < 7*24*60*60*1000;
-  }).length;
-  const assess = leads.filter(l => l._source === 'assessment').length;
-  document.getElementById('stat-today').textContent = today;
-  document.getElementById('stat-week').textContent = week;
-  document.getElementById('stat-assess').textContent = assess;
-  document.getElementById('lead-count-badge').textContent = leads.length + ' leads';
+function score(l){const b=l.budget||'';if(b.includes('50,000')||b.includes('15,000'))return'hot';if(b.includes('5,000')||String(l.timeline).includes('ASAP')||String(l.timeline).includes('2 weeks'))return'warm';return'cool';}
+function renderStats(){
+  const t=allLeads.length,n=allLeads.filter(l=>l._stage==='new').length,a=allLeads.filter(l=>['contacted','discovery','proposal'].includes(l._stage)).length,w=allLeads.filter(l=>l._stage==='won').length,h=allLeads.filter(l=>score(l)==='hot').length;
+  document.getElementById('stats-row').innerHTML=`<div class="stat-card"><div class="stat-val">${t}</div><div class="stat-label">Total Leads</div></div><div class="stat-card teal"><div class="stat-val">${n}</div><div class="stat-label">New</div></div><div class="stat-card blue"><div class="stat-val">${a}</div><div class="stat-label">In Pipeline</div></div><div class="stat-card amber"><div class="stat-val">${h}</div><div class="stat-label">Hot Leads</div></div><div class="stat-card green"><div class="stat-val">${w}</div><div class="stat-label">Won</div></div>`;
 }
-
-function fmt(ts) {
-  if (!ts) return '—';
-  const d = new Date(ts);
-  return d.toLocaleDateString('en-ZA', {day:'2-digit',month:'short',year:'numeric'}) + ' ' + d.toLocaleTimeString('en-ZA',{hour:'2-digit',minute:'2-digit'});
-}
-
-function renderTable() {
-  allLeads = getAllLeads();
-  updateStats(allLeads);
-  const q = document.getElementById('search').value.toLowerCase();
-  const src = document.getElementById('filter-source').value;
-  const filtered = allLeads.filter(l => {
-    const searchable = [l.name,l.email,l.organisation,l.service,l.industry].join(' ').toLowerCase();
-    const matchQ = !q || searchable.includes(q);
-    const matchSrc = !src || l._source === src;
-    return matchQ && matchSrc;
+function renderTable(){
+  const q=document.getElementById('search-box').value.toLowerCase();
+  const stage=document.getElementById('stage-filter').value;
+  const sort=document.getElementById('sort-filter').value;
+  let leads=allLeads.filter(l=>{
+    if(currentTab==='onboarding'&&l._source!=='onboarding')return false;
+    if(currentTab==='contact'&&l._source!=='contact')return false;
+    if(currentTab==='won'&&l._stage!=='won')return false;
+    if(stage&&l._stage!==stage)return false;
+    if(q){const h=[l.name,l.company,l.email,l.phone,l.services,l.service].join(' ').toLowerCase();if(!h.includes(q))return false;}
+    return true;
   });
-
-  const tbody = document.getElementById('leads-table-body');
-  if (!filtered.length) {
-    tbody.innerHTML = '<tr><td colspan="6" class="empty"><h3>No leads found</h3><p>Leads will appear here when someone submits the contact form or assessment tool.</p></td></tr>';
-    return;
-  }
-
-  tbody.innerHTML = filtered.map((l, i) => {
-    const srcColor = l._source === 'contact' ? 'dot-green' : 'dot-blue';
-    const srcLabel = l._source === 'contact' ? 'Contact Form' : 'Assessment';
-    const budget = l.budget || l.monthlyCost ? (l.budget || 'R'+Number(l.monthlyCost||0).toLocaleString()+'/mo cost') : '—';
-    const service = l.service || l.service_interest || l.ptype || '—';
-    return `<tr onclick="openModal(${allLeads.indexOf(l)})" style="cursor:pointer;">
-      <td>
-        <div class="lead-name">${l.name || 'Unknown'}</div>
-        <div class="lead-email">${l.email || '—'}</div>
-        <div class="lead-org">${l.organisation || l.industry || ''}</div>
-      </td>
-      <td><span class="tag tag-service">${service}</span></td>
-      <td><span class="tag tag-budget">${budget}</span></td>
-      <td>
-        <div class="source-type">
-          <div class="dot ${srcColor}"></div>
-          <span style="font-size:0.78rem;color:#94A3B8;">${srcLabel}</span>
-        </div>
-      </td>
-      <td style="font-size:0.78rem;color:#64748B;">${fmt(l.timestamp||l.ts)}</td>
-      <td><button onclick="event.stopPropagation();openModal(${allLeads.indexOf(l)})" class="btn btn-outline" style="padding:0.3rem 0.7rem;font-size:0.75rem;">View →</button></td>
+  if(sort==='oldest')leads.sort((a,b)=>new Date(a.ts||0)-new Date(b.ts||0));
+  else if(sort==='score')leads.sort((a,b)=>{const o={hot:0,warm:1,cool:2};return o[score(a)]-o[score(b)];});
+  else leads.sort((a,b)=>new Date(b.ts||0)-new Date(a.ts||0));
+  const tbody=document.getElementById('leads-tbody');
+  const empty=document.getElementById('empty-state');
+  if(!leads.length){tbody.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  tbody.innerHTML=leads.map(l=>{
+    const sc=score(l);
+    const name=l.name||l.from_name||'—';
+    const company=l.company||l.organisation||'';
+    const email=l.email||'';const phone=l.phone||'';
+    const services=l.services||l.service_interest||l.service||'—';
+    const budget=l.budget||l.budget_range||'—';
+    const timeline=l.timeline||'—';
+    const date=l.ts?new Date(l.ts).toLocaleDateString('en-ZA',{day:'numeric',month:'short',year:'2-digit'}):'—';
+    return`<tr>
+      <td><div class="name-cell">${name}</div>${company?`<div class="sub-cell">${company}</div>`:''}</td>
+      <td class="contact-cell">${email?`<div><a href="mailto:${email}">${email}</a></div>`:''} ${phone?`<div><a href="tel:${phone}">${phone}</a></div>`:''}</td>
+      <td style="max-width:160px;font-size:.78rem;color:var(--muted)">${services}</td>
+      <td style="font-size:.8rem;white-space:nowrap">${budget}</td>
+      <td style="font-size:.78rem;color:var(--muted);white-space:nowrap">${timeline}</td>
+      <td><span class="source-badge source-${l._source}">${l._source==='onboarding'?'Onboarding':'Contact'}</span></td>
+      <td><select class="stage-select stage-${l._stage}" onchange="updateStage('${l._id}',this.value,this)">
+        <option value="new" ${l._stage==='new'?'selected':''}>New</option>
+        <option value="contacted" ${l._stage==='contacted'?'selected':''}>Contacted</option>
+        <option value="discovery" ${l._stage==='discovery'?'selected':''}>Discovery</option>
+        <option value="proposal" ${l._stage==='proposal'?'selected':''}>Proposal Sent</option>
+        <option value="won" ${l._stage==='won'?'selected':''}>Won ✓</option>
+        <option value="lost" ${l._stage==='lost'?'selected':''}>Lost</option>
+      </select></td>
+      <td><span class="score-${sc}" style="font-size:.78rem;font-weight:700;display:flex;align-items:center"><span class="score-dot"></span>${sc.charAt(0).toUpperCase()+sc.slice(1)}</span></td>
+      <td style="font-size:.78rem;color:var(--slate);white-space:nowrap">${date}</td>
+      <td><button class="btn btn-outline" style="padding:.3rem .7rem;font-size:.75rem" onclick="openModal('${l._id}')">View</button></td>
     </tr>`;
   }).join('');
 }
-
-function openModal(idx) {
-  const l = allLeads[idx];
-  if (!l) return;
-  document.getElementById('modal-title').textContent = (l.name || 'Lead') + ' — Full Details';
-  const rows = [
-    ['Name', l.name],
-    ['Email', l.email],
-    ['Phone', l.phone],
-    ['Organisation', l.organisation],
-    ['Industry', l.industry],
-    ['Business Size', l.biz_size || l.bizSize],
-    ['Service Interest', l.service || l.service_interest || l.ptype],
-    ['Challenge / Message', l.challenge],
-    ['Additional Info', l.additional || l.additional_info],
-    ['Budget', l.budget],
-    ['Timeline', l.timeline],
-    ['Monthly Cost (Calc)', l.monthlyCost ? 'R' + Number(l.monthlyCost).toLocaleString() : null],
-    ['Monthly Saving (Est)', l.monthlySaving ? 'R' + Number(l.monthlySaving).toLocaleString() + '/mo' : null],
-    ['Source', l._source === 'contact' ? 'Contact Form' : 'Assessment Tool'],
-    ['Referral / Referrer', l.source],
-    ['Submitted', fmt(l.timestamp || l.ts)],
-  ].filter(r => r[1]);
-
-  document.getElementById('modal-body').innerHTML = rows.map(r =>
-    `<div class="detail-row"><span class="detail-label">${r[0]}</span><span class="detail-val">${r[1]}</span></div>`
-  ).join('');
-
-  const emailTo = l.email || '';
-  const emailSub = encodeURIComponent(`Following up on your Proaxis Solutions enquiry`);
-  const emailBody = encodeURIComponent(`Hi ${(l.name||'').split(' ')[0] || 'there'},\n\nThank you for reaching out to Proaxis Solutions. I wanted to follow up personally on your enquiry.\n\nBest regards,\nBongumusa Mthembu\nDirector — Proaxis Solutions\n📱 066 213 6607 | 🌐 proaxissolutions.co.za`);
-  document.getElementById('modal-email-link').href = `mailto:${emailTo}?subject=${emailSub}&body=${emailBody}`;
-
-  document.getElementById('modal').classList.add('open');
+function updateStage(id,stage,el){
+  const meta=JSON.parse(localStorage.getItem('proaxis_crm_meta')||'{}');
+  if(!meta[id])meta[id]={};meta[id].stage=stage;
+  localStorage.setItem('proaxis_crm_meta',JSON.stringify(meta));
+  const lead=allLeads.find(l=>l._id===id);if(lead)lead._stage=stage;
+  el.className='stage-select stage-'+stage;renderStats();
 }
-
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
+function openModal(id){
+  currentModalId=id;const l=allLeads.find(l=>l._id===id);if(!l)return;
+  const name=l.name||l.from_name||'—';
+  const rows=[['Name',name],['Business',l.company||l.organisation||'—'],['Email',l.email||'—'],['Phone',l.phone||'—'],['Sector',l.sector||l.industry||'—'],['Services',l.services||l.service_interest||l.service||'—'],['Budget',l.budget||l.budget_range||'—'],['Timeline',l.timeline||'—'],['Their Notes',l.notes||l.challenge||l.additional_info||'—'],['Source',l._source],['Submitted',l.ts?new Date(l.ts).toLocaleString('en-ZA'):'—']].filter(r=>r[1]&&r[1]!=='—');
+  document.getElementById('modal-title').textContent=name+(l.company?' · '+l.company:'');
+  document.getElementById('modal-body').innerHTML=rows.map(([k,v])=>`<div class="modal-row"><div class="modal-key">${k}</div><div class="modal-val">${v}</div></div>`).join('');
+  document.getElementById('modal-notes').value=l._notes||'';
+  document.getElementById('modal-bg').classList.add('open');
 }
-
-function exportCSV() {
-  const leads = getAllLeads();
-  if (!leads.length) { alert('No leads to export.'); return; }
-  const cols = ['name','email','phone','organisation','industry','biz_size','service','challenge','budget','timeline','_source','timestamp'];
-  const header = cols.join(',');
-  const rows = leads.map(l => cols.map(k => '"' + String(l[k]||'').replace(/"/g,'""') + '"').join(','));
-  const csv = [header, ...rows].join('\n');
-  const blob = new Blob([csv], {type:'text/csv'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'proaxis-leads-' + new Date().toISOString().slice(0,10) + '.csv';
-  a.click();
+function closeModal(e){if(e.target===document.getElementById('modal-bg'))document.getElementById('modal-bg').classList.remove('open');}
+function saveNotes(){
+  if(!currentModalId)return;
+  const notes=document.getElementById('modal-notes').value;
+  const meta=JSON.parse(localStorage.getItem('proaxis_crm_meta')||'{}');
+  if(!meta[currentModalId])meta[currentModalId]={};meta[currentModalId].notes=notes;
+  localStorage.setItem('proaxis_crm_meta',JSON.stringify(meta));
+  const lead=allLeads.find(l=>l._id===currentModalId);if(lead)lead._notes=notes;
+  document.getElementById('modal-bg').classList.remove('open');
 }
-
-function clearAllLeads() {
-  if (!confirm('⚠️ This will permanently delete ALL stored leads. Are you sure?')) return;
-  localStorage.removeItem('proaxis_contact_leads');
-  localStorage.removeItem('proaxis_leads');
-  renderTable();
+function switchTab(tab,el){currentTab=tab;document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderTable();}
+function exportCSV(){
+  if(!allLeads.length){alert('No leads to export.');return;}
+  const headers=['Name','Business','Email','Phone','Sector','Services','Budget','Timeline','Stage','Priority','Source','Date','Notes'];
+  const rows=allLeads.map(l=>[l.name||l.from_name||'',l.company||l.organisation||'',l.email||'',l.phone||'',l.sector||l.industry||'',l.services||l.service_interest||l.service||'',l.budget||l.budget_range||'',l.timeline||'',l._stage||'new',score(l),l._source||'',l.ts?new Date(l.ts).toLocaleDateString('en-ZA'):'',String(l._notes||'').replace(/,/g,'|')].map(v=>`"${String(v).replace(/"/g,'""')}"`));
+  const csv=[headers.join(','),...rows.map(r=>r.join(','))].join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='proaxis-leads-'+new Date().toISOString().slice(0,10)+'.csv';a.click();
 }
-
-function saveW3FKey() {
-  const key = document.getElementById('w3f-key-input').value.trim();
-  if (!key) return;
-  alert('Key noted! Open contact.html in a text editor (or via VS Code) and replace YOUR_ACCESS_KEY_HERE with:\n\n' + key + '\n\nThen save and push to GitHub.');
-}
-
-function checkSetup() {
-  // We can't read the contact.html JS from here — just show the banner always as a reminder
-  document.getElementById('setup-banner').style.display = 'block';
-}
-
-// Init
-checkSetup();
-renderTable();
-
-// Auto-refresh every 30s
-setInterval(renderTable, 30000);
+// Seed demo data if localStorage is empty
+(function(){
+  const ex=JSON.parse(localStorage.getItem('proaxis_onboarding_leads')||'[]');
+  if(ex.length)return;
+  localStorage.setItem('proaxis_onboarding_leads',JSON.stringify([
+    {_id:'demo_1',name:'Thabo Dlamini',company:'Dlamini Logistics',phone:'071 234 5678',email:'thabo@dlaminilog.co.za',sector:'SME / Small Business',services:'AI Automation, Website / Online presence',budget:'R15,000 – R50,000',timeline:'1–2 months',notes:'Wants to automate fleet tracking and invoicing.',ts:new Date(Date.now()-172800000).toISOString()},
+    {_id:'demo_2',name:'Dr Priya Naidoo',company:'PrimeCare Clinic',phone:'083 456 7890',email:'priya@primecaredbn.co.za',sector:'Healthcare / Clinic',services:'Custom Software, Process Automation',budget:'R50,000+',timeline:'ASAP — within 2 weeks',notes:'Fully manual patient booking. Urgent upgrade needed.',ts:new Date(Date.now()-86400000).toISOString()},
+    {_id:'demo_3',name:'Sipho Khumalo',company:'',phone:'066 789 0123',email:'sipho@gmail.com',sector:'',services:'Website / Online presence',budget:'Under R5,000',timeline:'Just exploring',notes:'',ts:new Date().toISOString()}
+  ]));
+  localStorage.setItem('proaxis_contact_leads',JSON.stringify([]));
+})();
+loadLeads();
 </script>
-
 </body>
 </html>
