@@ -150,7 +150,7 @@
 
     * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; box-sizing: border-box; }
 
-    body {
+    body { overflow-x: hidden;
       background: #fff;
       color: var(--slate);
       line-height: 1.65;
@@ -793,6 +793,42 @@
     .cookie-text a { color: #14B8A6; text-decoration: none; }
     .cookie-btn { background: #14B8A6; color: #0F172A; border: none; border-radius: 6px; padding: 0.5rem 1.25rem; font-weight: 700; font-size: 0.82rem; cursor: pointer; white-space: nowrap; }
     .cookie-btn-decline { background: transparent; color: #64748B; border: 1px solid #334155; border-radius: 6px; padding: 0.5rem 1rem; font-size: 0.82rem; cursor: pointer; margin-right: 0.5rem; }
+  
+    /* ── MOBILE GLOBAL ── */
+    @media (max-width: 768px) {
+      .hero { padding: 68px 1.25rem 60px !important; }
+      .hero h1 { font-size: clamp(1.8rem, 6vw, 2.8rem) !important; }
+      .hero p  { font-size: 1rem !important; }
+      .hero-btns { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+      .hero-btns a { text-align: center; }
+
+      /* Services preview grid — 1 col */
+      .services-grid { grid-template-columns: 1fr !important; }
+
+      /* Stats row */
+      .stats-row { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
+
+      /* Trust bar */
+      .trust-bar { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+
+      /* Section padding */
+      .section-inner, .py-section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+      .container-xl { padding-left: 1.25rem; padding-right: 1.25rem; }
+
+      /* CTA section */
+      .cta-section { padding: 3rem 1.25rem !important; text-align: center; }
+      .cta-section h2 { font-size: clamp(1.4rem, 4vw, 2rem) !important; }
+      .cta-btns { flex-direction: column; align-items: center; gap: 0.75rem; }
+
+      /* Biz card grid */
+      .biz-grid { grid-template-columns: 1fr 1fr !important; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: clamp(1.5rem, 7vw, 2rem) !important; }
+      .biz-grid { grid-template-columns: 1fr !important; }
+      .stats-row { grid-template-columns: 1fr 1fr !important; }
+      footer .footer-main-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+    }
   </style>
 </head>
 <body>

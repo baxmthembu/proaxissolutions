@@ -47,7 +47,7 @@
     * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; box-sizing: border-box; }
 
     /* ACCESSIBILITY-FIRST BASE — larger text throughout */
-    body {
+    body { overflow-x: hidden;
       background: #fff;
       color: var(--slate);
       line-height: 1.7;
@@ -475,6 +475,28 @@
       .contact-form-wrapper { padding: 1.75rem 1.25rem; }
       body { font-size: 16px; }
     }
+  
+    /* ── MOBILE GLOBAL ── */
+    @media (max-width: 768px) {
+      .page-header { padding: 56px 1.25rem 48px !important; }
+      h1 { font-size: clamp(1.6rem, 5vw, 2.4rem) !important; }
+
+      /* Form container */
+      .form-container { padding: 1.5rem 1.25rem !important; margin: 0 0.75rem !important; }
+      .contact-grid { grid-template-columns: 1fr !important; }
+
+      /* Step indicator */
+      .step-indicator { overflow-x: auto; }
+
+      /* Options grid */
+      .service-options-grid, .options-grid { grid-template-columns: 1fr 1fr !important; }
+
+      .container-xl { padding-left: 1.25rem; padding-right: 1.25rem; }
+    }
+    @media (max-width: 480px) {
+      .service-options-grid, .options-grid { grid-template-columns: 1fr !important; }
+      .form-container { padding: 1.25rem 1rem !important; margin: 0 0.5rem !important; }
+    }
   </style>
 </head>
 <body>
@@ -893,7 +915,7 @@
 
   // ── PROAXIS CONTACT FORM SUBMISSION ──
 // Web3Forms key — get yours FREE at https://web3forms.com (enter info@proaxissolutions.co.za)
-const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE';
+const WEB3FORMS_KEY = '1070ddd8-174a-4202-8fad-b6ad40cb5322';
 
 function collectFormData() {
   const val = id => (document.getElementById(id) || {}).value || '';
@@ -952,7 +974,7 @@ async function submitForm() {
   }
 
   // Try Web3Forms (email delivery)
-  if (WEB3FORMS_KEY && WEB3FORMS_KEY !== 'YOUR_ACCESS_KEY_HERE') {
+  if (WEB3FORMS_KEY) {
     try {
       const payload = {
         access_key: WEB3FORMS_KEY,
