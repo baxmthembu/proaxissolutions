@@ -2,221 +2,273 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ndlovu & Associates</title>
+<title>Ndlovu &amp; Associates — Attorneys &amp; Conveyancers</title>
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
-body{background:#05060a;color:#e8e6e0;min-height:100vh}
-:root{--gold:#c9a84c;--gold-light:#e2c87a;--dark:#05060a;--card:#0c0d12;--border:rgba(201,168,76,0.15);--text-dim:#8c8a80}
-nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;background:rgba(5,6,10,0.98);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
-.logo{display:flex;flex-direction:column}
-.logo-name{font-size:0.9rem;font-weight:800;color:#fff;letter-spacing:0.06em;text-transform:uppercase}
-.logo-tag{font-size:0.58rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;font-weight:600;margin-top:0.1rem}
-.nav-right{display:flex;align-items:center;gap:0.7rem}
-.consult-btn{background:linear-gradient(135deg,var(--gold),#a8702e);color:#05060a;border:none;padding:0.45rem 0.95rem;border-radius:20px;font-size:0.72rem;font-weight:800;cursor:pointer;letter-spacing:0.03em}
-.call-btn{background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,0.3);padding:0.45rem 0.85rem;border-radius:20px;font-size:0.72rem;font-weight:700;cursor:pointer}
+:root{--gold:#c9a84c;--gold2:#e2c87a;--bg:#05060a;--card:#0c0d12;--border:rgba(201,168,76,.15);--dim:#8c8a80}
+body{background:var(--bg);color:#e8e6e0;min-height:100vh;overflow-x:hidden}
+.app{max-width:430px;margin:0 auto;min-height:100vh;position:relative;box-shadow:0 0 60px rgba(201,168,76,.05)}
 
-.hero{background:linear-gradient(160deg,#08090f 0%,#0d1020 50%,#08090f 100%);padding:2.5rem 1.25rem 2rem;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(201,168,76,0.07),transparent)}
-.hero-tag{font-size:0.62rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;display:flex;align-items:center;justify-content:center;gap:0.5rem}
-.hero-tag::before,.hero-tag::after{content:'';height:1px;width:24px;background:rgba(201,168,76,0.4)}
-.hero h1{font-size:1.6rem;font-weight:900;color:#fff;line-height:1.2;letter-spacing:-0.01em;margin-bottom:0.5rem}
-.hero h1 em{font-style:normal;color:var(--gold)}
-.hero p{font-size:0.8rem;color:#8c8a80;max-width:280px;margin:0 auto 1.25rem;line-height:1.7}
-.hero-btns{display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap}
-.btn-p{background:linear-gradient(135deg,var(--gold),#a8702e);color:#05060a;border:none;padding:0.65rem 1.3rem;border-radius:25px;font-weight:800;font-size:0.8rem;cursor:pointer;letter-spacing:0.02em}
-.btn-s{background:transparent;color:var(--gold);border:1.5px solid rgba(201,168,76,0.3);padding:0.65rem 1.3rem;border-radius:25px;font-weight:700;font-size:0.8rem;cursor:pointer}
-.credentials{display:flex;justify-content:center;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap}
-.cred{font-size:0.65rem;color:var(--text-dim);display:flex;align-items:center;gap:0.3rem}
-.cred::before{content:'✓';color:var(--gold);font-weight:700}
+/* ───── LOADER: tipping scales of justice ───── */
+#page-loader{position:fixed;inset:0;background:#07080d;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s ease}
+#page-loader.hidden{opacity:0;visibility:hidden}
+.ldr-wrap{display:flex;flex-direction:column;align-items:center;gap:.8rem}
+.scales-stage{width:110px;height:100px;display:flex;align-items:center;justify-content:center}
+.beam-group{transform-origin:50px 22px;animation:beamTip 2.4s ease-in-out infinite}
+@keyframes beamTip{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+.pan-l{transform-origin:14px 22px;animation:panSwingL 2.4s ease-in-out infinite}
+.pan-r{transform-origin:86px 22px;animation:panSwingR 2.4s ease-in-out infinite}
+@keyframes panSwingL{0%,100%{transform:rotate(6deg)}50%{transform:rotate(-6deg)}}
+@keyframes panSwingR{0%,100%{transform:rotate(6deg)}50%{transform:rotate(-6deg)}}
+.ldr-name{font-size:1rem;font-weight:800;color:#fff;letter-spacing:.08em;text-transform:uppercase}
+.ldr-name span{color:var(--gold)}
+.ldr-sub{font-size:.6rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#5a584c;margin-top:-.3rem}
+.ldr-bar-wrap{width:90px;height:2px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;margin-top:.3rem}
+.ldr-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));animation:ldrBarFill 2.6s ease forwards}
+@keyframes ldrBarFill{0%{width:0}100%{width:100%}}
 
-/* Practice areas */
-.practice-strip{display:flex;gap:0.5rem;padding:0.85rem 1.25rem;overflow-x:auto;background:#08090f;border-bottom:1px solid var(--border)}
-.pa-chip{display:flex;align-items:center;gap:0.35rem;padding:0.4rem 0.85rem;border-radius:20px;background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.12);white-space:nowrap;cursor:pointer;transition:all 0.15s}
-.pa-chip.active{background:rgba(201,168,76,0.12);border-color:rgba(201,168,76,0.35)}
-.pa-chip span{font-size:0.7rem;font-weight:600;color:var(--gold)}
+/* ───── NAV ───── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;background:rgba(5,6,10,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.logo-name{font-size:.85rem;font-weight:800;color:#fff;letter-spacing:.06em;text-transform:uppercase}
+.logo-name span{color:var(--gold)}
+.logo-sub{font-size:.55rem;color:var(--dim);letter-spacing:.14em;text-transform:uppercase}
+.nav-cta{background:linear-gradient(135deg,var(--gold),#a8893a);color:#0a0a0a;border:none;padding:.5rem 1rem;border-radius:3px;font-size:.72rem;font-weight:800;cursor:pointer;letter-spacing:.04em;transition:transform .2s}
+.nav-cta:hover{transform:translateY(-2px)}
 
-.section{padding:1rem 1.25rem}
-.section-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem}
-.section-title{font-size:0.88rem;font-weight:700;color:#fff}
-.gold-divider{height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin-bottom:0.85rem;opacity:0.3}
+/* ───── HERO ───── */
+.hero{background:linear-gradient(160deg,#0a0b12,#14121a 55%,#0a0b12);padding:2.8rem 1.5rem 2.2rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(201,168,76,.12),transparent 70%);animation:glowPulse 5s ease-in-out infinite}
+@keyframes glowPulse{0%,100%{opacity:.6}50%{opacity:1}}
+.pillar{position:absolute;width:1px;background:linear-gradient(to bottom,transparent,rgba(201,168,76,.3),transparent);top:0;bottom:0;animation:pillarGlow 3s ease-in-out infinite alternate}
+@keyframes pillarGlow{0%{opacity:.2}100%{opacity:.7}}
+.hero-tag{font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.55rem;animation:fadeUp .8s ease .2s both}
+.hero h1{font-size:1.7rem;font-weight:800;color:#fff;line-height:1.22;margin-bottom:.45rem;font-family:Georgia,serif;animation:fadeUp .8s ease .35s both}
+.hero h1 em{font-style:italic;color:var(--gold2)}
+.hero p{font-size:.82rem;color:#a8a69a;max-width:300px;margin:0 auto 1.3rem;line-height:1.65;animation:fadeUp .8s ease .5s both}
+@keyframes fadeUp{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:translateY(0)}}
+.hero-btns{display:flex;gap:.6rem;justify-content:center;animation:fadeUp .8s ease .65s both}
+.btn-p{background:linear-gradient(135deg,var(--gold),#a8893a);color:#0a0a0a;border:none;padding:.72rem 1.4rem;border-radius:3px;font-weight:800;font-size:.78rem;letter-spacing:.04em;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(201,168,76,.3)}
+.btn-s{background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,.4);padding:.72rem 1.4rem;border-radius:3px;font-weight:700;font-size:.78rem;cursor:pointer}
 
-/* Attorneys */
-.attorney-grid{display:grid;gap:0.6rem;margin-bottom:1.25rem}
-.attorney-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0.95rem;display:flex;gap:0.85rem;align-items:flex-start;cursor:pointer;transition:all 0.15s}
-.attorney-card:hover{border-color:rgba(201,168,76,0.3)}
-.att-avatar{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;border:1px solid rgba(201,168,76,0.15)}
-.av1{background:linear-gradient(135deg,#1a1200,#2d2000)}
-.av2{background:linear-gradient(135deg,#0d1220,#1a2035)}
-.av3{background:linear-gradient(135deg,#120d1a,#251535)}
-.att-info{flex:1}
-.att-name{font-size:0.83rem;font-weight:700;color:#fff}
-.att-title{font-size:0.68rem;color:var(--gold);font-weight:600;margin-top:0.1rem}
-.att-spec{font-size:0.65rem;color:var(--text-dim);margin-top:0.3rem;line-height:1.5}
-.att-badge{display:inline-block;font-size:0.58rem;font-weight:700;padding:0.12rem 0.45rem;border-radius:10px;background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.2);margin-top:0.3rem}
-.att-right{text-align:right;flex-shrink:0}
-.att-rate{font-size:0.72rem;font-weight:700;color:#fff}
-.att-rate-label{font-size:0.58rem;color:var(--text-dim);margin-top:0.1rem}
-.att-book{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);color:var(--gold);font-size:0.65rem;font-weight:700;padding:0.3rem 0.65rem;border-radius:20px;cursor:pointer;margin-top:0.5rem;white-space:nowrap}
+/* ───── STATS ───── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);background:rgba(201,168,76,.04);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat{padding:1.05rem .4rem;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-val{font-size:1.2rem;font-weight:800;color:var(--gold)}
+.stat-label{font-size:.58rem;color:#6a685c;text-transform:uppercase;font-weight:600;letter-spacing:.08em;margin-top:.15rem}
 
-/* Case tracker */
-.case-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0.9rem;margin-bottom:0.5rem;cursor:pointer;transition:all 0.15s}
-.case-card:hover{border-color:rgba(201,168,76,0.25)}
-.case-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.4rem}
-.case-ref{font-size:0.67rem;font-weight:700;color:var(--gold);letter-spacing:0.04em}
-.case-status{font-size:0.6rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:20px}
-.cs-active{background:rgba(201,168,76,0.1);color:var(--gold-light)}
-.cs-review{background:rgba(37,99,235,0.12);color:#93c5fd}
-.cs-complete{background:rgba(74,222,128,0.1);color:#86efac}
-.cs-pending{background:rgba(156,163,175,0.1);color:#9ca3af}
-.case-name{font-size:0.82rem;font-weight:600;color:#fff;margin-bottom:0.15rem}
-.case-matter{font-size:0.7rem;color:var(--text-dim);line-height:1.4}
-.case-footer{display:flex;justify-content:space-between;margin-top:0.5rem;align-items:center}
-.case-meta{font-size:0.62rem;color:#4a4840;display:flex;gap:0.7rem}
-.case-value{font-size:0.75rem;font-weight:700;color:var(--gold)}
-.progress-bar-bg{height:3px;background:rgba(255,255,255,0.05);border-radius:20px;margin-top:0.6rem}
-.progress-bar{height:3px;border-radius:20px;background:linear-gradient(90deg,var(--gold),#a8702e)}
+/* ───── PRACTICE AREAS + CONSULT ───── */
+.section{padding:1.5rem 1.25rem}
+.section-label{font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+.section-title{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.9rem;font-family:Georgia,serif}
+.area-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.55rem;margin-bottom:1.4rem}
+.area-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:1rem .8rem;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.area-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transition:transform .25s}
+.area-card:hover::before,.area-card.sel::before{transform:scaleY(1)}
+.area-card:hover{border-color:rgba(201,168,76,.4);transform:translateY(-2px)}
+.area-card.sel{border-color:var(--gold);background:rgba(201,168,76,.07)}
+.area-ic{font-size:1.25rem;margin-bottom:.4rem}
+.area-nm{font-size:.76rem;font-weight:700;color:#fff;line-height:1.3}
+.area-ds{font-size:.62rem;color:var(--dim);margin-top:.2rem;line-height:1.45}
+.consult-box{background:var(--card);border:1px solid rgba(201,168,76,.25);border-radius:6px;padding:1.3rem}
+.consult-title{font-size:.92rem;font-weight:800;color:#fff;margin-bottom:.25rem;font-family:Georgia,serif}
+.consult-hint{font-size:.68rem;color:var(--dim);margin-bottom:1rem}
+.fld{margin-bottom:.8rem}
+.fld label{display:block;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#a8a69a;margin-bottom:.3rem}
+.fld input,.fld textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:.65rem .75rem;color:#fff;font-size:.8rem;font-family:inherit;transition:border-color .2s}
+.fld input:focus,.fld textarea:focus{outline:none;border-color:var(--gold)}
+.fld textarea{resize:none;height:74px}
+.consult-btn{width:100%;background:linear-gradient(135deg,var(--gold),#a8893a);color:#0a0a0a;border:none;padding:.8rem;border-radius:4px;font-weight:800;font-size:.82rem;letter-spacing:.04em;cursor:pointer;transition:all .2s}
+.consult-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(201,168,76,.25)}
+.consult-success{display:none;text-align:center;padding:1.4rem .6rem}
+.consult-success.show{display:block;animation:fadeUp .45s ease both}
+.consult-success .tick{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#a8893a);display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#0a0a0a;margin:0 auto .7rem;animation:pop .4s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
+.consult-success h3{color:#fff;font-size:1rem;margin-bottom:.3rem;font-family:Georgia,serif}
+.consult-success p{color:var(--dim);font-size:.74rem;line-height:1.6}
 
-/* Consultation booking */
-.consult-box{background:linear-gradient(135deg,rgba(201,168,76,0.05),rgba(168,112,46,0.03));border:1px solid var(--border);border-radius:14px;padding:1.1rem;margin-bottom:1rem}
-.consult-title{font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:0.85rem;display:flex;align-items:center;gap:0.4rem}
-.consult-types{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;margin-bottom:0.75rem}
-.consult-type{border:1px solid var(--border);border-radius:8px;padding:0.6rem;text-align:center;cursor:pointer;transition:all 0.15s}
-.consult-type.sel{border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.06)}
-.ct-icon{font-size:1rem;margin-bottom:0.2rem}
-.ct-name{font-size:0.72rem;font-weight:600;color:#fff}
-.ct-duration{font-size:0.62rem;color:var(--text-dim)}
-.cal-mini{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:0.75rem}
-.cm-h{font-size:0.58rem;font-weight:700;color:var(--text-dim);text-align:center;padding:0.2rem;text-transform:uppercase}
-.cm-d{font-size:0.7rem;text-align:center;padding:0.32rem 0;border-radius:5px;cursor:pointer;color:#64605a}
-.cm-d:hover,.cm-d.sel{background:rgba(201,168,76,0.1);color:var(--gold)}
-.cm-d.today{background:linear-gradient(135deg,var(--gold),#a8702e);color:#05060a;font-weight:700}
-.cm-d.na{color:#1e1c18;cursor:default}
-.confirm-consult{width:100%;background:linear-gradient(135deg,var(--gold),#a8702e);color:#05060a;border:none;padding:0.7rem;border-radius:10px;font-weight:800;font-size:0.8rem;cursor:pointer;letter-spacing:0.02em}
+/* ───── TEAM + PROCESS ───── */
+.partner{display:flex;align-items:center;gap:.9rem;background:var(--card);border:1px solid var(--border);border-radius:4px;padding:.95rem;margin-bottom:.55rem;transition:all .2s}
+.partner:hover{border-color:rgba(201,168,76,.4);transform:translateX(3px)}
+.partner-av{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;background:linear-gradient(135deg,#1a1820,#26222e);border:1px solid rgba(201,168,76,.3)}
+.partner-nm{font-size:.8rem;font-weight:700;color:#fff}
+.partner-rl{font-size:.64rem;color:var(--gold);margin-top:.1rem;font-weight:600}
+.partner-ds{font-size:.62rem;color:var(--dim);margin-top:.15rem}
+.step-row{display:flex;gap:.7rem;align-items:flex-start;margin-bottom:.9rem}
+.step-num{width:26px;height:26px;border-radius:50%;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.4);color:var(--gold);font-size:.72rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-tx b{display:block;font-size:.78rem;color:#fff;margin-bottom:.1rem}
+.step-tx span{font-size:.68rem;color:var(--dim);line-height:1.5}
+.testi{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:1rem;margin-bottom:.6rem}
+.testi p{font-size:.76rem;color:#b8b6aa;line-height:1.65;font-style:italic}
+.testi .who{font-size:.64rem;color:var(--gold);font-weight:700;margin-top:.5rem;letter-spacing:.04em}
+
+/* ───── WA + FOOTER ───── */
+.wa-btn{position:fixed;bottom:1.2rem;right:1.2rem;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.45);z-index:90;text-decoration:none;animation:waBob 2.4s ease-in-out infinite}
+@keyframes waBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.wa-btn svg{width:28px;height:28px;fill:#fff}
+footer{padding:1.7rem 1.25rem 2.2rem;text-align:center;border-top:1px solid var(--border)}
+footer .f-brand{font-size:.8rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;margin-bottom:.3rem}
+footer .f-brand span{color:var(--gold)}
+footer p{font-size:.62rem;color:#55534a;line-height:1.7}
+.powered{display:inline-block;margin-top:.8rem;font-size:.62rem;color:var(--dim);text-decoration:none;border:1px solid rgba(201,168,76,.2);padding:.4rem .9rem;border-radius:3px;transition:all .2s}
+.powered:hover{color:var(--gold);border-color:var(--gold)}
+.powered b{color:var(--gold)}
+@media(max-width:480px){.hero h1{font-size:1.45rem}}
 </style>
-  <link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
-  <link rel="icon" type="image/x-icon" href="brand/favicon.ico">
 </head>
 <body>
-<nav>
-  <div class="logo">
-    <div class="logo-name">Ndlovu &amp; Associates</div>
-    <div class="logo-tag">Attorneys · Notaries · Conveyancers</div>
-  </div>
-  <div class="nav-right">
-    <button class="call-btn">📞 Call</button>
-    <button class="consult-btn">Book Consult</button>
-  </div>
-</nav>
-
-<div class="hero">
-  <div class="hero-tag">Durban Legal Excellence</div>
-  <h1>Trusted Counsel.<br><em>Decisive</em> Action.</h1>
-  <p>Expert legal representation across commercial, property, labour, and family law. 20+ years serving KwaZulu-Natal.</p>
-  <div class="hero-btns">
-    <button class="btn-p">Free Consultation</button>
-    <button class="btn-s">Our Practice Areas</button>
-  </div>
-  <div class="credentials">
-    <span class="cred">Law Society of SA</span>
-    <span class="cred">Legal Aid Panel</span>
-    <span class="cred">BBB-EE Level 1</span>
+<div id="page-loader">
+  <div class="ldr-wrap">
+    <div class="scales-stage">
+      <svg width="100" height="92" viewBox="0 0 100 92" xmlns="http://www.w3.org/2000/svg">
+        <line x1="50" y1="22" x2="50" y2="78" stroke="#c9a84c" stroke-width="3" stroke-linecap="round"/>
+        <line x1="34" y1="82" x2="66" y2="82" stroke="#c9a84c" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="50" cy="16" r="4" fill="none" stroke="#c9a84c" stroke-width="2.5"/>
+        <g class="beam-group">
+          <line x1="14" y1="22" x2="86" y2="22" stroke="#e2c87a" stroke-width="2.5" stroke-linecap="round"/>
+          <g class="pan-l">
+            <line x1="14" y1="22" x2="7" y2="40" stroke="#c9a84c" stroke-width="1.5"/>
+            <line x1="14" y1="22" x2="21" y2="40" stroke="#c9a84c" stroke-width="1.5"/>
+            <path d="M4 40 Q14 50 24 40" fill="none" stroke="#e2c87a" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
+          <g class="pan-r">
+            <line x1="86" y1="22" x2="79" y2="40" stroke="#c9a84c" stroke-width="1.5"/>
+            <line x1="86" y1="22" x2="93" y2="40" stroke="#c9a84c" stroke-width="1.5"/>
+            <path d="M76 40 Q86 50 96 40" fill="none" stroke="#e2c87a" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="ldr-name">Ndlovu <span>&amp;</span> Associates</div>
+    <div class="ldr-sub">Attorneys · Conveyancers</div>
+    <div class="ldr-bar-wrap"><div class="ldr-bar-fill"></div></div>
   </div>
 </div>
 
-<div class="practice-strip">
-  <div class="pa-chip active"><span>⚖️ Commercial Law</span></div>
-  <div class="pa-chip"><span>🏠 Property</span></div>
-  <div class="pa-chip"><span>👷 Labour Law</span></div>
-  <div class="pa-chip"><span>👨‍👩‍👧 Family Law</span></div>
-  <div class="pa-chip"><span>📑 Contracts</span></div>
-  <div class="pa-chip"><span>🏛️ Litigation</span></div>
+<div class="app">
+<nav>
+  <div><div class="logo-name">Ndlovu <span>&amp;</span> Associates</div><div class="logo-sub">Attorneys · Est. 2009</div></div>
+  <button class="nav-cta" onclick="document.getElementById('consult').scrollIntoView({behavior:'smooth'})">Consult</button>
+</nav>
+
+<div class="hero" id="hero">
+  <div class="hero-tag">Trusted Legal Counsel · Durban</div>
+  <h1>Justice With<br><em>Integrity</em> ⚖️</h1>
+  <p>Specialist attorneys in property, family, labour and commercial law. Your first consultation is free.</p>
+  <div class="hero-btns">
+    <button class="btn-p" onclick="document.getElementById('areas').scrollIntoView({behavior:'smooth'})">Book Free Consult</button>
+    <button class="btn-s" onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'})">Meet the Team</button>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-val"><span class="count" data-target="15">0</span>+</div><div class="stat-label">Years Practice</div></div>
+  <div class="stat"><div class="stat-val"><span class="count" data-target="900">0</span>+</div><div class="stat-label">Matters Resolved</div></div>
+  <div class="stat"><div class="stat-val"><span class="count" data-target="96">0</span>%</div><div class="stat-label">Client Retention</div></div>
+</div>
+
+<div class="section" id="areas">
+  <div class="section-label">Step 1 — Select Your Matter</div>
+  <div class="section-title">Practice Areas</div>
+  <div class="area-grid">
+    <div class="area-card" onclick="pickArea(this,'Property & Conveyancing')"><div class="area-ic">🏠</div><div class="area-nm">Property &amp; Conveyancing</div><div class="area-ds">Transfers, bonds, leases</div></div>
+    <div class="area-card" onclick="pickArea(this,'Family Law')"><div class="area-ic">👨‍👩‍👧</div><div class="area-nm">Family Law</div><div class="area-ds">Divorce, custody, maintenance</div></div>
+    <div class="area-card" onclick="pickArea(this,'Labour Law')"><div class="area-ic">💼</div><div class="area-nm">Labour Law</div><div class="area-ds">CCMA, dismissals, contracts</div></div>
+    <div class="area-card" onclick="pickArea(this,'Commercial Law')"><div class="area-ic">📈</div><div class="area-nm">Commercial Law</div><div class="area-ds">Contracts, disputes, compliance</div></div>
+    <div class="area-card" onclick="pickArea(this,'Wills & Estates')"><div class="area-ic">📜</div><div class="area-nm">Wills &amp; Estates</div><div class="area-ds">Drafting, administration</div></div>
+    <div class="area-card" onclick="pickArea(this,'Debt Recovery')"><div class="area-ic">⚖️</div><div class="area-nm">Debt Recovery</div><div class="area-ds">Collections, judgments</div></div>
+  </div>
+
+  <div class="consult-box" id="consult">
+    <div id="consultForm">
+      <div class="consult-title">Request Your Free Consultation</div>
+      <div class="consult-hint" id="areaHint">Select a practice area above, then tell us briefly about your matter.</div>
+      <div class="fld"><label>Full Name</label><input id="cName" placeholder="e.g. Sipho Mkhize"></div>
+      <div class="fld"><label>Phone</label><input id="cPhone" placeholder="e.g. 082 000 0000"></div>
+      <div class="fld"><label>Brief Description</label><textarea id="cDesc" placeholder="A short summary of your legal matter…"></textarea></div>
+      <button class="consult-btn" onclick="submitConsult()">Request Consultation →</button>
+    </div>
+    <div class="consult-success" id="consultSuccess">
+      <div class="tick">✓</div>
+      <h3>Request Received</h3>
+      <p id="consultText"></p>
+      <p style="margin-top:.6rem;color:var(--gold);font-weight:700">An attorney will call you within one business day.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="team">
+  <div class="section-label">Who You'll Work With</div>
+  <div class="section-title">Our Attorneys</div>
+  <div class="partner"><div class="partner-av">👨🏿‍💼</div><div><div class="partner-nm">S. Ndlovu</div><div class="partner-rl">Managing Partner · Conveyancer</div><div class="partner-ds">Property &amp; commercial · 15 yrs</div></div></div>
+  <div class="partner"><div class="partner-av">👩🏽‍💼</div><div><div class="partner-nm">A. Govender</div><div class="partner-rl">Senior Associate</div><div class="partner-ds">Family &amp; labour law · 9 yrs</div></div></div>
+  <div class="partner"><div class="partner-av">👨🏾‍💼</div><div><div class="partner-nm">T. Zondi</div><div class="partner-rl">Associate</div><div class="partner-ds">Estates &amp; debt recovery · 5 yrs</div></div></div>
 </div>
 
 <div class="section">
-  <div class="section-row"><div class="section-title">Our Attorneys</div><span style="font-size:0.7rem;color:var(--text-dim)">3 practitioners</span></div>
-  <div class="gold-divider"></div>
-  <div class="attorney-grid">
-    <div class="attorney-card">
-      <div class="att-avatar av1">👨‍⚖️</div>
-      <div class="att-info">
-        <div class="att-name">Adv. S. Ndlovu</div>
-        <div class="att-title">Senior Partner</div>
-        <div class="att-spec">Commercial Law · Mergers &amp; Acquisitions · Corporate Governance</div>
-        <div class="att-badge">20 yrs experience</div>
-      </div>
-      <div class="att-right">
-        <div class="att-rate">R1,800</div>
-        <div class="att-rate-label">per hour</div>
-        <button class="att-book">Book</button>
-      </div>
-    </div>
-    <div class="attorney-card">
-      <div class="att-avatar av2">👩‍⚖️</div>
-      <div class="att-info">
-        <div class="att-name">Adv. P. Zungu</div>
-        <div class="att-title">Associate · Conveyancer</div>
-        <div class="att-spec">Property Law · Transfers · Bonds &amp; Registration</div>
-        <div class="att-badge">Notary Public</div>
-      </div>
-      <div class="att-right">
-        <div class="att-rate">R1,200</div>
-        <div class="att-rate-label">per hour</div>
-        <button class="att-book">Book</button>
-      </div>
-    </div>
-    <div class="attorney-card">
-      <div class="att-avatar av3">👨‍⚖️</div>
-      <div class="att-info">
-        <div class="att-name">Adv. R. Cele</div>
-        <div class="att-title">Associate</div>
-        <div class="att-spec">Labour Law · CCMA · Disciplinary Hearings</div>
-        <div class="att-badge">CCMA Accredited</div>
-      </div>
-      <div class="att-right">
-        <div class="att-rate">R950</div>
-        <div class="att-rate-label">per hour</div>
-        <button class="att-book">Book</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-row"><div class="section-title">Active Cases</div><span style="font-size:0.7rem;color:var(--text-dim)">8 matters</span></div>
-  <div class="gold-divider"></div>
-
-  <div class="case-card">
-    <div class="case-header"><div><div class="case-ref">CASE-2024/1142</div><div class="case-name">Dlamini Holdings (Pty) Ltd</div></div><span class="case-status cs-active">In Litigation</span></div>
-    <div class="case-matter">Commercial dispute — breach of supply contract. High Court Durban. Next hearing 22 July 2026.</div>
-    <div class="case-footer"><div class="case-meta"><span>⚖️ Commercial</span><span>👤 S. Ndlovu</span></div><span class="case-value">R340k</span></div>
-    <div class="progress-bar-bg"><div class="progress-bar" style="width:65%"></div></div>
-  </div>
-
-  <div class="case-card">
-    <div class="case-header"><div><div class="case-ref">CASE-2025/0081</div><div class="case-name">Naidoo v. Coastal Properties</div></div><span class="case-status cs-review">Under Review</span></div>
-    <div class="case-matter">Property transfer dispute. Title deed irregularity identified. Awaiting Deeds Office response.</div>
-    <div class="case-footer"><div class="case-meta"><span>🏠 Property</span><span>👤 P. Zungu</span></div><span class="case-value">R1.2m</span></div>
-    <div class="progress-bar-bg"><div class="progress-bar" style="width:30%"></div></div>
-  </div>
-
-  <div class="case-card">
-    <div class="case-header"><div><div class="case-ref">CASE-2025/0203</div><div class="case-name">Mokoena v. EduTech SA</div></div><span class="case-status cs-complete">Settled</span></div>
-    <div class="case-matter">Unfair dismissal — CCMA arbitration. Settled out of hearing. R85,000 compensation awarded.</div>
-    <div class="case-footer"><div class="case-meta"><span>👷 Labour</span><span>👤 R. Cele</span></div><span class="case-value">R85k ✓</span></div>
-    <div class="progress-bar-bg"><div class="progress-bar" style="width:100%"></div></div>
-  </div>
-
-  <div class="consult-box">
-    <div class="consult-title">📅 Book a Consultation</div>
-    <div class="consult-types">
-      <div class="consult-type sel"><div class="ct-icon">🏛️</div><div class="ct-name">In-Person</div><div class="ct-duration">60 min · R800</div></div>
-      <div class="consult-type"><div class="ct-icon">💻</div><div class="ct-name">Virtual</div><div class="ct-duration">45 min · R600</div></div>
-    </div>
-    <div class="cal-mini">
-      <div class="cm-h">Mo</div><div class="cm-h">Tu</div><div class="cm-h">We</div><div class="cm-h">Th</div><div class="cm-h">Fr</div><div class="cm-h">Sa</div><div class="cm-h">Su</div>
-      <div class="cm-d na">2</div><div class="cm-d na">3</div><div class="cm-d">4</div><div class="cm-d">5</div><div class="cm-d">6</div><div class="cm-d na">7</div><div class="cm-d na">8</div>
-      <div class="cm-d">9</div><div class="cm-d sel">10</div><div class="cm-d today">11</div><div class="cm-d">12</div><div class="cm-d">13</div><div class="cm-d na">14</div><div class="cm-d na">15</div>
-    </div>
-    <button class="confirm-consult">Confirm — Adv. Ndlovu · Wed 11 Jun · 10:00 →</button>
-  </div>
+  <div class="section-label">How It Works</div>
+  <div class="section-title">Our Process</div>
+  <div class="step-row"><div class="step-num">1</div><div class="step-tx"><b>Free consultation</b><span>30 minutes, in person or by phone — no obligation.</span></div></div>
+  <div class="step-row"><div class="step-num">2</div><div class="step-tx"><b>Fixed-fee quote</b><span>Clear costs upfront. No surprise billing.</span></div></div>
+  <div class="step-row"><div class="step-num">3</div><div class="step-tx"><b>We act</b><span>Regular updates at every stage of your matter.</span></div></div>
 </div>
+
+<div class="section">
+  <div class="section-label">Client Testimonials</div>
+  <div class="section-title">In Their Words</div>
+  <div class="testi"><p>"My property transfer was done in record time, and they explained every step in plain language."</p><div class="who">— N.M., UMHLANGA</div></div>
+  <div class="testi"><p>"They handled my CCMA matter with absolute professionalism. Result exceeded expectations."</p><div class="who">— K.P., PINETOWN</div></div>
+</div>
+
+<footer>
+  <div class="f-brand">Ndlovu <span>&amp;</span> Associates</div>
+  <p>12 Justice Lane, Durban · Mon–Fri 8am–5pm<br>This is a demonstration website.</p>
+  <a class="powered" href="https://proaxissolutions.co.za" target="_blank">Powered by <b>Proaxis Solutions</b></a>
+</footer>
+</div>
+
+<a class="wa-btn" href="https://wa.me/272136607" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.3 7L4 29l7.2-2.2c1.9 1 4 1.6 6.3 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-2 0-3.9-.6-5.5-1.6l-.4-.2-4.1 1.3 1.3-4-.3-.4C5.7 18.4 5 16.8 5 15 5 9 9.9 4 16 4s11 4.9 11 11-4.9 9.8-11 9.8zm5.6-7.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.5 4.9.8.3 1.4.5 1.9.7.8.2 1.5.2 2.1.1.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>
+</a>
+
+<script>
+window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('page-loader').classList.add('hidden')},2600)});
+
+function animateCounters(){
+  document.querySelectorAll('.count').forEach(el=>{
+    const target=+el.dataset.target,dur=1600,t0=performance.now();
+    function tick(t){const p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(target*e).toLocaleString();if(p<1)requestAnimationFrame(tick)}
+    requestAnimationFrame(tick);
+  });
+}
+window.addEventListener('load',()=>setTimeout(animateCounters,2700));
+
+let area=null;
+function pickArea(el,name){
+  document.querySelectorAll('.area-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');area=name;
+  document.getElementById('areaHint').textContent='✓ '+name+' selected — complete the form below.';
+  document.getElementById('consult').scrollIntoView({behavior:'smooth'});
+}
+function submitConsult(){
+  const nm=document.getElementById('cName').value.trim();
+  if(!area){document.getElementById('areaHint').textContent='⚠ Please select a practice area above first.';document.getElementById('areas').scrollIntoView({behavior:'smooth'});return}
+  if(!nm){document.getElementById('cName').focus();document.getElementById('cName').style.borderColor='#e2c87a';return}
+  document.getElementById('consultForm').style.display='none';
+  document.getElementById('consultSuccess').classList.add('show');
+  document.getElementById('consultText').textContent='Thank you, '+nm+'. Your '+area+' enquiry has been logged.';
+}
+
+// Gold pillars in hero
+const hero=document.getElementById('hero');
+[15,35,65,85].forEach((x,i)=>{
+  const p=document.createElement('div');p.className='pillar';
+  p.style.cssText='left:'+x+'%;animation-delay:'+(i*.5)+'s';
+  hero.appendChild(p);
+});
+</script>
 </body>
 </html>

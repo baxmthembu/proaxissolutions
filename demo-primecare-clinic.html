@@ -2,199 +2,289 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PrimeCare Clinic</title>
+<title>PrimeCare Clinic — Quality Care, Close to Home</title>
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
-body{background:#f0f4f8;color:#1e293b;min-height:100vh}
-:root{--teal:#0d9488;--blue:#2563eb;--light-teal:#ccfbf1;--card:#fff;--border:#e2e8f0;--dark-bg:#0f172a}
-nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.25rem;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
-.logo{display:flex;align-items:center;gap:0.5rem}
-.logo-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--teal),var(--blue));border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.9rem;font-weight:900}
-.logo-text{font-size:0.95rem;font-weight:800;color:#0f172a}<br>
+:root{--teal:#0d9488;--blue:#2563eb;--lt:#ccfbf1;--card:#fff;--border:#e2e8f0;--ink:#1e293b;--mut:#64748b}
+body{background:#f0f4f8;color:var(--ink);min-height:100vh;overflow-x:hidden}
+.app{max-width:430px;margin:0 auto;min-height:100vh;position:relative;background:#f0f4f8;box-shadow:0 0 40px rgba(13,148,136,.1)}
+
+/* ───── LOADER: ECG heartbeat ───── */
+#page-loader{position:fixed;inset:0;background:#06302b;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s ease}
+#page-loader.hidden{opacity:0;visibility:hidden}
+.ldr-wrap{display:flex;flex-direction:column;align-items:center;gap:.8rem}
+.ecg-stage{position:relative;width:200px;height:80px}
+.ecg-line{stroke:#2dd4bf;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;animation:ecgDraw 2.2s linear infinite;filter:drop-shadow(0 0 6px rgba(45,212,191,.7))}
+@keyframes ecgDraw{0%{stroke-dashoffset:420}55%{stroke-dashoffset:0;opacity:1}80%{opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+.ecg-dot{position:absolute;width:9px;height:9px;border-radius:50%;background:#2dd4bf;box-shadow:0 0 12px #2dd4bf;offset-path:path('M0 40 L50 40 L62 40 L70 18 L80 62 L88 8 L96 52 L104 40 L150 40 L200 40');animation:dotRun 2.2s linear infinite}
+@keyframes dotRun{0%{offset-distance:0%;opacity:1}55%{offset-distance:100%;opacity:1}56%,100%{offset-distance:100%;opacity:0}}
+.heart{font-size:1.3rem;animation:heartBeat 1.1s ease infinite;display:inline-block}
+@keyframes heartBeat{0%,100%{transform:scale(1)}12%{transform:scale(1.25)}24%{transform:scale(1)}36%{transform:scale(1.18)}48%{transform:scale(1)}}
+.ldr-name{font-size:1.15rem;font-weight:900;color:#fff}
+.ldr-name span{color:#2dd4bf}
+.ldr-sub{font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#3a7a70;margin-top:-.3rem}
+.ldr-bar-wrap{width:90px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;margin-top:.3rem}
+.ldr-bar-fill{height:100%;background:linear-gradient(90deg,#2dd4bf,#2563eb);animation:ldrBarFill 2.6s ease forwards}
+@keyframes ldrBarFill{0%{width:0}100%{width:100%}}
+
+/* ───── NAV ───── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.logo{display:flex;align-items:center;gap:.5rem}
+.logo-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--teal),var(--blue));border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.9rem;font-weight:900}
+.logo-text{font-size:.92rem;font-weight:800}
 .logo-text span{color:var(--teal)}
-.nav-right{display:flex;align-items:center;gap:0.6rem}
-.emergency{background:#ef4444;color:#fff;border:none;padding:0.4rem 0.8rem;border-radius:20px;font-size:0.7rem;font-weight:700;cursor:pointer}
-.book-btn{background:var(--teal);color:#fff;border:none;padding:0.4rem 0.9rem;border-radius:20px;font-size:0.7rem;font-weight:700;cursor:pointer}
+.nav-cta{background:linear-gradient(135deg,var(--teal),#0f766e);color:#fff;border:none;padding:.45rem 1rem;border-radius:20px;font-size:.75rem;font-weight:700;cursor:pointer;transition:transform .2s}
+.nav-cta:hover{transform:translateY(-2px)}
 
-.hero{background:linear-gradient(135deg,var(--dark-bg),#0d2540);padding:2rem 1.25rem;color:#fff;text-align:center}
-.hero-tag{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#5eead4;margin-bottom:0.4rem}
-.hero h1{font-size:1.5rem;font-weight:900;line-height:1.2;margin-bottom:0.4rem}
-.hero h1 span{color:#5eead4}
-.hero p{font-size:0.8rem;color:#94a3b8;max-width:280px;margin:0 auto 1.1rem;line-height:1.6}
-.availability{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(13,148,136,0.15);border:1px solid rgba(13,148,136,0.3);border-radius:20px;padding:0.35rem 0.9rem;font-size:0.7rem;color:#5eead4;font-weight:600;margin-bottom:1.1rem}
-.avail-dot{width:7px;height:7px;background:#22c55e;border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-.hero-btns{display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap}
-.btn-p{background:var(--teal);color:#fff;border:none;padding:0.6rem 1.2rem;border-radius:25px;font-weight:700;font-size:0.8rem;cursor:pointer}
-.btn-s{background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.15);padding:0.6rem 1.2rem;border-radius:25px;font-weight:700;font-size:0.8rem;cursor:pointer}
+/* ───── HERO ───── */
+.hero{background:linear-gradient(150deg,#0d9488,#0f766e 60%,#115e59);padding:2.6rem 1.25rem 2.1rem;text-align:center;position:relative;overflow:hidden;color:#fff}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);animation:glowPulse 4s ease-in-out infinite}
+@keyframes glowPulse{0%,100%{opacity:.6}50%{opacity:1}}
+.pulse-cross{position:absolute;color:rgba(255,255,255,.15);pointer-events:none;animation:crossFloat ease-in-out infinite alternate;font-weight:900}
+@keyframes crossFloat{0%{transform:translateY(0) rotate(0)}100%{transform:translateY(-18px) rotate(12deg)}}
+.hero-tag{font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#99f6e4;margin-bottom:.45rem;animation:fadeUp .8s ease .2s both}
+.hero h1{font-size:1.75rem;font-weight:900;line-height:1.18;margin-bottom:.4rem;animation:fadeUp .8s ease .35s both}
+.hero p{font-size:.83rem;color:#ccfbf1;max-width:300px;margin:0 auto 1.25rem;line-height:1.6;animation:fadeUp .8s ease .5s both}
+@keyframes fadeUp{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:translateY(0)}}
+.hero-btns{display:flex;gap:.6rem;justify-content:center;animation:fadeUp .8s ease .65s both}
+.btn-p{background:#fff;color:var(--teal);border:none;padding:.7rem 1.3rem;border-radius:25px;font-weight:800;font-size:.8rem;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.2)}
+.btn-s{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5);padding:.7rem 1.3rem;border-radius:25px;font-weight:700;font-size:.8rem;cursor:pointer}
 
-.services-strip{display:flex;gap:0.5rem;padding:1rem 1.25rem;overflow-x:auto;background:#fff;border-bottom:1px solid var(--border)}
-.svc-chip{display:flex;align-items:center;gap:0.35rem;padding:0.4rem 0.85rem;border-radius:20px;background:rgba(13,148,136,0.06);border:1px solid rgba(13,148,136,0.15);white-space:nowrap;cursor:pointer;transition:all 0.15s}
-.svc-chip:hover{background:rgba(13,148,136,0.12)}
-.svc-chip.active{background:var(--teal);border-color:var(--teal)}
-.svc-chip.active span{color:#fff}
-.svc-chip .ic{font-size:0.9rem}
-.svc-chip span{font-size:0.72rem;font-weight:600;color:var(--teal)}
-.svc-chip.active span{color:#fff}
+/* ───── STATS ───── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border-bottom:1px solid var(--border)}
+.stat{padding:1rem .4rem;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-val{font-size:1.2rem;font-weight:800;color:var(--teal)}
+.stat-label{font-size:.6rem;color:var(--mut);text-transform:uppercase;font-weight:600;margin-top:.1rem}
 
-.section{padding:1rem 1.25rem}
-.section-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem}
-.section-title{font-size:0.9rem;font-weight:800;color:#0f172a}
+/* ───── BOOKING FLOW ───── */
+.section{padding:1.4rem 1.25rem}
+.section-label{font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:.25rem}
+.section-title{font-size:1.1rem;font-weight:800;margin-bottom:.9rem}
+.book-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;box-shadow:0 4px 16px rgba(15,23,42,.06)}
+.step-label{font-size:.68rem;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.55rem}
+.doc-row{display:flex;gap:.55rem;overflow-x:auto;padding-bottom:.4rem;margin-bottom:1rem}
+.doc-card{min-width:108px;background:#f8fafc;border:1.5px solid var(--border);border-radius:12px;padding:.8rem .6rem;text-align:center;cursor:pointer;transition:all .2s;flex-shrink:0}
+.doc-card:hover{border-color:var(--teal);transform:translateY(-2px)}
+.doc-card.sel{border-color:var(--teal);background:var(--lt);box-shadow:0 0 0 1px var(--teal) inset}
+.doc-av{width:46px;height:46px;border-radius:50%;margin:0 auto .4rem;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#fff}
+.doc-nm{font-size:.7rem;font-weight:800}
+.doc-sp{font-size:.6rem;color:var(--mut);margin-top:.1rem}
+.doc-next{font-size:.58rem;color:var(--teal);font-weight:700;margin-top:.25rem}
+.slot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;margin-bottom:1rem}
+.slot{background:#f8fafc;border:1.5px solid var(--border);border-radius:8px;padding:.5rem .3rem;text-align:center;font-size:.72rem;font-weight:600;color:var(--ink);cursor:pointer;transition:all .15s}
+.slot:not(.taken):hover{border-color:var(--teal)}
+.slot.active{background:var(--lt);border-color:var(--teal);color:var(--teal);font-weight:800}
+.slot.taken{color:#cbd5e1;cursor:not-allowed;text-decoration:line-through}
+.visit-row{display:flex;gap:.5rem;margin-bottom:1rem}
+.visit-opt{flex:1;background:#f8fafc;border:1.5px solid var(--border);border-radius:10px;padding:.6rem .4rem;text-align:center;cursor:pointer;font-size:.7rem;font-weight:700;color:var(--mut);transition:all .2s}
+.visit-opt.sel{border-color:var(--blue);background:#eff6ff;color:var(--blue)}
+.book-btn{width:100%;background:linear-gradient(135deg,var(--teal),#0f766e);color:#fff;border:none;padding:.8rem;border-radius:10px;font-weight:800;font-size:.85rem;cursor:pointer;transition:all .2s;opacity:.45;pointer-events:none}
+.book-btn.ready{opacity:1;pointer-events:auto}
+.book-btn.ready:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(13,148,136,.3)}
+.book-success{display:none;text-align:center;padding:1.2rem .5rem}
+.book-success.show{display:block;animation:fadeUp .45s ease both}
+.book-success .tick{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--blue));display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#fff;margin:0 auto .7rem;animation:pop .4s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
+.book-success h3{font-size:1rem;margin-bottom:.3rem}
+.book-success p{font-size:.75rem;color:var(--mut);line-height:1.6}
 
-/* Doctors */
-.doctor-grid{display:grid;grid-template-columns:repeat(1,1fr);gap:0.6rem;margin-bottom:1.25rem}
-.doctor-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0.9rem;display:flex;gap:0.9rem;align-items:flex-start;cursor:pointer;transition:all 0.15s;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
-.doctor-card:hover{border-color:rgba(13,148,136,0.3);box-shadow:0 4px 12px rgba(13,148,136,0.1)}
-.doc-avatar{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
-.av1{background:linear-gradient(135deg,#0d9488,#0369a1)}
-.av2{background:linear-gradient(135deg,#7c3aed,#2563eb)}
-.av3{background:linear-gradient(135deg,#dc2626,#9333ea)}
-.doc-info{flex:1}
-.doc-name{font-size:0.85rem;font-weight:700;color:#0f172a}
-.doc-spec{font-size:0.7rem;color:var(--teal);font-weight:600;margin-top:0.1rem}
-.doc-tags{display:flex;gap:0.3rem;margin-top:0.4rem;flex-wrap:wrap}
-.doc-tag{font-size:0.6rem;font-weight:600;padding:0.15rem 0.45rem;border-radius:10px;background:rgba(13,148,136,0.08);color:var(--teal)}
-.doc-right{text-align:right;flex-shrink:0}
-.doc-avail{font-size:0.65rem;font-weight:700;color:#22c55e}
-.doc-avail.busy{color:#f59e0b}
-.doc-rate{font-size:0.75rem;font-weight:700;color:#0f172a;margin-top:0.25rem}
-.book-doc-btn{background:var(--teal);color:#fff;border:none;padding:0.3rem 0.7rem;border-radius:20px;font-size:0.65rem;font-weight:700;cursor:pointer;margin-top:0.4rem}
+/* ───── SERVICES ───── */
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}
+.svc-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;transition:all .2s;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+.svc-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(15,23,42,.1)}
+.svc-ic{width:38px;height:38px;background:var(--lt);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:.5rem}
+.svc-nm{font-size:.78rem;font-weight:800}
+.svc-ds{font-size:.64rem;color:var(--mut);margin-top:.2rem;line-height:1.45}
 
-/* Booking */
-.booking-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem;box-shadow:0 1px 3px rgba(0,0,0,0.04);margin-bottom:1rem}
-.booking-card h3{font-size:0.85rem;font-weight:700;color:#0f172a;margin-bottom:0.85rem}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:0.85rem}
-.ch{font-size:0.6rem;font-weight:700;color:#94a3b8;text-align:center;padding:0.2rem;text-transform:uppercase}
-.cd{font-size:0.72rem;text-align:center;padding:0.35rem 0;border-radius:6px;cursor:pointer;color:#475569}
-.cd:hover{background:rgba(13,148,136,0.1);color:var(--teal)}
-.cd.today{background:var(--teal);color:#fff;font-weight:700}
-.cd.sel{background:rgba(13,148,136,0.12);color:var(--teal);font-weight:700;border:1px solid rgba(13,148,136,0.3)}
-.cd.na{color:#e2e8f0;cursor:default}
-.time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.4rem;margin-bottom:0.75rem}
-.ts{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:0.4rem;text-align:center;font-size:0.72rem;color:#64748b;cursor:pointer;transition:all 0.15s;font-weight:500}
-.ts:hover,.ts.sel{background:rgba(13,148,136,0.08);border-color:rgba(13,148,136,0.3);color:var(--teal);font-weight:600}
-.ts.booked{background:#f1f5f9;color:#cbd5e1;cursor:default}
-.confirm-btn{width:100%;background:linear-gradient(135deg,var(--teal),var(--blue));color:#fff;border:none;padding:0.7rem;border-radius:10px;font-weight:700;font-size:0.82rem;cursor:pointer}
+/* ───── INFO + TESTI ───── */
+.info-card{background:linear-gradient(135deg,#115e59,#0d9488);border-radius:14px;padding:1.25rem;color:#fff;position:relative;overflow:hidden}
+.info-card::after{content:'';position:absolute;top:-50%;left:-60%;width:60%;height:200%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.12),transparent);animation:shine 3.5s ease infinite}
+@keyframes shine{0%{left:-60%}60%,100%{left:120%}}
+.info-card h3{font-size:.95rem;margin-bottom:.4rem}
+.info-card p{font-size:.74rem;color:#ccfbf1;line-height:1.6}
+.chips{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.7rem}
+.chip{background:rgba(255,255,255,.15);color:#fff;font-size:.62rem;font-weight:700;padding:.25rem .6rem;border-radius:20px}
+.testi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:.6rem;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+.testi p{font-size:.76rem;color:#475569;line-height:1.6;font-style:italic}
+.testi .who{font-size:.66rem;color:var(--teal);font-weight:700;margin-top:.5rem}
+.testi .stars{color:#f59e0b;font-size:.7rem;letter-spacing:.1em}
 
-/* Patient queue */
-.queue-item{display:flex;align-items:center;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid var(--border)}
-.queue-left{display:flex;align-items:center;gap:0.6rem}
-.queue-num{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--teal),var(--blue));color:#fff;font-size:0.72rem;font-weight:800;display:flex;align-items:center;justify-content:center}
-.q-name{font-size:0.8rem;font-weight:600;color:#0f172a}
-.q-detail{font-size:0.65rem;color:#64748b;margin-top:0.1rem}
-.q-status{font-size:0.62rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:20px}
-.qs-in{background:rgba(34,197,94,0.1);color:#16a34a}
-.qs-wait{background:rgba(245,158,11,0.1);color:#d97706}
-.qs-next{background:rgba(37,99,235,0.1);color:var(--blue)}
-.q-wait-time{font-size:0.65rem;color:#94a3b8;text-align:right;margin-top:0.2rem}
+/* ───── WA + FOOTER ───── */
+.wa-btn{position:fixed;bottom:1.2rem;right:1.2rem;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.45);z-index:90;text-decoration:none;animation:waBob 2.4s ease-in-out infinite}
+@keyframes waBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.wa-btn svg{width:28px;height:28px;fill:#fff}
+footer{padding:1.6rem 1.25rem 2.2rem;text-align:center;background:#fff;border-top:1px solid var(--border)}
+footer .f-brand{font-size:.85rem;font-weight:900;margin-bottom:.3rem}
+footer .f-brand span{color:var(--teal)}
+footer p{font-size:.64rem;color:#94a3b8;line-height:1.7}
+.powered{display:inline-block;margin-top:.8rem;font-size:.64rem;color:var(--mut);text-decoration:none;border:1px solid var(--border);padding:.4rem .9rem;border-radius:20px;transition:all .2s}
+.powered:hover{color:var(--teal);border-color:var(--teal)}
+.powered b{color:var(--teal)}
+@media(max-width:480px){.hero h1{font-size:1.5rem}}
 </style>
-  <link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
-  <link rel="icon" type="image/x-icon" href="brand/favicon.ico">
 </head>
 <body>
-<nav>
-  <div class="logo"><div class="logo-mark">+</div><div class="logo-text">Prime<span>Care</span> Clinic</div></div>
-  <div class="nav-right">
-    <button class="emergency">🚨 Emergency</button>
-    <button class="book-btn">Book Now</button>
-  </div>
-</nav>
-
-<div class="hero">
-  <div class="hero-tag">Durban's Trusted Community Clinic</div>
-  <h1>Your Health,<br><span>Our Priority</span></h1>
-  <p>Book appointments online. Consult from home. Access your records anytime.</p>
-  <div class="availability"><span class="avail-dot"></span>Accepting new patients today</div>
-  <div class="hero-btns">
-    <button class="btn-p">Book Appointment</button>
-    <button class="btn-s">Virtual Consult</button>
+<div id="page-loader">
+  <div class="ldr-wrap">
+    <div class="ecg-stage">
+      <svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+        <path class="ecg-line" d="M0 40 L50 40 L62 40 L70 18 L80 62 L88 8 L96 52 L104 40 L150 40 L200 40"/>
+      </svg>
+      <div class="ecg-dot"></div>
+    </div>
+    <div class="ldr-name"><span class="heart">💓</span> Prime<span>Care</span></div>
+    <div class="ldr-sub">Family Clinic · Walk-ins Welcome</div>
+    <div class="ldr-bar-wrap"><div class="ldr-bar-fill"></div></div>
   </div>
 </div>
 
-<div class="services-strip">
-  <div class="svc-chip active"><span class="ic">🏥</span><span>General GP</span></div>
-  <div class="svc-chip"><span class="ic">👶</span><span>Paediatrics</span></div>
-  <div class="svc-chip"><span class="ic">❤️</span><span>Cardiology</span></div>
-  <div class="svc-chip"><span class="ic">🦷</span><span>Dental</span></div>
-  <div class="svc-chip"><span class="ic">🧠</span><span>Mental Health</span></div>
-  <div class="svc-chip"><span class="ic">💉</span><span>Vaccinations</span></div>
+<div class="app">
+<nav>
+  <div class="logo"><div class="logo-mark">+</div><div class="logo-text">Prime<span>Care</span></div></div>
+  <button class="nav-cta" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book Visit</button>
+</nav>
+
+<div class="hero" id="hero">
+  <div class="hero-tag">Family Healthcare · Medical Aid &amp; Cash</div>
+  <h1>Quality Care,<br>Close to Home 🩺</h1>
+  <p>GP consultations, chronic care, wellness checks &amp; more. Book in under a minute.</p>
+  <div class="hero-btns">
+    <button class="btn-p" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'})">Book Appointment</button>
+    <button class="btn-s" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Our Services</button>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-val"><span class="count" data-target="12000">0</span>+</div><div class="stat-label">Patients Seen</div></div>
+  <div class="stat"><div class="stat-val"><span class="count" data-target="15">0</span> min</div><div class="stat-label">Avg Wait</div></div>
+  <div class="stat"><div class="stat-val"><span class="count" data-target="6">0</span> days</div><div class="stat-label">Open / Week</div></div>
+</div>
+
+<div class="section" id="book">
+  <div class="section-label">3 quick steps</div>
+  <div class="section-title">📅 Book an Appointment</div>
+  <div class="book-box">
+    <div id="bookForm">
+      <div class="step-label">1 — Choose your doctor</div>
+      <div class="doc-row" id="docRow"></div>
+      <div class="step-label">2 — Visit type</div>
+      <div class="visit-row">
+        <div class="visit-opt" onclick="pickVisit(this,'In-person')">🏥 In-person</div>
+        <div class="visit-opt" onclick="pickVisit(this,'Telehealth')">📱 Telehealth</div>
+      </div>
+      <div class="step-label">3 — Pick a time (tomorrow)</div>
+      <div class="slot-grid" id="slotGrid"></div>
+      <button class="book-btn" id="bookBtn" onclick="confirmBooking()">Choose doctor, type &amp; time</button>
+    </div>
+    <div class="book-success" id="bookSuccess">
+      <div class="tick">✓</div>
+      <h3>Appointment Booked!</h3>
+      <p id="successText"></p>
+      <p style="margin-top:.6rem;color:var(--teal);font-weight:700">A confirmation SMS is on its way.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="services">
+  <div class="section-label">What We Treat</div>
+  <div class="section-title">Our Services</div>
+  <div class="svc-grid">
+    <div class="svc-card"><div class="svc-ic">🩺</div><div class="svc-nm">GP Consults</div><div class="svc-ds">Acute &amp; general care for all ages</div></div>
+    <div class="svc-card"><div class="svc-ic">💉</div><div class="svc-nm">Vaccinations</div><div class="svc-ds">Flu, travel &amp; childhood schedules</div></div>
+    <div class="svc-card"><div class="svc-ic">🫀</div><div class="svc-nm">Chronic Care</div><div class="svc-ds">Diabetes, BP &amp; medication plans</div></div>
+    <div class="svc-card"><div class="svc-ic">🤰</div><div class="svc-nm">Women's Health</div><div class="svc-ds">Screenings &amp; family planning</div></div>
+    <div class="svc-card"><div class="svc-ic">🧪</div><div class="svc-nm">On-site Lab</div><div class="svc-ds">Bloods &amp; rapid tests, same day</div></div>
+    <div class="svc-card"><div class="svc-ic">🚑</div><div class="svc-nm">Minor Injuries</div><div class="svc-ds">Stitches, wounds &amp; sprains</div></div>
+  </div>
 </div>
 
 <div class="section">
-  <div class="section-row"><div class="section-title">Our Doctors</div><span style="font-size:0.7rem;color:#64748b">3 available today</span></div>
-  <div class="doctor-grid">
-    <div class="doctor-card">
-      <div class="doc-avatar av1">👨‍⚕️</div>
-      <div class="doc-info">
-        <div class="doc-name">Dr. Ndlela Mthethwa</div>
-        <div class="doc-spec">General Practitioner</div>
-        <div class="doc-tags"><span class="doc-tag">Diabetes</span><span class="doc-tag">Hypertension</span><span class="doc-tag">Chronic</span></div>
-      </div>
-      <div class="doc-right">
-        <div class="doc-avail">● Available</div>
-        <div class="doc-rate">R350/visit</div>
-        <button class="book-doc-btn">Book</button>
-      </div>
-    </div>
-    <div class="doctor-card">
-      <div class="doc-avatar av2">👩‍⚕️</div>
-      <div class="doc-info">
-        <div class="doc-name">Dr. Priya Pillay</div>
-        <div class="doc-spec">Paediatrics</div>
-        <div class="doc-tags"><span class="doc-tag">Child Health</span><span class="doc-tag">Vaccines</span></div>
-      </div>
-      <div class="doc-right">
-        <div class="doc-avail">● Available</div>
-        <div class="doc-rate">R380/visit</div>
-        <button class="book-doc-btn">Book</button>
-      </div>
-    </div>
-    <div class="doctor-card">
-      <div class="doc-avatar av3">👨‍⚕️</div>
-      <div class="doc-info">
-        <div class="doc-name">Dr. A. Govender</div>
-        <div class="doc-spec">Mental Health & Counselling</div>
-        <div class="doc-tags"><span class="doc-tag">Anxiety</span><span class="doc-tag">CBT</span></div>
-      </div>
-      <div class="doc-right">
-        <div class="doc-avail busy">● Next: 2pm</div>
-        <div class="doc-rate">R420/visit</div>
-        <button class="book-doc-btn">Book</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="booking-card">
-    <h3>📅 Schedule Your Appointment</h3>
-    <div class="cal-grid">
-      <div class="ch">Mo</div><div class="ch">Tu</div><div class="ch">We</div><div class="ch">Th</div><div class="ch">Fr</div><div class="ch">Sa</div><div class="ch">Su</div>
-      <div class="cd na">2</div><div class="cd na">3</div><div class="cd">4</div><div class="cd">5</div><div class="cd">6</div><div class="cd">7</div><div class="cd na">8</div>
-      <div class="cd">9</div><div class="cd sel">10</div><div class="cd today">11</div><div class="cd">12</div><div class="cd">13</div><div class="cd">14</div><div class="cd na">15</div>
-    </div>
-    <div class="time-grid">
-      <div class="ts booked">08:00</div>
-      <div class="ts booked">09:00</div>
-      <div class="ts sel">10:30</div>
-      <div class="ts">12:00</div>
-      <div class="ts booked">13:30</div>
-      <div class="ts">15:00</div>
-    </div>
-    <button class="confirm-btn">Confirm — Dr. Mthethwa · 10:30am →</button>
-  </div>
-
-  <div class="section-row"><div class="section-title">Today's Queue</div><span style="font-size:0.7rem;color:#64748b">8 patients</span></div>
-  <div class="queue-item">
-    <div class="queue-left"><div class="queue-num">1</div><div><div class="q-name">Zanele Dlamini</div><div class="q-detail">Dr. Mthethwa · General check-up</div></div></div>
-    <div style="text-align:right"><span class="q-status qs-in">In Consult</span><div class="q-wait-time">~15 min</div></div>
-  </div>
-  <div class="queue-item">
-    <div class="queue-left"><div class="queue-num">2</div><div><div class="q-name">Sandile Ngcobo</div><div class="q-detail">Dr. Pillay · Paediatrics</div></div></div>
-    <div style="text-align:right"><span class="q-status qs-next">Up Next</span><div class="q-wait-time">~5 min</div></div>
-  </div>
-  <div class="queue-item">
-    <div class="queue-left"><div class="queue-num">3</div><div><div class="q-name">Mrs Pather</div><div class="q-detail">Dr. Mthethwa · Blood pressure</div></div></div>
-    <div style="text-align:right"><span class="q-status qs-wait">Waiting</span><div class="q-wait-time">~25 min</div></div>
+  <div class="section-label">Good To Know</div>
+  <div class="section-title">Visiting PrimeCare</div>
+  <div class="info-card">
+    <h3>🏥 Walk-ins welcome, bookings faster</h3>
+    <p>We accept all major medical aids plus affordable cash rates. Bring your ID and medical aid card.</p>
+    <div class="chips"><span class="chip">Discovery</span><span class="chip">Bonitas</span><span class="chip">GEMS</span><span class="chip">Momentum</span><span class="chip">Cash R450</span></div>
   </div>
 </div>
+
+<div class="section">
+  <div class="section-label">Patient Stories</div>
+  <div class="section-title">Reviews</div>
+  <div class="testi"><div class="stars">★★★★★</div><p>"Booked online at 8am, seen by 9:15. Dr Naidoo explains everything properly."</p><div class="who">— Priya S.</div></div>
+  <div class="testi"><div class="stars">★★★★★</div><p>"The telehealth option saved me a taxi trip for my repeat script. Brilliant."</p><div class="who">— Bheki N.</div></div>
+</div>
+
+<footer>
+  <div class="f-brand">Prime<span>Care</span> Clinic</div>
+  <p>Mon–Sat 7:30am–6pm · 45 Health Way<br>This is a demonstration website.</p>
+  <a class="powered" href="https://proaxissolutions.co.za" target="_blank">Powered by <b>Proaxis Solutions</b></a>
+</footer>
+</div>
+
+<a class="wa-btn" href="https://wa.me/272136607" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.3 7L4 29l7.2-2.2c1.9 1 4 1.6 6.3 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-2 0-3.9-.6-5.5-1.6l-.4-.2-4.1 1.3 1.3-4-.3-.4C5.7 18.4 5 16.8 5 15 5 9 9.9 4 16 4s11 4.9 11 11-4.9 9.8-11 9.8zm5.6-7.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.5 4.9.8.3 1.4.5 1.9.7.8.2 1.5.2 2.1.1.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>
+</a>
+
+<script>
+window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('page-loader').classList.add('hidden')},2600)});
+
+function animateCounters(){
+  document.querySelectorAll('.count').forEach(el=>{
+    const target=+el.dataset.target,dur=1600,t0=performance.now();
+    function tick(t){const p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(target*e).toLocaleString();if(p<1)requestAnimationFrame(tick)}
+    requestAnimationFrame(tick);
+  });
+}
+window.addEventListener('load',()=>setTimeout(animateCounters,2700));
+
+// Booking flow
+const DOCTORS=[
+  {nm:'Dr Naidoo',sp:'General Practice',av:'👩🏽‍⚕️',bg:'#0d9488',next:'Tomorrow 09:00'},
+  {nm:'Dr Khumalo',sp:'Family Medicine',av:'👨🏿‍⚕️',bg:'#2563eb',next:'Tomorrow 10:30'},
+  {nm:'Dr Petersen',sp:"Women's Health",av:'👩🏼‍⚕️',bg:'#7c3aed',next:'Thu 08:30'},
+  {nm:'Sr Mbatha',sp:'Clinic Sister',av:'👩🏾‍⚕️',bg:'#ea580c',next:'Tomorrow 08:00'}
+];
+const TIMES=['08:00','09:00','10:30','11:30','14:00','15:30'];
+const TAKEN=['09:00','14:00'];
+let doc=null,visit=null,slot=null;
+
+const docRow=document.getElementById('docRow');
+DOCTORS.forEach(d=>{
+  const el=document.createElement('div');el.className='doc-card';
+  el.innerHTML='<div class="doc-av" style="background:'+d.bg+'">'+d.av+'</div><div class="doc-nm">'+d.nm+'</div><div class="doc-sp">'+d.sp+'</div><div class="doc-next">Next: '+d.next+'</div>';
+  el.onclick=()=>{document.querySelectorAll('.doc-card').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');doc=d;updateBtn()};
+  docRow.appendChild(el);
+});
+const slotGrid=document.getElementById('slotGrid');
+TIMES.forEach(t=>{
+  const el=document.createElement('div');el.className='slot'+(TAKEN.includes(t)?' taken':'');el.textContent=t;
+  if(!TAKEN.includes(t))el.onclick=()=>{document.querySelectorAll('.slot').forEach(s=>s.classList.remove('active'));el.classList.add('active');slot=t;updateBtn()};
+  slotGrid.appendChild(el);
+});
+function pickVisit(el,v){document.querySelectorAll('.visit-opt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');visit=v;updateBtn()}
+function updateBtn(){
+  const btn=document.getElementById('bookBtn');
+  if(doc&&visit&&slot){btn.classList.add('ready');btn.textContent='Confirm — '+doc.nm+' · '+visit+' · '+slot}
+  else{btn.classList.remove('ready');btn.textContent=!doc?'Choose your doctor':!visit?'Choose visit type':'Pick a time'}
+}
+function confirmBooking(){
+  document.getElementById('bookForm').style.display='none';
+  document.getElementById('bookSuccess').classList.add('show');
+  document.getElementById('successText').textContent=doc.nm+' ('+doc.sp+') — '+visit+' visit, tomorrow at '+slot+'.';
+}
+
+// Floating crosses in hero
+const hero=document.getElementById('hero');
+for(let i=0;i<6;i++){
+  const c=document.createElement('div');c.className='pulse-cross';c.textContent='+';
+  c.style.cssText='left:'+(5+Math.random()*90)+'%;top:'+(10+Math.random()*75)+'%;font-size:'+(0.9+Math.random()*1.2)+'rem;animation-duration:'+(2.5+Math.random()*3)+'s;animation-delay:'+(Math.random()*2)+'s';
+  hero.appendChild(c);
+}
+</script>
 </body>
 </html>

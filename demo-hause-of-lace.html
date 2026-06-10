@@ -2,162 +2,324 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hause of Lace</title>
+<title>Hause of Lace — Durban's Premier Hair Studio</title>
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
-body{background:#0d0a0e;color:#f0e6f0;min-height:100vh}
-nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;background:rgba(13,10,14,0.95);border-bottom:1px solid rgba(255,182,193,0.15);position:sticky;top:0;z-index:10}
-.logo{font-size:1rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#fff}.logo span{color:#e8a0b8}
-.nav-links{display:flex;gap:1.5rem;list-style:none}
-.nav-links a{color:#ccc;text-decoration:none;font-size:0.8rem;font-weight:600;letter-spacing:0.04em}
-.btn-book{background:linear-gradient(135deg,#e8a0b8,#c76d96);color:#fff;border:none;padding:0.5rem 1.1rem;border-radius:20px;font-size:0.78rem;font-weight:700;cursor:pointer;letter-spacing:0.04em}
-.hero{background:linear-gradient(135deg,#1a0d1a 0%,#2d1030 50%,#1a0d1a 100%);padding:2.5rem 1.5rem 2rem;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-40px;left:50%;transform:translateX(-50%);width:300px;height:300px;background:radial-gradient(circle,rgba(232,160,184,0.15) 0%,transparent 70%);pointer-events:none}
-.hero-tag{font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#e8a0b8;margin-bottom:0.5rem}
-.hero h1{font-size:1.8rem;font-weight:900;color:#fff;line-height:1.15;letter-spacing:-0.02em;margin-bottom:0.4rem}
-.hero h1 em{font-style:normal;color:#e8a0b8}
-.hero p{font-size:0.85rem;color:#b09ab0;max-width:300px;margin:0 auto 1.25rem;line-height:1.6}
-.hero-btns{display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap}
-.btn-primary{background:linear-gradient(135deg,#e8a0b8,#c76d96);color:#fff;border:none;padding:0.7rem 1.4rem;border-radius:25px;font-weight:700;font-size:0.82rem;cursor:pointer}
-.btn-secondary{background:transparent;color:#e8a0b8;border:1.5px solid rgba(232,160,184,0.4);padding:0.7rem 1.4rem;border-radius:25px;font-weight:700;font-size:0.82rem;cursor:pointer}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,182,193,0.08);border-top:1px solid rgba(255,182,193,0.1);border-bottom:1px solid rgba(255,182,193,0.1)}
-.stat{background:#0d0a0e;padding:1rem;text-align:center}
-.stat-val{font-size:1.3rem;font-weight:800;color:#e8a0b8}
-.stat-label{font-size:0.65rem;color:#7a6a7a;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-top:0.15rem}
-.section{padding:1.5rem}
-.section-label{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#e8a0b8;margin-bottom:0.3rem}
-.section-title{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:1rem}
-/* Services Grid */
-.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;margin-bottom:1.5rem}
-.service-card{background:linear-gradient(135deg,rgba(232,160,184,0.08),rgba(199,109,150,0.04));border:1px solid rgba(232,160,184,0.12);border-radius:12px;padding:1rem;cursor:pointer;transition:all 0.2s}
-.service-card:hover{border-color:rgba(232,160,184,0.35);background:linear-gradient(135deg,rgba(232,160,184,0.15),rgba(199,109,150,0.08))}
-.service-icon{font-size:1.4rem;margin-bottom:0.4rem}
-.service-name{font-size:0.82rem;font-weight:700;color:#fff}
-.service-price{font-size:0.72rem;color:#e8a0b8;margin-top:0.2rem;font-weight:600}
-.service-time{font-size:0.65rem;color:#7a6a7a;margin-top:0.1rem}
-/* Booking */
-.booking-box{background:rgba(232,160,184,0.06);border:1px solid rgba(232,160,184,0.15);border-radius:14px;padding:1.25rem}
-.booking-title{font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:1rem}
+body{background:#0d0a0e;color:#f0e6f0;min-height:100vh;overflow-x:hidden}
+.app{max-width:430px;margin:0 auto;background:#0d0a0e;min-height:100vh;position:relative;box-shadow:0 0 60px rgba(232,160,184,.07)}
+
+/* ───── LOADER: animated scissors cutting ───── */
+#page-loader{position:fixed;inset:0;background:#120a14;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s ease}
+#page-loader.hidden{opacity:0;visibility:hidden}
+.ldr-wrap{display:flex;flex-direction:column;align-items:center;gap:.8rem}
+.ldr-stage{position:relative;width:120px;height:90px;display:flex;align-items:center;justify-content:center}
+.scissors{position:relative;width:70px;height:70px;animation:scissorMove 2.6s ease-in-out infinite}
+.blade{position:absolute;left:8px;top:31px;width:52px;height:5px;background:linear-gradient(90deg,#e8a0b8,#fff);border-radius:3px;transform-origin:12px 50%}
+.blade::after{content:'';position:absolute;left:-12px;top:-5px;width:15px;height:15px;border:2.5px solid #e8a0b8;border-radius:50%;background:transparent}
+.blade.b1{animation:bladeTop 0.65s ease-in-out infinite}
+.blade.b2{animation:bladeBot 0.65s ease-in-out infinite}
+@keyframes bladeTop{0%,100%{transform:rotate(-22deg)}50%{transform:rotate(-2deg)}}
+@keyframes bladeBot{0%,100%{transform:rotate(22deg)}50%{transform:rotate(2deg)}}
+@keyframes scissorMove{0%,100%{transform:translateX(-22px)}50%{transform:translateX(22px)}}
+.hair-strands{position:absolute;bottom:6px;left:0;right:0;display:flex;justify-content:center;gap:7px}
+.strand{width:2.5px;height:26px;border-radius:2px;background:linear-gradient(#c76d96,#5a2d4a);animation:strandSway 1.4s ease-in-out infinite alternate;transform-origin:top center}
+.strand:nth-child(2n){animation-delay:.2s;height:22px}
+.strand:nth-child(3n){animation-delay:.4s;height:28px}
+@keyframes strandSway{0%{transform:rotate(-7deg)}100%{transform:rotate(7deg)}}
+.ldr-name{font-size:1.15rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.ldr-name span{color:#e8a0b8}
+.ldr-sub{font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#7a6a7a;margin-top:-.4rem}
+.ldr-bar-wrap{width:90px;height:2px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;margin-top:.3rem}
+.ldr-bar-fill{height:100%;background:linear-gradient(90deg,#e8a0b8,#c76d96);animation:ldrBarFill 2.6s ease forwards}
+@keyframes ldrBarFill{0%{width:0}100%{width:100%}}
+
+/* ───── NAV ───── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;background:rgba(13,10,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(232,160,184,.15);position:sticky;top:0;z-index:50}
+.logo{font-size:.95rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.logo span{color:#e8a0b8}
+.btn-book{background:linear-gradient(135deg,#e8a0b8,#c76d96);color:#fff;border:none;padding:.5rem 1.1rem;border-radius:20px;font-size:.75rem;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn-book:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(232,160,184,.35)}
+
+/* ───── HERO with floating particles ───── */
+.hero{background:linear-gradient(160deg,#1a0d1a,#2d1030 55%,#1a0d1a);padding:2.8rem 1.5rem 2.2rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:340px;height:340px;background:radial-gradient(circle,rgba(232,160,184,.18),transparent 70%);pointer-events:none;animation:glowPulse 4s ease-in-out infinite}
+@keyframes glowPulse{0%,100%{opacity:.7}50%{opacity:1}}
+.particle{position:absolute;border-radius:50%;background:rgba(232,160,184,.5);pointer-events:none;animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(110%) scale(1);opacity:0}12%{opacity:.8}88%{opacity:.5}100%{transform:translateY(-30px) scale(.4);opacity:0}}
+.hero-tag{font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#e8a0b8;margin-bottom:.55rem;animation:fadeUp .8s ease .2s both}
+.hero h1{font-size:1.85rem;font-weight:900;color:#fff;line-height:1.15;letter-spacing:-.02em;margin-bottom:.45rem;animation:fadeUp .8s ease .35s both}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#e8a0b8,#f5c8d8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:.85rem;color:#b09ab0;max-width:300px;margin:0 auto 1.3rem;line-height:1.6;animation:fadeUp .8s ease .5s both}
+@keyframes fadeUp{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:translateY(0)}}
+.hero-btns{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s ease .65s both}
+.btn-primary{background:linear-gradient(135deg,#e8a0b8,#c76d96);color:#fff;border:none;padding:.72rem 1.4rem;border-radius:25px;font-weight:700;font-size:.82rem;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(232,160,184,.4)}
+.btn-secondary{background:transparent;color:#e8a0b8;border:1.5px solid rgba(232,160,184,.4);padding:.72rem 1.4rem;border-radius:25px;font-weight:700;font-size:.82rem;cursor:pointer;transition:background .2s}
+.btn-secondary:hover{background:rgba(232,160,184,.1)}
+
+/* ───── ANIMATED STATS ───── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,182,193,.08);border-top:1px solid rgba(255,182,193,.1);border-bottom:1px solid rgba(255,182,193,.1)}
+.stat{background:#0d0a0e;padding:1.1rem .5rem;text-align:center}
+.stat-val{font-size:1.35rem;font-weight:800;color:#e8a0b8}
+.stat-label{font-size:.62rem;color:#7a6a7a;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:.15rem}
+
+/* ───── SECTIONS ───── */
+.section{padding:1.6rem 1.25rem}
+.section-label{font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#e8a0b8;margin-bottom:.3rem}
+.section-title{font-size:1.15rem;font-weight:800;color:#fff;margin-bottom:1rem}
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin-bottom:1.6rem}
+.service-card{background:linear-gradient(135deg,rgba(232,160,184,.08),rgba(199,109,150,.04));border:1px solid rgba(232,160,184,.12);border-radius:12px;padding:1rem;cursor:pointer;transition:all .25s}
+.service-card:hover{border-color:rgba(232,160,184,.4);transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.service-card.selected{border-color:#e8a0b8;background:linear-gradient(135deg,rgba(232,160,184,.18),rgba(199,109,150,.1));box-shadow:0 0 0 1px #e8a0b8 inset}
+.service-icon{font-size:1.4rem;margin-bottom:.4rem}
+.service-name{font-size:.82rem;font-weight:700;color:#fff}
+.service-price{font-size:.72rem;color:#e8a0b8;margin-top:.2rem;font-weight:600}
+.service-time{font-size:.64rem;color:#7a6a7a;margin-top:.1rem}
+
+/* ───── INTERACTIVE BOOKING ───── */
+.booking-box{background:rgba(232,160,184,.06);border:1px solid rgba(232,160,184,.15);border-radius:14px;padding:1.25rem}
+.booking-title{font-size:.9rem;font-weight:700;color:#fff;margin-bottom:.3rem}
+.booking-hint{font-size:.68rem;color:#9a8a9a;margin-bottom:1rem}
 .calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:1rem}
-.cal-header{text-align:center;font-size:0.62rem;font-weight:700;color:#7a6a7a;padding:0.3rem 0;text-transform:uppercase}
-.cal-day{text-align:center;font-size:0.75rem;padding:0.4rem 0;border-radius:6px;cursor:pointer;color:#ccc;transition:all 0.15s}
-.cal-day:hover{background:rgba(232,160,184,0.15);color:#e8a0b8}
-.cal-day.today{background:linear-gradient(135deg,#e8a0b8,#c76d96);color:#fff;font-weight:700}
-.cal-day.booked{color:#3d2d3d;cursor:default}
-.cal-day.selected{background:rgba(232,160,184,0.2);color:#e8a0b8;font-weight:700;border:1px solid rgba(232,160,184,0.4)}
-.time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:0.4rem;margin-bottom:1rem}
-.slot{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:0.4rem;text-align:center;font-size:0.72rem;color:#ccc;cursor:pointer;transition:all 0.15s}
-.slot:hover,.slot.active{background:rgba(232,160,184,0.15);border-color:rgba(232,160,184,0.35);color:#e8a0b8;font-weight:600}
-.slot.taken{color:#3d2d3d;cursor:default;text-decoration:line-through}
-.book-btn{width:100%;background:linear-gradient(135deg,#e8a0b8,#c76d96);color:#fff;border:none;padding:0.75rem;border-radius:10px;font-weight:700;font-size:0.85rem;cursor:pointer;transition:opacity 0.2s}
-.book-btn:hover{opacity:0.9}
-/* Portfolio */
-.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem}
+.cal-header{text-align:center;font-size:.6rem;font-weight:700;color:#7a6a7a;padding:.3rem 0;text-transform:uppercase}
+.cal-day{text-align:center;font-size:.75rem;padding:.45rem 0;border-radius:7px;cursor:pointer;color:#ccc;transition:all .15s;border:1px solid transparent}
+.cal-day:not(.booked):hover{background:rgba(232,160,184,.15);color:#e8a0b8}
+.cal-day.selected{background:linear-gradient(135deg,#e8a0b8,#c76d96);color:#fff;font-weight:700;transform:scale(1.08)}
+.cal-day.booked{color:#3d2d3d;cursor:not-allowed;text-decoration:line-through}
+.time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;margin-bottom:1rem}
+.slot{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:.5rem .3rem;text-align:center;font-size:.72rem;color:#ccc;cursor:pointer;transition:all .15s}
+.slot:not(.taken):hover{border-color:rgba(232,160,184,.35);color:#e8a0b8}
+.slot.active{background:rgba(232,160,184,.2);border-color:#e8a0b8;color:#e8a0b8;font-weight:700}
+.slot.taken{color:#3d2d3d;cursor:not-allowed;text-decoration:line-through}
+.book-btn{width:100%;background:linear-gradient(135deg,#e8a0b8,#c76d96);color:#fff;border:none;padding:.8rem;border-radius:10px;font-weight:700;font-size:.85rem;cursor:pointer;transition:all .2s;opacity:.45;pointer-events:none}
+.book-btn.ready{opacity:1;pointer-events:auto}
+.book-btn.ready:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(232,160,184,.35)}
+.book-success{display:none;text-align:center;padding:1.4rem .8rem;animation:fadeUp .5s ease both}
+.book-success.show{display:block}
+.book-success .tick{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#e8a0b8,#c76d96);display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto .7rem;animation:pop .4s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
+.book-success h3{color:#fff;font-size:1rem;margin-bottom:.3rem}
+.book-success p{color:#9a8a9a;font-size:.75rem;line-height:1.6}
+
+/* ───── PORTFOLIO ───── */
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
 .portfolio-item{aspect-ratio:1;border-radius:10px;overflow:hidden;position:relative;cursor:pointer}
-.portfolio-item div{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2rem;transition:transform 0.3s}
-.portfolio-item:hover div{transform:scale(1.1)}
-.p1{background:linear-gradient(135deg,#2d1030,#4a1a3a)}
-.p2{background:linear-gradient(135deg,#1a1025,#3d1535)}
-.p3{background:linear-gradient(135deg,#251025,#4a2040)}
-.p4{background:linear-gradient(135deg,#1a0d20,#351530)}
-.p5{background:linear-gradient(135deg,#2a1030,#451840)}
-.p6{background:linear-gradient(135deg,#200d25,#3a1535)}
-.portfolio-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);padding:0.5rem 0.4rem 0.3rem;font-size:0.6rem;color:#e8a0b8;font-weight:600}
-/* Loyalty */
-.loyalty-card{background:linear-gradient(135deg,#2d1030,#451840);border:1px solid rgba(232,160,184,0.2);border-radius:14px;padding:1.25rem;margin-top:1.5rem}
+.portfolio-item .pi{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2rem;transition:transform .35s}
+.portfolio-item:hover .pi{transform:scale(1.15) rotate(3deg)}
+.p1{background:linear-gradient(135deg,#2d1030,#4a1a3a)}.p2{background:linear-gradient(135deg,#1a1025,#3d1535)}.p3{background:linear-gradient(135deg,#251025,#4a2040)}
+.p4{background:linear-gradient(135deg,#1a0d20,#351530)}.p5{background:linear-gradient(135deg,#2a1030,#451840)}.p6{background:linear-gradient(135deg,#200d25,#3a1535)}
+.portfolio-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.85),transparent);padding:.5rem .4rem .3rem;font-size:.58rem;color:#e8a0b8;font-weight:600}
+
+/* ───── LOYALTY ───── */
+.loyalty-card{background:linear-gradient(135deg,#2d1030,#451840);border:1px solid rgba(232,160,184,.2);border-radius:14px;padding:1.25rem;margin-top:1.6rem;position:relative;overflow:hidden}
+.loyalty-card::after{content:'';position:absolute;top:-50%;left:-60%;width:60%;height:200%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.07),transparent);animation:shine 3.5s ease infinite}
+@keyframes shine{0%{left:-60%}60%,100%{left:120%}}
 .loyalty-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
-.loyalty-name{font-size:0.85rem;font-weight:700;color:#fff}
-.loyalty-tier{background:linear-gradient(135deg,#e8a0b8,#c76d96);color:#fff;font-size:0.65rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:20px}
-.points-bar-bg{background:rgba(255,255,255,0.08);border-radius:20px;height:8px;margin-bottom:0.5rem}
-.points-bar{background:linear-gradient(90deg,#e8a0b8,#c76d96);height:8px;border-radius:20px;width:72%}
-.points-info{display:flex;justify-content:space-between;font-size:0.68rem;color:#9a8a9a}
-.perks{display:flex;gap:0.5rem;margin-top:0.75rem;flex-wrap:wrap}
-.perk{background:rgba(232,160,184,0.1);border:1px solid rgba(232,160,184,0.2);color:#e8a0b8;font-size:0.65rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:20px}
+.loyalty-name{font-size:.85rem;font-weight:700;color:#fff}
+.loyalty-tier{background:linear-gradient(135deg,#e8a0b8,#c76d96);color:#fff;font-size:.62rem;font-weight:700;padding:.22rem .6rem;border-radius:20px}
+.points-bar-bg{background:rgba(255,255,255,.08);border-radius:20px;height:8px;margin-bottom:.5rem;overflow:hidden}
+.points-bar{background:linear-gradient(90deg,#e8a0b8,#c76d96);height:8px;border-radius:20px;width:0;transition:width 1.6s cubic-bezier(.22,1,.36,1)}
+.points-info{display:flex;justify-content:space-between;font-size:.66rem;color:#9a8a9a}
+.perks{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.perk{background:rgba(232,160,184,.1);border:1px solid rgba(232,160,184,.2);color:#e8a0b8;font-size:.62rem;font-weight:600;padding:.22rem .6rem;border-radius:20px}
+
+/* ───── TESTIMONIALS ───── */
+.testi{background:rgba(255,255,255,.03);border:1px solid rgba(232,160,184,.1);border-radius:12px;padding:1rem;margin-bottom:.6rem}
+.testi p{font-size:.76rem;color:#c9b5c9;line-height:1.6;font-style:italic}
+.testi .who{font-size:.66rem;color:#e8a0b8;font-weight:700;margin-top:.5rem}
+.testi .stars{color:#f5c8d8;font-size:.7rem;letter-spacing:.1em}
+
+/* ───── WHATSAPP + FOOTER ───── */
+.wa-btn{position:fixed;bottom:1.2rem;right:1.2rem;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.45);z-index:90;text-decoration:none;animation:waBob 2.4s ease-in-out infinite}
+@keyframes waBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.wa-btn svg{width:28px;height:28px;fill:#fff}
+footer{padding:1.6rem 1.25rem 2.2rem;text-align:center;border-top:1px solid rgba(232,160,184,.1)}
+footer .f-brand{font-size:.8rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:.3rem}
+footer .f-brand span{color:#e8a0b8}
+footer p{font-size:.64rem;color:#6a5a6a;line-height:1.7}
+.powered{display:inline-block;margin-top:.8rem;font-size:.64rem;color:#7a6a7a;text-decoration:none;border:1px solid rgba(232,160,184,.18);padding:.4rem .9rem;border-radius:20px;transition:all .2s}
+.powered:hover{color:#e8a0b8;border-color:#e8a0b8}
+.powered b{color:#e8a0b8}
+@media(max-width:480px){.hero h1{font-size:1.6rem}}
 </style>
-  <link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
-  <link rel="icon" type="image/x-icon" href="brand/favicon.ico">
 </head>
 <body>
+<div id="page-loader">
+  <div class="ldr-wrap">
+    <div class="ldr-stage">
+      <div class="scissors">
+        <div class="blade b1"></div>
+        <div class="blade b2"></div>
+      </div>
+      <div class="hair-strands">
+        <div class="strand"></div><div class="strand"></div><div class="strand"></div><div class="strand"></div><div class="strand"></div><div class="strand"></div><div class="strand"></div><div class="strand"></div>
+      </div>
+    </div>
+    <div class="ldr-name">Hause <span>of Lace</span></div>
+    <div class="ldr-sub">Hair Artistry · Durban</div>
+    <div class="ldr-bar-wrap"><div class="ldr-bar-fill"></div></div>
+  </div>
+</div>
+
+<div class="app">
 <nav>
   <div class="logo">Hause <span>of Lace</span></div>
-  <ul class="nav-links">
-    <li><a href="#">Services</a></li>
-    <li><a href="#">Gallery</a></li>
-    <li><a href="#">About</a></li>
-  </ul>
-  <button class="btn-book">Book Now</button>
+  <button class="btn-book" onclick="scrollToBooking()">Book Now</button>
 </nav>
 
-<div class="hero">
+<div class="hero" id="hero">
   <div class="hero-tag">Durban's Premier Hair Studio</div>
   <h1>Where Every Strand<br>Tells a <em>Story</em></h1>
-  <p>Weaves, braids, lashes & nails. Experience luxury hair artistry crafted just for you.</p>
+  <p>Weaves, braids, lashes &amp; nails. Luxury hair artistry crafted just for you.</p>
   <div class="hero-btns">
-    <button class="btn-primary">Book Appointment</button>
-    <button class="btn-secondary">View Gallery</button>
+    <button class="btn-primary" onclick="scrollToBooking()">Book Appointment</button>
+    <button class="btn-secondary" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">View Gallery</button>
   </div>
 </div>
 
 <div class="stats">
-  <div class="stat"><div class="stat-val">2,400+</div><div class="stat-label">Happy Clients</div></div>
-  <div class="stat"><div class="stat-val">4.9★</div><div class="stat-label">Avg Rating</div></div>
-  <div class="stat"><div class="stat-val">8 Yrs</div><div class="stat-label">Experience</div></div>
+  <div class="stat"><div class="stat-val"><span class="count" data-target="2400">0</span>+</div><div class="stat-label">Happy Clients</div></div>
+  <div class="stat"><div class="stat-val"><span class="count" data-target="49" data-decimal="1">0</span>★</div><div class="stat-label">Avg Rating</div></div>
+  <div class="stat"><div class="stat-val"><span class="count" data-target="8">0</span> Yrs</div><div class="stat-label">Experience</div></div>
 </div>
 
 <div class="section">
-  <div class="section-label">What We Offer</div>
+  <div class="section-label">Step 1 — Pick a Service</div>
   <div class="section-title">Our Services</div>
-  <div class="services-grid">
-    <div class="service-card"><div class="service-icon">💇</div><div class="service-name">Knotless Braids</div><div class="service-price">From R450</div><div class="service-time">3–4 hrs</div></div>
-    <div class="service-card"><div class="service-icon">✨</div><div class="service-name">Weave Install</div><div class="service-price">From R380</div><div class="service-time">2–3 hrs</div></div>
-    <div class="service-card"><div class="service-icon">👁️</div><div class="service-name">Lash Extensions</div><div class="service-price">From R250</div><div class="service-time">1.5 hrs</div></div>
-    <div class="service-card"><div class="service-icon">💅</div><div class="service-name">Gel Nails</div><div class="service-price">From R180</div><div class="service-time">1 hr</div></div>
+  <div class="services-grid" id="services">
+    <div class="service-card" onclick="pickService(this,'Knotless Braids','R450')"><div class="service-icon">💇‍♀️</div><div class="service-name">Knotless Braids</div><div class="service-price">From R450</div><div class="service-time">3–4 hrs</div></div>
+    <div class="service-card" onclick="pickService(this,'Weave Install','R380')"><div class="service-icon">✨</div><div class="service-name">Weave Install</div><div class="service-price">From R380</div><div class="service-time">2–3 hrs</div></div>
+    <div class="service-card" onclick="pickService(this,'Lash Extensions','R250')"><div class="service-icon">👁️</div><div class="service-name">Lash Extensions</div><div class="service-price">From R250</div><div class="service-time">1.5 hrs</div></div>
+    <div class="service-card" onclick="pickService(this,'Gel Nails','R180')"><div class="service-icon">💅</div><div class="service-name">Gel Nails</div><div class="service-price">From R180</div><div class="service-time">1 hr</div></div>
   </div>
 
-  <div class="booking-box">
-    <div class="booking-title">📅 Book Your Appointment</div>
-    <div class="calendar">
-      <div class="cal-header">Mo</div><div class="cal-header">Tu</div><div class="cal-header">We</div><div class="cal-header">Th</div><div class="cal-header">Fr</div><div class="cal-header">Sa</div><div class="cal-header">Su</div>
-      <div class="cal-day booked">2</div><div class="cal-day booked">3</div><div class="cal-day booked">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day booked">8</div>
-      <div class="cal-day">9</div><div class="cal-day selected">10</div><div class="cal-day today">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day booked">15</div>
+  <div class="booking-box" id="booking">
+    <div id="bookForm">
+      <div class="booking-title">📅 Book Your Appointment</div>
+      <div class="booking-hint" id="bookHint">Select a service above, then pick a day &amp; time</div>
+      <div class="calendar" id="calendar">
+        <div class="cal-header">Mo</div><div class="cal-header">Tu</div><div class="cal-header">We</div><div class="cal-header">Th</div><div class="cal-header">Fr</div><div class="cal-header">Sa</div><div class="cal-header">Su</div>
+      </div>
+      <div class="time-slots" id="slots"></div>
+      <button class="book-btn" id="bookBtn" onclick="confirmBooking()">Select service, day &amp; time</button>
     </div>
-    <div class="time-slots">
-      <div class="slot taken">09:00</div>
-      <div class="slot active">10:30</div>
-      <div class="slot">12:00</div>
-      <div class="slot taken">13:30</div>
-      <div class="slot">15:00</div>
-      <div class="slot">16:30</div>
+    <div class="book-success" id="bookSuccess">
+      <div class="tick">✓</div>
+      <h3>Booking Confirmed!</h3>
+      <p id="successText"></p>
+      <p style="margin-top:.6rem;color:#e8a0b8;font-weight:600">We'll WhatsApp you to confirm. 💕</p>
     </div>
-    <button class="book-btn">Confirm Booking — 10:30am ✓</button>
   </div>
 
-  <div style="margin-top:1.5rem">
+  <div style="margin-top:1.6rem" id="portfolio">
     <div class="section-label">Our Work</div>
     <div class="section-title">Portfolio</div>
     <div class="portfolio-grid">
-      <div class="portfolio-item"><div class="p1">💇</div><div class="portfolio-label">Knotless Box Braids</div></div>
-      <div class="portfolio-item"><div class="p2">✨</div><div class="portfolio-label">Silk Press & Curl</div></div>
-      <div class="portfolio-item"><div class="p3">🌸</div><div class="portfolio-label">Goddess Locs</div></div>
-      <div class="portfolio-item"><div class="p4">💅</div><div class="portfolio-label">Chrome Nails</div></div>
-      <div class="portfolio-item"><div class="p5">👁️</div><div class="portfolio-label">Volume Lashes</div></div>
-      <div class="portfolio-item"><div class="p6">🎀</div><div class="portfolio-label">Weave & Trim</div></div>
+      <div class="portfolio-item"><div class="pi p1">💇‍♀️</div><div class="portfolio-label">Knotless Box Braids</div></div>
+      <div class="portfolio-item"><div class="pi p2">✨</div><div class="portfolio-label">Silk Press &amp; Curl</div></div>
+      <div class="portfolio-item"><div class="pi p3">🌸</div><div class="portfolio-label">Goddess Locs</div></div>
+      <div class="portfolio-item"><div class="pi p4">💅</div><div class="portfolio-label">Chrome Nails</div></div>
+      <div class="portfolio-item"><div class="pi p5">👁️</div><div class="portfolio-label">Volume Lashes</div></div>
+      <div class="portfolio-item"><div class="pi p6">🎀</div><div class="portfolio-label">Weave &amp; Trim</div></div>
     </div>
   </div>
 
   <div class="loyalty-card">
     <div class="loyalty-header">
-      <div><div class="loyalty-name">Thandi Dlamini</div><div style="font-size:0.7rem;color:#9a8a9a;margin-top:0.1rem">720 loyalty points</div></div>
+      <div><div class="loyalty-name">Thandi Dlamini</div><div style="font-size:.7rem;color:#9a8a9a;margin-top:.1rem">720 loyalty points</div></div>
       <div class="loyalty-tier">GOLD MEMBER</div>
     </div>
-    <div class="points-bar-bg"><div class="points-bar"></div></div>
+    <div class="points-bar-bg"><div class="points-bar" id="pointsBar"></div></div>
     <div class="points-info"><span>720 pts</span><span>1,000 pts = Free service</span></div>
-    <div class="perks">
-      <span class="perk">10% off nails</span>
-      <span class="perk">Free deep cond.</span>
-      <span class="perk">Priority booking</span>
-    </div>
+    <div class="perks"><span class="perk">10% off nails</span><span class="perk">Free deep cond.</span><span class="perk">Priority booking</span></div>
+  </div>
+
+  <div style="margin-top:1.6rem">
+    <div class="section-label">Client Love</div>
+    <div class="section-title">What They Say</div>
+    <div class="testi"><div class="stars">★★★★★</div><p>"Best knotless braids in Durban, hands down. Zero tension, lasted 8 weeks."</p><div class="who">— Nokuthula M.</div></div>
+    <div class="testi"><div class="stars">★★★★★</div><p>"Booked online in 30 seconds. The loyalty points actually pay off!"</p><div class="who">— Ayanda K.</div></div>
   </div>
 </div>
+
+<footer>
+  <div class="f-brand">Hause <span>of Lace</span></div>
+  <p>123 Florida Road, Durban · Tue–Sat 8am–6pm<br>This is a demonstration website.</p>
+  <a class="powered" href="https://proaxissolutions.co.za" target="_blank">Powered by <b>Proaxis Solutions</b></a>
+</footer>
+</div>
+
+<a class="wa-btn" href="https://wa.me/272136607" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.3 7L4 29l7.2-2.2c1.9 1 4 1.6 6.3 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-2 0-3.9-.6-5.5-1.6l-.4-.2-4.1 1.3 1.3-4-.3-.4C5.7 18.4 5 16.8 5 15 5 9 9.9 4 16 4s11 4.9 11 11-4.9 9.8-11 9.8zm5.6-7.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.5 4.9.8.3 1.4.5 1.9.7.8.2 1.5.2 2.1.1.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>
+</a>
+
+<script>
+window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('page-loader').classList.add('hidden')},2600)});
+
+// Animated counters
+function animateCounters(){
+  document.querySelectorAll('.count').forEach(el=>{
+    const target=+el.dataset.target, dec=el.dataset.decimal?1:0, dur=1600, t0=performance.now();
+    function tick(t){
+      const p=Math.min((t-t0)/dur,1), eased=1-Math.pow(1-p,3), v=target*eased;
+      el.textContent=dec?(v/10).toFixed(1):Math.round(v).toLocaleString();
+      if(p<1)requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+window.addEventListener('load',()=>{setTimeout(()=>{animateCounters();document.getElementById('pointsBar').style.width='72%'},2700)});
+
+// Booking state
+let svc=null,svcPrice=null,day=null,slot=null;
+const bookedDays=[2,3,8,15],takenSlots=['09:00','13:30'];
+const times=['09:00','10:30','12:00','13:30','15:00','16:30'];
+
+// Build calendar (days 2–15, today=11)
+const cal=document.getElementById('calendar');
+for(let d=2;d<=15;d++){
+  const el=document.createElement('div');
+  el.className='cal-day'+(bookedDays.includes(d)?' booked':'');
+  el.textContent=d;
+  if(!bookedDays.includes(d))el.onclick=()=>{document.querySelectorAll('.cal-day').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');day=d;updateBtn()};
+  cal.appendChild(el);
+}
+// Build time slots
+const slotsEl=document.getElementById('slots');
+times.forEach(t=>{
+  const el=document.createElement('div');
+  el.className='slot'+(takenSlots.includes(t)?' taken':'');
+  el.textContent=t;
+  if(!takenSlots.includes(t))el.onclick=()=>{document.querySelectorAll('.slot').forEach(s=>s.classList.remove('active'));el.classList.add('active');slot=t;updateBtn()};
+  slotsEl.appendChild(el);
+});
+
+function pickService(el,name,price){
+  document.querySelectorAll('.service-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');svc=name;svcPrice=price;updateBtn();
+  document.getElementById('bookHint').textContent='✓ '+name+' selected — now pick a day & time';
+}
+function updateBtn(){
+  const btn=document.getElementById('bookBtn');
+  if(svc&&day&&slot){btn.classList.add('ready');btn.textContent='Confirm — '+svc+' · June '+day+' · '+slot}
+  else{btn.classList.remove('ready');btn.textContent=!svc?'Select a service above':!day?'Pick a day':'Pick a time'}
+}
+function confirmBooking(){
+  document.getElementById('bookForm').style.display='none';
+  const s=document.getElementById('bookSuccess');s.classList.add('show');
+  document.getElementById('successText').textContent=svc+' ('+svcPrice+') · June '+day+', 2026 at '+slot;
+}
+function scrollToBooking(){document.getElementById('booking').scrollIntoView({behavior:'smooth'})}
+
+// Hero particles
+const hero=document.getElementById('hero');
+for(let i=0;i<14;i++){
+  const p=document.createElement('div');p.className='particle';
+  const sz=2+Math.random()*4;
+  p.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+(Math.random()*100)+'%;animation-duration:'+(4+Math.random()*5)+'s;animation-delay:'+(Math.random()*5)+'s';
+  hero.appendChild(p);
+}
+</script>
 </body>
 </html>

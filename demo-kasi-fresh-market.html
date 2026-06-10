@@ -2,185 +2,309 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kasi Fresh Market</title>
+<title>Kasi Fresh Market — Fresh. Local. Delivered.</title>
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
-body{background:#0a1205;color:#e8f5e0;min-height:100vh}
-:root{--green:#4ade80;--orange:#fb923c;--dark:#0a1205;--card:#0f1a08;--border:rgba(74,222,128,0.12)}
-nav{display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.25rem;background:rgba(10,18,5,0.97);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
-.logo{display:flex;align-items:center;gap:0.5rem}
-.logo-icon{width:30px;height:30px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.9rem}
-.logo-text{font-size:0.92rem;font-weight:800;color:#fff;letter-spacing:-0.01em}
+:root{--green:#4ade80;--orange:#fb923c;--bg:#0a1205;--card:#0f1a08;--border:rgba(74,222,128,.12)}
+body{background:var(--bg);color:#e8f5e0;min-height:100vh;overflow-x:hidden}
+.app{max-width:430px;margin:0 auto;min-height:100vh;position:relative;box-shadow:0 0 60px rgba(74,222,128,.05)}
+
+/* ───── LOADER: bouncing cart + falling coins ───── */
+#page-loader{position:fixed;inset:0;background:#0c1505;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s ease}
+#page-loader.hidden{opacity:0;visibility:hidden}
+.ldr-wrap{display:flex;flex-direction:column;align-items:center;gap:.8rem}
+.cart-stage{position:relative;width:110px;height:95px;display:flex;align-items:flex-end;justify-content:center}
+.cart-svg{animation:cartBounce .7s cubic-bezier(.28,.84,.42,1) infinite;transform-origin:bottom center}
+@keyframes cartBounce{0%,100%{transform:translateY(0) scaleY(1)}35%{transform:translateY(-18px) scaleY(1.04)}70%{transform:translateY(0) scaleY(.94)}}
+.cart-shadow{position:absolute;bottom:2px;width:60px;height:7px;background:rgba(0,0,0,.55);border-radius:50%;animation:shadowPulse .7s ease infinite}
+@keyframes shadowPulse{0%,100%{transform:scaleX(1);opacity:.55}35%{transform:scaleX(.6);opacity:.3}}
+.coin{position:absolute;top:0;width:13px;height:13px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fde68a,#f59e0b);border:1.5px solid #d97706;animation:coinDrop 1.5s ease-in infinite;font-size:7px;display:flex;align-items:center;justify-content:center;color:#92400e;font-weight:900}
+.coin.c1{left:24px;animation-delay:0s}.coin.c2{left:52px;animation-delay:.5s}.coin.c3{left:78px;animation-delay:1s}
+@keyframes coinDrop{0%{transform:translateY(-12px) rotateY(0);opacity:0}20%{opacity:1}80%{opacity:1}100%{transform:translateY(58px) rotateY(540deg);opacity:0}}
+.ldr-name{font-size:1.15rem;font-weight:900;color:#fff}
+.ldr-name span{color:var(--green)}
+.ldr-sub{font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#5a7a4a;margin-top:-.4rem}
+.ldr-bar-wrap{width:90px;height:2px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;margin-top:.3rem}
+.ldr-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--orange));animation:ldrBarFill 2.6s ease forwards}
+@keyframes ldrBarFill{0%{width:0}100%{width:100%}}
+
+/* ───── NAV ───── */
+nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem;background:rgba(10,18,5,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.logo{display:flex;align-items:center;gap:.5rem}
+.logo-icon{width:30px;height:30px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.logo-text{font-size:.92rem;font-weight:800;color:#fff}
 .logo-text span{color:var(--green)}
-.nav-right{display:flex;align-items:center;gap:0.75rem}
-.cart-btn{background:var(--orange);color:#fff;border:none;padding:0.4rem 0.9rem;border-radius:20px;font-size:0.75rem;font-weight:700;cursor:pointer}
-.status-dot{width:8px;height:8px;background:#22c55e;border-radius:50%;display:inline-block;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-.status-text{font-size:0.7rem;color:#86efac;font-weight:600}
+.cart-pill{background:var(--green);color:#0a1205;border:none;padding:.45rem .9rem;border-radius:20px;font-size:.75rem;font-weight:800;cursor:pointer;transition:transform .2s}
+.cart-pill:hover{transform:translateY(-2px)}
+.cart-pill .badge{background:#0a1205;color:var(--green);border-radius:50%;padding:.05rem .4rem;font-size:.68rem;margin-left:.25rem}
 
-/* Dashboard Banner */
-.banner{background:linear-gradient(135deg,#0f2a08,#1a3d10);padding:1.25rem;border-bottom:1px solid var(--border)}
-.banner-title{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:0.25rem}
-.banner-date{font-size:1rem;font-weight:800;color:#fff}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin-top:1rem}
-.kpi{background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.1);border-radius:10px;padding:0.6rem;text-align:center}
-.kpi-val{font-size:1rem;font-weight:800;color:#fff}
-.kpi-val.up{color:var(--green)}
-.kpi-val.warn{color:var(--orange)}
-.kpi-label{font-size:0.6rem;color:#4a7a40;font-weight:600;margin-top:0.1rem;text-transform:uppercase}
+/* ───── HERO ───── */
+.hero{background:linear-gradient(150deg,#0f1d06,#1a2e0c 55%,#0f1d06);padding:2.5rem 1.25rem 2rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(74,222,128,.14),transparent 70%);animation:glowPulse 4s ease-in-out infinite}
+@keyframes glowPulse{0%,100%{opacity:.7}50%{opacity:1}}
+.leaf{position:absolute;pointer-events:none;font-size:.9rem;animation:leafFall linear infinite;opacity:0}
+@keyframes leafFall{0%{transform:translateY(-20px) rotate(0);opacity:0}10%{opacity:.7}90%{opacity:.4}100%{transform:translateY(340px) rotate(300deg);opacity:0}}
+.hero-tag{font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:.45rem;animation:fadeUp .8s ease .2s both}
+.hero h1{font-size:1.75rem;font-weight:900;color:#fff;line-height:1.18;margin-bottom:.4rem;animation:fadeUp .8s ease .35s both}
+.hero h1 em{font-style:normal;color:var(--green)}
+.hero p{font-size:.83rem;color:#9ab586;max-width:290px;margin:0 auto 1.25rem;line-height:1.6;animation:fadeUp .8s ease .5s both}
+@keyframes fadeUp{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:translateY(0)}}
+.hero-btns{display:flex;gap:.6rem;justify-content:center;animation:fadeUp .8s ease .65s both}
+.btn-p{background:linear-gradient(135deg,var(--green),#22c55e);color:#06200d;border:none;padding:.7rem 1.3rem;border-radius:25px;font-weight:800;font-size:.8rem;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(74,222,128,.3)}
+.btn-s{background:transparent;color:var(--green);border:1.5px solid rgba(74,222,128,.35);padding:.7rem 1.3rem;border-radius:25px;font-weight:700;font-size:.8rem;cursor:pointer}
 
-/* POS Section */
-.section{padding:1rem 1.25rem}
-.section-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem}
-.section-title{font-size:0.88rem;font-weight:700;color:#fff}
-.badge{background:var(--orange);color:#fff;font-size:0.62rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:20px}
+/* ───── STATS ───── */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);background:rgba(74,222,128,.05);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat{padding:1rem .4rem;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-val{font-size:1.2rem;font-weight:800;color:var(--green)}
+.stat-label{font-size:.6rem;color:#5a7a4a;text-transform:uppercase;font-weight:600;margin-top:.1rem}
 
-.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.5rem;margin-bottom:1rem}
-.product-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:0.75rem;cursor:pointer;transition:all 0.15s;position:relative}
-.product-card:hover{border-color:rgba(74,222,128,0.3);background:rgba(74,222,128,0.04)}
-.product-card.low-stock{border-color:rgba(251,146,60,0.3)}
-.low-badge{position:absolute;top:0.4rem;right:0.4rem;background:var(--orange);color:#fff;font-size:0.55rem;font-weight:700;padding:0.1rem 0.4rem;border-radius:10px}
-.prod-icon{font-size:1.3rem;margin-bottom:0.3rem}
-.prod-name{font-size:0.78rem;font-weight:700;color:#fff}
-.prod-price{font-size:0.72rem;color:var(--green);font-weight:600;margin-top:0.15rem}
-.prod-stock{font-size:0.62rem;color:#4a7a40;margin-top:0.1rem}
-.add-btn{position:absolute;bottom:0.5rem;right:0.5rem;width:22px;height:22px;background:var(--green);border:none;border-radius:6px;color:#0a1205;font-weight:700;cursor:pointer;font-size:0.85rem;line-height:22px;text-align:center}
+/* ───── PRODUCTS ───── */
+.section{padding:1.4rem 1.25rem}
+.section-label{font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:.25rem}
+.section-title{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.9rem}
+.filter-tabs{display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap}
+.tab{padding:.38rem .8rem;border-radius:20px;font-size:.72rem;font-weight:600;cursor:pointer;border:1px solid rgba(74,222,128,.2);color:#7a9a66;background:transparent;transition:all .15s}
+.tab.active{background:var(--green);color:#0a1205;border-color:var(--green)}
+.prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}
+.prod-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.9rem;text-align:center;transition:all .2s;position:relative}
+.prod-card:hover{border-color:rgba(74,222,128,.4);transform:translateY(-3px)}
+.prod-emoji{font-size:2rem;margin-bottom:.4rem}
+.prod-name{font-size:.78rem;font-weight:700;color:#fff}
+.prod-unit{font-size:.62rem;color:#5a7a4a;margin-top:.1rem}
+.prod-price{font-size:.85rem;font-weight:800;color:var(--green);margin:.35rem 0 .5rem}
+.special-tag{position:absolute;top:.5rem;right:.5rem;background:var(--orange);color:#fff;font-size:.55rem;font-weight:800;padding:.15rem .45rem;border-radius:10px;animation:tagPulse 1.8s ease infinite}
+@keyframes tagPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.add-btn{background:linear-gradient(135deg,var(--green),#22c55e);color:#06200d;border:none;width:100%;padding:.45rem;border-radius:8px;font-size:.72rem;font-weight:800;cursor:pointer;transition:all .15s}
+.add-btn:hover{filter:brightness(1.1)}
+.add-btn:active{transform:scale(.96)}
+.qty-ctrl{display:flex;align-items:center;justify-content:center;gap:.6rem}
+.qty-btn{background:rgba(74,222,128,.15);color:var(--green);border:1px solid rgba(74,222,128,.3);width:28px;height:28px;border-radius:50%;font-weight:800;cursor:pointer}
+.qty-num{font-size:.85rem;font-weight:800;color:#fff}
 
-/* Cart */
-.cart-section{background:rgba(74,222,128,0.04);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem}
-.cart-title{font-size:0.8rem;font-weight:700;color:#fff;margin-bottom:0.75rem;display:flex;justify-content:space-between;align-items:center}
-.cart-item{display:flex;justify-content:space-between;align-items:center;padding:0.4rem 0;border-bottom:1px solid rgba(74,222,128,0.06);font-size:0.78rem}
-.cart-item-name{color:#ccc}
-.cart-item-right{display:flex;align-items:center;gap:0.5rem}
-.qty-ctrl{display:flex;align-items:center;gap:0.3rem}
-.qty-btn{background:rgba(74,222,128,0.1);border:1px solid var(--border);color:var(--green);width:18px;height:18px;border-radius:4px;cursor:pointer;font-size:0.75rem;line-height:18px;text-align:center}
-.qty-num{font-size:0.72rem;color:#fff;width:16px;text-align:center}
-.cart-price{color:var(--green);font-weight:700;font-size:0.75rem;min-width:45px;text-align:right}
-.cart-total{display:flex;justify-content:space-between;padding-top:0.6rem;margin-top:0.3rem;border-top:1px solid rgba(74,222,128,0.15);font-weight:700}
-.total-label{font-size:0.78rem;color:#86efac}
-.total-val{font-size:1rem;color:var(--green)}
-.checkout-btn{width:100%;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;border:none;padding:0.7rem;border-radius:10px;font-weight:700;font-size:0.85rem;cursor:pointer;margin-top:0.75rem}
+/* ───── CART BAR + SHEET ───── */
+.cart-bar{position:fixed;bottom:0;left:50%;transform:translate(-50%,110%);width:100%;max-width:430px;background:linear-gradient(135deg,var(--green),#22c55e);padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:center;z-index:80;border-radius:16px 16px 0 0;transition:transform .35s cubic-bezier(.22,1,.36,1);cursor:pointer;box-shadow:0 -8px 30px rgba(74,222,128,.25)}
+.cart-bar.show{transform:translate(-50%,0)}
+.cart-bar .ct{color:#06200d;font-weight:800;font-size:.85rem}
+.cart-bar .cv{color:#fff;font-weight:900;font-size:1rem}
+.cart-modal{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:95;display:none;align-items:flex-end;justify-content:center}
+.cart-modal.open{display:flex}
+.cart-sheet{width:100%;max-width:430px;background:#0f1a08;border-radius:20px 20px 0 0;padding:1.4rem 1.25rem 2rem;animation:sheetUp .35s cubic-bezier(.22,1,.36,1) both;max-height:75vh;overflow-y:auto}
+@keyframes sheetUp{0%{transform:translateY(100%)}100%{transform:translateY(0)}}
+.cart-sheet h3{color:#fff;font-size:1rem;margin-bottom:1rem}
+.cart-line{display:flex;justify-content:space-between;font-size:.8rem;color:#b5d5a0;padding:.45rem 0;border-bottom:1px dashed rgba(74,222,128,.15)}
+.cart-total{display:flex;justify-content:space-between;font-size:.95rem;font-weight:900;color:#fff;padding-top:.8rem}
+.checkout-btn{width:100%;background:linear-gradient(135deg,var(--green),#22c55e);color:#06200d;border:none;padding:.85rem;border-radius:12px;font-weight:800;font-size:.88rem;cursor:pointer;margin-top:1rem}
+.order-success{text-align:center;padding:1rem 0;display:none}
+.order-success.show{display:block;animation:fadeUp .4s ease both}
+.order-success .tick{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--green),#22c55e);display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#06200d;margin:0 auto .7rem;animation:pop .4s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
 
-/* Inventory */
-.inv-row{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0;border-bottom:1px solid rgba(74,222,128,0.06)}
-.inv-info{display:flex;align-items:center;gap:0.6rem}
-.inv-icon{font-size:1rem}
-.inv-name{font-size:0.78rem;font-weight:600;color:#fff}
-.inv-sku{font-size:0.62rem;color:#4a7a40}
-.inv-right{text-align:right}
-.inv-count{font-size:0.85rem;font-weight:700}
-.inv-count.ok{color:var(--green)}
-.inv-count.low{color:var(--orange)}
-.inv-count.out{color:#ef4444}
-.inv-status{font-size:0.62rem;font-weight:600;margin-top:0.1rem}
-.stock-bar-bg{height:4px;background:rgba(255,255,255,0.06);border-radius:20px;width:60px;margin-top:0.3rem}
-.stock-bar{height:4px;border-radius:20px}
-.bar-green{background:var(--green)}
-.bar-orange{background:var(--orange)}
-.bar-red{background:#ef4444}
-.alert-box{background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);border-radius:10px;padding:0.75rem;margin-top:0.75rem;display:flex;align-items:center;gap:0.6rem}
-.alert-icon{font-size:1rem}
-.alert-text{font-size:0.75rem;color:#fed7aa;line-height:1.5}
-.alert-text strong{color:var(--orange)}
+/* ───── DELIVERY + TESTI ───── */
+.delivery-card{background:linear-gradient(135deg,#1a2e0c,#0f1d06);border:1px solid rgba(74,222,128,.25);border-radius:14px;padding:1.25rem;position:relative;overflow:hidden}
+.delivery-card::after{content:'';position:absolute;top:-50%;left:-60%;width:60%;height:200%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.05),transparent);animation:shine 3.5s ease infinite}
+@keyframes shine{0%{left:-60%}60%,100%{left:120%}}
+.delivery-card h3{color:#fff;font-size:.95rem;margin-bottom:.4rem}
+.delivery-card p{font-size:.74rem;color:#9ab586;line-height:1.6;margin-bottom:.4rem}
+.delivery-zones{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.6rem}
+.zone{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);color:var(--green);font-size:.62rem;font-weight:700;padding:.25rem .6rem;border-radius:20px}
+.testi{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:.6rem}
+.testi p{font-size:.76rem;color:#b5d5a0;line-height:1.6;font-style:italic}
+.testi .who{font-size:.66rem;color:var(--green);font-weight:700;margin-top:.5rem}
+.testi .stars{color:#fde68a;font-size:.7rem;letter-spacing:.1em}
+
+/* ───── WHATSAPP + FOOTER ───── */
+.wa-btn{position:fixed;bottom:1.2rem;right:1.2rem;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.45);z-index:90;text-decoration:none;animation:waBob 2.4s ease-in-out infinite}
+@keyframes waBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.wa-btn svg{width:28px;height:28px;fill:#fff}
+footer{padding:1.6rem 1.25rem 6rem;text-align:center;border-top:1px solid var(--border)}
+footer .f-brand{font-size:.85rem;font-weight:900;color:#fff;margin-bottom:.3rem}
+footer .f-brand span{color:var(--green)}
+footer p{font-size:.64rem;color:#4a6a3a;line-height:1.7}
+.powered{display:inline-block;margin-top:.8rem;font-size:.64rem;color:#7a9a66;text-decoration:none;border:1px solid rgba(74,222,128,.2);padding:.4rem .9rem;border-radius:20px;transition:all .2s}
+.powered:hover{color:var(--green);border-color:var(--green)}
+.powered b{color:var(--green)}
+@media(max-width:480px){.hero h1{font-size:1.5rem}}
 </style>
-  <link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
-  <link rel="icon" type="image/x-icon" href="brand/favicon.ico">
 </head>
 <body>
-<nav>
-  <div class="logo"><div class="logo-icon">🛒</div><div class="logo-text">Kasi <span>Fresh</span> Market</div></div>
-  <div class="nav-right">
-    <span class="status-dot"></span><span class="status-text">Store Open</span>
-    <button class="cart-btn">🧾 View Sales</button>
+<div id="page-loader">
+  <div class="ldr-wrap">
+    <div class="cart-stage">
+      <div class="coin c1">R</div><div class="coin c2">R</div><div class="coin c3">R</div>
+      <svg class="cart-svg" width="74" height="64" viewBox="0 0 74 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 6 H14 L22 38 H58 L66 14 H18" fill="none" stroke="#4ade80" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="28" cy="50" r="5.5" fill="none" stroke="#4ade80" stroke-width="3"/>
+        <circle cx="52" cy="50" r="5.5" fill="none" stroke="#4ade80" stroke-width="3"/>
+      </svg>
+      <div class="cart-shadow"></div>
+    </div>
+    <div class="ldr-name">Kasi <span>Fresh</span> Market</div>
+    <div class="ldr-sub">Fresh · Local · Delivered</div>
+    <div class="ldr-bar-wrap"><div class="ldr-bar-fill"></div></div>
   </div>
+</div>
+
+<div class="app">
+<nav>
+  <div class="logo"><div class="logo-icon">🥬</div><div class="logo-text">Kasi <span>Fresh</span></div></div>
+  <button class="cart-pill" onclick="openCart()">🛒<span class="badge" id="navCount">0</span></button>
 </nav>
 
-<div class="banner">
-  <div class="banner-title">Today's Dashboard — Sunday 8 June 2025</div>
-  <div class="banner-date">Good morning, Sipho 👋</div>
-  <div class="kpis">
-    <div class="kpi"><div class="kpi-val up">R1,240</div><div class="kpi-label">Today</div></div>
-    <div class="kpi"><div class="kpi-val up">47</div><div class="kpi-label">Txns</div></div>
-    <div class="kpi"><div class="kpi-val warn">3</div><div class="kpi-label">Low Stock</div></div>
-    <div class="kpi"><div class="kpi-val">R26</div><div class="kpi-label">Avg Sale</div></div>
+<div class="hero" id="hero">
+  <div class="hero-tag">Your Neighbourhood Market — Online</div>
+  <h1>Fresh Groceries,<br><em>Kasi Prices</em> 🥬</h1>
+  <p>Order from your phone, collect in-store or get same-day delivery in the hood.</p>
+  <div class="hero-btns">
+    <button class="btn-p" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+    <button class="btn-s" onclick="document.getElementById('delivery').scrollIntoView({behavior:'smooth'})">Delivery Areas</button>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-val"><span class="count" data-target="850">0</span>+</div><div class="stat-label">Orders / Month</div></div>
+  <div class="stat"><div class="stat-val"><span class="count" data-target="320">0</span>+</div><div class="stat-label">Products</div></div>
+  <div class="stat"><div class="stat-val"><span class="count" data-target="45">0</span> min</div><div class="stat-label">Avg Delivery</div></div>
+</div>
+
+<div class="section" id="shop">
+  <div class="section-label">Tap "Add" to build your basket</div>
+  <div class="section-title">Shop Fresh</div>
+  <div class="filter-tabs">
+    <div class="tab active" onclick="filterProds('all',this)">All</div>
+    <div class="tab" onclick="filterProds('veg',this)">🥕 Veg</div>
+    <div class="tab" onclick="filterProds('fruit',this)">🍎 Fruit</div>
+    <div class="tab" onclick="filterProds('staples',this)">🍞 Staples</div>
+  </div>
+  <div class="prod-grid" id="prodGrid"></div>
+</div>
+
+<div class="section" id="delivery">
+  <div class="section-label">We Come To You</div>
+  <div class="section-title">Same-Day Delivery</div>
+  <div class="delivery-card">
+    <h3>🛵 Free delivery over R250</h3>
+    <p>Order before 2pm for same-day delivery. Under R250? Just R25 flat fee.</p>
+    <div class="delivery-zones">
+      <span class="zone">Umlazi</span><span class="zone">KwaMashu</span><span class="zone">Pinetown</span><span class="zone">Clermont</span><span class="zone">Inanda</span>
+    </div>
   </div>
 </div>
 
 <div class="section">
-  <div class="section-row">
-    <div class="section-title">Quick Sale — Tap to Add</div>
-    <span class="badge">⚡ POS Mode</span>
-  </div>
-  <div class="product-grid">
-    <div class="product-card">
-      <div class="prod-icon">🥬</div><div class="prod-name">Spinach Bunch</div>
-      <div class="prod-price">R8.50</div><div class="prod-stock">Stock: 34</div>
-      <button class="add-btn">+</button>
-    </div>
-    <div class="product-card low-stock">
-      <div class="low-badge">LOW</div>
-      <div class="prod-icon">🧈</div><div class="prod-name">Butter 500g</div>
-      <div class="prod-price">R36.99</div><div class="prod-stock">Stock: 4</div>
-      <button class="add-btn">+</button>
-    </div>
-    <div class="product-card">
-      <div class="prod-icon">🍞</div><div class="prod-name">Brown Bread</div>
-      <div class="prod-price">R18.99</div><div class="prod-stock">Stock: 22</div>
-      <button class="add-btn">+</button>
-    </div>
-    <div class="product-card low-stock">
-      <div class="low-badge">LOW</div>
-      <div class="prod-icon">🥛</div><div class="prod-name">Milk 2L</div>
-      <div class="prod-price">R28.00</div><div class="prod-stock">Stock: 6</div>
-      <button class="add-btn">+</button>
-    </div>
-  </div>
+  <div class="section-label">The Community Says</div>
+  <div class="section-title">Reviews</div>
+  <div class="testi"><div class="stars">★★★★★</div><p>"Veggies fresher than the big chains and half the taxi fare saved. Delivery was 35 min!"</p><div class="who">— Mama Zanele, Umlazi</div></div>
+  <div class="testi"><div class="stars">★★★★★</div><p>"I order the staples combo every month-end. Never missed a delivery."</p><div class="who">— Thabo M., KwaMashu</div></div>
+</div>
 
-  <div class="cart-section">
-    <div class="cart-title">Current Sale <span style="color:#4a7a40;font-size:0.7rem;font-weight:500">3 items</span></div>
-    <div class="cart-item">
-      <span class="cart-item-name">Brown Bread</span>
-      <div class="cart-item-right">
-        <div class="qty-ctrl"><button class="qty-btn">−</button><span class="qty-num">2</span><button class="qty-btn">+</button></div>
-        <span class="cart-price">R37.98</span>
-      </div>
-    </div>
-    <div class="cart-item">
-      <span class="cart-item-name">Spinach Bunch</span>
-      <div class="cart-item-right">
-        <div class="qty-ctrl"><button class="qty-btn">−</button><span class="qty-num">1</span><button class="qty-btn">+</button></div>
-        <span class="cart-price">R8.50</span>
-      </div>
-    </div>
-    <div class="cart-item">
-      <span class="cart-item-name">Milk 2L</span>
-      <div class="cart-item-right">
-        <div class="qty-ctrl"><button class="qty-btn">−</button><span class="qty-num">1</span><button class="qty-btn">+</button></div>
-        <span class="cart-price">R28.00</span>
-      </div>
-    </div>
-    <div class="cart-total"><span class="total-label">Total Due</span><span class="total-val">R74.48</span></div>
-    <button class="checkout-btn">💳 Charge R74.48</button>
-  </div>
+<footer>
+  <div class="f-brand">Kasi <span>Fresh</span> Market</div>
+  <p>Open daily 7am–7pm · Spar Complex, Main Rd<br>This is a demonstration website.</p>
+  <a class="powered" href="https://proaxissolutions.co.za" target="_blank">Powered by <b>Proaxis Solutions</b></a>
+</footer>
+</div>
 
-  <div class="section-row"><div class="section-title">Inventory Alerts</div></div>
-  <div class="inv-row">
-    <div class="inv-info"><div class="inv-icon">🧈</div><div><div class="inv-name">Butter 500g</div><div class="inv-sku">SKU-0042</div></div></div>
-    <div class="inv-right"><div class="inv-count low">4 units</div><div class="stock-bar-bg"><div class="stock-bar bar-orange" style="width:15%"></div></div></div>
-  </div>
-  <div class="inv-row">
-    <div class="inv-info"><div class="inv-icon">🥛</div><div><div class="inv-name">Full Cream Milk 2L</div><div class="inv-sku">SKU-0018</div></div></div>
-    <div class="inv-right"><div class="inv-count low">6 units</div><div class="stock-bar-bg"><div class="stock-bar bar-orange" style="width:20%"></div></div></div>
-  </div>
-  <div class="inv-row">
-    <div class="inv-info"><div class="inv-icon">🍳</div><div><div class="inv-name">Cooking Oil 2L</div><div class="inv-sku">SKU-0031</div></div></div>
-    <div class="inv-right"><div class="inv-count out">0 units</div><div class="stock-bar-bg"><div class="stock-bar bar-red" style="width:0%"></div></div></div>
-  </div>
+<div class="cart-bar" id="cartBar" onclick="openCart()">
+  <span class="ct" id="cartCount">0 items</span>
+  <span class="cv">View Basket · R<span id="cartTotal">0</span></span>
+</div>
 
-  <div class="alert-box">
-    <div class="alert-icon">⚡</div>
-    <div class="alert-text"><strong>Auto-order triggered:</strong> Supplier notified for Butter (×24) and Cooking Oil (×12). Estimated delivery: Tuesday morning.</div>
+<div class="cart-modal" id="cartModal" onclick="if(event.target===this)closeCart()">
+  <div class="cart-sheet">
+    <div id="cartContent">
+      <h3>🧺 Your Basket</h3>
+      <div id="cartLines"></div>
+      <div class="cart-total"><span>Total</span><span>R<span id="sheetTotal">0</span></span></div>
+      <button class="checkout-btn" onclick="checkout()">Checkout →</button>
+    </div>
+    <div class="order-success" id="orderSuccess">
+      <div class="tick">✓</div>
+      <h3 style="color:#fff;margin-bottom:.3rem">Order Placed!</h3>
+      <p style="font-size:.75rem;color:#9ab586;line-height:1.6">We'll WhatsApp you the delivery slot &amp; payment link. Enkosi! 🥬</p>
+    </div>
   </div>
 </div>
+
+<a class="wa-btn" href="https://wa.me/272136607" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.3 7L4 29l7.2-2.2c1.9 1 4 1.6 6.3 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-2 0-3.9-.6-5.5-1.6l-.4-.2-4.1 1.3 1.3-4-.3-.4C5.7 18.4 5 16.8 5 15 5 9 9.9 4 16 4s11 4.9 11 11-4.9 9.8-11 9.8zm5.6-7.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.5 4.9.8.3 1.4.5 1.9.7.8.2 1.5.2 2.1.1.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>
+</a>
+
+<script>
+window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('page-loader').classList.add('hidden')},2600)});
+
+function animateCounters(){
+  document.querySelectorAll('.count').forEach(el=>{
+    const target=+el.dataset.target,dur=1600,t0=performance.now();
+    function tick(t){const p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(target*e).toLocaleString();if(p<1)requestAnimationFrame(tick)}
+    requestAnimationFrame(tick);
+  });
+}
+window.addEventListener('load',()=>setTimeout(animateCounters,2700));
+
+const PRODUCTS=[
+  {id:1,cat:'veg',emoji:'🥬',name:'Spinach Bunch',unit:'per bunch',price:15,special:1},
+  {id:2,cat:'veg',emoji:'🍅',name:'Tomatoes',unit:'1kg',price:22},
+  {id:3,cat:'veg',emoji:'🥔',name:'Potatoes',unit:'7kg pocket',price:65},
+  {id:4,cat:'veg',emoji:'🧅',name:'Onions',unit:'3kg bag',price:38},
+  {id:5,cat:'fruit',emoji:'🍎',name:'Apples',unit:'1.5kg bag',price:32},
+  {id:6,cat:'fruit',emoji:'🍌',name:'Bananas',unit:'1kg',price:18,special:1},
+  {id:7,cat:'fruit',emoji:'🍊',name:'Oranges',unit:'3kg pocket',price:35},
+  {id:8,cat:'staples',emoji:'🌽',name:'Maize Meal',unit:'10kg',price:95},
+  {id:9,cat:'staples',emoji:'🍚',name:'Rice',unit:'5kg',price:78},
+  {id:10,cat:'staples',emoji:'🍞',name:'Brown Bread',unit:'loaf',price:16},
+  {id:11,cat:'staples',emoji:'🥚',name:'Eggs',unit:'18 tray',price:55},
+  {id:12,cat:'staples',emoji:'🫘',name:'Sugar Beans',unit:'2kg',price:62,special:1}
+];
+const cart={};
+let currentCat='all';
+function renderProds(cat){
+  const grid=document.getElementById('prodGrid');grid.innerHTML='';
+  PRODUCTS.filter(p=>cat==='all'||p.cat===cat).forEach(p=>{
+    const qty=cart[p.id]||0;
+    const card=document.createElement('div');card.className='prod-card';
+    card.innerHTML=(p.special?'<div class="special-tag">SPECIAL</div>':'')+
+      '<div class="prod-emoji">'+p.emoji+'</div><div class="prod-name">'+p.name+'</div><div class="prod-unit">'+p.unit+'</div><div class="prod-price">R'+p.price+'</div>'+
+      (qty===0?'<button class="add-btn" onclick="addItem('+p.id+')">+ Add</button>'
+      :'<div class="qty-ctrl"><button class="qty-btn" onclick="removeItem('+p.id+')">−</button><span class="qty-num">'+qty+'</span><button class="qty-btn" onclick="addItem('+p.id+')">+</button></div>');
+    grid.appendChild(card);
+  });
+}
+function filterProds(cat,el){currentCat=cat;document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderProds(cat)}
+function addItem(id){cart[id]=(cart[id]||0)+1;updateCart()}
+function removeItem(id){if(cart[id]){cart[id]--;if(cart[id]===0)delete cart[id]}updateCart()}
+function updateCart(){
+  renderProds(currentCat);
+  let n=0,total=0;
+  for(const id in cart){const p=PRODUCTS.find(x=>x.id==id);n+=cart[id];total+=p.price*cart[id]}
+  document.getElementById('navCount').textContent=n;
+  document.getElementById('cartCount').textContent=n+' item'+(n===1?'':'s');
+  document.getElementById('cartTotal').textContent=total;
+  document.getElementById('sheetTotal').textContent=total;
+  document.getElementById('cartBar').classList.toggle('show',n>0);
+  const lines=document.getElementById('cartLines');lines.innerHTML='';
+  for(const id in cart){const p=PRODUCTS.find(x=>x.id==id);
+    const d=document.createElement('div');d.className='cart-line';
+    d.innerHTML='<span>'+cart[id]+'× '+p.name+'</span><span>R'+(p.price*cart[id])+'</span>';lines.appendChild(d)}
+}
+function openCart(){if(Object.keys(cart).length===0){document.getElementById('shop').scrollIntoView({behavior:'smooth'});return}document.getElementById('cartModal').classList.add('open')}
+function closeCart(){document.getElementById('cartModal').classList.remove('open')}
+function checkout(){document.getElementById('cartContent').style.display='none';document.getElementById('orderSuccess').classList.add('show');setTimeout(()=>{closeCart();document.getElementById('cartContent').style.display='block';document.getElementById('orderSuccess').classList.remove('show');for(const k in cart)delete cart[k];updateCart()},3200)}
+renderProds('all');
+
+// Falling leaves in hero
+const hero=document.getElementById('hero');
+const leaves=['🍃','🥬','🍂'];
+for(let i=0;i<8;i++){
+  const l=document.createElement('div');l.className='leaf';
+  l.textContent=leaves[i%3];
+  l.style.cssText='left:'+(Math.random()*95)+'%;animation-duration:'+(5+Math.random()*5)+'s;animation-delay:'+(Math.random()*5)+'s';
+  hero.appendChild(l);
+}
+</script>
 </body>
 </html>
