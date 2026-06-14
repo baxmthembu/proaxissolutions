@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Notice — Proaxis Solutions</title>
+  <meta name="description" content="How Proaxis Solutions collects, uses, and protects your personal information in accordance with POPIA.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://proaxissolutions.co.za/privacy.html">
+  <link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="brand/favicon.ico">
+  <link rel="apple-touch-icon" href="brand/logo-icon-192.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0F172A;
+      --blue: #2563EB;
+      --teal: #14B8A6;
+      --teal-dark: #0d9488;
+      --slate: #334155;
+      --light-bg: #F8FAFC;
+      --border: #CBD5E1;
+    }
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; box-sizing: border-box; }
+    body { background: #fff; color: var(--slate); line-height: 1.7; margin: 0; padding-top: 64px; font-size: 16px; overflow-x: hidden; }
+
+    /* PAGE LOADER */
+    #page-loader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #0F172A;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1), visibility 0.6s;
+    }
+    #page-loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .ldr-wrap { display: flex; flex-direction: column; align-items: center; gap: 0; }
+    .ldr-icon-stage { perspective: 600px; width: 72px; height: 72px; margin-bottom: 20px; position: relative; }
+    .ldr-icon-box {
+      width: 72px; height: 72px; background: #1E293B; border-radius: 16px;
+      border: 1px solid rgba(20,184,166,0.35);
+      display: flex; align-items: center; justify-content: center;
+      transform: rotateY(90deg) scale(0.7);
+      animation: iconFlip 0.55s cubic-bezier(0.34,1.56,0.64,1) 0.1s forwards;
+    }
+    @keyframes iconFlip {
+      0%   { transform: rotateY(90deg) scale(0.7); }
+      60%  { transform: rotateY(-8deg) scale(1.05); box-shadow: 0 0 32px 8px rgba(20,184,166,0.25); }
+      100% { transform: rotateY(0deg) scale(1); box-shadow: 0 0 24px 4px rgba(20,184,166,0.12); }
+    }
+    .ldr-pulse { position: absolute; width: 72px; height: 72px; border-radius: 16px; border: 1.5px solid rgba(20,184,166,0.5); opacity: 0; animation: ldrPulse 1s ease 0.65s infinite; }
+    @keyframes ldrPulse { 0%{opacity:0.6;transform:scale(1)} 100%{opacity:0;transform:scale(1.55)} }
+    .ldr-name { font-family:'Arial Black',Arial,sans-serif; font-size:1.55rem; font-weight:900; color:#fff; letter-spacing:0.5px; opacity:0; transform:translateY(10px); animation:wordUp 0.4s ease 0.55s forwards; }
+    .ldr-sub { font-size:0.6rem; font-weight:500; color:rgba(255,255,255,0.4); letter-spacing:5px; text-transform:uppercase; opacity:0; transform:translateY(6px); animation:wordUp 0.35s ease 0.72s forwards; }
+    @keyframes wordUp { to { opacity:1; transform:translateY(0); } }
+    .ldr-bar-wrap { width:180px; height:2px; background:rgba(255,255,255,0.07); border-radius:99px; overflow:hidden; margin-top:18px; opacity:0; animation:barAppear 0.2s ease 0.8s forwards; }
+    @keyframes barAppear { to{opacity:1} }
+    .ldr-bar-fill { height:100%; width:0%; background:linear-gradient(90deg,#14B8A6,#0284C7); border-radius:99px; animation:barFill 0.55s cubic-bezier(0.4,0,0.2,1) 0.82s forwards; }
+    @keyframes barFill { to{width:100%} }
+
+    /* NAV */
+    .navbar { background: var(--navy); height: 64px; padding: 0 1rem; }
+    .navbar-brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
+    .brand-icon { width:36px; height:36px; background:#1E293B; border-radius:8px; display:flex; align-items:center; justify-content:center; border:1px solid rgba(20,184,166,0.3); }
+    .brand-words { display:flex; flex-direction:column; }
+    .brand-name { font-family:"Arial Black",Arial,sans-serif; font-size:1.05rem; font-weight:900; color:#fff; letter-spacing:0.3px; line-height:1; }
+    .brand-sub { font-size:0.55rem; color:rgba(255,255,255,0.45); letter-spacing:3px; text-transform:uppercase; margin-top:2px; }
+    .nav-link { color:#CBD5E1 !important; font-size:0.95rem; font-weight:600; padding:0.4rem 0.85rem !important; border-radius:6px; transition:color 0.15s,background 0.15s; }
+    .nav-link:hover { color:#fff !important; background:rgba(255,255,255,0.1); }
+    .nav-cta { background:var(--blue) !important; color:#fff !important; margin-left:0.5rem; }
+    .nav-cta:hover { background:#1d4ed8 !important; }
+
+    /* HERO */
+    .privacy-hero {
+      background: var(--navy);
+      padding: 72px 1.5rem 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .privacy-hero::before {
+      content:''; position:absolute; inset:0;
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(20,184,166,0.18) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      background:rgba(20,184,166,0.15); color:var(--teal);
+      border:1px solid rgba(20,184,166,0.35); border-radius:999px;
+      padding:0.4rem 1.1rem; font-size:0.82rem; font-weight:800;
+      letter-spacing:0.07em; text-transform:uppercase; margin-bottom:1.5rem;
+    }
+    .privacy-hero h1 { color:#fff; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; letter-spacing:-0.03em; line-height:1.15; margin-bottom:1rem; }
+    .privacy-hero h1 em { font-style:normal; color:var(--teal); }
+    .privacy-hero p { color:#94A3B8; font-size:1rem; font-weight:500; max-width:500px; margin:0 auto; line-height:1.7; }
+    .hero-meta { display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; margin-top:2rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.08); }
+    .meta-item { font-size:0.82rem; font-weight:600; color:#64748B; }
+    .meta-item strong { color:#94A3B8; font-weight:700; }
+
+    /* CONTENT */
+    .privacy-body { max-width: 760px; margin: 0 auto; padding: 60px 1.5rem 80px; }
+
+    /* TL;DR Card */
+    .tldr-card {
+      background: linear-gradient(135deg, rgba(20,184,166,0.07), rgba(37,99,235,0.07));
+      border: 1.5px solid rgba(20,184,166,0.3);
+      border-radius: 16px;
+      padding: 1.75rem;
+      margin-bottom: 3rem;
+    }
+    .tldr-card .tldr-label {
+      display:inline-flex; align-items:center; gap:0.4rem;
+      font-size:0.75rem; font-weight:800; letter-spacing:0.1em;
+      text-transform:uppercase; color:var(--teal); margin-bottom:0.75rem;
+    }
+    .tldr-card h2 { font-size:1.15rem; font-weight:800; color:var(--navy); margin-bottom:1rem; }
+    .tldr-points { display:flex; flex-direction:column; gap:0.6rem; }
+    .tldr-point { display:flex; align-items:flex-start; gap:0.65rem; font-size:0.95rem; font-weight:500; color:var(--slate); }
+    .tldr-point::before { content:'✓'; color:var(--teal); font-weight:900; font-size:1rem; flex-shrink:0; margin-top:0.05rem; }
+
+    /* Section */
+    .section-block { margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 2.5rem; }
+    .section-block:last-child { border-bottom: none; }
+    .section-num { font-size:0.75rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:0.5rem; }
+    .section-block h2 { font-size:1.25rem; font-weight:800; color:var(--navy); margin-bottom:1rem; letter-spacing:-0.02em; }
+    .section-block p { font-size:0.97rem; font-weight:500; color:var(--slate); line-height:1.8; margin-bottom:0.85rem; }
+    .section-block p:last-child { margin-bottom:0; }
+
+    /* Data table */
+    .data-table { width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.92rem; }
+    .data-table th { background:var(--light-bg); color:var(--navy); font-weight:800; font-size:0.8rem; letter-spacing:0.05em; text-transform:uppercase; padding:0.75rem 1rem; text-align:left; border-bottom:1.5px solid var(--border); }
+    .data-table td { padding:0.85rem 1rem; border-bottom:1px solid #f1f5f9; color:var(--slate); font-weight:500; vertical-align:top; }
+    .data-table tr:last-child td { border-bottom:none; }
+    .data-table tr:hover td { background:#fafbfc; }
+
+    /* Rights grid */
+    .rights-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem; }
+    .right-card {
+      background:var(--light-bg); border:1.5px solid var(--border);
+      border-radius:12px; padding:1.1rem 1.15rem;
+      transition:border-color 0.2s, box-shadow 0.2s;
+    }
+    .right-card:hover { border-color:#93C5FD; box-shadow:0 4px 12px rgba(37,99,235,0.08); }
+    .right-card .r-icon { font-size:1.4rem; margin-bottom:0.5rem; }
+    .right-card h4 { font-size:0.88rem; font-weight:800; color:var(--navy); margin-bottom:0.3rem; }
+    .right-card p { font-size:0.85rem; font-weight:500; color:var(--slate); margin:0; line-height:1.55; }
+
+    /* IO card */
+    .io-card {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 1.75rem;
+      margin-top: 1rem;
+    }
+    .io-card h3 { color:#fff; font-size:1.05rem; font-weight:800; margin-bottom:1rem; }
+    .io-row { display:flex; gap:0.5rem; font-size:0.9rem; font-weight:500; margin-bottom:0.6rem; }
+    .io-label { color:#64748B; min-width:140px; flex-shrink:0; }
+    .io-value { color:#CBD5E1; font-weight:600; }
+    .io-value a { color:var(--teal); text-decoration:none; }
+    .io-value a:hover { text-decoration:underline; }
+
+    /* Contact CTA */
+    .contact-cta {
+      background:linear-gradient(135deg,rgba(37,99,235,0.07),rgba(20,184,166,0.07));
+      border:1.5px solid rgba(37,99,235,0.2); border-radius:16px;
+      padding:1.75rem; text-align:center; margin-top:3rem;
+    }
+    .contact-cta h3 { font-size:1.1rem; font-weight:800; color:var(--navy); margin-bottom:0.5rem; }
+    .contact-cta p { font-size:0.92rem; font-weight:500; color:var(--slate); margin-bottom:1.25rem; }
+    .cta-btn {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      background:var(--blue); color:#fff; text-decoration:none;
+      padding:0.75rem 1.75rem; border-radius:10px;
+      font-size:0.92rem; font-weight:800; letter-spacing:0.01em;
+      transition:all 0.2s; border:none;
+    }
+    .cta-btn:hover { background:#1d4ed8; color:#fff; transform:translateY(-2px); box-shadow:0 8px 20px rgba(37,99,235,0.3); }
+
+    /* FOOTER */
+    footer { background:var(--navy); color:#94A3B8; padding:3rem 1.5rem; }
+    .footer-inner { max-width:1140px; margin:0 auto; display:flex; flex-wrap:wrap; gap:2rem; justify-content:space-between; align-items:flex-start; }
+    .footer-brand { font-weight:800; font-size:1.1rem; color:#fff; margin-bottom:0.4rem; }
+    .footer-brand span { color:var(--teal); }
+    .footer-sub { font-size:0.85rem; font-weight:500; color:#64748B; }
+    .footer-links { display:flex; gap:1.25rem; flex-wrap:wrap; align-items:center; }
+    .footer-links a { color:#64748B; font-size:0.9rem; font-weight:600; text-decoration:none; transition:color 0.15s; }
+    .footer-links a:hover { color:#fff; }
+    .footer-links a.active { color:var(--teal); }
+    .footer-copy { font-size:0.85rem; font-weight:500; color:#475569; margin-top:2rem; text-align:center; }
+
+    /* Scroll reveal */
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.6s ease,transform 0.6s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    @media (max-width:600px) {
+      .rights-grid { grid-template-columns:1fr; }
+      .io-row { flex-direction:column; gap:0.1rem; }
+      .io-label { min-width:unset; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loader -->
+<div id="page-loader">
+  <div class="ldr-wrap">
+    <div class="ldr-icon-stage">
+      <div class="ldr-pulse"></div>
+      <div class="ldr-icon-box">
+        <svg viewBox="0 0 44 44" width="38" height="38" xmlns="http://www.w3.org/2000/svg">
+          <line x1="22" y1="32" x2="22" y2="10" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M16 17 L22 10 L28 17" fill="none" stroke="#14B8A6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="8" y1="32" x2="36" y2="32" stroke="white" stroke-width="2" stroke-linecap="round" stroke-opacity="0.35"/>
+          <circle cx="22" cy="32" r="2.5" fill="#14B8A6"/>
+        </svg>
+      </div>
+    </div>
+    <div class="ldr-name">Proaxis</div>
+    <div class="ldr-sub">Solutions</div>
+    <div class="ldr-bar-wrap"><div class="ldr-bar-fill"></div></div>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container-xl">
+    <a class="navbar-brand" href="index.html">
+      <div class="brand-icon"><svg viewBox="0 0 36 36" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><line x1="18" y1="26" x2="18" y2="8" stroke="#14B8A6" stroke-width="2" stroke-linecap="round"/><path d="M13 14 L18 8 L23 14" fill="none" stroke="#14B8A6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="6" y1="26" x2="30" y2="26" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.35"/><circle cx="18" cy="26" r="2" fill="#14B8A6"/></svg></div>
+      <div class="brand-words"><span class="brand-name">Proaxis</span><span class="brand-sub">Solutions</span></div>
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link nav-cta" href="contact.html">Get in Touch</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="privacy-hero">
+  <div style="position:relative;z-index:1;">
+    <div class="hero-badge">🛡️ Privacy Notice</div>
+    <h1>Your Data.<br><em>Your Rights.</em> Our Responsibility.</h1>
+    <p>We believe privacy should be clear, not complicated. Here is exactly what we collect, why we collect it, and what you can do about it.</p>
+    <div class="hero-meta">
+      <div class="meta-item"><strong>Effective:</strong> June 2026</div>
+      <div class="meta-item"><strong>Last Updated:</strong> June 2026</div>
+      <div class="meta-item"><strong>IO Ref:</strong> 2025-058837</div>
+      <div class="meta-item"><strong>Law:</strong> POPIA (Act 4 of 2013)</div>
+    </div>
+  </div>
+</div>
+
+<!-- Body -->
+<div class="privacy-body">
+
+  <!-- TL;DR -->
+  <div class="tldr-card reveal">
+    <div class="tldr-label">⚡ The Short Version</div>
+    <h2>Here's what you actually need to know</h2>
+    <div class="tldr-points">
+      <div class="tldr-point">We only collect your name, email, and business details when you contact us — nothing else.</div>
+      <div class="tldr-point">We use your information only to respond to your enquiry and deliver our services.</div>
+      <div class="tldr-point">We never sell, rent, or share your personal data with third parties for marketing.</div>
+      <div class="tldr-point">You can ask us to show you, correct, or delete your data at any time — no questions asked.</div>
+      <div class="tldr-point">We keep your data for 12 months after your last contact with us, then it is deleted.</div>
+    </div>
+  </div>
+
+  <!-- 1. Who we are -->
+  <div class="section-block reveal">
+    <div class="section-num">Section 1</div>
+    <h2>Who We Are</h2>
+    <p>This Privacy Notice is issued by <strong>Proaxis Solutions (Pty) Ltd</strong>, a technology company registered in South Africa (Registration No. 2025/542019/07). We provide custom software development, AI automation, digital transformation, and IT support services.</p>
+    <p>We are the <strong>Responsible Party</strong> under the Protection of Personal Information Act 4 of 2013 (POPIA) — meaning we decide how and why your personal information is processed.</p>
+  </div>
+
+  <!-- 2. What we collect -->
+  <div class="section-block reveal">
+    <div class="section-num">Section 2</div>
+    <h2>What We Collect and Why</h2>
+    <p>We only collect personal information that is necessary for a specific, legitimate purpose. Here is exactly what we collect:</p>
+    <table class="data-table">
+      <thead>
+        <tr><th>Information</th><th>Why We Collect It</th><th>Legal Basis</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Name &amp; email address</strong></td>
+          <td>To respond to your enquiry and communicate with you about our services</td>
+          <td>Consent / Legitimate interest</td>
+        </tr>
+        <tr>
+          <td><strong>Business name &amp; industry</strong></td>
+          <td>To understand your context and provide a relevant, tailored response</td>
+          <td>Consent / Contractual necessity</td>
+        </tr>
+        <tr>
+          <td><strong>Challenge description &amp; budget</strong></td>
+          <td>To assess how we can best help you and prepare an appropriate proposal</td>
+          <td>Consent</td>
+        </tr>
+        <tr>
+          <td><strong>Phone number</strong> (if provided)</td>
+          <td>To contact you about your enquiry where you have requested a call</td>
+          <td>Consent</td>
+        </tr>
+        <tr>
+          <td><strong>Usage data</strong> (page visited, referral source)</td>
+          <td>To understand how people find and use our website so we can improve it</td>
+          <td>Legitimate interest</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.88rem;color:#64748B;margin-top:0.75rem;">We do not collect special personal information (race, health, religion, biometrics, etc.) and we do not collect information about children.</p>
+  </div>
+
+  <!-- 3. How we use your data -->
+  <div class="section-block reveal">
+    <div class="section-num">Section 3</div>
+    <h2>How We Use Your Information</h2>
+    <p>We use your personal information strictly for the following purposes:</p>
+    <p>— To respond to your enquiry or service request<br>
+    — To prepare and send you a proposal or quote<br>
+    — To deliver and manage the services you have engaged us for<br>
+    — To comply with our legal obligations (e.g. tax, contract records)<br>
+    — To improve our website and communication based on how people engage with us</p>
+    <p>We will <strong>never use your personal information for unsolicited marketing</strong> without your explicit consent. If you have opted in to updates from us, you can opt out at any time by replying "unsubscribe" to any email.</p>
+  </div>
+
+  <!-- 4. Sharing -->
+  <div class="section-block reveal">
+    <div class="section-num">Section 4</div>
+    <h2>Who We Share Your Information With</h2>
+    <p>We do not sell, rent, or trade your personal information. We may share your information with trusted third-party service providers who help us operate — but only where necessary and only under strict confidentiality obligations:</p>
+    <table class="data-table">
+      <thead>
+        <tr><th>Third Party</th><th>Purpose</th><th>Location</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Web3Forms</strong></td><td>Delivers contact form submissions to our inbox</td><td>International</td></tr>
+        <tr><td><strong>Netlify</strong></td><td>Website hosting and form processing</td><td>International</td></tr>
+        <tr><td><strong>Google (Workspace)</strong></td><td>Email communication and document storage</td><td>International</td></tr>
+      </tbody>
+    </table>
+    <p>All international transfers are made with appropriate safeguards in place. We do not share your information with government bodies unless legally required to do so.</p>
+  </div>
+
+  <!-- 5. Retention -->
+  <div class="section-block reveal">
+    <div class="section-num">Section 5</div>
+    <h2>How Long We Keep Your Information</h2>
+    <p>We keep your information only for as long as necessary:</p>
+    <p>— <strong>Enquiry data</strong> (contact form submissions): 12 months from your last contact with us<br>
+    — <strong>Client project data</strong>: Duration of the contract plus 5 years (as required by law)<br>
+    — <strong>Financial records</strong> (invoices, payments): 7 years (SARS requirement)<br>
+    — <strong>Website usage data</strong>: 12 months</p>
+    <p>After the applicable retention period, your information is permanently deleted or anonymised.</p>
+  </div>
+
+  <!-- 6. Your rights -->
+  <div class="section-block reveal">
+    <div class="section-num">Section 6</div>
+    <h2>Your Rights Under POPIA</h2>
+    <p>You have the following rights regarding your personal information. You can exercise any of these rights by contacting our Information Officer (details in Section 7).</p>
+    <div class="rights-grid">
+      <div class="right-card">
+        <div class="r-icon">👁️</div>
+        <h4>Right to Access</h4>
+        <p>Request a copy of the personal information we hold about you.</p>
+      </div>
+      <div class="right-card">
+        <div class="r-icon">✏️</div>
+        <h4>Right to Correction</h4>
+        <p>Ask us to correct inaccurate or incomplete information about you.</p>
+      </div>
+      <div class="right-card">
+        <div class="r-icon">🗑️</div>
+        <h4>Right to Deletion</h4>
+        <p>Request that we delete your personal information where there is no longer a lawful reason to keep it.</p>
+      </div>
+      <div class="right-card">
+        <div class="r-icon">🚫</div>
+        <h4>Right to Object</h4>
+        <p>Object to the processing of your information, including for direct marketing purposes.</p>
+      </div>
+      <div class="right-card">
+        <div class="r-icon">📦</div>
+        <h4>Right to Portability</h4>
+        <p>Request your information in a structured, commonly used format.</p>
+      </div>
+      <div class="right-card">
+        <div class="r-icon">⏸️</div>
+        <h4>Right to Restrict</h4>
+        <p>Ask us to limit how we use your information while a dispute is resolved.</p>
+      </div>
+    </div>
+    <p style="margin-top:1.25rem;">We will respond to all requests within <strong>5 business days</strong>. If you are not satisfied with our response, you may lodge a complaint with the <a href="https://www.inforegulator.org.za" target="_blank" rel="noopener" style="color:var(--blue);font-weight:700;">Information Regulator of South Africa</a>.</p>
+  </div>
+
+  <!-- 7. IO -->
+  <div class="section-block reveal">
+    <div class="section-num">Section 7</div>
+    <h2>Our Information Officer</h2>
+    <p>Our registered Information Officer is responsible for overseeing compliance with POPIA and PAIA. All privacy requests and queries should be directed to:</p>
+    <div class="io-card">
+      <h3>🛡️ Information Officer — Proaxis Solutions</h3>
+      <div class="io-row"><span class="io-label">Name</span><span class="io-value">Andile Khoza</span></div>
+      <div class="io-row"><span class="io-label">IO Reference</span><span class="io-value">2025-058837</span></div>
+      <div class="io-row"><span class="io-label">Email</span><span class="io-value"><a href="mailto:privacy@proaxissolutions.co.za">privacy@proaxissolutions.co.za</a></span></div>
+      <div class="io-row"><span class="io-label">Phone</span><span class="io-value">066 213 6607</span></div>
+      <div class="io-row"><span class="io-label">Address</span><span class="io-value">1 Shantally Close, Milarina Gardens, Durban, KwaZulu-Natal</span></div>
+      <div class="io-row"><span class="io-label">Registered With</span><span class="io-value">Information Regulator of South Africa</span></div>
+    </div>
+  </div>
+
+  <!-- 8. Cookies -->
+  <div class="section-block reveal">
+    <div class="section-num">Section 8</div>
+    <h2>Cookies &amp; Website Tracking</h2>
+    <p>Our website uses minimal, functional cookies — small text files stored on your device that help the site work properly.</p>
+    <p>— <strong>Essential cookies:</strong> Required for the site to function (e.g. remembering your consent preference). Cannot be disabled.<br>
+    — <strong>Analytics cookies:</strong> Help us understand how visitors use our site so we can improve it. Only set with your consent.</p>
+    <p>You can manage or withdraw your cookie consent at any time using the settings in your browser. Withdrawing consent will not affect the lawfulness of any processing done before withdrawal.</p>
+  </div>
+
+  <!-- 9. Security -->
+  <div class="section-block reveal">
+    <div class="section-num">Section 9</div>
+    <h2>How We Protect Your Information</h2>
+    <p>We take the security of your personal information seriously. We implement technical and organisational measures to protect your data against unauthorised access, loss, or misuse — including encrypted connections (HTTPS), access controls, and regular security reviews.</p>
+    <p>In the unlikely event of a data breach that poses a risk to your rights, we will notify you and the Information Regulator as required by POPIA Section 22.</p>
+  </div>
+
+  <!-- 10. Updates -->
+  <div class="section-block reveal">
+    <div class="section-num">Section 10</div>
+    <h2>Changes to This Notice</h2>
+    <p>We review this Privacy Notice annually and whenever our practices change. The current version will always be available on this page with the effective date shown at the top. We will notify active clients of any material changes by email.</p>
+    <p>This notice was last reviewed and updated in <strong>June 2026</strong>.</p>
+  </div>
+
+  <!-- Contact CTA -->
+  <div class="contact-cta reveal">
+    <h3>Questions about your privacy?</h3>
+    <p>Our Information Officer is here to help. Contact us and we'll respond within 5 business days.</p>
+    <a href="mailto:privacy@proaxissolutions.co.za" class="cta-btn">✉️ privacy@proaxissolutions.co.za</a>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Proaxis <span>Solutions</span></div>
+      <div class="footer-sub">Reg. 2025/542019/07 · B-BBEE Level 1 · IO Ref: 2025-058837</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html" class="active">Privacy Notice</a>
+    </div>
+  </div>
+  <hr style="border-color:#1E293B; max-width:1140px; margin:1.5rem auto 0;">
+  <p class="footer-copy">© 2025 Proaxis Solutions (Pty) Ltd · All Rights Reserved · South Africa</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  window.addEventListener('load', () => setTimeout(() => document.getElementById('page-loader').classList.add('hidden'), 950));
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

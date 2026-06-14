@@ -1286,5 +1286,24 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 function flipCard(el) { el.classList.toggle('flipped'); }
 function unflipCard(id) { document.getElementById(id).classList.remove('flipped'); }
 </script>
+
+<!-- Cookie Bar -->
+<div id="cookie-bar" role="region" aria-label="Cookie consent" style="position:fixed;bottom:0;left:0;right:0;z-index:8888;background:#0F172A;border-top:1px solid rgba(20,184,166,0.2);padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;transform:translateY(100%);transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 -4px 24px rgba(0,0,0,0.25);" id="cookie-bar">
+  <div style="flex:1;min-width:200px;font-size:0.88rem;font-weight:500;color:#94A3B8;line-height:1.5;font-family:Inter,sans-serif;">
+    <strong style="color:#fff;font-weight:700;">We use minimal cookies</strong> to remember your preferences and improve your experience. No tracking, no ads. <a href="privacy.html" style="color:#14B8A6;font-weight:600;text-decoration:none;">Privacy Notice</a>
+  </div>
+  <div style="display:flex;gap:0.6rem;flex-shrink:0;">
+    <button onclick="acceptCookies()" style="background:#14B8A6;color:#fff;border:none;padding:0.5rem 1.25rem;border-radius:8px;font-size:0.85rem;font-weight:800;cursor:pointer;font-family:Inter,sans-serif;">Got it</button>
+    <a href="privacy.html" style="background:transparent;color:#94A3B8;border:1px solid rgba(255,255,255,0.15);padding:0.5rem 1rem;border-radius:8px;font-size:0.85rem;font-weight:700;cursor:pointer;text-decoration:none;font-family:Inter,sans-serif;display:inline-flex;align-items:center;">Learn more</a>
+  </div>
+</div>
+<script>
+(function(){
+  function acceptCookies(){localStorage.setItem('proaxis_cookie_consent','1');document.getElementById('cookie-bar').style.transform='translateY(100%)';}
+  window.acceptCookies=acceptCookies;
+  setTimeout(function(){if(!localStorage.getItem('proaxis_cookie_consent')){document.getElementById('cookie-bar').style.transform='translateY(0)';}},1800);
+})();
+</script>
+
 </body>
 </html>

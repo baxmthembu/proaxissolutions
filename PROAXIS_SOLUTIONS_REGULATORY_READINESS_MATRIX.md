@@ -104,9 +104,9 @@
 |---|---|---|---|---|
 | SARS Tax Number registered | ✅ COMPLETE | None | — | — |
 | Company appears on eFiling | ✅ COMPLETE | None | — | — |
-| Corporate Income Tax (CIT) product activated | 🔍 INVESTIGATE | Cannot obtain TCS PIN without active CIT registration | Investigate on eFiling: Organisation > Tax Products | 🔴 P1 |
-| ITR14 return issued/filed | 🔍 INVESTIGATE | Possible first-year issue; non-filing if overdue | Check eFiling: Returns > Returns History | 🔴 P1 |
-| Tax Compliance Status (TCS) PIN | ❌ NOT STARTED | Every tender requires a valid TCS PIN — without it, tender disqualified | Resolve CIT activation first; then apply via eFiling | 🔴 P1 |
+| Corporate Income Tax (CIT) product activated | ✅ COMPLETE | — | — | — |
+| ITR14 return issued/filed | 🔍 INVESTIGATE | Confirm filing status with SARS | Check eFiling: Returns > Returns History | 🟠 P2 |
+| Tax Compliance Status (TCS) PIN | ✅ COMPLETE — **93227BC47N** | None — PIN obtained June 2026 | Link PIN on CSD profile | ✅ Done |
 | VAT registration | Not applicable (turnover < threshold) | N/A until turnover exceeds registration threshold | Monitor turnover; register when required | 🟢 P4 |
 | E-invoicing readiness | ❌ NOT STARTED | SARS phased mandate 2026–2028 | Monitor SARS communications; confirm accounting software readiness [VERIFY: applicable dates for Proaxis' turnover band] | 🟡 P3 |
 | Financial record keeping | 🔍 INVESTIGATE | Companies Act and SARS require 7-year retention | Confirm what accounting system is in use | 🟡 P3 |
@@ -141,7 +141,7 @@
 |---|---|---|---|---|
 | CSD Registration | ✅ COMPLETE | None for basic registration | — | — |
 | CSD Profile — optimised | ❌ NOT STARTED | Incomplete profile = tender disqualification | Optimise all CSD fields per ACMD B6 checklist | 🟠 P2 |
-| TCS PIN linked on CSD | ❌ NOT STARTED | Profile incomplete; tenders disqualified | Obtain TCS PIN first; then link on CSD | 🔴 P1 |
+| TCS PIN linked on CSD | ⚠️ PIN obtained, not yet linked | Profile incomplete until linked | Log into CSD → Tax Compliance → enter 93227BC47N | 🔴 P1 |
 | B-BBEE certificate / affidavit uploaded | 🔍 INVESTIGATE | If not uploaded or expired: no B-BBEE points | Confirm on CSD portal; upload current certificate | 🟠 P2 |
 | Banking details verified on CSD | 🔍 INVESTIGATE | Payments cannot be processed | Confirm bank letter is current (< 3 months); verify on CSD | 🟠 P2 |
 | Company description reflects technology positioning | 🔍 INVESTIGATE | Poor positioning; may not appear in relevant searches | Update to AI / software / digital transformation description (ACMD B6.2) | 🟠 P2 |
@@ -189,7 +189,7 @@
 | PAIA | 10% | Registration done; no published manual |
 | POPIA | 20% | IO registered; no published policies |
 | Information Regulator | 30% | IO registered; annual report status unknown |
-| SARS | 40% | Tax number active; TCS PIN missing |
+| SARS | 75% | Tax number active; TCS PIN **93227BC47N** obtained — link on CSD |
 | CIPC | 60% | Registered; annual return status unconfirmed |
 | CSD | 25% | Registered; profile needs full optimisation |
 | Supplier Readiness | 15% | Bank account and CIPC done; no documentation |
@@ -207,11 +207,11 @@
 | PAIA | PAIA Manual not published; Annual Report status unknown |
 | POPIA | Policy and Privacy Notice not published; website collecting data without consent |
 | Information Regulator | Annual Report period active; IO email not updated to business address |
-| SARS | TCS PIN not obtained; CIT product status unclear |
+| SARS | TCS PIN **93227BC47N** obtained ✅ — link on CSD now |
 | CIPC | Annual return deadline not calendared |
-| CSD | TCS PIN not linked; profile not optimised |
+| CSD | TCS PIN 93227BC47N obtained — link it now; profile still needs optimisation |
 | Supplier | No Company Profile, Capability Statement, or Supplier Pack |
-| Tender | TCS PIN, B-BBEE renewal, CSD optimisation, and compliance documentation all blocking |
+| Tender | TCS PIN ✅ obtained (93227BC47N); B-BBEE renewal, CSD linking, and profile optimisation still blocking |
 
 ---
 

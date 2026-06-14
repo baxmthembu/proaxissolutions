@@ -29,7 +29,7 @@ Before updating the CSD profile, ensure the following are in place:
 
 | Item | Status | Required |
 |---|---|---|
-| SARS TCS PIN — active | ❌ Not yet obtained | MUST be obtained first |
+| SARS TCS PIN — active | ✅ **93227BC47N** | Link to CSD profile immediately |
 | Bank verification letter — less than 3 months old | ⏳ Obtain from FNB | Required for banking verification on CSD |
 | B-BBEE certificate / new EME affidavit | ⚠️ Expiring 07 Jul 2026 | Ensure current and upload new affidavit once commissioned |
 | Company registration number confirmed | ✅ 2025/542019/07 | — |
@@ -86,21 +86,21 @@ Navigate to the company information section and verify/update each field:
 |---|---|---|
 | **Tax Reference Number** | 9007193338 | Confirm |
 | **VAT Number** | Not applicable (not VAT registered) | Leave blank or select "Not Registered" |
-| **Tax Compliance Status (TCS) PIN** | [TO BE OBTAINED] | Link once TCS PIN is obtained |
+| **Tax Compliance Status (TCS) PIN** | **93227BC47N** | ✅ Link on CSD now |
 
 ---
 
 ### Step 5 — Link TCS PIN
 
-Once the TCS PIN has been obtained from SARS eFiling:
+TCS PIN **93227BC47N** has been obtained. Complete the following immediately:
 
 1. Navigate to the Tax Compliance section on CSD.
-2. Enter the TCS PIN.
-3. Enter the TCS PIN expiry date.
+2. Enter TCS PIN: **93227BC47N**
+3. Enter the TCS PIN expiry date (check your eFiling confirmation for the expiry date).
 4. Save.
 5. Verify that the TCS status shows as "Compliant" or "Active".
 
-> This step cannot be completed until the TCS PIN Action Plan has been executed. **No tender can be submitted until this is done.**
+> ✅ TCS PIN obtained. This step is now unblocked — link the PIN on CSD as soon as possible before any tender submission.
 
 ---
 

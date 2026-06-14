@@ -13,7 +13,7 @@
 | Revenue | R0 |
 | Website | Live at proaxissolutions.co.za |
 | GBP | Registered — pending 24hr verification |
-| CSD | Registered — approval status unconfirmed |
+| CSD | Registered — TCS PIN **93227BC47N** must now be linked on CSD |
 | Last git push | feat: CRM dashboard + onboarding rebuild + flip cards fixed |
 | Unpushed changes | `leads-admin.html` (rebuilt this session, NOT yet pushed) |
 

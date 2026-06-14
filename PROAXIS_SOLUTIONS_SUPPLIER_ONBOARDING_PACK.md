@@ -85,7 +85,7 @@ The following documents are typically required for supplier onboarding. Tick eac
 | CIPC Company Registration Certificate | ⏳ OBTAIN | Available from CIPC portal (www.cipc.co.za) |
 | CIPC Certificate of Incorporation | ⏳ OBTAIN | Issued at registration — retrieve from CIPC records |
 | B-BBEE Certificate / EME Sworn Affidavit | ⚠️ EXPIRING 07 JUL 2026 | New affidavit must be commissioned by 30 June 2026 |
-| SARS Tax Compliance Status (TCS) PIN | ❌ NOT YET OBTAINED | Resolve on SARS eFiling urgently |
+| SARS Tax Compliance Status (TCS) PIN | ✅ **93227BC47N** | Obtained June 2026 — link on CSD now |
 | SARS Tax Registration Number Confirmation | ✅ 9007193338 | Available via SARS eFiling |
 
 ### Identity and Governance Documents
@@ -194,7 +194,7 @@ Proaxis Solutions achieves the **maximum possible B-BBEE preference points** und
 
 | # | Item | Priority | Action |
 |---|---|---|---|
-| 1 | TCS PIN | 🔴 CRITICAL | Obtain from SARS eFiling |
+| 1 | TCS PIN | ✅ RESOLVED | PIN: **93227BC47N** — now link it on CSD profile |
 | 2 | B-BBEE Renewal | 🔴 CRITICAL | Commission new EME affidavit by 30 June 2026 |
 | 3 | Bank Account Number and Verification Letter | 🟠 HIGH | Obtain from FNB |
 | 4 | Business Email | 🟠 HIGH | Configure company domain email |

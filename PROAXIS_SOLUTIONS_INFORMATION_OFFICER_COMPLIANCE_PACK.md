@@ -251,7 +251,7 @@ The Information Regulator has issued communication indicating that the PAIA Annu
 |---|---|---|
 | **30 June 2026** | Commission new B-BBEE EME Sworn Affidavit before current certificate expires (07 July 2026) | 🔴 CRITICAL |
 | **Immediately** | Investigate and confirm PAIA Annual Report deadline with the Information Regulator | 🔴 CRITICAL |
-| **Immediately** | Investigate SARS TCS PIN — resolve CIT product activation | 🔴 CRITICAL |
+| ✅ DONE | SARS TCS PIN obtained — **93227BC47N** | Link on CSD immediately |
 | **Week 1** | Publish PAIA Manual on website | 🔴 CRITICAL |
 | **Week 1** | Publish POPIA Policy, Privacy Notice on website | 🔴 CRITICAL |
 | **Week 1** | Configure business email (info@, privacy@, tenders@ proaxissolutions.co.za) | 🟠 HIGH |
@@ -313,7 +313,7 @@ Use this checklist annually to assess the IO's compliance status:
 
 **Business Compliance**
 - [ ] B-BBEE certificate / EME affidavit is valid (not expired)
-- [ ] TCS PIN is active
+- [x] TCS PIN obtained: **93227BC47N** — link on CSD profile
 - [ ] CSD profile is up to date
 - [ ] CIPC annual return is filed
 

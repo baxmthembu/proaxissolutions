@@ -126,29 +126,12 @@ This audit covers:
 
 ---
 
-### GAP B3 — SARS Tax Compliance Status (TCS PIN): Not Obtained
+### GAP B3 — SARS Tax Compliance Status (TCS PIN): ✅ RESOLVED
 **Area:** SARS / Tax Compliance / Tender Readiness  
-**Severity:** 🔴 CRITICAL  
-**Finding:** Proaxis Solutions does not have an active Tax Compliance Status (TCS) PIN. The company appears in eFiling but no ITR14 (Corporate Income Tax return) is visible. The Corporate Income Tax product may not be fully activated on eFiling.  
-**Impact if Unresolved:**
-- Every government tender requires a valid TCS PIN at the time of submission. Without it, the tender will be disqualified.
-- CSD profile cannot be fully verified without a linked and active TCS PIN.
-- Non-compliance with SARS obligations as a registered company.
-**Possible Causes (to be investigated):**
-1. Corporate Income Tax product not fully activated on eFiling.
-2. CIPC/SARS synchronisation delay — the company may not have been fully transferred to the corporate tax system.
-3. No ITR14 has been issued yet (possible for a 2025-incorporated company depending on tax year end).
-4. The organisation tax profile may need to be reviewed and corrected on eFiling.
-**Required Action:**
-1. Log into SARS eFiling using the company credentials (Tax Ref: 9007193338).
-2. Navigate to: Organisation > Maintain SARS Registered Details > Tax Products.
-3. Confirm whether Corporate Income Tax (CIT) is listed and activated.
-4. If not activated: request activation through eFiling or contact the SARS Contact Centre (0800 00 7277).
-5. Navigate to: Returns > Returns History and confirm whether an ITR14 has been issued.
-6. If no ITR14 is visible: contact SARS to determine the company's first filing period based on the financial year end.
-7. Once the CIT product is active and returns are in order: request the TCS PIN via eFiling (Compliance > Tax Compliance Status > Apply).
-8. Document the full investigation in the TCS PIN Action Plan (Phase 6 deliverable).
-**Detailed guidance:** See PROAXIS_SOLUTIONS_TCS_PIN_ACTION_PLAN.md (Phase 6).  
+**Severity:** ✅ RESOLVED — June 2026  
+**Finding:** TCS PIN has been obtained from SARS eFiling.  
+**TCS PIN: 93227BC47N**  
+**Remaining action:** Log into CSD (www.csd.gov.za) and link TCS PIN 93227BC47N in the Tax Compliance section of the CSD profile. Confirm the PIN expiry date from the eFiling confirmation and calendar a renewal reminder.  
 
 ---
 
@@ -323,7 +306,7 @@ Listed in priority order:
 | Priority | Gap | Action | Deadline |
 |---|---|---|---|
 | 1 | B1 — B-BBEE Certificate | Commission new EME sworn affidavit | 30 June 2026 |
-| 2 | B3 — TCS PIN | Investigate and resolve SARS CIT activation; obtain TCS PIN | Immediate |
+| 2 | B3 — TCS PIN | ✅ RESOLVED — PIN: 93227BC47N | Link PIN on CSD now |
 | 3 | B2 — PAIA Manual | Finalise, review, publish; investigate Annual Report requirement | Immediate |
 | 4 | B4 — POPIA Policy | Finalise and publish | Week 1 |
 | 5 | B8 — Privacy Notice | Draft and publish to website | Week 1 |
@@ -366,7 +349,7 @@ Before finalising compliance documents, the following information must be confir
 | B-BBEE Certificate | Expiring in 31 days | 🔴 CRITICAL |
 | PAIA Manual | Draft only — not published | 🔴 CRITICAL |
 | POPIA Policy | Draft only — not published | 🔴 CRITICAL |
-| TCS PIN | Not obtained | 🔴 CRITICAL |
+| TCS PIN | ✅ Obtained — **93227BC47N** | ✅ RESOLVED — link on CSD |
 | Information Regulator — Annual Report | Active period — status unknown | 🔴 CRITICAL |
 | Business Email | Not configured | 🟠 HIGH |
 | CSD Profile | Incomplete / unoptimised | 🟠 HIGH |

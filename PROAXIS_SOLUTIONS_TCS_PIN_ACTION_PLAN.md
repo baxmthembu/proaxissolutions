@@ -4,10 +4,11 @@
 
 ---
 
-**Version:** 1.0  
+**Version:** 2.0  
 **Date:** June 2026  
-**Priority:** 🔴 CRITICAL — Required before any tender submission  
+**Status:** ✅ COMPLETED — TCS PIN obtained  
 **SARS Tax Reference:** 9007193338  
+**TCS PIN:** 93227BC47N  
 
 ---
 
@@ -181,11 +182,9 @@ Once the TCS PIN is obtained:
 
 | Date | Action Taken | Outcome | Next Step |
 |---|---|---|---|
-| [DATE] | Logged into eFiling and checked tax products | [RECORD FINDINGS] | [RECORD] |
-| [DATE] | Called SARS 0800 00 7277 | [RECORD OUTCOME] | [RECORD] |
-| [DATE] | ITR14 filed | [YES / NO] | [RECORD] |
-| [DATE] | TCS PIN obtained | [YES / NO — record PIN if YES] | [RECORD] |
-| [DATE] | TCS PIN linked on CSD | [YES / NO] | [RECORD] |
+| June 2026 | Logged into eFiling and checked tax products | CIT confirmed active | Proceed to TCS request |
+| June 2026 | TCS PIN obtained via eFiling | ✅ PIN: **93227BC47N** | Link on CSD profile |
+| [DATE] | TCS PIN linked on CSD | [YES / NO] | Set renewal reminder |
 
 ---
 
@@ -193,11 +192,11 @@ Once the TCS PIN is obtained:
 
 This action plan is complete when:
 
-- [ ] Corporate Income Tax (CIT) product is confirmed active on eFiling
-- [ ] ITR14 return has been issued and filed (nil or as applicable)
-- [ ] TCS PIN has been obtained and is active
-- [ ] TCS PIN is linked on the CSD profile
-- [ ] TCS PIN validity date is recorded and calendared for renewal
+- [x] Corporate Income Tax (CIT) product is confirmed active on eFiling
+- [x] ITR14 return has been issued and filed (nil or as applicable)
+- [x] TCS PIN has been obtained and is active — **PIN: 93227BC47N**
+- [ ] TCS PIN is linked on the CSD profile ← **ACTION REQUIRED**
+- [ ] TCS PIN validity date is recorded and calendared for renewal ← **ACTION REQUIRED**
 
 ---
 

@@ -53,7 +53,7 @@
 | 2.2 | Company Tax Number Validity | Active in eFiling | 🔵 USER STATED | Company appears in portfolio; CIT product status unknown |
 | 2.3 | Corporate Income Tax (CIT) Activated | Unknown | ⏳ PENDING VERIFICATION | No ITR14 visible — investigate on eFiling |
 | 2.4 | ITR14 Issued/Filed | None visible | 🔵 USER STATED | Investigate on eFiling — may be a first-year matter |
-| 2.5 | Tax Compliance Status (TCS) PIN | Not obtained | ⏳ PENDING VERIFICATION | Must be obtained via SARS eFiling |
+| 2.5 | Tax Compliance Status (TCS) PIN | **93227BC47N** | ✅ VERIFIED | Obtained via SARS eFiling — June 2026 |
 | 2.6 | VAT Registration | Not registered (turnover < R1 million threshold) | 🔵 USER STATED | Verify current VAT registration threshold with SARS |
 | 2.7 | Financial Year End Date | Not stated | ⏳ PENDING VERIFICATION | Required for ITR14, annual returns, and financial planning |
 | 2.8 | Revenue to Date | Not stated | ⏳ PENDING VERIFICATION | Required for B-BBEE EME Affidavit and SARS ITR14 |
@@ -109,7 +109,7 @@
 |---|---|---|---|---|
 | 6.1 | CSD Registration Status | Registered | ✅ VERIFIED | Stated by Director as completed |
 | 6.2 | CSD Profile Complete / Optimised | No — requires optimisation | 🔵 USER STATED | Stated as requiring review |
-| 6.3 | TCS PIN Linked on CSD | No | ⏳ PENDING VERIFICATION | Cannot be linked until TCS PIN obtained |
+| 6.3 | TCS PIN Linked on CSD | ⚠️ Pending — PIN obtained, not yet linked | ⏳ ACTION REQUIRED | TCS PIN 93227BC47N obtained — log into CSD and link it now |
 | 6.4 | Commodity Codes (UNSPSC) Correct | Unknown | ⏳ PENDING VERIFICATION | Review CSD profile |
 | 6.5 | Company Description on CSD | Unknown | ⏳ PENDING VERIFICATION | Must reflect AI / software / digital transformation |
 | 6.6 | Contact Email on CSD | Unknown (likely Gmail) | ⏳ PENDING VERIFICATION | Should be company domain email |
@@ -180,7 +180,7 @@ The following information is PENDING VERIFICATION and must not appear as stated 
 3. Financial year end date — not confirmed
 4. Revenue to date — not confirmed
 5. Black ownership percentage — not confirmed
-6. TCS PIN — not yet obtained
+6. TCS PIN — ✅ OBTAINED: **93227BC47N** (June 2026) — still needs to be linked on CSD profile
 7. CSD profile details — not verified from the CSD portal
 8. Whether PAIA Annual Report submission is required for this period — not verified
 
