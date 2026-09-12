@@ -9,9 +9,6 @@
 **Classification:** Internal — Confidential  
 
 ---
-
-> ⚠️ **AI-GENERATED DOCUMENT** — This register was compiled using information provided by the Director/user and cross-referenced against internal company skills and reference documents. All entries must be verified against primary sources before reliance in legal, regulatory, or tender contexts.
-
 ---
 
 ## CATEGORISATION KEY
@@ -197,7 +194,4 @@ The following information is PENDING VERIFICATION and must not appear as stated 
 | Date of Approval | _________________________ |
 
 ---
-
-> ⚠️ **AI-GENERATED OUTPUT** — This register was produced with AI assistance. All entries must be verified against primary sources. PENDING VERIFICATION items must not be used as fact in any document until confirmed.
-
 *Proaxis Solutions (Pty) Ltd | Reg: 2025/542019/07 | IO Reference: 2025-058837*

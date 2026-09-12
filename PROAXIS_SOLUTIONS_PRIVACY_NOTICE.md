@@ -196,9 +196,6 @@ Our full PAIA Section 51 Manual, which contains information about accessing reco
 *www.proaxissolutions.co.za | Technology. Intelligence. Transformation.*  
 
 ---
-
-> ⚠️ **AI-GENERATED DOCUMENT** — This Privacy Notice was prepared with AI assistance. It must be reviewed by a qualified attorney before publication. All statutory references must be verified against current South African law.
-
 ---
 
 ### WEBSITE IMPLEMENTATION CHECKLIST

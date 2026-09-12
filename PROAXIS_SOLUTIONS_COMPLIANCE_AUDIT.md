@@ -10,9 +10,6 @@
 **Review Cycle:** Quarterly  
 
 ---
-
-> ⚠️ **AI-GENERATED DOCUMENT** — All findings, statutory references and risk classifications must be independently verified against current South African law and primary sources before reliance or submission. This document does not constitute legal advice.
-
 ---
 
 ## AUDIT SCOPE
@@ -381,9 +378,6 @@ This audit was conducted using AI assistance and must be reviewed and signed off
 | Date of Sign-Off | _________________________ |
 
 ---
-
-> ⚠️ **AI-GENERATED OUTPUT** — This compliance audit was produced with the assistance of an AI language model. All statutory references, risk classifications, and action items must be independently verified against current South African law and primary regulatory sources before reliance or submission. This document does not constitute legal advice. Proaxis Solutions should engage a qualified attorney for formal legal opinions on compliance obligations.
-
 ---
 
 *Proaxis Solutions (Pty) Ltd | Reg: 2025/542019/07 | IO Reference: 2025-058837*  

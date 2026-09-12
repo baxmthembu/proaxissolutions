@@ -11,9 +11,6 @@
 **TCS PIN:** 93227BC47N  
 
 ---
-
-> ⚠️ **AI-GENERATED DOCUMENT** — This plan was prepared with AI assistance. All SARS procedures must be verified against current SARS guidance and eFiling interface before execution. If difficulties persist after following this plan, contact the SARS Contact Centre on **0800 00 7277** or visit a SARS branch.
-
 ---
 
 ## BACKGROUND

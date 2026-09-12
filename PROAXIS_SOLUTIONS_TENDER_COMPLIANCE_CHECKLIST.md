@@ -163,8 +163,5 @@ Answer the following before investing time in a tender response:
 | Date | _________________________ |
 
 ---
-
-> ⚠️ **AI-GENERATED DOCUMENT** — This checklist was prepared with AI assistance. All regulatory references must be verified against current South African procurement legislation. This document does not constitute legal advice.
-
 *Proaxis Solutions (Pty) Ltd | Reg: 2025/542019/07 | B-BBEE Level 1 EME*  
 *Technology. Intelligence. Transformation.*

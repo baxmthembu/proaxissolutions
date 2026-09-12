@@ -9,9 +9,6 @@
 **Classification:** External — Supplier and Business Development Use  
 
 ---
-
-> ⚠️ **AI-GENERATED DOCUMENT** — This profile was prepared with AI assistance using verified company information. It must be reviewed and approved by the Director before use in any submission, presentation, or publication. Do not use unverified claims. Fabricated statistics, client references, or outcomes are strictly prohibited.
-
 ---
 
 ## COMPANY AT A GLANCE

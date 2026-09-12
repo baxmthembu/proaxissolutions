@@ -277,9 +277,6 @@ This PAIA Section 51 Manual is adopted by Proaxis Solutions (Pty) Ltd as the com
 | Date | _________________________ |
 
 ---
-
-> ⚠️ **AI-GENERATED DOCUMENT** — This PAIA Manual was prepared with AI assistance. It must be independently reviewed by a qualified attorney before publication and submission to the Information Regulator. All statutory references must be verified against current South African law. This document does not constitute legal advice.
-
 ---
 
 *Proaxis Solutions (Pty) Ltd | Reg: 2025/542019/07 | IO Reference: 2025-058837*  

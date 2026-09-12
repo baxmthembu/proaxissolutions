@@ -10,9 +10,6 @@
 **CSD Portal:** www.csd.gov.za  
 
 ---
-
-> ⚠️ **AI-GENERATED DOCUMENT** — This plan was prepared with AI assistance. All CSD procedures must be verified against current CSD portal requirements. If you encounter difficulties, contact the CSD Help Desk [VERIFY: current CSD contact details — www.csd.gov.za].
-
 > **Prerequisite:** Complete the TCS PIN Action Plan first. The TCS PIN must be active before the CSD profile can be fully optimised and activated.
 
 ---

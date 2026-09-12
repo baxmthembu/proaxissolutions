@@ -1,0 +1,303 @@
+// DbnOvrload — PostgreSQL schema
+// Pay-at-the-till model: tokens prove attendance, they never hold money.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Enums
+// ────────────────────────────────────────────────────────────────────────────
+
+enum UserRole {
+  STUDENT
+  PROMOTER
+  DOOR_STAFF
+  VENUE_OWNER
+  ADMIN
+}
+
+enum MembershipTier {
+  FREE // Sun–Thu, off-peak combos, early-entry limits
+  PREMIUM // R49/mo via Capitec Pay — line-skip, VIP, sound-drops
+}
+
+enum VenueBillingTier {
+  TIER1_COMMISSION // R10–R20 per validated student scan, billed month-end
+  TIER2_RETAINER // R1 500/mo flat, unlimited scans, priority placement
+}
+
+enum TokenStatus {
+  ACTIVE // unlocked, inside its 60s window
+  REDEEMED // verified at the till
+  EXPIRED // window elapsed before redemption
+  VOID // cancelled / superseded
+}
+
+enum TokenChannel {
+  TILL // student-unlocked single-use redemption token
+  ENTRANCE_TOTP // rotating QR shown on a screen at the door
+  DOOR_OVERRIDE // manual admit by door staff (Track B)
+}
+
+enum TransactionType {
+  MEMBERSHIP // student premium subscription (Capitec Pay / Stitch)
+  VENUE_COMMISSION // Tier 1 per-scan fee accrued to the venue
+  VENUE_RETAINER // Tier 2 monthly retainer
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  EXPIRED
+  CANCELLED
+  REFUNDED
+}
+
+enum EnergyRating {
+  CHILLED // 1
+  WARMING // 2
+  LIT // 3
+  GQOM_OVERLOAD // 4
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Core actors
+// ────────────────────────────────────────────────────────────────────────────
+
+model User {
+  id             String         @id @default(cuid())
+  role           UserRole       @default(STUDENT)
+  fullName       String
+  mobileNumber   String         @unique // primary identity (Capitec Pay links to this)
+  email          String?        @unique
+  passwordHash   String? // only door staff / owners / admins authenticate with a password
+  campusSlug     String? // e.g. "ukzn-howard-college", "dut-steve-biko"
+  membershipTier MembershipTier @default(FREE)
+  consentPopiaAt DateTime? // POPIA: explicit processing consent timestamp
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  membership    Membership?
+  tokens        ActiveToken[]
+  scans         Scan[]
+  transactions  Transaction[]
+  ugcClips      UgcClip[]
+  doorAtVenueId String? // for DOOR_STAFF / VENUE_OWNER: which venue they operate
+  doorAtVenue   Venue?  @relation("VenueStaff", fields: [doorAtVenueId], references: [id])
+
+  @@index([campusSlug])
+  @@index([role])
+}
+
+model Venue {
+  id              String           @id @default(cuid())
+  name            String
+  slug            String           @unique // "wiseman-shisanyama-carwash"
+  neighborhood    String // "kwamashu-g-section", "florida-road", "durban-cbd"
+  neighborhoodTag String // human label: "KwaMashu G-Section"
+  description     String
+  lat             Float?
+  lng             Float?
+  heroImageUrl    String?
+  billingTier     VenueBillingTier @default(TIER1_COMMISSION)
+  commissionCents Int              @default(1500) // Tier 1 fee per scan (R15 default, R10–R20)
+  retainerCents   Int              @default(150000) // Tier 2: R1 500/mo
+  capacity        Int              @default(0) // for off-peak utilisation %
+  priorityRank    Int              @default(0) // visual positioning weight (Tier 2 perk)
+  posTillSecret   String // HMAC secret the till app signs verification calls with
+  isActive        Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  vouchers     Voucher[]
+  tokens       ActiveToken[]
+  scans        Scan[]
+  promoters    Promoter[]
+  transactions Transaction[]
+  ugcClips     UgcClip[]
+  staff        User[]        @relation("VenueStaff")
+
+  @@index([neighborhood])
+  @@index([priorityRank])
+}
+
+model Promoter {
+  id          String   @id @default(cuid())
+  handle      String   @unique // "@kwamashu_kid"
+  fullName    String
+  mobileNumber String  @unique
+  campusSlug  String?
+  venueId     String?
+  venue       Venue?   @relation(fields: [venueId], references: [id])
+  referralCode String  @unique // attached to clout-share links
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  scans       Scan[]
+  shareAssets ShareAsset[]
+
+  @@index([campusSlug])
+  @@index([venueId])
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Offers & redemption
+// ────────────────────────────────────────────────────────────────────────────
+
+model Voucher {
+  id             String   @id @default(cuid())
+  venueId        String
+  venue          Venue    @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  title          String // "The Wash, Chow & Warm-Up"
+  slug           String
+  blurb          String // "R150 combo — carwash + plate + early entry"
+  priceCents     Int // till charge the student pays at the venue (display only)
+  dailyQuantity  Int // scarcity cap per day; "only N left" derives from this
+  premiumOnly    Boolean  @default(false)
+  // Free tier validity window: 0=Sun .. 6=Sat. Off-peak combos run Sun–Thu by default.
+  validDays      Int[]    @default([0, 1, 2, 3, 4])
+  windowStart    String   @default("11:00") // local HH:mm the combo opens
+  windowEnd      String   @default("18:00")
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  tokens ActiveToken[]
+  scans  Scan[]
+
+  @@unique([venueId, slug])
+  @@index([venueId, isActive])
+}
+
+// ActiveToken is the heart of the pay-at-the-till model. It carries NO money.
+model ActiveToken {
+  id          String       @id @default(cuid())
+  code        String       @unique // short human code shown at the till, e.g. "DBN-7F3K9"
+  hash        String       @unique // SHA-256(code + secret); the till verifies against this
+  channel     TokenChannel @default(TILL)
+  status      TokenStatus  @default(ACTIVE)
+  userId      String?
+  user        User?        @relation(fields: [userId], references: [id])
+  venueId     String
+  venue       Venue        @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  voucherId   String?
+  voucher     Voucher?     @relation(fields: [voucherId], references: [id])
+  promoterId  String? // attributed promoter (from clout-share referral)
+  issuedAt    DateTime     @default(now())
+  expiresAt   DateTime // issuedAt + VOUCHER_TOKEN_TTL_SECONDS (60s)
+  redeemedAt  DateTime?
+  redeemedBy  String? // till operator / door-staff user id
+
+  scan Scan?
+
+  @@index([venueId, status])
+  @@index([expiresAt])
+}
+
+// A Scan is a settled, validated entry — the billable unit for Tier 1 venues
+// and the source of every dashboard metric.
+model Scan {
+  id          String       @id @default(cuid())
+  tokenId     String       @unique
+  token       ActiveToken  @relation(fields: [tokenId], references: [id])
+  userId      String?
+  user        User?        @relation(fields: [userId], references: [id])
+  venueId     String
+  venue       Venue        @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  voucherId   String?
+  voucher     Voucher?     @relation(fields: [voucherId], references: [id])
+  promoterId  String?
+  promoter    Promoter?    @relation(fields: [promoterId], references: [id])
+  channel     TokenChannel
+  valueCents  Int // commission accrued to the venue for this scan (Tier 1)
+  scannedAt   DateTime     @default(now())
+
+  @@index([venueId, scannedAt])
+  @@index([promoterId, scannedAt])
+  @@index([voucherId, scannedAt])
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Money (membership + venue billing) — Stitch / Capitec Pay
+// ────────────────────────────────────────────────────────────────────────────
+
+model Membership {
+  id              String         @id @default(cuid())
+  userId          String         @unique
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tier            MembershipTier @default(PREMIUM)
+  priceCents      Int
+  active          Boolean        @default(false)
+  currentStart    DateTime?
+  currentEnd      DateTime? // access expiry; renews on each completed Capitec Pay charge
+  stitchPayerRef  String? // payer.identifier reused across renewals
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  transactions Transaction[]
+}
+
+model Transaction {
+  id                String            @id @default(cuid())
+  type              TransactionType
+  status            TransactionStatus @default(PENDING)
+  amountCents       Int
+  currency          String            @default("ZAR")
+  userId            String?
+  user              User?             @relation(fields: [userId], references: [id])
+  venueId           String?
+  venue             Venue?            @relation(fields: [venueId], references: [id])
+  membershipId      String?
+  membership        Membership?       @relation(fields: [membershipId], references: [id])
+  // Stitch linkage
+  stitchPaymentId   String?           @unique // payment-request id
+  externalReference String            @unique // our idempotency key sent to Stitch
+  interactionUrl    String? // Capitec Pay redirect surfaced to the student
+  rawWebhookPayload Json?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@index([status])
+  @@index([type, status])
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Growth: UGC + clout-share
+// ────────────────────────────────────────────────────────────────────────────
+
+model UgcClip {
+  id          String        @id @default(cuid())
+  venueId     String
+  venue       Venue         @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  userId      String?
+  user        User?         @relation(fields: [userId], references: [id])
+  videoUrl    String // 5s low-bandwidth dancefloor snippet (object-storage URL)
+  posterUrl   String?
+  energy      EnergyRating  @default(LIT)
+  approved    Boolean       @default(false) // moderation gate before it hits SEO metadata
+  createdAt   DateTime      @default(now())
+
+  @@index([venueId, approved, createdAt])
+}
+
+model ShareAsset {
+  id          String   @id @default(cuid())
+  promoterId  String?
+  promoter    Promoter? @relation(fields: [promoterId], references: [id])
+  channel     String // "whatsapp" | "tiktok" | "instagram"
+  caption     String
+  imageUrl    String?
+  trackingUrl String   @unique
+  clicks      Int      @default(0)
+  conversions Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  @@index([promoterId, createdAt])
+}

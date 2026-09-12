@@ -9,9 +9,6 @@
 **Purpose:** Corporate vendor registration and supplier onboarding with private sector, enterprise, and government clients  
 
 ---
-
-> ⚠️ **AI-GENERATED DOCUMENT** — This pack was prepared with AI assistance. All information must be verified by the Director before submission to any client or procurement authority. Documents listed as "pending" must be obtained before submission.
-
 ---
 
 ## HOW TO USE THIS PACK

@@ -1,6 +1,6 @@
 # PROAXIS SOLUTIONS — OUTBOUND SALES ENGINE
 **Company:** Proaxis Solutions (Pty) Ltd · Reg 2025/542019/07
-**Prepared:** 10 June 2026 · `⚠️ AI-GENERATED – verify before client-facing use.`
+**Prepared:** 10 June 2026
 **Principle:** Technology leads. B-BBEE Level 1 is an enabler, never the headline. Revenue first.
 
 ---

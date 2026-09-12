@@ -4,8 +4,8 @@
 
 ---
 
-**Version:** 1.0  
-**Date:** June 2026  
+**Version:** 1.1  
+**Date:** 20 June 2026  
 **Use:** Tender submissions, supplier onboarding, client proposals  
 
 ---
@@ -18,11 +18,11 @@
 | **Registration** | 2025/542019/07 |
 | **SARS Tax Reference** | 9007193338 |
 | **B-BBEE Status** | Level 1 Contributor — EME |
-| **CSD Registered** | Yes |
+| **CSD Registered** | Yes — Supplier No. MAAA1729940 |
 | **Province** | KwaZulu-Natal |
 | **Website** | www.proaxissolutions.co.za |
-| **Email** | info@proaxissolutions.co.za **[UPDATE once active]** |
-| **Director** | Bongumusa Mthembu [VERIFY: confirm full legal name against CIPC records] |
+| **Email** | info@proaxissolutions.co.za |
+| **Director** | Bongumusa Aphiwe Xolani Mthembu |
 
 ---
 
@@ -117,9 +117,10 @@ We apply structured project management discipline to every engagement — regard
 |---|---|
 | CIPC Registered | Reg: 2025/542019/07 |
 | SARS Registered | Tax Ref: 9007193338 |
-| B-BBEE Level 1 EME | Certificate valid — EME (expiry: 07 July 2026) |
+| SARS Tax Compliance | TCS PIN: 93227BC47N — Tax Compliant |
+| B-BBEE Level 1 EME | Certificate valid — EME (renewal in progress, current certificate expires 07 July 2026) |
 | Information Officer | Andile Khoza — IO Reference: 2025-058837 |
-| CSD Registered | Central Supplier Database |
+| CSD Registered | Supplier No. MAAA1729940 — Active |
 | POPIA Compliant | POPIA Policy and Privacy Notice implemented June 2026 |
 | PAIA Compliant | PAIA Section 51 Manual published June 2026 |
 
@@ -157,15 +158,12 @@ For use in CSD and tender submissions [VERIFY: current UNSPSC taxonomy]:
 
 | Field | Detail |
 |---|---|
-| **Director** | Bongumusa Mthembu |
-| **Email** | info@proaxissolutions.co.za **[UPDATE once active]** |
-| **Tenders** | tenders@proaxissolutions.co.za **[UPDATE once active]** |
+| **Director** | Bongumusa Aphiwe Xolani Mthembu |
+| **Email** | info@proaxissolutions.co.za |
+| **Tenders** | tenders@proaxissolutions.co.za |
 | **Website** | www.proaxissolutions.co.za |
-| **Address** | 1 Shantally Close, Milarina Gardens, Durban, KwaZulu-Natal, South Africa |
+| **Address** | 1 Shantally Close, Milarina Gardens, Newlands West, 4037, KwaZulu-Natal, South Africa |
 
 ---
-
-> ⚠️ **AI-GENERATED DOCUMENT** — This Capability Statement was prepared with AI assistance using verified company information. It must be reviewed and approved by the Director before use in any submission. All facts and credentials must be independently confirmed before inclusion in a tender response or formal submission.
-
 *Proaxis Solutions (Pty) Ltd | Reg: 2025/542019/07 | B-BBEE Level 1 EME*  
 *Technology. Intelligence. Transformation.*

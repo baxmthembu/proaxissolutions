@@ -178,9 +178,6 @@ Website: www.proaxissolutions.co.za
 *www.proaxissolutions.co.za | Technology. Intelligence. Transformation.*
 
 ---
-
-> ⚠️ **AI-GENERATED DOCUMENT** — These Terms of Use were prepared with AI assistance. They must be reviewed by a qualified attorney before publication. Nothing in this document constitutes legal advice.
-
 ---
 
 ### WEBSITE PUBLICATION CHECKLIST

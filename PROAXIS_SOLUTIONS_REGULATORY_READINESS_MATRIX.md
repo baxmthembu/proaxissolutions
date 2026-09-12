@@ -9,9 +9,6 @@
 **Classification:** Internal — Confidential  
 
 ---
-
-> ⚠️ **AI-GENERATED DOCUMENT** — All statutory references and risk assessments must be independently verified against current South African law and primary regulatory sources before reliance or submission. This document does not constitute legal advice.
-
 ---
 
 ## STATUS KEY
@@ -227,8 +224,5 @@
 | Date | _________________________ |
 
 ---
-
-> ⚠️ **AI-GENERATED OUTPUT** — This regulatory readiness matrix was produced with AI assistance. All statutory references and assessments must be independently verified. This document does not constitute legal advice.
-
 *Proaxis Solutions (Pty) Ltd | Reg: 2025/542019/07 | IO Reference: 2025-058837*  
 *Technology. Intelligence. Transformation.*

@@ -1,0 +1,114 @@
+<svg width="1280" height="760" viewBox="0 0 1280 760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+<rect x="0" y="0" width="1280" height="760" fill="#FFFFFF"/>
+<text x="40" y="38" font-size="22" font-weight="700" fill="#5C2A3A">Ash's Nail Bar — proposed website &amp; feature map</text>
+<text x="40" y="60" font-size="13" fill="#8C7480">Concept by Proaxis Solutions &#183; Durban</text>
+<line x1="40" y1="78" x2="1240" y2="78" stroke="#F0DEE3" stroke-width="1"/>
+
+<text x="40" y="104" font-size="14" font-weight="700" fill="#5C2A3A">Your website (wireframe)</text>
+<rect x="40" y="116" width="700" height="572" rx="10" fill="#FFFFFF" stroke="#E0C3CC" stroke-width="1"/>
+<rect x="40" y="116" width="700" height="30" rx="10" fill="#FBEEF1"/>
+<rect x="40" y="131" width="700" height="15" fill="#FBEEF1"/>
+<circle cx="60" cy="131" r="5" fill="#E8B0A8"/>
+<circle cx="76" cy="131" r="5" fill="#E8D08A"/>
+<circle cx="92" cy="131" r="5" fill="#A8D4B0"/>
+<rect x="120" y="123" width="260" height="16" rx="8" fill="#FFFFFF" stroke="#EAD4DA"/>
+<text x="132" y="135" font-size="11" fill="#8C7480">ashsnailbar.co.za</text>
+
+<rect x="56" y="156" width="668" height="26" rx="4" fill="#FCF6F8" stroke="#F0DEE3"/>
+<text x="390" y="172" font-size="12" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Navigation</text>
+
+<rect x="56" y="190" width="668" height="138" rx="6" fill="#FBE4EA" stroke="#E8A0B4"/>
+<text x="390" y="216" font-size="14" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Hero — &#8220;8 years of skill, one Facebook page&#8221;</text>
+<text x="390" y="238" font-size="12" fill="#8C7480" text-anchor="middle" dominant-baseline="central">Headline, short intro, two buttons</text>
+<rect x="100" y="256" width="150" height="28" rx="14" fill="#E8A0B4"/>
+<text x="175" y="270" font-size="11" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Book appointment</text>
+<rect x="266" y="256" width="160" height="28" rx="14" fill="none" stroke="#E8A0B4"/>
+<text x="346" y="270" font-size="11" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Training academy</text>
+<rect x="500" y="246" width="100" height="60" rx="6" fill="#FFFFFF" stroke="#E8A0B4"/>
+<text x="550" y="270" font-size="10" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Gel &amp; acrylics</text>
+<text x="550" y="286" font-size="9" fill="#8C7480" text-anchor="middle" dominant-baseline="central">From R220</text>
+<rect x="612" y="246" width="100" height="60" rx="6" fill="#FFFFFF" stroke="#E8A0B4"/>
+<text x="662" y="270" font-size="10" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Nail art</text>
+<text x="662" y="286" font-size="9" fill="#8C7480" text-anchor="middle" dominant-baseline="central">From R80</text>
+
+<rect x="56" y="338" width="668" height="106" rx="6" fill="#FCF6F8" stroke="#F0DEE3"/>
+<text x="390" y="358" font-size="13" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Why book here — beyond a Facebook page</text>
+<rect x="72" y="372" width="204" height="58" rx="6" fill="#FFFFFF" stroke="#EAD4DA"/>
+<text x="174" y="396" font-size="11" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">24/7 online booking</text>
+<text x="174" y="412" font-size="9" fill="#8C7480" text-anchor="middle" dominant-baseline="central">No DM waiting</text>
+<rect x="288" y="372" width="204" height="58" rx="6" fill="#FFFFFF" stroke="#EAD4DA"/>
+<text x="390" y="396" font-size="11" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">AI nail design try-on</text>
+<text x="390" y="412" font-size="9" fill="#8C7480" text-anchor="middle" dominant-baseline="central">Preview before booking</text>
+<rect x="504" y="372" width="204" height="58" rx="6" fill="#FFFFFF" stroke="#EAD4DA"/>
+<text x="606" y="396" font-size="11" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Training academy page</text>
+<text x="606" y="412" font-size="9" fill="#8C7480" text-anchor="middle" dominant-baseline="central">A second revenue stream</text>
+
+<rect x="56" y="458" width="668" height="118" rx="6" fill="#FBE4EA" stroke="#E8A0B4"/>
+<text x="390" y="478" font-size="13" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Online booking form</text>
+<text x="220" y="500" font-size="11" fill="#8C7480">Name, phone, service, preferred date</text>
+<text x="220" y="518" font-size="11" fill="#8C7480">&amp; time. Submits straight through to</text>
+<text x="220" y="536" font-size="11" fill="#8C7480">the connections shown on the right.</text>
+<rect x="500" y="486" width="190" height="18" rx="4" fill="#FFFFFF" stroke="#EAD4DA"/>
+<rect x="500" y="510" width="190" height="18" rx="4" fill="#FFFFFF" stroke="#EAD4DA"/>
+<rect x="500" y="540" width="190" height="24" rx="12" fill="#E8A0B4"/>
+<text x="595" y="552" font-size="11" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Confirm booking</text>
+
+<rect x="56" y="590" width="668" height="64" rx="6" fill="#FCF6F8" stroke="#F0DEE3"/>
+<text x="390" y="608" font-size="12" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Nail art showcase</text>
+<rect x="86" y="618" width="80" height="26" rx="4" fill="#E8A0B4" opacity="0.5"/>
+<rect x="178" y="618" width="80" height="26" rx="4" fill="#C9A14A" opacity="0.5"/>
+<rect x="270" y="618" width="80" height="26" rx="4" fill="#E8A0B4" opacity="0.5"/>
+<rect x="362" y="618" width="80" height="26" rx="4" fill="#C9A14A" opacity="0.5"/>
+
+<rect x="56" y="664" width="668" height="14" fill="#FCF6F8"/>
+<text x="390" y="671" font-size="9" fill="#8C7480" text-anchor="middle" dominant-baseline="central">Footer &#183; contact &amp; social links</text>
+
+<text x="800" y="104" font-size="14" font-weight="700" fill="#5C2A3A">How the features connect</text>
+
+<rect x="900" y="124" width="240" height="56" rx="8" fill="#FBE4EA" stroke="#E8A0B4"/>
+<text x="1020" y="146" font-size="13" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Booking form</text>
+<text x="1020" y="164" font-size="11" fill="#8C7480" text-anchor="middle" dominant-baseline="central">Client picks service + time</text>
+
+<line x1="960" y1="180" x2="900" y2="232" stroke="#E8A0B4" stroke-width="1.2"/>
+<line x1="1080" y1="180" x2="1140" y2="232" stroke="#E8A0B4" stroke-width="1.2"/>
+
+<rect x="800" y="234" width="200" height="50" rx="8" fill="#FFFFFF" stroke="#C9A14A"/>
+<text x="900" y="252" font-size="12" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">WhatsApp confirmation</text>
+<text x="900" y="268" font-size="10" fill="#8C7480" text-anchor="middle" dominant-baseline="central">Sent to client instantly</text>
+
+<rect x="1040" y="234" width="200" height="50" rx="8" fill="#FFFFFF" stroke="#C9A14A"/>
+<text x="1140" y="252" font-size="12" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Email notification</text>
+<text x="1140" y="268" font-size="10" fill="#8C7480" text-anchor="middle" dominant-baseline="central">Sent to Ash's inbox</text>
+
+<line x1="900" y1="284" x2="960" y2="320" stroke="#8C7480" stroke-width="1.2"/>
+<line x1="1140" y1="284" x2="1080" y2="320" stroke="#8C7480" stroke-width="1.2"/>
+
+<rect x="900" y="322" width="240" height="46" rx="8" fill="#FCF6F8" stroke="#EAD4DA"/>
+<text x="1020" y="346" font-size="12" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Stored in the booking calendar</text>
+
+<text x="1020" y="384" font-size="10" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Training academy enquiries route the same way, kept separate from client bookings</text>
+
+<line x1="1020" y1="368" x2="1020" y2="396" stroke="#8C7480" stroke-width="1.2"/>
+
+<rect x="880" y="398" width="280" height="220" rx="10" fill="none" stroke="#EAD4DA" stroke-dasharray="4 4"/>
+<text x="1020" y="416" font-size="12" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Choose your data backend — pick one</text>
+
+<rect x="896" y="430" width="248" height="52" rx="6" fill="#FFFFFF" stroke="#E8A0B4"/>
+<text x="1020" y="448" font-size="11" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Google Sheets — Starter</text>
+<text x="1020" y="464" font-size="9" fill="#8C7480" text-anchor="middle" dominant-baseline="central">Free, simple, easy to view daily</text>
+
+<rect x="896" y="490" width="248" height="52" rx="6" fill="#FFFFFF" stroke="#E8A0B4"/>
+<text x="1020" y="508" font-size="11" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Airtable — Growth</text>
+<text x="1020" y="524" font-size="9" fill="#8C7480" text-anchor="middle" dominant-baseline="central">Structured, searchable client records</text>
+
+<rect x="896" y="550" width="248" height="52" rx="6" fill="#FFFFFF" stroke="#E8A0B4"/>
+<text x="1020" y="568" font-size="11" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">Supabase database — Scale</text>
+<text x="1020" y="584" font-size="9" fill="#8C7480" text-anchor="middle" dominant-baseline="central">Full system, academy bookings too</text>
+
+<rect x="800" y="638" width="440" height="50" rx="6" fill="#FBE4EA"/>
+<text x="1020" y="656" font-size="11" font-weight="700" fill="#5C2A3A" text-anchor="middle" dominant-baseline="central">All options connect via WhatsApp + email</text>
+<text x="1020" y="672" font-size="10" fill="#8C7480" text-anchor="middle" dominant-baseline="central">No technical knowledge required day-to-day</text>
+
+<rect x="40" y="704" width="1200" height="40" rx="6" fill="#5C2A3A"/>
+<text x="640" y="724" font-size="12" font-weight="700" fill="#FBE4EA" text-anchor="middle" dominant-baseline="central">Indicative investment: from R8,000 &#183; Live within 1-3 weeks &#183; Built by Proaxis Solutions</text>
+</svg>

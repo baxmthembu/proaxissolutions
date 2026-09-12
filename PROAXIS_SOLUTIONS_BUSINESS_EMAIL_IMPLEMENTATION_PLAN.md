@@ -11,9 +11,6 @@
 **Registrar / DNS:** Woza Domains / TrueHost  
 
 ---
-
-> ⚠️ **AI-GENERATED DOCUMENT** — This plan was prepared with AI assistance. DNS and email configuration steps must be verified against the current TrueHost / Woza Domains control panel interface, which may differ from general descriptions below. [VERIFY each step against the actual control panel before executing.]
-
 ---
 
 ## OBJECTIVE

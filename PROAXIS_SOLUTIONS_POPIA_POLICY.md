@@ -319,8 +319,5 @@ This POPIA Policy is adopted by Proaxis Solutions (Pty) Ltd.
 | Date | _________________________ |
 
 ---
-
-> ⚠️ **AI-GENERATED DOCUMENT** — This policy was prepared with AI assistance. It must be reviewed by a qualified attorney before implementation. All statutory references must be verified against current South African law. This document does not constitute legal advice.
-
 *Proaxis Solutions (Pty) Ltd | Reg: 2025/542019/07 | IO Reference: 2025-058837*  
 *www.proaxissolutions.co.za | Technology. Intelligence. Transformation.*

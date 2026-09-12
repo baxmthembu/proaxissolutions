@@ -150,9 +150,6 @@ We encourage you to review this policy periodically.
 *www.proaxissolutions.co.za | Technology. Intelligence. Transformation.*
 
 ---
-
-> ⚠️ **AI-GENERATED DOCUMENT** — This Cookie Policy was prepared with AI assistance. It must be technically verified against the actual cookie configuration of the live website before publication, and reviewed by a qualified attorney. Items marked [VERIFY] require confirmation before the policy is finalised.
-
 ---
 
 ### PRE-PUBLICATION TECHNICAL CHECKLIST

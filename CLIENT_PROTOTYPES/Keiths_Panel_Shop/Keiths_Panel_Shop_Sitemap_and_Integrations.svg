@@ -1,0 +1,110 @@
+<svg width="1280" height="760" viewBox="0 0 1280 760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+<rect x="0" y="0" width="1280" height="760" fill="#FFFFFF"/>
+<text x="40" y="38" font-size="22" font-weight="700" fill="#23272E">Keith's Panel Shop — proposed website &amp; feature map</text>
+<text x="40" y="60" font-size="13" fill="#6B7280">Concept by Proaxis Solutions &#183; Stamford Hill, Durban</text>
+<line x1="40" y1="78" x2="1240" y2="78" stroke="#E2E5EA" stroke-width="1"/>
+
+<text x="40" y="104" font-size="14" font-weight="700" fill="#23272E">Your website (wireframe)</text>
+<rect x="40" y="116" width="700" height="572" rx="10" fill="#FFFFFF" stroke="#C7CCD3" stroke-width="1"/>
+<rect x="40" y="116" width="700" height="30" rx="10" fill="#ECEDEF"/>
+<rect x="40" y="131" width="700" height="15" fill="#ECEDEF"/>
+<circle cx="60" cy="131" r="5" fill="#E8B0A8"/>
+<circle cx="76" cy="131" r="5" fill="#E8D08A"/>
+<circle cx="92" cy="131" r="5" fill="#A8D4B0"/>
+<rect x="120" y="123" width="260" height="16" rx="8" fill="#FFFFFF" stroke="#D6D9DE"/>
+<text x="132" y="135" font-size="11" fill="#6B7280">keithspanelshop.co.za</text>
+
+<rect x="56" y="156" width="668" height="26" rx="4" fill="#F7F8F9" stroke="#E2E5EA"/>
+<text x="390" y="172" font-size="12" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Navigation</text>
+
+<rect x="56" y="190" width="668" height="138" rx="6" fill="#FCEADF" stroke="#E8590C"/>
+<text x="390" y="216" font-size="14" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Hero — &#8220;37 years, three generations&#8221;</text>
+<text x="390" y="238" font-size="12" fill="#6B7280" text-anchor="middle" dominant-baseline="central">Headline, short intro, two buttons</text>
+<rect x="120" y="256" width="150" height="28" rx="14" fill="#E8590C"/>
+<text x="195" y="270" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central">Get instant quote</text>
+<rect x="286" y="256" width="130" height="28" rx="14" fill="none" stroke="#E8590C"/>
+<text x="351" y="270" font-size="11" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Our story</text>
+<rect x="500" y="240" width="180" height="22" rx="4" fill="#FFFFFF" stroke="#E8590C"/>
+<text x="510" y="251" font-size="9" font-weight="700" fill="#23272E" dominant-baseline="central">Reece Williamson &#183; Owner</text>
+<rect x="500" y="266" width="180" height="22" rx="4" fill="#FFFFFF" stroke="#E8590C"/>
+<text x="510" y="277" font-size="9" font-weight="700" fill="#23272E" dominant-baseline="central">Cameron &amp; Luke &#183; 3rd gen</text>
+
+<rect x="56" y="338" width="668" height="106" rx="6" fill="#F7F8F9" stroke="#E2E5EA"/>
+<text x="390" y="358" font-size="13" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Why it wins — beats every directory listing</text>
+<rect x="72" y="372" width="204" height="58" rx="6" fill="#FFFFFF" stroke="#D6D9DE"/>
+<text x="174" y="396" font-size="11" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Instant online quote</text>
+<text x="174" y="412" font-size="9" fill="#6B7280" text-anchor="middle" dominant-baseline="central">Upload photos, get estimate</text>
+<rect x="288" y="372" width="204" height="58" rx="6" fill="#FFFFFF" stroke="#D6D9DE"/>
+<text x="390" y="396" font-size="11" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Live repair tracker</text>
+<text x="390" y="412" font-size="9" fill="#6B7280" text-anchor="middle" dominant-baseline="central">No calling for updates</text>
+<rect x="504" y="372" width="204" height="58" rx="6" fill="#FFFFFF" stroke="#D6D9DE"/>
+<text x="606" y="396" font-size="11" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Insurance rights info</text>
+<text x="606" y="412" font-size="9" fill="#6B7280" text-anchor="middle" dominant-baseline="central">Your right to choose us</text>
+
+<rect x="56" y="458" width="668" height="118" rx="6" fill="#FCEADF" stroke="#E8590C"/>
+<text x="390" y="478" font-size="13" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Upload photos, get an estimate</text>
+<text x="220" y="500" font-size="11" fill="#6B7280">Vehicle, contact number, damage type</text>
+<text x="220" y="518" font-size="11" fill="#6B7280">and photos. Submits straight through</text>
+<text x="220" y="536" font-size="11" fill="#6B7280">to the connections shown on the right.</text>
+<rect x="500" y="486" width="190" height="30" rx="4" fill="#FFFFFF" stroke="#D6D9DE" stroke-dasharray="3 3"/>
+<text x="595" y="501" font-size="9" fill="#6B7280" text-anchor="middle" dominant-baseline="central">Drag photos here</text>
+<rect x="500" y="540" width="190" height="24" rx="12" fill="#E8590C"/>
+<text x="595" y="552" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central">Request quote</text>
+
+<rect x="56" y="590" width="668" height="64" rx="6" fill="#F7F8F9" stroke="#E2E5EA"/>
+<text x="390" y="608" font-size="12" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Before / after repair gallery</text>
+<rect x="86" y="618" width="80" height="26" rx="4" fill="#E8590C" opacity="0.5"/>
+<rect x="178" y="618" width="80" height="26" rx="4" fill="#8A94A6" opacity="0.5"/>
+<rect x="270" y="618" width="80" height="26" rx="4" fill="#E8590C" opacity="0.5"/>
+<rect x="362" y="618" width="80" height="26" rx="4" fill="#8A94A6" opacity="0.5"/>
+
+<rect x="56" y="664" width="668" height="14" fill="#F7F8F9"/>
+<text x="390" y="671" font-size="9" fill="#6B7280" text-anchor="middle" dominant-baseline="central">Footer &#183; contact &amp; social links</text>
+
+<text x="800" y="104" font-size="14" font-weight="700" fill="#23272E">How the features connect</text>
+
+<rect x="900" y="124" width="240" height="56" rx="8" fill="#FCEADF" stroke="#E8590C"/>
+<text x="1020" y="146" font-size="13" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Quote request form</text>
+<text x="1020" y="164" font-size="11" fill="#6B7280" text-anchor="middle" dominant-baseline="central">Customer uploads damage photos</text>
+
+<line x1="960" y1="180" x2="900" y2="232" stroke="#E8590C" stroke-width="1.2"/>
+<line x1="1080" y1="180" x2="1140" y2="232" stroke="#E8590C" stroke-width="1.2"/>
+
+<rect x="800" y="234" width="200" height="50" rx="8" fill="#FFFFFF" stroke="#8A94A6"/>
+<text x="900" y="252" font-size="12" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">WhatsApp to Reece's team</text>
+<text x="900" y="268" font-size="10" fill="#6B7280" text-anchor="middle" dominant-baseline="central">Photos arrive instantly</text>
+
+<rect x="1040" y="234" width="200" height="50" rx="8" fill="#FFFFFF" stroke="#8A94A6"/>
+<text x="1140" y="252" font-size="12" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Email notification</text>
+<text x="1140" y="268" font-size="10" fill="#6B7280" text-anchor="middle" dominant-baseline="central">Sent to the workshop inbox</text>
+
+<line x1="900" y1="284" x2="960" y2="320" stroke="#6B7280" stroke-width="1.2"/>
+<line x1="1140" y1="284" x2="1080" y2="320" stroke="#6B7280" stroke-width="1.2"/>
+
+<rect x="900" y="322" width="240" height="46" rx="8" fill="#F7F8F9" stroke="#D6D9DE"/>
+<text x="1020" y="346" font-size="12" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Live repair status tracker</text>
+
+<line x1="1020" y1="368" x2="1020" y2="396" stroke="#6B7280" stroke-width="1.2"/>
+
+<rect x="880" y="398" width="280" height="220" rx="10" fill="none" stroke="#D6D9DE" stroke-dasharray="4 4"/>
+<text x="1020" y="416" font-size="12" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Choose your data backend — pick one</text>
+
+<rect x="896" y="430" width="248" height="52" rx="6" fill="#FFFFFF" stroke="#E8590C"/>
+<text x="1020" y="448" font-size="11" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Google Sheets — Starter</text>
+<text x="1020" y="464" font-size="9" fill="#6B7280" text-anchor="middle" dominant-baseline="central">Free, simple job list</text>
+
+<rect x="896" y="490" width="248" height="52" rx="6" fill="#FFFFFF" stroke="#E8590C"/>
+<text x="1020" y="508" font-size="11" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Airtable — Growth</text>
+<text x="1020" y="524" font-size="9" fill="#6B7280" text-anchor="middle" dominant-baseline="central">Structured jobs &amp; parts tracking</text>
+
+<rect x="896" y="550" width="248" height="52" rx="6" fill="#FFFFFF" stroke="#E8590C"/>
+<text x="1020" y="568" font-size="11" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">Supabase database — Scale</text>
+<text x="1020" y="584" font-size="9" fill="#6B7280" text-anchor="middle" dominant-baseline="central">Full system, multi-bay, reporting</text>
+
+<rect x="800" y="638" width="440" height="50" rx="6" fill="#FCEADF"/>
+<text x="1020" y="656" font-size="11" font-weight="700" fill="#23272E" text-anchor="middle" dominant-baseline="central">All options connect via WhatsApp + email</text>
+<text x="1020" y="672" font-size="10" fill="#6B7280" text-anchor="middle" dominant-baseline="central">No technical knowledge required day-to-day</text>
+
+<rect x="40" y="704" width="1200" height="40" rx="6" fill="#23272E"/>
+<text x="640" y="724" font-size="12" font-weight="700" fill="#FCEADF" text-anchor="middle" dominant-baseline="central">Indicative investment: from R8,000 &#183; Live within 1-3 weeks &#183; Built by Proaxis Solutions</text>
+</svg>
